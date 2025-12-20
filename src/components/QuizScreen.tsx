@@ -192,8 +192,6 @@ function QuizHeader({
   totalQuestions: number;
   returnToTitle: () => void;
 }): React.ReactNode {
-  // 深堀り問題または超深堀り問題の場合のみジャンルを表示
-  const showGenre = genre && (category === '深堀り問題' || category === '超深堀り問題');
 
   return (
     <div
