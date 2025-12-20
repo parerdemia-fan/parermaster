@@ -1,0 +1,625 @@
+# パレ学マスター alpha1 内部仕様書
+
+## 0. 前提条件
+
+### 必須ソフトウェア
+
+| ソフトウェア | バージョン | インストール |
+|-------------|-----------|-------------|
+| Node.js | 20.x以上（LTS推奨） | `brew install node` |
+| pnpm | 最新版 | `brew install pnpm` |
+
+### 技術スタック
+
+- node
+- pnpm
+- React 19 + TypeScript
+- Vite
+- Tailwind CSS v4
+- Zustand（状態管理）
+
+## 1. ディレクトリ構成
+
+```
+parermaster/
+├── .github/
+│   └── copilot-instructions.md # Copilot用指示ファイル
+├── public/
+│   └── data/
+│       ├── questions.json      # 問題データ
+│       ├── questions_dev.json  # 動作確認用問題データ
+│       ├── talents.json        # タレントデータ
+│       └── images/             # 画像ファイル（問題・解説用）
+├── src/
+│   ├── components/
+│   │   ├── AchievementScreen.tsx  # アチーブメント画面
+│   │   ├── GameContainer.tsx      # 正方形スケーリングコンテナ
+│   │   ├── HelpScreen.tsx         # ヘルプ画面
+│   │   ├── QuizScreen.tsx         # クイズ画面
+│   │   ├── ResultScreen.tsx       # 結果画面
+│   │   ├── SettingScreen.tsx      # 設定画面
+│   │   ├── TalentDetailScreen.tsx # 寮生詳細画面
+│   │   ├── TalentListScreen.tsx   # 寮生一覧画面
+│   │   ├── ThreePatchButton.tsx   # 3-Patchボタンコンポーネント
+│   │   ├── ThreePatchImage.tsx    # 3-Patch画像コンポーネント
+│   │   └── TitleScreen.tsx        # タイトル画面
+│   ├── stores/
+│   │   ├── gameStore.ts        # Zustand状態管理
+│   │   └── gameStore.test.ts   # gameStoreのユニットテスト
+│   ├── types/
+│   │   └── index.ts            # 型定義
+│   ├── utils/
+│   │   ├── imageTagParser.ts        # 画像タグ解析ユーティリティ
+│   │   ├── imageTagParser.test.ts   # imageTagParserのユニットテスト
+│   │   ├── talentIconParser.tsx     # タレントアイコン挿入ユーティリティ
+│   │   └── talentIconParser.test.tsx # talentIconParserのユニットテスト
+│   ├── config.ts               # アプリケーション設定（DEV_MODE等）
+│   ├── App.tsx
+│   ├── main.tsx
+│   └── index.css
+├── index.html
+├── package.json
+├── tsconfig.json
+├── tsconfig.app.json
+├── tsconfig.node.json
+├── vite.config.ts
+└── eslint.config.js
+```
+
+## 2. 型定義（types/index.ts）
+
+```ts
+// タレントデータ
+export type Talent = {
+  name: string;
+  kana: string;
+  name_separated: string;
+  kana_separated: string;
+  dormitory: string;
+  student_id: string;
+  intro: string;
+  dream: string;
+  hashtags: string[];
+  hobbies: string[];
+  skills: string[];
+  favorites: string[];
+  fan_name: string;
+  fan_mark: string;
+  birthday: string;
+  height: number;
+  hair_color: string;
+  hair_style: string;
+  url: string;
+  tiktok_url: string;
+  youtube_url: string;
+  x_url: string;
+  marshmallow_url: string;
+  awards: string[];
+};
+
+// 問題データ（JSONから読み込んだ生データ）
+export type RawQuestion = {
+  question: string;
+  answers: string[];       // answers[0]が正解、空文字列はタレント名で補完
+  category?: string;       // 問題のカテゴリ（プロフィール、エピソード等）
+  sort_answers?: boolean;  // trueの場合は昇順ソート、false/未指定の場合はシャッフル
+  comment?: string;        // 解説テキスト（オプショナル）
+  image?: string | null;
+  hide_icon?: boolean;
+  source_url?: string;
+  difficulty: number;      // 問題の難易度（1-5、必須）
+  dormitory?: string;      // 関連する寮（出題範囲フィルタ用）
+  questioner?: string;     // 出題者名（任意）
+};
+
+// 問題タイプ
+export type QuestionType = 'normal' | 'face' | 'name';
+
+// 処理済み問題データ（ゲーム中に使用）
+export type ProcessedQuestion = {
+  questionType: QuestionType;  // 問題タイプ
+  question: string;
+  answers: string[];      // シャッフル/ソート済みの選択肢
+  correctIndex: number;   // 正解の選択肢のインデックス
+  comment?: string;
+  sourceUrl?: string;     // 情報源URL
+  hideIcon?: boolean;     // 回答前にアイコンを非表示にするか
+  difficulty: number;     // 問題の難易度（1-5、必須）
+  category?: string;      // 問題のカテゴリ（プロフィール、エピソード等）
+  questioner?: string;    // 出題者名（任意）
+  // 顔当て/名前当て用の追加情報
+  talentImagePath?: string;    // 正解タレントの画像パス（名前当てで出題画像として使用）
+  answerImages?: string[];     // 選択肢の画像パス配列（顔当てで選択肢として使用）
+  answerTalentNames?: string[]; // 選択肢のタレント名配列（顔当てで回答後に表示）
+  answerStudentIds?: string[];  // 選択肢のタレント学籍番号配列（名前当てでアイコン表示に使用）
+  talentProfile?: {            // 出題時に表示するプロフィール情報
+    dormitory: string;         // 所属寮
+    dream: string;             // 将来の夢
+  };
+  talentKana?: string;         // タレント名のフリガナ（顔当て問題用）
+  isSilhouette?: boolean;      // 上級モード: 画像をシルエット表示するか
+};
+
+// ステージ
+export type GameStage = '入門試験' | '実力試験' | 'マスター試験';
+
+// カテゴリー
+export type Category = '顔名前当て' | '顔名前当て上級' | '顔名前当て超級' | '基本問題' | '深堀り問題' | '超深堀り問題';
+
+// アチーブメント
+export type Achievement = {
+  id: string;           // アチーブメントID
+  name: string;         // アチーブメント名
+  description: string;  // 説明
+  imagePath: string;    // 画像パス
+  unlocked: boolean;    // 取得済みかどうか
+  unlockedAt?: string;  // 取得日時
+  x: number;            // 配置位置X座標（vw/vh単位）
+  y: number;            // 配置位置Y座標（vw/vh単位）
+  w: number;            // 画像幅（vw/vh単位）
+  h: number;            // 画像高さ（vw/vh単位）
+  dependsOn?: string[]; // 依存する他のアチーブメントID（すべて取得済みの場合のみ表示）
+};
+
+// 出題数の選択肢
+export type QuestionCountOption = 10 | 20 | 50 | 100 | 'all';
+
+// ゲームレベル（初級・中級・上級）
+export type GameLevel = 'beginner' | 'intermediate' | 'advanced';
+
+// 画面状態
+export type ScreenType = 'title' | 'setting' | 'quiz' | 'result' | 'talents' | 'talent-detail' | 'help' | 'achievement';
+
+// クイズ画面の状態
+export type QuizState = 'answering' | 'answered';
+```
+
+### stores/gameStore.ts 内の型
+
+```ts
+// 各問題の回答状態を保持する型
+interface AnswerRecord {
+  selectedAnswer: number;
+  isCorrect: boolean;
+}
+```
+
+## 3. 状態管理設計（stores/gameStore.ts）
+
+### 3.1 State
+
+| プロパティ | 型 | 説明 |
+|-----------|-----|------|
+| screen | ScreenType | 現在の画面 |
+| rawQuestions | RawQuestion[] | JSONから読み込んだ生問題データ |
+| talents | Talent[] | タレントデータ |
+| questions | ProcessedQuestion[] | 処理済み問題データ（ゲーム中に使用） |
+| currentIndex | number | 現在の問題インデックス |
+| quizState | QuizState | クイズ画面の状態 |
+| selectedAnswer | number \| null | 選択した回答のインデックス |
+| correctCount | number | 正解数 |
+| answerRecords | AnswerRecord[] | 各問題の回答履歴 |
+| questionCount | QuestionCountOption | 選択された出題数 |
+| gameLevel | GameLevel | 選択されたゲームレベル |
+| selectedTalent | Talent \| null | 詳細表示中のタレント |
+
+### 3.2 Actions
+
+| アクション | 説明 |
+|-----------|------|
+| loadQuestions() | questions.jsonとtalents.jsonを読み込み |
+| setQuestionCount(count) | 出題数を設定 |
+| setGameLevel(level) | ゲームレベルを設定 |
+| startGame() | ゲーム開始（問題をシャッフルし、選択された出題数分の問題を処理してタイトル→クイズ） |
+| selectAnswer(index) | 回答を選択し正誤判定 |
+| nextQuestion() | 次の問題へ or 結果画面へ |
+| prevQuestion() | 前の問題へ戻る |
+| returnToTitle() | タイトル画面に戻る |
+| showTalentList() | 寮生一覧画面を表示 |
+| showTalentDetail(talent) | 寮生詳細画面を表示 |
+| backToTalentList() | 寮生一覧画面に戻る |
+| showHelp() | ヘルプ画面を表示 |
+
+### 3.3 ユーティリティ関数
+
+| 関数 | 説明 |
+|-----|------|
+| shuffleArray(array) | Fisher-Yatesアルゴリズムで配列をシャッフル |
+| fillEmptyAnswers(answers, talents, dormitory) | 空文字列の選択肢をタレント名で補完（出題範囲でフィルタ） |
+| processQuestion(rawQuestion, talents, dormitory) | 生問題データを処理済みデータに変換（questionType: 'normal'） |
+| generateFaceQuestion(talent, otherTalents, difficulty) | 顔当て問題を生成（タレント名を出題し、画像4枚を選択肢として表示） |
+| generateNameQuestion(talent, otherTalents, difficulty) | 名前当て問題を生成（画像を出題し、タレント名4つを選択肢として表示） |
+| generateTalentQuestions(talents, selectedTalents) | タレントリストから顔当て/名前当て問題をランダムに生成 |
+| generateTalentQuestionsIntermediate(talents, selectedTalents) | 中級用: 同じ/似た髪色・髪型を優先した選択肢で問題を生成 |
+| generateTalentQuestionsAdvanced(talents, selectedTalents) | 上級用: シルエットモードの問題を生成 |
+| getSimilarHairColors(hairColor) | 指定した髪色と似ている髪色のリストを取得 |
+| getSimilarHairStyles(hairStyle) | 指定した髪型と似ている髪型のリストを取得 |
+
+## 4. スケーリング実装方式
+
+### 4.1 方針
+
+ビューポート内接正方形基準のスケーラブルレイアウトを採用。
+全UI要素が正方形領域のサイズに比例してスケールする。
+
+### 4.2 実装方法（GameContainer.tsx）
+
+```
+1. ビューポートサイズを監視（ResizeObserver）
+2. min(width, height) で正方形のサイズを算出
+3. コンテナを中央配置し、算出サイズを適用
+4. 内部要素は % または vmin 相対単位でサイズ指定
+```
+
+### 4.3 CSS変数による相対サイズ管理
+
+```css
+:root {
+  --game-size: min(100vw, 100vh);
+}
+```
+
+内部要素はこの変数を基準にサイズを計算。
+
+## 5. 画面遷移
+
+```
+[タイトル画面]
+    │
+    ├─ スタートボタン押下
+    │   → loadQuestions() → startGame()
+    │   ▼
+    │  [クイズ画面: answering]
+    │      │
+    │      │ 選択肢ボタン押下
+    │      │ → selectAnswer(index)
+    │      ▼
+    │  [クイズ画面: answered]
+    │      │
+    │      ├─ 次の問題あり → nextQuestion() → [クイズ画面: answering]
+    │      │
+    │      └─ 最後の問題 → nextQuestion() → [結果画面]
+    │                                            │
+    │                                            │ タイトルに戻るボタン押下
+    │                                            │ → returnToTitle()
+    │                                            ▼
+    │                                       [タイトル画面]
+    │
+    └─ 寮生一覧ボタン押下
+        → showTalentList()
+        ▼
+       [寮生一覧画面]
+           │
+           ├─ 戻るボタン押下 → returnToTitle() → [タイトル画面]
+           │
+           └─ 寮生選択
+               → showTalentDetail(talent)
+               ▼
+              [寮生詳細画面]
+                  │
+                  └─ 戻るボタン押下 → backToTalentList() → [寮生一覧画面]
+
+    └─ ヘルプボタン押下
+        → showHelp()
+        ▼
+       [ヘルプ画面]
+           │
+           └─ 戻るボタン押下 → returnToTitle() → [タイトル画面]
+```
+
+## 6. 問題データ（public/data/questions.json）
+
+### 6.1 配置場所
+
+`public/data/questions.json` に配置。
+ビルド後は `./data/questions.json` としてアクセス可能。
+
+`public/data/talents.json` にタレントデータを配置。
+ビルド後は `./data/talents.json` としてアクセス可能。
+
+解説用の画像ファイルは `public/data/images/` に配置。
+ビルド後は `./data/images/ファイル名` としてアクセス可能。
+
+### 6.2 読み込み方法
+
+```ts
+// DEV_MODEがtrueの場合はquestions_dev.jsonを使用
+const questionsPath = DEV_MODE ? './data/questions_dev.json' : './data/questions.json';
+const [questionsRes, talentsRes] = await Promise.all([
+  fetch(questionsPath),
+  fetch('./data/talents.json'),
+]);
+const rawQuestions: RawQuestion[] = await questionsRes.json();
+const talents: Talent[] = await talentsRes.json();
+```
+
+### 6.3 問題データの処理
+
+ゲーム開始時に以下の処理を行う：
+
+1. 通常問題を処理:
+   - 空文字列の選択肢をタレント名で補完（他の選択肢と重複しない）
+   - `sort_answers`がtrueの場合は昇順ソート、それ以外はシャッフル
+   - `answers[0]`が正解として、シャッフル/ソート後の正解インデックスを計算
+2. タレントから顔当て/名前当て問題を生成:
+   - 各タレントに対してランダムに顔当てか名前当てを選択
+   - 顔当て: タレント名とプロフィールを出題し、画像4枚を選択肢として表示
+   - 名前当て: 画像とプロフィールを出題し、タレント名4つを選択肢として表示
+3. 通常問題と顔当て/名前当て問題を結合してシャッフル
+4. 指定された出題数分だけ取り出し
+5. 処理済みの問題データを保持（前の問題に戻っても選択肢の順番が変わらない）
+
+### 6.4 サンプルデータ
+
+```json
+[
+  {
+    "question": "令和少女漫画主人公系VTuberといえば？",
+    "category": "プロフィール",
+    "difficulty": 1,
+    "answers": ["橜庭羽奈", "", "", ""],
+    "sort_answers": false,
+    "comment": ""
+  },
+  {
+    "question": "陰山アゲハのネームロゴに絆創膏は何枚ある？",
+    "category": "容姿",
+    "difficulty": 3,
+    "answers": ["2枚", "1枚", "3枚", "4枚"],
+    "sort_answers": true,
+    "comment": "絆創膏は足に貼られているやつです"
+  }
+]
+```
+
+## 7. コンポーネント仕様
+
+### 7.1 GameContainer
+
+- 責務: 正方形スケーリングコンテナの提供
+- 子コンポーネントをラップし、スケーリングを適用
+- 背景:
+  - タイトル画面: `./data/images/parermaster_l.png`
+  - ページ全体の背景画像: `./data/images/clocktower.webp`（`index.css`で設定）
+  - ゲームエリア: 青紫グラデーション（透明度90%）で背景画像が薄っすら透ける
+
+### 7.2 TitleScreen
+
+- 責務: タイトル画面の表示とゲーム設定
+- デザイン:
+  - M PLUS Rounded 1cフォントを使用
+  - ロゴ画像（`./data/images/parermaster_logo.png`）を表示
+  - ロゴ画像にはマスク効果で端をぼかし、背景と自然に馴染ませる
+  - レベル・出題数はカード形式のボタンで選択（選択中は黄色背景）
+  - スタートボタンにシャドウを適用
+  - 画面表示時にフェードインアニメーション
+- 表示要素:
+  - ロゴ画像（タイトル）
+  - レベル選択（初級・中級・上級）
+  - 出題数選択（10問・20問・50問・100問・全N問）
+  - スタートボタン
+  - ヘルプリンク・寮生一覧リンク（横並び）
+- 出題数選択:
+  - 問題数に応じて選択肢を動的に生成
+  - 10問・20問・50問・100問のうち、全問題数未満のものを表示
+  - 最後に「全N問」オプションを追加（Nは全問題数）
+  - コンポーネントマウント時に問題データを読み込み
+- 難易度選択:
+  - 初級（beginner）: 顔当て/名前当てのみ
+  - 中級（intermediate）: 同じ/似た髪色優先の選択肢 + difficulty 1〜2の通常問題
+  - 上級（advanced）: シルエット表示 + difficulty 3〜5の通常問題
+- イベント: 
+  - レベルボタン選択 → setGameLevel()
+  - 出題数ボタン選択 → setQuestionCount()
+  - スタートボタン → startGame()
+  - ヘルプリンク → showHelp()
+  - 寮生一覧リンク → showTalentList()
+
+### 7.3 QuizScreen
+
+- 問題タイプによって異なるレイアウトを表示
+- 共通レイアウト:
+  - ヘッダーエリア（8%）: レベル・問題の種類・難易度（星表示）・進捗を表示、各ラベルは3-Patch画像で表示
+    - レベル: 初級/中級/上級（ThreePatchImageコンポーネント）
+    - 問題の種類: 顔当て/名前当て/category（プロフィール、エピソード等）（ThreePatchImageコンポーネント）
+    - ジャンル: 深堀り/超深堀り問題の場合のみ表示（ThreePatchImageコンポーネント）
+    - 難易度: 5段階の星表示（★★★☆☆）（ThreePatchImageコンポーネント）
+      - 顔当て・名前当て: 初級=星1、中級=星2、上級=星3
+      - 通常問題: questions.jsonのdifficultyの値
+    - 進捗: 「現在の問題番号 / 全問題数」（ThreePatchImageコンポーネント）
+    - ホームボタン: タイトル画面に戻るボタン（確認ダイアログ表示）
+    - 3-Patch画像: `./data/images/ui/plate_left.png`, `./data/images/ui/plate_middle.png`, `./data/images/ui/plate_right.png`
+  - 操作ボタンエリア（15%）: 前の問題へ/次の問題へ/結果を見るボタン
+
+#### 7.3.1 通常問題レイアウト（questionType: 'normal'）
+- レイアウト構成（顔当てと同様の左右2パネル構成）:
+  - 左パネル（出題エリア）: 問題文・問題画像と正解/不正解表示
+    - 背景画像: `./data/images/ui/question_panel.png`
+    - 問題画像がある場合: 画像 + 問題文を表示
+    - 問題画像がない場合: 問題文のみ表示
+    - 正解/不正解表示は下部に表示
+  - 右パネル（選択肢エリア）: 選択肢の種類に応じたレイアウト
+    - 背景画像: `./data/images/ui/question_panel.png`
+- 選択肢がタレント名の場合（2×2グリッド配置）:
+  - 背景画像: `./data/images/ui/panel_choice_face_bg.png`
+  - フレーム画像: `./data/images/ui/panel_choice_face.png`
+  - 回答前: `./data/images/ui/icon_question.png`を表示し、その上にタレント名をオーバーレイ
+  - 回答後: タレント画像（`./data/images/kv/sq/[学籍番号].png`）を表示、下部にタレント名
+  - 正解/不正解時は枠線の色で表示（緑/赤）
+- 選択肢がタレント名でない場合（4行配置）:
+  - 各選択肢の背景画像: `./data/images/ui/panel_answer_oneline.png`
+  - 正解/不正解時は背景画像のフィルターで色を変更
+- 問題文画像表示:
+  - 問題文に`[image:ファイル名]`がある場合、その画像を左パネル内に表示
+  - 画像は領域中央に内接（縦横比維持、見切れなし、はみ出しなし）
+  - 文字に黒い影を付けて視認性を確保
+  - `[image:ファイル名]`は最初の1つのみ有効（2つ目以降は無視）
+- タレントアイコン表示:
+  - 問題文・選択肢・解説文中のタレント名の手前にアイコンを表示
+  - 画像は`./data/images/kv/sq/[学籍番号].png`から読み込み（角丸正方形で表示）
+  - `hide_icon`がtrueの問題では回答前は👤（プレースホルダー）を表示、回答後に実際の画像を表示
+
+#### 7.3.2 顔当て問題レイアウト（questionType: 'face'）
+- レイアウト構成:
+  - 出題エリア（30%）: タレント名「〇〇〇〇はどれ？」とプロフィール（寮・夢）
+  - 選択肢エリア（45%）: 4枚のタレント画像（正方形、横1列配置）
+- 画像は`./data/images/kv/sq/[学籍番号].png`から読み込み
+- 正解/不正解時に画像に緑/赤のボーダーを表示
+- 回答後に各選択肢の下にタレント名を表示（正解は緑、不正解選択は赤、その他はグレー）
+- シルエットモード（上級）: 回答前は画像を黒塗り、回答後に通常表示
+
+#### 7.3.3 名前当て問題レイアウト（questionType: 'name'）
+- レイアウト構成:
+  - 出題エリア（40%）: 「この人はだれ？」、タレント画像とプロフィール（寮・夢）
+  - 選択肢エリア（35%）: 4つのタレント名ボタン（2×2配置、アイコン付き）
+- 画像は`./data/images/kv/sq/[学籍番号].png`から読み込み
+- 選択肢のアイコン表示:
+  - 回答前: 👤アイコンを表示
+  - 回答後: タレント画像（`./data/images/kv/sq/[学籍番号].png`）を表示
+- シルエットモード（上級）: 回答前は画像を黒塗り、回答後に通常表示
+
+#### 7.3.4 共通仕様
+- 表示（answering）: 問題、4つの選択肢
+- 表示（answered）: 正解/不正解表示、正答ハイライト、操作ボタン
+- 文字サイズの動的調整:
+  - 問題文: 文字数に応じて自動調整
+    - 20文字以下: min(6vw, 6vh)
+    - 40文字以下: min(5vw, 5vh)
+    - 60文字以下: min(4vw, 4vh)
+    - 60文字超: min(3.5vw, 3.5vh)
+  - 回答選択肢: 文字数に応じて自動調整
+    - 6文字以下: min(4.5vw, 4.5vh)
+    - 12文字以下: min(3.8vw, 3.8vh)
+    - 12文字超: min(3vw, 3vh)
+- 選択肢の共通レイアウト（AnswerButtonGrid）:
+  - 通常問題・名前当て問題で共通のコンポーネントを使用
+  - タレント名が選択肢の場合は画像を表示（ボタン高さにフィット）
+  - hide_iconがtrueの場合は回答前は👤を表示
+- 操作ボタンの表示条件:
+  - 「前の問題へ」: 最初の問題でない場合
+  - 「解説」: 問題にcommentがある（空文字でない）またはsource_urlがある かつ 回答後（通常問題のみ）
+  - 「次の問題へ」: 最後の問題でない かつ 回答後
+  - 「結果を見る」: 最後の問題 かつ 回答後
+- 解説ダイアログ:
+  - 「解説」ボタン押下でポップアップ表示
+  - ダイアログにはcommentテキストと「閉じる」ボタンを表示
+  - comment内の`[image:ファイル名]`は画像として表示（最初の1つのみ有効）
+  - 画像は`./data/images/`から読み込み
+  - 情報源リンク: source_urlがある場合に表示
+    - 「📎 情報源: サイト名」形式で表示
+    - URLのドメインからサイト名を認識（YouTube, X, TikTok, パレデミア学園公式サイト）
+    - その他のドメインはそのまま表示
+    - リンクは別タブで開く
+  - ダイアログの最大幅はゲーム画面幅の80%
+  - 「閉じる」ボタンまたはダイアログ外クリックで閉じる
+- イベント: 選択肢 → selectAnswer()、次へ → nextQuestion()、前へ → prevQuestion()
+
+### 7.4 ResultScreen
+
+- 責務: ゲーム結果の表示
+- デザイン:
+  - ロゴ画像（`./data/images/parermaster_logo.png`）を表示（タイトル画面と同様のマスク効果、小さめサイズ）
+  - 全問正解時: PERFECT!の光るテキストエフェクト + 光のバースト + キラキラエフェクト
+- 表示要素:
+  - ロゴ画像（タイトル）
+  - ゲームレベルと出題数
+  - 正解率表示:
+    - 100%: 「PERFECT!」のみ（光るエフェクト付き）
+    - 100%未満: 「正解率 80%」形式
+  - 称賛メッセージ: レベル・問題数・正解率に応じた多様なポジティブメッセージ
+  - タイトルに戻るボタン
+  - Xシェアボタン: ゲーム名、レベル、出題数、正解率、メッセージ、URLを含むツイート画面を開く
+- イベント: 
+  - 戻るボタン → returnToTitle()
+  - シェアボタン → X投稿画面を別タブで開く
+
+### 7.5 TalentListScreen
+
+- 責務: 寮生一覧の表示
+- レイアウト構成:
+  - ヘッダー（10%）: 「戻る」ボタン、タイトル
+  - リストエリア（90%）: 寮ごとにセクション分けされたタレントグリッド
+- 寮の表示順: クゥ、ミュゥ、バゥ、ウィニー
+- 各寮のセクション:
+  - 寮名ヘッダー（寮ごとに色分け）
+  - タレントグリッド: 顔アイコンと名前
+- イベント:
+  - 「戻る」ボタン → returnToTitle()
+  - タレントクリック → showTalentDetail(talent)
+
+### 7.6 TalentDetailScreen
+
+- 責務: 寮生詳細プロフィールの表示
+- レイアウト構成:
+  - ヘッダー（10%）: 「戻る」ボタン、タイトル
+  - プロフィールエリア（90%）: スクロール可能
+- 表示内容:
+  - 上部: 顔画像、寮名バッジ、名前、ふりがな
+  - SNSリンク: YouTube、TikTok、X、マシュマロ、公式ページ（URLがあるもののみ表示、別タブで開く）
+  - 夢: talent.dream
+  - 自己紹介: talent.intro
+  - 基本情報: 誕生日、身長、寮、学籍番号、ファンネーム、ファンマーク
+  - リスト情報: 趣味、特技、好きなもの、ハッシュタグ、受賞歴
+- イベント:
+  - 「戻る」ボタン → backToTalentList()
+
+### 7.7 HelpScreen
+
+- 責務: ヘルプ画面の表示
+- レイアウト構成:
+  - ヘッダー（10%）: 「戻る」ボタン、タイトル
+  - コンテンツエリア（90%）: スクロール可能
+- 表示内容:
+  - パレ学マスターとは: ゲームの概要説明
+    - レベル別の説明（初級、中級、上級）
+    - 問題の種類（顔当て、名前当て、4択クイズ）
+    - 解説機能の説明
+  - 開発者について: AIの妹がこのゲームを作成したという設定
+  - 問題募集: Googleフォームへのリンク
+  - リンク: パレデミア学園公式サイト、Xシェアボタン
+- イベント:
+  - 「戻る」ボタン → returnToTitle()
+  - 「Xでシェアする」ボタン → 別タブでX投稿画面を開く
+
+### 7.8 ThreePatchImage
+
+- 責務: 3-Patch画像の表示（左・中央・右で別々の画像を配置）
+- Props:
+  - leftImage: 左端画像のパス
+  - middleImage: 中央画像のパス
+  - rightImage: 右端画像のパス
+  - children: 中央に表示する内容（ReactNode）
+  - height: 画像の高さ（例: `'min(9vw, 9vh)'`）
+  - textColor: テキストカラー（デフォルト: `'#999'`）
+  - filter: 画像に適用するfilter（オプション）
+- 機能:
+  - 中央部分が内容に応じて伸縮
+  - ボタン機能を持たない純粋な表示コンポーネント
+- 使用例:
+  - ThreePatchButtonの内部で使用
+  - 静的な3-Patch表示要素として使用可能
+
+### 7.9 ThreePatchButton
+
+- 責務: 3-Patchボタンの表示（ThreePatchImageを使用したクリック可能なボタン）
+- Props:
+  - leftImage: 左端画像のパス
+  - middleImage: 中央画像のパス
+  - rightImage: 右端画像のパス
+  - children: ボタン内のテキスト（ReactNode）
+  - onClick: クリックハンドラー
+  - height: ボタンの高さ（例: `'min(9vw, 9vh)'`）
+  - fontSize: フォントサイズ（デフォルト: `'min(4vw, 4vh)'`）
+  - textColor: テキストカラー（デフォルト: `'#999'`）
+  - isSelected: 選択状態（デフォルト: `false`）
+  - selectedBrightness: 選択時のbrightness（デフォルト: `1.2`）
+  - className: 追加のクラス名（オプション）
+  - style: 追加のスタイル（オプション）
+- 機能:
+  - ThreePatchImageコンポーネントを内部で使用
+  - 選択状態に応じてbrightness変更
+  - ホバー時に明度が125%に変化
+- 使用例:
+  - SettingScreenのカテゴリー選択ボタン（blue/red）
+  - SettingScreenの出題範囲・出題数選択ボタン（normal_off）
+

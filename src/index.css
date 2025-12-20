@@ -1,0 +1,167 @@
+@import "tailwindcss";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* フォント設定と背景画像 */
+body {
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  background-image: url('./data/images/ui/parermaster_l.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* 汎用アニメーション */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.2s ease-out;
+}
+
+/* PERFECT! 光るテキストエフェクト */
+@keyframes perfectGlow {
+  0%, 100% {
+    text-shadow: 
+      0 0 10px rgba(255, 215, 0, 0.8),
+      0 0 20px rgba(255, 215, 0, 0.6),
+      0 0 30px rgba(255, 215, 0, 0.4),
+      0 0 40px rgba(255, 165, 0, 0.3);
+  }
+  50% {
+    text-shadow: 
+      0 0 20px rgba(255, 215, 0, 1),
+      0 0 40px rgba(255, 215, 0, 0.8),
+      0 0 60px rgba(255, 215, 0, 0.6),
+      0 0 80px rgba(255, 165, 0, 0.5);
+  }
+}
+
+.perfect-glow {
+  animation: perfectGlow 1.5s ease-in-out infinite;
+  color: #b08101;
+}
+
+/* 光のバーストエフェクト */
+@keyframes burstRay {
+  0% {
+    transform: scale(0) rotate(0deg);
+    opacity: 0;
+  }
+  30% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(2) rotate(15deg);
+    opacity: 0;
+  }
+}
+
+.burst-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.burst-ray {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    rgba(255, 215, 0, 0.3) 5deg,
+    transparent 10deg,
+    transparent 30deg,
+    rgba(255, 215, 0, 0.3) 35deg,
+    transparent 40deg,
+    transparent 60deg,
+    rgba(255, 215, 0, 0.3) 65deg,
+    transparent 70deg,
+    transparent 90deg,
+    rgba(255, 215, 0, 0.3) 95deg,
+    transparent 100deg,
+    transparent 120deg,
+    rgba(255, 215, 0, 0.3) 125deg,
+    transparent 130deg,
+    transparent 150deg,
+    rgba(255, 215, 0, 0.3) 155deg,
+    transparent 160deg,
+    transparent 180deg,
+    rgba(255, 215, 0, 0.3) 185deg,
+    transparent 190deg,
+    transparent 210deg,
+    rgba(255, 215, 0, 0.3) 215deg,
+    transparent 220deg,
+    transparent 240deg,
+    rgba(255, 215, 0, 0.3) 245deg,
+    transparent 250deg,
+    transparent 270deg,
+    rgba(255, 215, 0, 0.3) 275deg,
+    transparent 280deg,
+    transparent 300deg,
+    rgba(255, 215, 0, 0.3) 305deg,
+    transparent 310deg,
+    transparent 330deg,
+    rgba(255, 215, 0, 0.3) 335deg,
+    transparent 340deg,
+    transparent 360deg
+  );
+  transform-origin: center center;
+  animation: burstRay 2s ease-out forwards;
+}
+
+/* キラキラエフェクト */
+@keyframes sparkle {
+  0% {
+    transform: scale(0) rotate(0deg);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1) rotate(180deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.sparkle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: radial-gradient(circle, #FFD700 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: sparkle 1.5s ease-in-out infinite;
+}
+
+/* ラジオボタンのカスタムスタイル（選択カード用） */
+.selection-card {
+  transition: all 0.15s ease-out;
+}
+
+.selection-card:hover {
+  transform: translateY(-2px);
+}
+
+.selection-card.selected {
+  transform: translateY(0);
+}
