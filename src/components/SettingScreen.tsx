@@ -122,11 +122,11 @@ export function SettingScreen() {
       {/* カテゴリーラベル */}
       <div
         className="fixed left-1/2 -translate-x-1/2"
-        style={{ top: '23.8vh' }}
+        style={{ top: '23.8cqmin' }}
       >
         <p
           className="text-center font-bold"
-          style={{ fontSize: 'min(5vw, 5vh)', color: '#DDA' }}
+          style={{ fontSize: '5cqmin', color: '#DDA' }}
         >
           カテゴリ
         </p>
@@ -135,11 +135,11 @@ export function SettingScreen() {
       {/* 出題範囲/出題数ラベル */}
       <div
         className="fixed left-1/2 -translate-x-1/2"
-        style={{ top: '51.7vh' }}
+        style={{ top: '51.7cqmin' }}
       >
         <p
           className="text-center font-bold"
-          style={{ fontSize: 'min(5vw, 5vh)', color: '#DDA' }}
+          style={{ fontSize: '5cqmin', color: '#DDA' }}
         >
           {category.indexOf("顔名前当て") !== -1 ? '出題範囲' : '出題数'}
         </p>
@@ -148,14 +148,14 @@ export function SettingScreen() {
       {/* 設定エリア */}
       <div
         className="w-full flex flex-col items-center relative z-10"
-        style={{ gap: '4vmin', marginBottom: '4vmin', marginTop: 'min(6vw, 6vh)' }}
+        style={{ gap: '4cqmin', marginBottom: '4cqmin', marginTop: '6cqmin' }}
       >
         {/* カテゴリー選択 */}
         <div
           className="flex flex-col items-center w-full relative"
-          style={{ marginTop: 'min(31vw, 31vh)' }}
+          style={{ marginTop: '31cqmin' }}
         >
-          <div className="flex justify-center" style={{ gap: '3vmin' }}>
+          <div className="flex justify-center" style={{ gap: '3cqmin' }}>
             {categoryOptions.map((option) => {
               const isSelected = category === option;
               // 2つ目のボタンはred、それ以外はblue
@@ -169,8 +169,8 @@ export function SettingScreen() {
                   middleImage={`./data/images/ui/btn_${colorPrefix}_middle.png`}
                   rightImage={`./data/images/ui/btn_${colorPrefix}_right.png`}
                   onClick={() => setCategory(option)}
-                  height="min(9vw, 9vh)"
-                  fontSize="min(4vw, 4vh)"
+                  height="9cqmin"
+                  fontSize="4cqmin"
                   isSelected={isSelected}
                   selectedBrightness={isSelected ? 1.45 : 1}
                   textColor={isSelected ? '#FFF' : '#999'}
@@ -186,8 +186,8 @@ export function SettingScreen() {
         {/* 出題範囲選択 */}
         {category.indexOf("顔名前当て") !== -1 && (
           <div className="flex flex-col items-center absolute left-0 top-0 w-full"
-            style={{ marginTop: 'min(56vw, 56vh)' }}>
-            <div className="flex justify-center" style={{ gap: '2vmin' }}>
+            style={{ marginTop: '56cqmin' }}>
+            <div className="flex justify-center" style={{ gap: '2cqmin' }}>
               {questionRangeOptions.map((option) => {
                 const isSelected = questionRange === option.value;
 
@@ -198,8 +198,8 @@ export function SettingScreen() {
                     middleImage="./data/images/ui/btn_normal_off_middle.png"
                     rightImage="./data/images/ui/btn_normal_off_right.png"
                     onClick={() => setQuestionRange(option.value)}
-                    height="min(7vw, 7vh)"
-                    fontSize="min(3.2vw, 3.2vh)"
+                    height="7cqmin"
+                    fontSize="3.2cqmin"
                     textColor={isSelected ? '#222' : '#fff'}
                     isSelected={isSelected}
                     selectedBrightness={isSelected ? 1.2 : 1}
@@ -217,8 +217,8 @@ export function SettingScreen() {
         {/* 出題数選択 */}
         {category.indexOf("顔名前当て") === -1 && (
           <div className="flex flex-col items-center absolute left-0 top-0 w-full"
-            style={{ marginTop: 'min(56vw, 56vh)' }}>
-            <div className="flex justify-center" style={{ gap: '2vmin' }}>
+            style={{ marginTop: '56cqmin' }}>
+            <div className="flex justify-center" style={{ gap: '2cqmin' }}>
               {questionCountOptions.map((option) => {
                 const isSelected = questionCount === option.value;
 
@@ -229,8 +229,8 @@ export function SettingScreen() {
                     middleImage="./data/images/ui/btn_normal_off_middle.png"
                     rightImage="./data/images/ui/btn_normal_off_right.png"
                     onClick={() => setQuestionCount(option.value)}
-                    height="min(7vw, 7vh)"
-                    fontSize="min(3.2vw, 3.2vh)"
+                    height="7cqmin"
+                    fontSize="3.2cqmin"
                     textColor={isSelected ? '#222' : '#fff'}
                     isSelected={isSelected}
                     selectedBrightness={isSelected ? 1.2 : 1}
@@ -248,7 +248,7 @@ export function SettingScreen() {
 
       {/* ボタンエリア（画面下部・横並び） */}
       <div
-        className="w-full flex justify-center items-end gap-[6vmin] absolute left-0 bottom-[9%] z-10"
+        className="w-full flex justify-center items-end gap-[6cqmin] absolute left-0 bottom-[9%] z-10"
       >
         {/* キャンセルボタン */}
         <button
@@ -264,7 +264,7 @@ export function SettingScreen() {
             src="./data/images/ui/btn_cancel.png"
             alt="戻る"
             style={{
-              width: 'min(40vw, 40vh)',
+              width: '40cqmin',
               height: 'auto',
             }}
           />
@@ -287,7 +287,7 @@ export function SettingScreen() {
             src="./data/images/ui/btn_start.png"
             alt="スタート"
             style={{
-              width: 'min(40vw, 40vh)',
+              width: '40cqmin',
               height: 'auto',
             }}
           />

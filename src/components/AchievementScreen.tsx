@@ -38,7 +38,7 @@ export function AchievementScreen() {
         className="w-full flex items-center justify-between"
         style={{ 
           height: '10%',
-          padding: 'min(2vw, 2vh) min(3vw, 3vh)',
+          padding: '2cqmin 3cqmin',
         }}
       >
         {/* 戻るボタン */}
@@ -47,8 +47,8 @@ export function AchievementScreen() {
           middleImage="./data/images/ui/btn_normal_off_middle.png"
           rightImage="./data/images/ui/btn_normal_off_right.png"
           onClick={returnToTitle}
-          height="min(5vw, 5vh)"
-          fontSize="min(2.5vw, 2.5vh)"
+          height="5cqmin"
+          fontSize="2.5cqmin"
           textColor="#CCC"
           className="selection-card"
         >
@@ -59,12 +59,12 @@ export function AchievementScreen() {
           leftImage="./data/images/ui/plate_left.png"
           middleImage="./data/images/ui/plate_middle.png"
           rightImage="./data/images/ui/plate_right.png"
-          height="min(6.5vw, 6.5vh)"
+          height="6.5cqmin"
         >
           <span
             className="text-white font-bold"
             style={{
-              fontSize: 'min(3.5vw, 3.5vh)',
+              fontSize: '3.5cqmin',
               textShadow: '2px 2px 4px rgba(0,0,0,1)',
              }}
           >
@@ -73,7 +73,7 @@ export function AchievementScreen() {
         </ThreePatchImage>
 
         {/* 右側スペース（レイアウトバランス用） */}
-        <div style={{ width: 'min(12vw, 12vh)' }} />
+        <div style={{ width: '12cqmin' }} />
       </div>
 
       {/* コンテンツエリア - 絶対位置指定 */}
@@ -88,23 +88,23 @@ export function AchievementScreen() {
         ) : (
           <>
             {unlockedAchievements.map((achievement) => (
-              <div
+                <div
                 key={achievement.id}
                 className="absolute group"
                 style={{
-                  left: `min(${achievement.x}vw, ${achievement.x}vh)`,
-                  top: `min(${achievement.y}vw, ${achievement.y}vh)`,
+                  left: `${achievement.x}cqmin`,
+                  top: `${achievement.y}cqmin`,
                 }}
-              >
+                >
                 {/* アチーブメント画像 */}
                 <img
                   src={achievement.imagePath}
                   alt={achievement.name}
                   className="drop-shadow-lg cursor-pointer"
                   style={{
-                    width: `min(${achievement.w}vw, ${achievement.w}vh)`,
-                    height: `min(${achievement.h}vw, ${achievement.h}vh)`,
-                    objectFit: 'contain',
+                  width: `${achievement.w}cqmin`,
+                  height: `${achievement.h}cqmin`,
+                  objectFit: 'contain',
                   }}
                   draggable={false}
                 />
@@ -112,29 +112,29 @@ export function AchievementScreen() {
                 <div
                   className="absolute left-1/2 transform -translate-x-1/2 bg-black bg-opacity-90 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
                   style={{
-                    top: `min(${achievement.h}vw, ${achievement.h}vh)`,
-                    padding: 'min(1vw, 1vh) min(1.5vw, 1.5vh)',
-                    zIndex: 10,
-                    maxWidth: 'min(40vw, 40vh)',
+                  top: `${achievement.h}cqmin`,
+                  padding: '1cqmin 1.5cqmin',
+                  zIndex: 10,
+                  maxWidth: '40cqmin',
                   }}
                 >
                   <p
-                    className="text-white font-bold text-center whitespace-nowrap"
-                    style={{ fontSize: 'min(2vw, 2vh)' }}
+                  className="text-white font-bold text-center whitespace-nowrap"
+                  style={{ fontSize: '4cqmin' }}
                   >
-                    {achievement.name}
+                  {achievement.name}
                   </p>
                   <p
-                    className="text-white text-center mt-1"
-                    style={{ 
-                      fontSize: 'min(1.5vw, 1.5vh)',
-                      lineHeight: '1.4',
-                    }}
+                  className="text-white text-center mt-1"
+                  style={{ 
+                    fontSize: '3cqmin',
+                    lineHeight: '1.4',
+                  }}
                   >
-                    {achievement.description}
+                  {achievement.description}
                   </p>
                 </div>
-              </div>
+                </div>
             ))}
           </>
         )}

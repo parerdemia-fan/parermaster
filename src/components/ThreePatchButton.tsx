@@ -12,9 +12,9 @@ interface ThreePatchButtonProps {
   children: ReactNode;
   /** クリックハンドラー */
   onClick?: () => void;
-  /** ボタンの高さ (例: 'min(9vw, 9vh)') */
+  /** ボタンの高さ (例: '9cqmin') */
   height: string;
-  /** フォントサイズ (例: 'min(4vw, 4vh)') */
+  /** フォントサイズ (例: '4cqmin') */
   fontSize?: string;
   /** テキストカラー */
   textColor?: string;
@@ -39,7 +39,7 @@ export function ThreePatchButton({
   children,
   onClick,
   height,
-  fontSize = 'min(4vw, 4vh)',
+  fontSize = '4cqmin',
   textColor = '#999',
   isSelected = false,
   selectedBrightness = 1.2,

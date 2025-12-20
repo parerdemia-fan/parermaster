@@ -9,9 +9,9 @@ interface ThreePatchImageProps {
   rightImage: string;
   /** 中央に表示する内容 */
   children: ReactNode;
-  /** 画像の幅 (例: 'min(9vw, 9vh)') */
+  /** 画像の幅 (例: '9cqmin') */
   width?: string;
-  /** 画像の高さ (例: 'min(9vw, 9vh)') */
+  /** 画像の高さ (例: '9cqmin') */
   height: string;
   /** テキストカラー */
   textColor?: string;
@@ -55,7 +55,7 @@ export function ThreePatchImage({
         height,
         display: 'flex',
         alignItems: 'center',
-        padding: '0 min(2.5vw, 2.5vh)',
+        padding: '0 2.5cqmin',
         color: textColor,
         fontWeight: 'bold',
         whiteSpace: 'nowrap',

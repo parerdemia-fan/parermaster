@@ -26,14 +26,14 @@ export function TitleScreen() {
     <div className="w-full h-full flex flex-col items-center justify-center p-[5%] animate-fade-in relative">
       {/* 試験モード選択ボタン */}
       <div
-        className="w-full flex flex-row items-center justify-center gap-[6vmin] relative z-10"
-        style={{ marginTop: 'min(35vw, 35vh)' }}
+        className="w-full flex flex-row items-center justify-center gap-[6cqmin] relative z-10"
+        style={{ marginTop: '35cqmin' }}
       >
         <button
           onClick={() => handleStage('入門試験')}
           className="transition-transform active:scale-95 focus:outline-none"
           style={{
-            width: 'min(36vw, 36vh)',
+            width: '36cqmin',
           }}
         >
           <img
@@ -53,7 +53,7 @@ export function TitleScreen() {
           onClick={() => handleStage('実力試験')}
           className="transition-transform active:scale-95 focus:outline-none"
           style={{
-            width: 'min(36vw, 36vh)',
+            width: '36cqmin',
           }}
         >
           <img
@@ -73,7 +73,7 @@ export function TitleScreen() {
           onClick={() => handleStage('マスター試験')}
           className="transition-transform active:scale-95 focus:outline-none"
           style={{
-            width: 'min(36vw, 36vh)',
+            width: '36cqmin',
           }}
         >
           <img
@@ -92,12 +92,12 @@ export function TitleScreen() {
       {/* ヘルプ・寮生一覧・アチーブメントリンク */}
       <div
         className="flex justify-center items-center absolute bottom-[5%]"
-        style={{ gap: 'min(4vw, 4vh)' }}
+        style={{ gap: '4cqmin' }}
       >
         <button
           onClick={showHelp}
           className="transition-transform active:scale-95 focus:outline-none"
-          style={{ width: 'min(9vw, 9vh)' }}
+          style={{ width: '9cqmin' }}
         >
           <img
             src="./data/images/ui/btn_help.png"
@@ -114,7 +114,7 @@ export function TitleScreen() {
         <button
           onClick={showTalentList}
           className="transition-transform active:scale-95 focus:outline-none"
-          style={{ width: 'min(9vw, 9vh)' }}
+          style={{ width: '9cqmin' }}
         >
           <img
             src="./data/images/ui/btn_talents.png"
@@ -131,7 +131,7 @@ export function TitleScreen() {
         <button
           onClick={showAchievement}
           className="transition-transform active:scale-95 focus:outline-none"
-          style={{ width: 'min(9vw, 9vh)' }}
+          style={{ width: '9cqmin' }}
         >
           <img
             src="./data/images/ui/btn_achievement.png"

@@ -13,13 +13,13 @@ import type { ProcessedQuestion } from '../types';
 function getQuestionFontSize(text: string): string {
   const length = text.length;
   if (length <= 20) {
-    return 'min(6vw, 6vh)';
+    return '6cqmin';
   } else if (length <= 40) {
-    return 'min(5vw, 5vh)';
+    return '5cqmin';
   } else if (length <= 60) {
-    return 'min(4vw, 4vh)';
+    return '4cqmin';
   } else {
-    return 'min(3.5vw, 3.5vh)';
+    return '3.5cqmin';
   }
 }
 
@@ -31,22 +31,22 @@ function getQuestionFontSize(text: string): string {
 function getAnswerFontSize(text: string): string {
   const length = text.length;
   if (length <= 6) {
-    return 'min(4.5vw, 4.5vh)';
+    return '4.5cqmin';
   } else if (length <= 12) {
-    return 'min(3.8vw, 3.8vh)';
+    return '3.8cqmin';
   } else {
-    return 'min(3vw, 3vh)';
+    return '3cqmin';
   }
 }
 
 function getFaceQuizFontSize(text: string): string {
   const length = text.length;
   if (length <= 6) {
-    return 'min(10vw, 10vh)';
+    return '10cqmin';
   } else if (length <= 10) {
-    return 'min(6.8vw, 6.8vh)';
+    return '6.8cqmin';
   } else {
-    return 'min(5.5vw, 5.5vh)';
+    return '5.5cqmin';
   }
 }
 
@@ -196,21 +196,21 @@ function QuizHeader({
   return (
     <div
       className="flex items-center justify-between"
-      style={{ height: '8%', padding: '0 min(1vw, 1vh)' }}
+      style={{ height: '8%', padding: '0 1cqmin' }}
     >
       {/* 左側: ステージ、ラベル、問題難易度 */}
-      <div className="flex items-center gap-[1.5vmin]">
+      <div className="flex items-center gap-[1.5cqmin]">
         <div className="flex items-center">
           <ThreePatchImage
             leftImage="./data/images/ui/plate_left.png"
             middleImage="./data/images/ui/plate_middle.png"
             rightImage="./data/images/ui/plate_right.png"
-            height="min(6.5vw, 6.5vh)"
+            height="6.5cqmin"
           >
             <span
               className="text-white font-bold"
               style={{
-                fontSize: 'min(3.5vw, 3.5vh)',
+                fontSize: '3.5cqmin',
                 textShadow: '2px 2px 4px rgba(0,0,0,1)',
                }}
             >
@@ -221,17 +221,17 @@ function QuizHeader({
         <DifficultyStars difficulty={difficulty} genre={genre} />
       </div>
       {/* 右側: 進捗 + ホームボタン */}
-      <div className="flex items-center gap-[1.5vmin]">
+      <div className="flex items-center gap-[1.5cqmin]">
         <div className="flex items-center">
           <ThreePatchImage
             leftImage="./data/images/ui/plate_left.png"
             middleImage="./data/images/ui/plate_middle.png"
             rightImage="./data/images/ui/plate_right.png"
-            height="min(6.5vw, 6.5vh)"
+            height="6.5cqmin"
           >
             <span
               className="text-white font-bold"
-              style={{ fontSize: 'min(3.5vw, 3.5vh)', textShadow: '2px 2px 4px rgba(0,0,0,1)' }}
+              style={{ fontSize: '3.5cqmin', textShadow: '2px 2px 4px rgba(0,0,0,1)' }}
             >
               {currentIndex + 1} / {totalQuestions}
             </span>
@@ -259,7 +259,7 @@ function QuizHeader({
             <img
               src="./data/images/ui/btn_home.png"
               alt="ホーム"
-              style={{ height: 'min(7vw, 7vh)', width: 'auto' }}
+              style={{ height: '7cqmin', width: 'auto' }}
             />
           </button>
         }
@@ -297,8 +297,8 @@ function CommentDialog({
       <div
         className="rounded-lg p-6 max-h-[80%] overflow-auto shadow-lg"
         style={{
-          maxWidth: 'calc(min(100vw, 100vh) * 0.8)',
-          padding: 'min(5.5vw, 5.5vh)',
+          maxWidth: '80cqmin',
+          padding: '5.5cqmin',
           backgroundImage: 'url(./data/images/ui/panel_paper.png)',
           backgroundRepeat: 'no-repeat',
           backgroundSize: '100% 100%',
@@ -309,7 +309,7 @@ function CommentDialog({
         {hasComment && (
           <div
             className="mb-4"
-            style={{ fontSize: 'min(4vw, 4vh)', lineHeight: '1.6', color: '#493e33ff', textShadow: '0 0 min(1vw, 1vh) rgba(74, 59, 42, 0.5)' }}
+            style={{ fontSize: '4cqmin', lineHeight: '1.6', color: '#493e33ff', textShadow: '0 0 1cqmin rgba(74, 59, 42, 0.5)' }}
           >
             {parseCommentWithImages(currentQuestion.comment ?? '')}
           </div>
@@ -317,7 +317,7 @@ function CommentDialog({
         {hasSourceUrl && (
           <div
             className="mb-4"
-            style={{ fontSize: 'min(3.5vw, 3.5vh)' }}
+            style={{ fontSize: '3.5cqmin' }}
           >
             <a
               href={currentQuestion.sourceUrl}
@@ -333,12 +333,12 @@ function CommentDialog({
         {hasQuestioner && (
           <div
             className="mb-4"
-            style={{ fontSize: 'min(3.5vw, 3.5vh)' }}
+            style={{ fontSize: '3.5cqmin' }}
           >
             🎓️出題者: {currentQuestion.questioner}
           </div>
         )}
-        <div className="flex justify-center" style={{ marginTop: 'min(2vw, 2vh)' }}>
+        <div className="flex justify-center" style={{ marginTop: '2cqmin' }}>
           <button
             onClick={onClose}
             className="flex items-center transition brightness-125 hover:brightness-150"
@@ -346,7 +346,7 @@ function CommentDialog({
               padding: 0,
               border: 'none',
               background: 'none',
-              fontSize: 'min(3.5vw, 3.5vh)',
+              fontSize: '3.5cqmin',
             }}
           >
             {/* 左端 */}
@@ -354,7 +354,7 @@ function CommentDialog({
               src="./data/images/ui/btn_normal_off_left.png"
               alt=""
               style={{
-                height: 'min(7vw, 7vh)',
+                height: '7cqmin',
                 width: 'auto',
                 display: 'block',
               }}
@@ -365,10 +365,10 @@ function CommentDialog({
                 backgroundImage: 'url(./data/images/ui/btn_normal_off_middle.png)',
                 backgroundRepeat: 'no-repeat',
                 backgroundSize: '100% 100%',
-                height: 'min(7vw, 7vh)',
+                height: '7cqmin',
                 display: 'flex',
                 alignItems: 'center',
-                padding: '0 min(2.5vw, 2.5vh)',
+                padding: '0 2.5cqmin',
                 color: '#999',
                 fontWeight: 'bold',
                 whiteSpace: 'nowrap',
@@ -381,7 +381,7 @@ function CommentDialog({
               src="./data/images/ui/btn_normal_off_right.png"
               alt=""
               style={{
-                height: 'min(7vw, 7vh)',
+                height: '7cqmin',
                 width: 'auto',
                 display: 'block',
               }}
@@ -427,17 +427,17 @@ function NormalQuizLayout({
       style={{
         width: '100%',
         height: '100%',
-        gap: 'min(2vw, 2vh)',
+        gap: '2cqmin',
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 'min(1vw, 1vh)',
+        borderRadius: '1cqmin',
       }}
     >
       {/* 左パネル: 出題エリア（正方形） */}
       <div
         className="flex flex-col items-center justify-center relative"
         style={{
-          flex: '0 0 calc(50% - min(1vw, 1vh))',
+          flex: '0 0 calc(50% - 1cqmin)',
           aspectRatio: '1 / 1',
           backgroundImage: 'url(./data/images/ui/panel_question.png)',
           backgroundSize: 'cover',
@@ -457,7 +457,7 @@ function NormalQuizLayout({
               style={{
                 width: '90%',
                 height: '60%',
-                marginBottom: 'min(1vw, 1vh)',
+                marginBottom: '1cqmin',
               }}
             >
               <img
@@ -472,7 +472,7 @@ function NormalQuizLayout({
               style={{
                 fontSize: getQuestionFontSize(questionText),
                 textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
-                padding: '0 min(2vw, 2vh)',
+                padding: '0 2cqmin',
               }}
             >
               {parseTextWithTalentIcons(questionText, showIconInQuestion, isAnswered)}
@@ -485,7 +485,7 @@ function NormalQuizLayout({
             style={{
               fontSize: getQuestionFontSize(questionText),
               textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
-              padding: '0 min(3vw, 3vh)',
+              padding: '0 3cqmin',
             }}
           >
             {parseTextWithTalentIcons(questionText, showIconInQuestion, isAnswered)}
@@ -497,12 +497,12 @@ function NormalQuizLayout({
           <div
             className="text-center font-bold rounded-lg absolute"
             style={{
-              fontSize: 'min(5vw, 5vh)',
+              fontSize: '5cqmin',
               color: isCorrect ? '#4ade80' : '#f87171',
-              bottom: 'min(2vw, 2vh)',
+              bottom: '2cqmin',
               textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)',
               backgroundColor: 'rgba(128, 128, 128, 0.5)',
-              padding: 'min(0.5vw, 0.5vh) min(1.5vw, 1.5vh)',
+              padding: '0.5cqmin 1.5cqmin',
             }}
           >
             {isCorrect ? '正解！' : '不正解...'}
@@ -514,13 +514,13 @@ function NormalQuizLayout({
       <div
         className="relative flex items-center justify-center"
         style={{
-          flex: '0 0 calc(50% - min(1vw, 1vh))',
+          flex: '0 0 calc(50% - 1cqmin)',
           aspectRatio: '1 / 1',
           backgroundImage: 'url(./data/images/ui/panel_question.png)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundColor: 'rgba(30,30,30,0.90)',
-          borderRadius: 'min(1vw, 1vh)',
+          borderRadius: '1cqmin',
           padding: 'min(1vw, 1vw)',
           maxWidth: '50%',
           maxHeight: '100%',
@@ -530,7 +530,7 @@ function NormalQuizLayout({
           /* タレント名選択肢: 2x2グリッド */
           <div
             className="grid grid-cols-2 grid-rows-2 w-full h-full"
-            style={{ gap: 'min(1vw, 1vh)' }}
+            style={{ gap: '1cqmin' }}
           >
             {currentQuestion.answers.map((answer, index) => {
               const studentId = answerStudentIds[index];
@@ -570,7 +570,7 @@ function NormalQuizLayout({
                     src="./data/images/ui/panel_choice_face_bg.png"
                     alt=""
                     className="absolute inset-0 w-full h-full object-cover"
-                    style={{ borderRadius: 'min(0.8vw, 0.8vh)' }}
+                    style={{ borderRadius: '0.8cqmin' }}
                   />
 
                   {/* 正解時のグリーングローエフェクト */}
@@ -578,8 +578,8 @@ function NormalQuizLayout({
                     <div
                       className="absolute inset-0 pointer-events-none"
                       style={{
-                        borderRadius: 'min(0.8vw, 0.8vh)',
-                        boxShadow: `0 0 min(10vw, 10vh) min(10vw, 10vh) ${bgColor} inset`,
+                        borderRadius: '0.8cqmin',
+                        boxShadow: `0 0 10cqmin 10cqmin ${bgColor} inset`,
                       }}
                     />
                   )}
@@ -592,22 +592,22 @@ function NormalQuizLayout({
                         draggable={false}
                         alt={answer}
                         className="absolute inset-0 w-full h-full object-cover"
-                        style={{ borderRadius: 'min(0.8vw, 0.8vh)' }}
+                        style={{ borderRadius: '0.8cqmin' }}
                       />
                       <div
                         className="absolute left-0 right-0 bottom-0 flex items-center justify-center"
                         style={{
                           backgroundColor: 'rgba(255, 255, 255, 0.9)',
-                          borderBottomLeftRadius: 'min(0.8vw, 0.8vh)',
-                          borderBottomRightRadius: 'min(0.8vw, 0.8vh)',
-                          padding: 'min(0.3vw, 0.3vh) min(0.5vw, 0.5vh)',
+                          borderBottomLeftRadius: '0.8cqmin',
+                          borderBottomRightRadius: '0.8cqmin',
+                          padding: '0.3cqmin 0.5cqmin',
                           zIndex: 10,
                         }}
                       >
                         <p
                           className="font-bold truncate w-full text-center"
                           style={{
-                            fontSize: 'min(2.5vw, 2.5vh)',
+                            fontSize: '2.5cqmin',
                             color: '#374151',
                           }}
                         >
@@ -623,14 +623,14 @@ function NormalQuizLayout({
                         alt=""
                         className="absolute inset-0 w-full h-full object-contain"
                         style={{
-                          borderRadius: 'min(0.8vw, 0.8vh)',
+                          borderRadius: '0.8cqmin',
                           padding: '15%',
                         }}
                       />
                       {/* タレント名（中央にオーバーレイ） */}
                       <div
                         className="absolute inset-0 flex items-center justify-center"
-                        style={{ padding: 'min(1vw, 1vh)' }}
+                        style={{ padding: '1cqmin' }}
                       >
                         <span
                           className="text-white font-bold text-center"
@@ -652,8 +652,8 @@ function NormalQuizLayout({
                     alt=""
                     className="absolute inset-0 w-full h-full object-cover pointer-events-none"
                     style={{
-                      borderRadius: 'min(0.8vw, 0.8vh)',
-                      boxShadow: isAnswered ? `0 0 0 min(0.5vw, 0.5vh) ${borderColor}` : 'none',
+                      borderRadius: '0.8cqmin',
+                      boxShadow: isAnswered ? `0 0 0 0.5cqmin ${borderColor}` : 'none',
                     }}
                   />
 
@@ -663,15 +663,15 @@ function NormalQuizLayout({
                       className="absolute left-0 right-0 bottom-0 flex items-center justify-center"
                       style={{
                         backgroundColor: 'rgba(255, 255, 255, 0.9)',
-                        borderBottomLeftRadius: 'min(0.8vw, 0.8vh)',
-                        borderBottomRightRadius: 'min(0.8vw, 0.8vh)',
-                        padding: 'min(0.3vw, 0.3vh) min(0.5vw, 0.5vh)',
+                        borderBottomLeftRadius: '0.8cqmin',
+                        borderBottomRightRadius: '0.8cqmin',
+                        padding: '0.3cqmin 0.5cqmin',
                       }}
                     >
                       <p
                         className="font-bold truncate w-full text-center"
                         style={{
-                          fontSize: 'min(2.5vw, 2.5vh)',
+                          fontSize: '2.5cqmin',
                           color: index === currentQuestion.correctIndex ? '#166534' : (index === selectedAnswer ? '#7f1d1d' : '#374151'),
                         }}
                       >
@@ -687,7 +687,7 @@ function NormalQuizLayout({
           /* 通常選択肢: 4行配置 */
           <div
             className="flex flex-col w-full h-full justify-center"
-            style={{ gap: 'min(1vw, 1vh)', padding: 'min(1vw, 1vh)' }}
+            style={{ gap: '1cqmin', padding: '1cqmin' }}
           >
             {currentQuestion.answers.map((answer, index) => {
               // 正解/不正解の背景色
@@ -698,7 +698,7 @@ function NormalQuizLayout({
                   if (isCorrect) {
                     bgStyle = {
                       filter: 'brightness(1.6) sepia(1) hue-rotate(70deg) saturate(2)',
-                      boxShadow: '0 0 min(2vw, 2vh) min(1vw, 1vh) #4ade80',
+                      boxShadow: '0 0 2cqmin 1cqmin #4ade80',
                     };
                   } else {
                     bgStyle = {
@@ -731,7 +731,7 @@ function NormalQuizLayout({
                     alt=""
                     className="absolute inset-0 w-full h-full object-cover"
                     style={{
-                      borderRadius: 'min(0.5vw, 0.5vh)',
+                      borderRadius: '0.5cqmin',
                       ...bgStyle,
                     }}
                   />
@@ -741,7 +741,7 @@ function NormalQuizLayout({
                     style={{
                       fontSize: getAnswerFontSize(answer),
                       color: textColor,
-                      padding: 'min(0.5vw, 0.5vh) min(1vw, 1vh)',
+                      padding: '0.5cqmin 1cqmin',
                       wordBreak: 'break-word',
                     }}
                   >
@@ -786,17 +786,17 @@ function FaceQuizLayout({
       style={{
         width: '100%',
         height: '100%',
-        gap: 'min(2vw, 2vh)', // パネル間の余白も少し広げる
+        gap: '2cqmin', // パネル間の余白も少し広げる
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 'min(1vw, 1vh)',
+        borderRadius: '1cqmin',
       }}
     >
       {/* 左パネル: 出題エリア（正方形, 小さめ） */}
       <div
         className="flex flex-col items-center justify-center relative"
         style={{
-          flex: '0 0 calc(50% - min(1vw, 1vh))',
+          flex: '0 0 calc(50% - 1cqmin)',
           aspectRatio: '1 / 1',
           backgroundImage: 'url(./data/images/ui/panel_question.png)',
           backgroundSize: 'cover',
@@ -811,19 +811,19 @@ function FaceQuizLayout({
           className="text-white text-center font-bold"
           style={{
             textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
-            height: 'min(20vw, 20vh)',
-            paddingTop: 'min(5vw, 5vh)',
+            height: '20cqmin',
+            paddingTop: '5cqmin',
           }}
         >
           {currentQuestion.talentKana && (
-            <div style={{ fontSize: 'min(3.7vw, 3.7vh)', opacity: 0.9 }}>
+            <div style={{ fontSize: '3.7cqmin', opacity: 0.9 }}>
               {currentQuestion.talentKana}
             </div>
           )}
           <div style={{ fontSize: getFaceQuizFontSize(currentQuestion.question) }}>
             {currentQuestion.question}<br />
           </div>
-          <div style={{ fontSize: 'min(4vw, 4vh)' }}>はどれ？</div>
+          <div style={{ fontSize: '4cqmin' }}>はどれ？</div>
         </div>
 
         {/* ヒント: 将来の夢 */}
@@ -831,14 +831,14 @@ function FaceQuizLayout({
           <div
             className="flex flex-col justify-center items-center text-center"
             style={{
-              fontSize: 'min(2.5vw, 2.5vh)',
+              fontSize: '2.5cqmin',
               color: 'rgba(255, 255, 255, 0.9)',
               textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)',
-              padding: 'min(1.5vw, 1.5vh)',
-              height: 'min(40vw, 40vh)',
+              padding: '1.5cqmin',
+              height: '40cqmin',
             }}
           >
-            <p style={{ margin: 0, fontSize: 'min(3.5vw, 3.5vh)' }}>
+            <p style={{ margin: 0, fontSize: '3.5cqmin' }}>
               💭将来の夢: {profile.dream}
             </p>
           </div>
@@ -849,12 +849,12 @@ function FaceQuizLayout({
           <div
             className="text-center font-bold rounded-lg absolute"
             style={{
-              fontSize: 'min(5vw, 5vh)',
+              fontSize: '5cqmin',
               color: isCorrect ? '#4ade80' : '#f87171',
-              bottom: 'min(2vw, 2vh)',
+              bottom: '2cqmin',
               textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)',
               backgroundColor: 'rgba(128, 128, 128, 0.5)',
-              padding: 'min(0.5vw, 0.5vh) min(1.5vw, 1.5vh)',
+              padding: '0.5cqmin 1.5cqmin',
             }}
           >
             {isCorrect ? '正解！' : '不正解...'}
@@ -866,13 +866,13 @@ function FaceQuizLayout({
       <div
         className="relative flex items-center justify-center"
         style={{
-          flex: '0 0 calc(50% - min(1vw, 1vh))',
+          flex: '0 0 calc(50% - 1cqmin)',
           aspectRatio: '1 / 1',
           backgroundImage: 'url(./data/images/ui/panel_question.png)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundColor: 'rgba(30,30,30,0.90)', // 半透明の背景
-          borderRadius: 'min(1vw, 1vh)',
+          borderRadius: '1cqmin',
           padding: 'min(1vw, 1vw)',
           maxWidth: '50%',
           maxHeight: '100%',
@@ -881,7 +881,7 @@ function FaceQuizLayout({
         {/* 2x2グリッド */}
         <div
           className="grid grid-cols-2 grid-rows-2 w-full h-full"
-          style={{ gap: 'min(1vw, 1vh)' }}
+          style={{ gap: '1cqmin' }}
         >
           {answerImages.map((imagePath, index) => {
             const showSilhouette = isSilhouette && !isAnswered;
@@ -925,7 +925,7 @@ function FaceQuizLayout({
                   }
                   alt=""
                   className="absolute inset-0 w-full h-full object-cover"
-                  style={{ borderRadius: 'min(0.8vw, 0.8vh)' }}
+                  style={{ borderRadius: '0.8cqmin' }}
                 />
 
                 {/* 正解時のグリーングローエフェクト */}
@@ -933,8 +933,8 @@ function FaceQuizLayout({
                   <div
                     className="absolute inset-0 pointer-events-none"
                     style={{
-                      borderRadius: 'min(0.8vw, 0.8vh)',
-                      boxShadow: `0 0 min(10vw, 10vh) min(10vw, 10vh) ${bgColor} inset`,
+                      borderRadius: '0.8cqmin',
+                      boxShadow: `0 0 10cqmin 10cqmin ${bgColor} inset`,
                     }}
                   />)}
 
@@ -945,7 +945,7 @@ function FaceQuizLayout({
                   alt={`選択肢${index + 1}`}
                   className="absolute inset-0 w-full h-full object-cover"
                   style={{
-                    borderRadius: 'min(0.8vw, 0.8vh)',
+                    borderRadius: '0.8cqmin',
                     ...(showSilhouette ? { filter: 'brightness(0) saturate(0.2)' } : {}),
                   }}
                 />
@@ -956,8 +956,8 @@ function FaceQuizLayout({
                   alt=""
                   className="absolute inset-0 w-full h-full object-cover pointer-events-none"
                   style={{
-                    borderRadius: 'min(0.8vw, 0.8vh)',
-                    boxShadow: isAnswered ? `0 0 0 min(0.5vw, 0.5vh) ${borderColor}` : 'none',
+                    borderRadius: '0.8cqmin',
+                    boxShadow: isAnswered ? `0 0 0 0.5cqmin ${borderColor}` : 'none',
                   }}
                 />
 
@@ -967,15 +967,15 @@ function FaceQuizLayout({
                     className="absolute left-0 right-0 bottom-0 flex items-center justify-center"
                     style={{
                       backgroundColor: 'rgba(255, 255, 255, 0.9)',
-                      borderBottomLeftRadius: 'min(0.8vw, 0.8vh)',
-                      borderBottomRightRadius: 'min(0.8vw, 0.8vh)',
-                      padding: 'min(0.3vw, 0.3vh) min(0.5vw, 0.5vh)',
+                      borderBottomLeftRadius: '0.8cqmin',
+                      borderBottomRightRadius: '0.8cqmin',
+                      padding: '0.3cqmin 0.5cqmin',
                     }}
                   >
                     <p
                       className="font-bold truncate w-full text-center"
                       style={{
-                        fontSize: 'min(2.5vw, 2.5vh)',
+                        fontSize: '2.5cqmin',
                         color: index === currentQuestion.correctIndex ? '#166534' : (index === selectedAnswer ? '#7f1d1d' : '#374151'),
                       }}
                     >
@@ -1024,17 +1024,17 @@ function NameQuizLayout({
       style={{
         width: '100%',
         height: '100%',
-        gap: 'min(2vw, 2vh)',
+        gap: '2cqmin',
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 'min(1vw, 1vh)',
+        borderRadius: '1cqmin',
       }}
     >
       {/* 左パネル: 出題エリア（正方形） */}
       <div
         className="flex flex-col items-center justify-center relative"
         style={{
-          flex: '0 0 calc(50% - min(1vw, 1vh))',
+          flex: '0 0 calc(50% - 1cqmin)',
           aspectRatio: '1 / 1',
           backgroundImage: 'url(./data/images/ui/panel_question.png)',
           backgroundSize: 'cover',
@@ -1049,7 +1049,7 @@ function NameQuizLayout({
         {
           <div
             className="text-gray-200"
-            style={{ fontSize: 'min(4vw, 4vh)', padding: '0', height: '10%' }}
+            style={{ fontSize: '4cqmin', padding: '0', height: '10%' }}
           >
             <p className="mt-1">この人は誰？</p>
           </div>
@@ -1061,14 +1061,14 @@ function NameQuizLayout({
           style={{
             width: '55%',
             height: '55%',
-            marginBottom: 'min(1vw, 1vh)',
+            marginBottom: '1cqmin',
           }}
         >
           <div
             className="w-full h-full rounded-lg overflow-hidden"
             style={{
               backgroundColor: 'white',
-              borderRadius: 'min(0.8vw, 0.8vh)',
+              borderRadius: '0.8cqmin',
             }}
           >
             <img
@@ -1085,7 +1085,7 @@ function NameQuizLayout({
         {profile && (
           <div
             className="text-gray-200"
-            style={{ fontSize: 'min(3vw, 3vh)', padding: '0 min(2vw, 2vh)', height: '25%', overflowY: 'auto' }}
+            style={{ fontSize: '3cqmin', padding: '0 2cqmin', height: '25%', overflowY: 'auto' }}
           >
             <p className="mt-1">💭将来の夢: {profile.dream}</p>
           </div>
@@ -1096,12 +1096,12 @@ function NameQuizLayout({
           <div
             className="text-center font-bold rounded-lg absolute"
             style={{
-              fontSize: 'min(5vw, 5vh)',
+              fontSize: '5cqmin',
               color: isCorrect ? '#4ade80' : '#f87171',
-              bottom: 'min(2vw, 2vh)',
+              bottom: '2cqmin',
               textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)',
               backgroundColor: 'rgba(128, 128, 128, 0.5)',
-              padding: 'min(0.5vw, 0.5vh) min(1.5vw, 1.5vh)',
+              padding: '0.5cqmin 1.5cqmin',
             }}
           >
             {isCorrect ? '正解！' : '不正解...'}
@@ -1113,13 +1113,13 @@ function NameQuizLayout({
       <div
         className="relative flex items-center justify-center"
         style={{
-          flex: '0 0 calc(50% - min(1vw, 1vh))',
+          flex: '0 0 calc(50% - 1cqmin)',
           aspectRatio: '1 / 1',
           backgroundImage: 'url(./data/images/ui/panel_question.png)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundColor: 'rgba(30,30,30,0.90)',
-          borderRadius: 'min(1vw, 1vh)',
+          borderRadius: '1cqmin',
           padding: 'min(1vw, 1vw)',
           maxWidth: '50%',
           maxHeight: '100%',
@@ -1128,7 +1128,7 @@ function NameQuizLayout({
         {/* 2x2グリッド - 通常問題のタレント名選択肢と同じ */}
         <div
           className="grid grid-cols-2 grid-rows-2 w-full h-full"
-          style={{ gap: 'min(1vw, 1vh)' }}
+          style={{ gap: '1cqmin' }}
         >
           {currentQuestion.answers.map((answer, index) => {
             const studentId = answerStudentIds[index];
@@ -1159,7 +1159,7 @@ function NameQuizLayout({
                 className="relative rounded-lg transition-colors h-full"
                 style={{
                   padding: 0,
-                  border: `min(0.3vw, 0.3vh) solid ${borderColor}`,
+                  border: `0.3cqmin solid ${borderColor}`,
                   background: bgColor,
                   cursor: isAnswered ? 'default' : 'pointer',
                   opacity,
@@ -1172,7 +1172,7 @@ function NameQuizLayout({
                     alt={answer}
                     className="absolute inset-0 w-full h-full object-cover"
                     style={{
-                      borderRadius: 'min(0.7vw, 0.7vh)',
+                      borderRadius: '0.7cqmin',
                     }}
                   />
                 )}
@@ -1183,8 +1183,8 @@ function NameQuizLayout({
                   alt=""
                   className="absolute inset-0 w-full h-full object-cover pointer-events-none"
                   style={{
-                    borderRadius: 'min(0.8vw, 0.8vh)',
-                    boxShadow: isAnswered ? `0 0 0 min(0.5vw, 0.5vh) ${borderColor}` : 'none',
+                    borderRadius: '0.8cqmin',
+                    boxShadow: isAnswered ? `0 0 0 0.5cqmin ${borderColor}` : 'none',
                   }}
                 />
 
@@ -1197,14 +1197,14 @@ function NameQuizLayout({
                       alt=""
                       className="absolute inset-0 w-full h-full object-contain"
                       style={{
-                        borderRadius: 'min(0.8vw, 0.8vh)',
+                        borderRadius: '0.8cqmin',
                         padding: '15%',
                       }}
                     />
                     {/* タレント名（中央にオーバーレイ） */}
                     <div
                       className="absolute inset-0 flex items-center justify-center"
-                      style={{ padding: 'min(1vw, 1vh)' }}
+                      style={{ padding: '1cqmin' }}
                     >
                       <span
                         className="text-white font-bold text-center"
@@ -1226,15 +1226,15 @@ function NameQuizLayout({
                     className="absolute left-0 right-0 bottom-0 flex items-center justify-center"
                     style={{
                       backgroundColor: 'rgba(255, 255, 255, 0.9)',
-                      borderBottomLeftRadius: 'min(0.8vw, 0.8vh)',
-                      borderBottomRightRadius: 'min(0.8vw, 0.8vh)',
-                      padding: 'min(0.3vw, 0.3vh) min(0.5vw, 0.5vh)',
+                      borderBottomLeftRadius: '0.8cqmin',
+                      borderBottomRightRadius: '0.8cqmin',
+                      padding: '0.3cqmin 0.5cqmin',
                     }}
                   >
                     <p
                       className="font-bold truncate w-full text-center"
                       style={{
-                        fontSize: 'min(2.5vw, 2.5vh)',
+                        fontSize: '2.5cqmin',
                         color: index === currentQuestion.correctIndex ? '#166534' : (index === selectedAnswer ? '#7f1d1d' : '#374151'),
                       }}
                     >
@@ -1264,7 +1264,7 @@ function DifficultyStars({ difficulty, maxStars = 5, genre ='' }: { difficulty: 
         key={i}
         className={i <= difficulty ? 'text-yellow-400' : 'text-gray-500'}
         style={{
-          fontSize: 'min(3.5vw, 3.5vh)',
+          fontSize: '3.5cqmin',
           textShadow: i <= difficulty ? '2px 2px 4px rgba(0,0,0,0.7)' : undefined,
         }}
       >
@@ -1278,15 +1278,15 @@ function DifficultyStars({ difficulty, maxStars = 5, genre ='' }: { difficulty: 
         leftImage="./data/images/ui/plate_left.png"
         middleImage="./data/images/ui/plate_middle.png"
         rightImage="./data/images/ui/plate_right.png"
-        height="min(6.5vw, 6.5vh)"
+        height="6.5cqmin"
       >
         {genre && genre !== '' && (
           <span
             className="ml-2 text-white font-bold"
             style={{
-              fontSize: 'min(3vw, 3vh)',
+              fontSize: '3cqmin',
               textShadow: '2px 2px 4px rgba(0,0,0,1)',
-              paddingRight: 'min(1vw, 1vh)',
+              paddingRight: '1cqmin',
             }}
           >
             {genre}
@@ -1306,7 +1306,7 @@ function ImageButton({
   alt,
   label,
   onClick,
-  height = 'min(7vw, 7vh)',
+  height = '7cqmin',
 }: {
   src: string;
   alt: string;
@@ -1365,10 +1365,10 @@ function ControlButtonArea({
   return (
     <div
       className="flex items-center justify-between"
-      style={{ height: '10%', padding: '0 min(1vw, 1vh)' }}
+      style={{ height: '10%', padding: '0 1cqmin' }}
     >
       {/* 左側: 前の問題へボタン */}
-      <div style={{ minWidth: '25%', marginBottom: 'min(7vw, 7vh)' }}>
+      <div style={{ minWidth: '25%', marginBottom: '7cqmin' }}>
         {showPrevButton && (
           <ImageButton
             src="./data/images/ui/btn_back.png"
@@ -1380,7 +1380,7 @@ function ControlButtonArea({
       </div>
 
       {/* 中央: 解説ボタン */}
-      <div className="flex items-center justify-center" style={{ marginBottom: 'min(8vw, 8vh)' }}>
+      <div className="flex items-center justify-center" style={{ marginBottom: '8cqmin' }}>
         {showCommentButton && isAnswered && (
           <ImageButton
             src="./data/images/ui/btn_description.png"
@@ -1392,14 +1392,14 @@ function ControlButtonArea({
       </div>
 
       {/* 右側: 次の問題へ / 結果を見るボタン */}
-      <div className="flex items-center justify-end" style={{ minWidth: '25%', marginBottom: 'min(8vw, 8vh)' }}>
+      <div className="flex items-center justify-end" style={{ minWidth: '25%', marginBottom: '8cqmin' }}>
         {showNextButton && isAnswered && (
           <ImageButton
             src={isLastQuestion ? './data/images/ui/btn_result.png' : './data/images/ui/btn_next.png'}
             alt={isLastQuestion ? '結果を見る' : '次の問題へ'}
             label={isLastQuestion ? '結果を見る' : '次の問題へ'}
             onClick={onNextClick}
-            height="min(10vw, 10vh)"
+            height="10cqmin"
           />
         )}
       </div>

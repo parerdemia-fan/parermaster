@@ -79,11 +79,11 @@ export function TalentListScreen() {
           middleImage="./data/images/ui/btn_normal_off_middle.png"
           rightImage="./data/images/ui/btn_normal_off_right.png"
           onClick={returnToTitle}
-          height="min(5vw, 5vh)"
-          fontSize="min(2.5vw, 2.5vh)"
+          height="5cqmin"
+          fontSize="2.5cqmin"
           textColor="#CCC"
           className="selection-card"
-          style={{marginLeft: 'min(2vw, 2vh)'}}
+          style={{marginLeft: '2cqmin'}}
         >
           戻る
         </ThreePatchButton>
@@ -92,23 +92,23 @@ export function TalentListScreen() {
           leftImage="./data/images/ui/plate_left.png"
           middleImage="./data/images/ui/plate_middle.png"
           rightImage="./data/images/ui/plate_right.png"
-          height="min(6.5vw, 6.5vh)"
+          height="6.5cqmin"
         >
           <span
             className="text-white font-bold"
             style={{
-              fontSize: 'min(3.5vw, 3.5vh)',
+              fontSize: '3.5cqmin',
               textShadow: '2px 2px 4px rgba(0,0,0,1)',
              }}
           >
             寮生一覧
           </span>
         </ThreePatchImage>
-        <div style={{ width: 'min(14vw, 14vh)' }} /> {/* スペーサー */}
+        <div style={{ width: '14cqmin' }} /> {/* スペーサー */}
       </div>
 
       {/* メインコンテンツ: 左右2分割 */}
-      <div className="flex-1 flex overflow-hidden" style={{ gap: 'min(2vw, 2vh)', padding: 'min(2vw, 2vh)' }}>
+      <div className="flex-1 flex overflow-hidden" style={{ gap: '2cqmin', padding: '2cqmin' }}>
         {/* 左側: 寮生一覧 (50%) */}
         <div
           className="overflow-y-auto"
@@ -125,8 +125,8 @@ export function TalentListScreen() {
                 leftImage="./data/images/ui/plate_left.png"
                 middleImage="./data/images/ui/plate_middle.png"
                 rightImage="./data/images/ui/plate_right.png"
-                width="min(62vw, 62vh)"
-                height="min(4vw, 4vh)"
+                width="62cqmin"
+                height="4cqmin"
                 filter={
                   idx === 0 ? "sepia(1) hue-rotate(-50deg) saturate(8) brightness(1)" :
                   idx === 1 ? "sepia(1) hue-rotate(-60deg) saturate(3) brightness(1)" :
@@ -137,7 +137,7 @@ export function TalentListScreen() {
                 <span
                   className="text-white font-bold"
                   style={{
-                  fontSize: 'min(2.5vw, 2.5vh)',
+                  fontSize: '2.5cqmin',
                   textShadow: '2px 2px 4px rgba(0,0,0,1)',
                    }}
                 >
@@ -150,8 +150,8 @@ export function TalentListScreen() {
                 className="bg-gray-800/50 rounded-b-lg grid"
                 style={{
                   gridTemplateColumns: 'repeat(3, 1fr)',
-                  gap: 'min(1vw, 1vh)',
-                  padding: 'min(1vw, 1vh)',
+                  gap: '1cqmin',
+                  padding: '1cqmin',
                 }}
               >
                 {dorm.talents.map(talent => {
@@ -173,7 +173,7 @@ export function TalentListScreen() {
                         src="./data/images/ui/panel_choice_face_bg.png"
                         alt=""
                         className="absolute inset-0 w-full h-full object-cover"
-                        style={{ borderRadius: 'min(0.8vw, 0.8vh)' }}
+                        style={{ borderRadius: '0.8cqmin' }}
                       />
 
                       {/* タレント画像 */}
@@ -182,7 +182,7 @@ export function TalentListScreen() {
                         draggable={false}
                         alt={talent.name}
                         className="absolute inset-0 w-full h-full object-cover"
-                        style={{ borderRadius: 'min(0.8vw, 0.8vh)' }}
+                        style={{ borderRadius: '0.8cqmin' }}
                       />
 
                       {/* 前面フレーム画像 */}
@@ -191,8 +191,8 @@ export function TalentListScreen() {
                         alt=""
                         className="absolute inset-0 w-full h-full object-cover pointer-events-none"
                         style={{
-                          borderRadius: 'min(0.8vw, 0.8vh)',
-                          boxShadow: isSelected ? '0 0 0 min(0.5vw, 0.5vh) #facc15' : 'none',
+                          borderRadius: '0.8cqmin',
+                          boxShadow: isSelected ? '0 0 0 0.5cqmin #facc15' : 'none',
                         }}
                       />
 
@@ -201,15 +201,15 @@ export function TalentListScreen() {
                         className="absolute left-0 right-0 bottom-0 flex items-center justify-center"
                         style={{
                           backgroundColor: 'rgba(255, 255, 255, 0.9)',
-                          borderBottomLeftRadius: 'min(0.8vw, 0.8vh)',
-                          borderBottomRightRadius: 'min(0.8vw, 0.8vh)',
-                          padding: 'min(0.3vw, 0.3vh) min(0.5vw, 0.5vh)',
+                          borderBottomLeftRadius: '0.8cqmin',
+                          borderBottomRightRadius: '0.8cqmin',
+                          padding: '0.3cqmin 0.5cqmin',
                         }}
                       >
                         <p
                           className="font-bold truncate w-full text-center"
                           style={{
-                            fontSize: 'min(2vw, 2vh)',
+                            fontSize: '2cqmin',
                             color: '#374151',
                           }}
                         >
@@ -230,15 +230,15 @@ export function TalentListScreen() {
           style={{
             width: '50%',
             minHeight: '0',
-            paddingTop: 'min(8vw, 8vh)',
-            paddingBottom: 'min(8vw, 8vh)',
+            paddingTop: '8cqmin',
+            paddingBottom: '8cqmin',
           }}
         >
           {/* 背景画像レイヤー（固定） */}
           <div
             className="absolute left-0 top-0 pointer-events-none"
             style={{
-              width: 'min(55vw, 55vh)',
+              width: '55cqmin',
               height: '100%',
               backgroundImage: 'url(./data/images/ui/panel_paper.png)',
               backgroundSize: '100% 100%',
@@ -257,7 +257,7 @@ export function TalentListScreen() {
             }.webp`}
               className="absolute top-30 left-0"
               style={{
-                width: 'min(57vw, 57vh)',
+                width: '57cqmin',
                 opacity: 0.15,
                 zIndex: 1,
               }}
@@ -268,7 +268,7 @@ export function TalentListScreen() {
             <div
               className="absolute right-0 top-0 bottom-0 flex items-end justify-end pointer-events-none"
               style={{
-                width: 'min(50vw, 50vh)',
+                width: '50cqmin',
                 zIndex: 2,
               }}
             >
@@ -300,16 +300,16 @@ export function TalentListScreen() {
                 <div
                   className="relative left-0 top-0"
                   style={{
-                    width: 'min(45vw, 45vh)',
-                    paddingLeft: 'min(4vw, 4vh)',
-                    paddingRight: 'min(4vw, 4vh)',
+                    width: '45cqmin',
+                    paddingLeft: '4cqmin',
+                    paddingRight: '4cqmin',
                   }}
                 >
                   {/* 読み仮名 */}
                   <p
-                    className="mb-[1.5vmin]"
+                    className="mb-[1.5cqmin]"
                     style={{
-                      fontSize: 'min(2vw, 2vh)',
+                      fontSize: '2cqmin',
                       color: '#304056ff',
                       textShadow: '1px 1px 10px rgba(217, 214, 198, 1), 1px -1px 10px rgba(217, 214, 198, 1), -1px 1px 10px rgba(217, 214, 198, 1), -1px -1px 10px rgba(217, 214, 198, 1)',
                       marginBottom: 'max(-1vw, -1vh)',
@@ -320,9 +320,9 @@ export function TalentListScreen() {
 
                   {/* 名前 */}
                   <h2
-                    className="font-bold mb-[1vmin]"
+                    className="font-bold mb-[1cqmin]"
                     style={{
-                      fontSize: 'min(4vw, 4vh)',
+                      fontSize: '4cqmin',
                       color: '#1f2937',
                       textShadow: '1px 1px 10px rgba(217, 214, 198, 1), 1px -1px 10px rgba(217, 214, 198, 1), -1px 1px 10px rgba(217, 214, 198, 1), -1px -1px 10px rgba(217, 214, 198, 1)',
                     }}
@@ -332,8 +332,8 @@ export function TalentListScreen() {
 
                   {/* SNSリンク */}
                   <div
-                    className="flex flex-wrap mb-[3vmin]"
-                    style={{ gap: 'min(1.5vw, 1.5vh)' }}
+                    className="flex flex-wrap mb-[3cqmin]"
+                    style={{ gap: '1.5cqmin' }}
                   >
                     {SNS_LINKS.map(sns => {
                       const url = selectedTalent[sns.key as keyof typeof selectedTalent] as string;
@@ -347,11 +347,11 @@ export function TalentListScreen() {
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex items-center justify-center"
-                            style={{ width: 'min(5vw, 5vh)', height: 'min(5vw, 5vh)' }}
+                            style={{ width: '5cqmin', height: '5cqmin' }}
                           >
                             <span
                               className="flex items-center justify-center rounded-full bg-black text-white"
-                              style={{ width: '100%', height: '100%', fontSize: 'min(3vw, 3vh)' }}
+                              style={{ width: '100%', height: '100%', fontSize: '3cqmin' }}
                             >
                               {sns.icon}
                             </span>
@@ -367,7 +367,7 @@ export function TalentListScreen() {
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex items-center justify-center"
-                            style={{ width: 'min(5vw, 5vh)', height: 'min(5vw, 5vh)' }}
+                            style={{ width: '5cqmin', height: '5cqmin' }}
                           >
                             <img
                               src={sns.icon}
@@ -386,7 +386,7 @@ export function TalentListScreen() {
                           target="_blank"
                           rel="noopener noreferrer"
                           className="flex items-center justify-center"
-                          style={{ width: 'min(5vw, 5vh)', height: 'min(5vw, 5vh)' }}
+                          style={{ width: '5cqmin', height: '5cqmin' }}
                         >
                           <img
                             src={sns.icon}
@@ -406,11 +406,11 @@ export function TalentListScreen() {
 
                   {/* 夢 */}
                   {selectedTalent.dream && (
-                    <div className="mb-[2.5vmin]">
+                    <div className="mb-[2.5cqmin]">
                       <h3
                         className="font-bold mb-[1%]"
                         style={{
-                          fontSize: 'min(2.5vw, 2.5vh)',
+                          fontSize: '2.5cqmin',
                           color: '#b45309',
                           textShadow: '1px 1px 10px rgba(217, 214, 198, 1), 1px -1px 10px rgba(217, 214, 198, 1), -1px 1px 10px rgba(217, 214, 198, 1), -1px -1px 10px rgba(217, 214, 198, 1)',
                         }}
@@ -419,7 +419,7 @@ export function TalentListScreen() {
                       </h3>
                       <p
                         style={{
-                          fontSize: 'min(2.2vw, 2.2vh)',
+                          fontSize: '2.2cqmin',
                           color: '#29303cff',
                           paddingLeft: '3%',
                           textShadow: '1px 1px 10px rgba(217, 214, 198, 1), 1px -1px 10px rgba(217, 214, 198, 1), -1px 1px 10px rgba(217, 214, 198, 1), -1px -1px 10px rgba(217, 214, 198, 1)',
@@ -432,11 +432,11 @@ export function TalentListScreen() {
 
                   {/* 自己紹介 */}
                   {selectedTalent.intro && (
-                    <div className="mb-[2.5vmin]">
+                    <div className="mb-[2.5cqmin]">
                       <h3
                         className="font-bold mb-[1%]"
                         style={{
-                          fontSize: 'min(2.5vw, 2.5vh)',
+                          fontSize: '2.5cqmin',
                           color: '#b45309',
                           textShadow: '1px 1px 10px rgba(217, 214, 198, 1), 1px -1px 10px rgba(217, 214, 198, 1), -1px 1px 10px rgba(217, 214, 198, 1), -1px -1px 10px rgba(217, 214, 198, 1)',
                         }}
@@ -446,7 +446,7 @@ export function TalentListScreen() {
                       <p
                         className="whitespace-pre-wrap"
                         style={{
-                          fontSize: 'min(2.2vw, 2.2vh)',
+                          fontSize: '2.2cqmin',
                           color: '#29303cff',
                           paddingLeft: '3%',
                           textShadow: '1px 1px 10px rgba(217, 214, 198, 1), 1px -1px 10px rgba(217, 214, 198, 1), -1px 1px 10px rgba(217, 214, 198, 1), -1px -1px 10px rgba(217, 214, 198, 1)',
@@ -459,11 +459,11 @@ export function TalentListScreen() {
 
                   {/* 基本プロフィール */}
                   {profileItems.length > 0 && (
-                    <div className="mb-[2.5vmin]">
+                    <div className="mb-[2.5cqmin]">
                       <h3
-                        className="font-bold mb-[1vmin]"
+                        className="font-bold mb-[1cqmin]"
                         style={{
-                          fontSize: 'min(2.5vw, 2.5vh)',
+                          fontSize: '2.5cqmin',
                           color: '#b45309',
                           paddingLeft: '1%',
                           textShadow: '1px 1px 10px rgba(217, 214, 198, 1), 1px -1px 10px rgba(217, 214, 198, 1), -1px 1px 10px rgba(217, 214, 198, 1), -1px -1px 10px rgba(217, 214, 198, 1)',
@@ -475,8 +475,8 @@ export function TalentListScreen() {
                         className="grid"
                         style={{
                           gridTemplateColumns: 'auto 1fr',
-                          gap: 'min(1vw, 1vh)',
-                          fontSize: 'min(2vw, 2vh)',
+                          gap: '1cqmin',
+                          fontSize: '2cqmin',
                           paddingLeft: '3%',
                         }}
                       >
@@ -492,11 +492,11 @@ export function TalentListScreen() {
 
                   {/* リスト系プロフィール */}
                   {listItems.map(section => (
-                    <div key={section.label} className="mb-[2.5vmin]">
+                    <div key={section.label} className="mb-[2.5cqmin]">
                       <h3
-                        className="font-bold mb-[1vmin]"
+                        className="font-bold mb-[1cqmin]"
                         style={{
-                          fontSize: 'min(2.5vw, 2.5vh)',
+                          fontSize: '2.5cqmin',
                           color: '#b45309',
                           paddingLeft: '1%',
                           textShadow: '1px 1px 10px rgba(217, 214, 198, 1), 1px -1px 10px rgba(217, 214, 198, 1), -1px 1px 10px rgba(217, 214, 198, 1), -1px -1px 10px rgba(217, 214, 198, 1)',
@@ -512,8 +512,8 @@ export function TalentListScreen() {
                       <div
                         className="flex flex-wrap"
                         style={{
-                          gap: 'min(1vw, 1vh)',
-                          fontSize: 'min(2vw, 2vh)',
+                          gap: '1cqmin',
+                          fontSize: '2cqmin',
                           paddingLeft: '3%',
                         }}
                       >

@@ -17,9 +17,16 @@ body {
   font-family: 'M PLUS Rounded 1c', sans-serif;
   background-image: url('/parermaster/data/images/ui/parermaster_l.png');
   background-size: cover;
-  background-position: center;
+  background-position: top;
   background-repeat: no-repeat;
   background-attachment: fixed;
+}
+
+/* 縦長画面用の背景画像 (アスペクト比が 4:3 より縦長の場合) */
+@media (max-aspect-ratio: 1) {
+  body {
+    background-image: url('/parermaster/data/images/ui/parerdemia_p.png');
+  }
 }
 
 /* 汎用アニメーション */

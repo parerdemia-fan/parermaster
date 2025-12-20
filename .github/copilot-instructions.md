@@ -71,20 +71,30 @@
 
 ### レスポンシブサイズ指定
 
-本プロジェクトでは正方形UI（`min(100vw, 100vh)`）を採用しているため、以下のルールに従う：
+本プロジェクトでは 4:3 アスペクト比のゲームコンテナを採用し、CSS Container Queries の `cqmin` 単位を使用する。
+
+**GameContainer の仕様:**
+- 横長画面: 高さ = 100vh、幅 = 133.33vh
+- 縦長画面: 幅 = 100vw、高さ = 75vw、上部配置
+- `container-type: size` が設定されており、子要素で `cqmin` 単位が使用可能
+
+**cqmin 単位について:**
+- コンテナの幅と高さの小さい方に対する割合
+- `3cqmin` = コンテナの短辺の 3%
+- ビューポートサイズに依存せず、ゲームコンテナ内で一貫したサイズを保証
 
 | 用途 | 推奨 | 例 |
 |------|------|----|
-| フォントサイズ | `min(Xvw, Xvh)` | `style={{ fontSize: 'min(3vw, 3vh)' }}` |
-| パディング・マージン | `min(Xvw, Xvh)` | `style={{ padding: 'min(1vw, 1vh) min(2vw, 2vh)' }}` |
-| 要素のギャップ | Tailwind `gap-[Xvmin]` または `gap-x-[X%]` | `className="gap-[2vmin]"` |
+| フォントサイズ | `Xcqmin` | `style={{ fontSize: '3cqmin' }}` |
+| パディング・マージン | `Xcqmin` | `style={{ padding: '1cqmin 2cqmin' }}` |
+| 要素のギャップ | `Xcqmin` または Tailwind `gap-[Xcqmin]` | `style={{ gap: '2cqmin' }}` |
 | 要素の高さ・幅（親要素比率） | パーセンテージ | `style={{ height: '40%' }}` |
 
 ### Tailwind vs インラインスタイル
 
-- **Tailwind任意値（`px-[5%]}` など）の注意点**: 親要素のサイズに対する比率になるため、小さな要素内では効果が薄い
-- **確実に余白を確保したい場合**: `min(Xvw, Xvh)` をインラインスタイルで指定する
-- **CSS Grid のギャップ**: `style` 属性ではなく Tailwind の `gap-x-[]`, `gap-y-[]` クラスを使用する
+- **Tailwind任意値（`gap-[3cqmin]` など）**: Container Query 単位は Tailwind の任意値でも使用可能
+- **確実に余白を確保したい場合**: `cqmin` をインラインスタイルで指定する
+- **CSS Grid のギャップ**: `style` 属性または Tailwind の `gap-x-[]`, `gap-y-[]` クラスを使用する
 
 ## 動作確認用データの使用方法
 

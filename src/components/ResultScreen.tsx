@@ -129,7 +129,7 @@ export function ResultScreen() {
         backgroundSize: '100% 100%',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
-        padding: 'min(20vw, 20vh)',
+        padding: '20cqmin',
       }}
     >
       {/* パーフェクト時のエフェクト */}
@@ -159,7 +159,7 @@ export function ResultScreen() {
       {/* ゲームレベルと出題数 */}
       <p
         className="text-black-300 font-medium"
-        style={{ fontSize: 'min(4vw, 4vh)' }}
+        style={{ fontSize: '4cqmin' }}
       >
         カテゴリー: {category} ・ 出題数: {questions.length}
       </p>
@@ -168,14 +168,14 @@ export function ResultScreen() {
       {isPerfect ? (
         <p
           className="font-bold perfect-glow"
-          style={{ fontSize: 'min(12vw, 12vh)' }}
+          style={{ fontSize: '12cqmin' }}
         >
           PERFECT!
         </p>
       ) : (
         <p
           className="font-bold text-black"
-          style={{ fontSize: 'min(10vw, 10vh)' }}
+          style={{ fontSize: '10cqmin' }}
         >
           正解率 {accuracy}%
         </p>
@@ -188,7 +188,7 @@ export function ResultScreen() {
           <p
             className="font-bold"
             style={{
-              fontSize: 'min(3.5vw, 3.5vh)',
+              fontSize: '3.5cqmin',
               color: '#b8860b',
               textShadow: '0 1px 2px rgba(0,0,0,0.2)',
             }}
@@ -197,30 +197,30 @@ export function ResultScreen() {
           </p>
           <div
             className="flex flex-wrap justify-center items-start"
-            style={{ gap: 'min(4vw, 4vh)' }}
+            style={{ gap: '4cqmin' }}
           >
             {newAchievements.map(achievement => (
               <div
                 key={achievement.id}
                 className="flex flex-col items-center"
-                style={{ maxWidth: 'min(35vw, 35vh)' }}
+                style={{ maxWidth: '35cqmin' }}
               >
                 <img
                   src={achievement.imagePath}
                   alt={achievement.name}
                   className="drop-shadow-lg"
                   style={{
-                    width: 'min(12vw, 12vh)',
-                    height: 'min(12vw, 12vh)',
+                    width: '12cqmin',
+                    height: '12cqmin',
                     objectFit: 'contain',
                   }}
                 />
                 <p
                   className="font-bold text-center"
                   style={{
-                    fontSize: 'min(2.8vw, 2.8vh)',
+                    fontSize: '2.8cqmin',
                     color: '#4a3728',
-                    marginTop: 'min(0.5vw, 0.5vh)',
+                    marginTop: '0.5cqmin',
                   }}
                 >
                   {achievement.name}
@@ -228,7 +228,7 @@ export function ResultScreen() {
                 <p
                   className="text-center"
                   style={{
-                    fontSize: 'min(2vw, 2vh)',
+                    fontSize: '2cqmin',
                     color: '#6b5344',
                     lineHeight: '1.3',
                   }}
@@ -244,7 +244,7 @@ export function ResultScreen() {
         <p
           className="text-black-200 text-center"
           style={{
-            fontSize: 'min(3.5vw, 3.5vh)',
+            fontSize: '3.5cqmin',
             maxWidth: '90%',
           }}
         >
@@ -255,7 +255,7 @@ export function ResultScreen() {
       {/* ボタンエリア - 横並びでスペース節約 */}
       <div
         className="flex items-center justify-center"
-        style={{ gap: 'min(3vw, 3vh)' }}
+        style={{ gap: '3cqmin' }}
       >
         {/* タイトルに戻るボタン */}
         <button
@@ -267,7 +267,7 @@ export function ResultScreen() {
             src="./data/images/ui/btn_normal_off_left.png"
             alt=""
             style={{
-              height: 'min(5vw, 5vh)',
+              height: '5cqmin',
               width: 'auto',
               display: 'block',
             }}
@@ -278,11 +278,11 @@ export function ResultScreen() {
               backgroundImage: 'url(./data/images/ui/btn_normal_off_middle.png)',
               backgroundRepeat: 'no-repeat',
               backgroundSize: '100% 100%',
-              height: 'min(5vw, 5vh)',
+              height: '5cqmin',
               display: 'flex',
               alignItems: 'center',
-              padding: '0 min(2vw, 2vh)',
-              fontSize: 'min(2.5vw, 2.5vh)',
+              padding: '0 2cqmin',
+              fontSize: '2.5cqmin',
               color: '#999',
               fontWeight: 'bold',
               whiteSpace: 'nowrap',
@@ -295,7 +295,7 @@ export function ResultScreen() {
             src="./data/images/ui/btn_normal_off_right.png"
             alt=""
             style={{
-              height: 'min(5vw, 5vh)',
+              height: '5cqmin',
               width: 'auto',
               display: 'block',
             }}
@@ -307,14 +307,14 @@ export function ResultScreen() {
           onClick={shareOnX}
           className="bg-gray-800 hover:bg-gray-700 text-white font-bold rounded-lg transition-colors flex items-center"
           style={{
-            fontSize: 'min(2.5vw, 2.5vh)',
-            padding: 'min(1.2vw, 1.2vh) min(3vw, 3vh)',
-            gap: 'min(1vw, 1vh)',
+            fontSize: '2.5cqmin',
+            padding: '1.2cqmin 3cqmin',
+            gap: '1cqmin',
           }}
         >
           <svg
             viewBox="0 0 24 24"
-            style={{ width: 'min(3vw, 3vh)', height: 'min(3vw, 3vh)' }}
+            style={{ width: '3cqmin', height: '3cqmin' }}
             fill="currentColor"
           >
             <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
