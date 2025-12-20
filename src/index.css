@@ -15,7 +15,7 @@ html, body, #root {
 /* フォント設定と背景画像 */
 body {
   font-family: 'M PLUS Rounded 1c', sans-serif;
-  background-image: url('./data/images/ui/parermaster_l.png');
+  background-image: url('/parermaster/data/images/ui/parermaster_l.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
