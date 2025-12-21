@@ -612,6 +612,24 @@
     "questioner": ""
   },
   {
+    "question": "第1回パレデミア学園雀魂大会の優勝者は？",
+    "category": "深堀り問題",
+    "dormitory": "co",
+    "difficulty": 3,
+    "answers": [
+      "瀬奈りるか",
+      "灯野ぺけ。",
+      "猫乃間うと",
+      "愛上オハナ"
+    ],
+    "genre": "イベント",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "熱い闘いでした[image:jantama.png]",
+    "source_url": "https://www.youtube.com/watch?v=D6bmVhjwvdM",
+    "questioner": ""
+  },
+  {
     "question": "神童めしあが世界で一番好きなボカロ曲は？",
     "category": "深堀り問題",
     "dormitory": "co",
@@ -770,7 +788,7 @@
     "hide_icon": false,
     "sort_answers": false,
     "comment": "その後無事復旧しました",
-    "source_url": "https://x.com/asukara_hajime/status/2000555509020258742",
+    "source_url": "https://www.youtube.com/shorts/whBV-PC8VhQ",
     "questioner": ""
   },
   {
@@ -2654,7 +2672,7 @@
       "花晴りら",
       "灯野ぺけ。",
       "肇明日空",
-      "(優勝者)"
+      "瀬奈りるか"
     ],
     "genre": "イベント",
     "hide_icon": false,

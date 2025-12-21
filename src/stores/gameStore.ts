@@ -495,7 +495,7 @@ export const processQuestion = (rawQuestion: RawQuestion, talents: Talent[], dor
     comment: rawQuestion.comment,
     sourceUrl: rawQuestion.source_url,
     hideIcon: rawQuestion.hide_icon,
-    difficulty: rawQuestion.difficulty,
+    difficulty: rawQuestion.difficulty || 1,
     category: rawQuestion.category,
     genre: rawQuestion.genre,
     questioner: rawQuestion.questioner,
@@ -534,6 +534,7 @@ export const generateFaceQuestion = (talent: Talent, otherTalents: Talent[], dif
     },
     talentKana: talent.kana,
     difficulty,
+    genre: '顔当て',
   };
 };
 
@@ -567,6 +568,7 @@ export const generateNameQuestion = (talent: Talent, otherTalents: Talent[], dif
       dream: talent.dream,
     },
     difficulty,
+    genre: '名前当て',
   };
 };
 
