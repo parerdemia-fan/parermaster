@@ -790,57 +790,91 @@ function FaceQuizLayout({
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: '1cqmin',
-      }}
-    >
-      {/* 左パネル: 出題エリア（正方形, 小さめ） */}
-      <div
-        className="flex flex-col items-center justify-center relative"
+            }}
+          >
+            {/* 左パネル: 出題エリア（正方形, 小さめ） */}
+            <div
+        className="flex flex-col relative"
         style={{
           flex: '0 0 calc(50% - 1cqmin)',
           aspectRatio: '1 / 1',
           backgroundImage: 'url(./data/images/ui/panel_question.png)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          backgroundColor: 'rgba(30,30,30,0.90)', // 半透明の背景
+          backgroundColor: 'rgba(30,30,30,0.90)',
           maxWidth: '50%',
           maxHeight: '100%',
+          borderRadius: '0.8cqmin',
+          overflow: 'hidden',
+          // 縦に上から順に配置するための設定
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'stretch',
+          justifyContent: 'flex-start',
         }}
-      >
-        {/* 出題文言 */}
-        <div
-          className="text-white text-center font-bold"
-          style={{
-            textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
-            height: '20cqmin',
-            paddingTop: '5cqmin',
-          }}
-        >
-          {currentQuestion.talentKana && (
-            <div style={{ fontSize: '3.7cqmin', opacity: 0.9 }}>
-              {currentQuestion.talentKana}
-            </div>
-          )}
-          <div style={{ fontSize: getFaceQuizFontSize(currentQuestion.question) }}>
-            {currentQuestion.question}<br />
-          </div>
-          <div style={{ fontSize: '4cqmin' }}>はどれ？</div>
-        </div>
-
-        {/* ヒント: 将来の夢 */}
-        {profile && (
+            >
+        {/* 上から順に固定高さで配置（重ならない） */}
+        {/* 1) タレント読み（あれば表示） */}
+        {currentQuestion.talentKana && (
           <div
-            className="flex flex-col justify-center items-center text-center"
+            className="flex items-center justify-center text-white font-bold"
             style={{
-              fontSize: '2.5cqmin',
-              color: 'rgba(255, 255, 255, 0.9)',
-              textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)',
-              padding: '1.5cqmin',
-              height: '40cqmin',
+              flex: '0 0 6cqmin',
+              textAlign: 'center',
+              fontSize: '4.5cqmin',
+              paddingTop: '5cqmin',
             }}
           >
-            <p style={{ margin: 0, fontSize: '3.5cqmin' }}>
-              💭将来の夢: {profile.dream}
-            </p>
+            {currentQuestion.talentKana}
+          </div>
+        )}
+
+        {/* 2) 問題文（高さ固定） */}
+        <div
+          className="flex items-center justify-center text-center font-bold text-white"
+          style={{
+            flex: '0 0 15cqmin',
+            textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <div style={{ lineHeight: 1.1, fontSize: getFaceQuizFontSize(currentQuestion.question) }}>
+            {currentQuestion.question}
+          </div>
+        </div>
+
+        {/* 3) 補助テキスト「はどれ？」 */}
+        <div
+          className="flex items-center justify-center text-white font-bold"
+          style={{
+            flex: '0 0 8cqmin',
+            paddingBottom: '2cqmin',
+            fontSize: '4cqmin',
+            textAlign: 'center',
+            
+          }}
+        >
+          はどれ？
+        </div>
+
+        {/* 4) ヒント（将来の夢など） - 残り領域を使用しスクロール可 */}
+        {profile && (
+          <div
+            className="text-white"
+            style={{
+              flex: '0 0 29cqmin',
+              padding: '0 2 cqmin',
+              fontSize: '4.5cqmin',
+              color: 'rgba(255,255,255,0.95)',
+              textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)',
+              overflowY: 'scroll',
+              display: 'flex',
+              alignItems: 'flex-start',
+            }}
+          >
+            <div style={{ width: '100%' }}>💭将来の夢: {profile.dream}</div>
           </div>
         )}
 
@@ -849,15 +883,18 @@ function FaceQuizLayout({
           <div
             className="text-center font-bold rounded-lg absolute"
             style={{
-              fontSize: '5cqmin',
+              fontSize: '8cqmin',
               color: isCorrect ? '#4ade80' : '#f87171',
-              bottom: '2cqmin',
+              top: '88%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
               textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)',
-              backgroundColor: 'rgba(128, 128, 128, 0.5)',
+              backgroundColor: 'rgba(128, 128, 128, 0.8)',
               padding: '0.5cqmin 1.5cqmin',
+              zIndex: 20,
             }}
           >
-            {isCorrect ? '正解！' : '不正解...'}
+            {isCorrect ? '正解！' : '不正解..'}
           </div>
         )}
       </div>
