@@ -79,8 +79,8 @@ export function TalentListScreen() {
           middleImage="./data/images/ui/btn_normal_off_middle.png"
           rightImage="./data/images/ui/btn_normal_off_right.png"
           onClick={returnToTitle}
-          height="5cqmin"
-          fontSize="2.5cqmin"
+          height="7cqmin"
+          fontSize="5cqmin"
           textColor="#CCC"
           className="selection-card"
           style={{marginLeft: '2cqmin'}}
@@ -92,19 +92,19 @@ export function TalentListScreen() {
           leftImage="./data/images/ui/plate_left.png"
           middleImage="./data/images/ui/plate_middle.png"
           rightImage="./data/images/ui/plate_right.png"
-          height="6.5cqmin"
+          height="7cqmin"
         >
           <span
             className="text-white font-bold"
             style={{
-              fontSize: '3.5cqmin',
+              fontSize: '5cqmin',
               textShadow: '2px 2px 4px rgba(0,0,0,1)',
              }}
           >
             寮生一覧
           </span>
         </ThreePatchImage>
-        <div style={{ width: '14cqmin' }} /> {/* スペーサー */}
+        <div style={{ width: '20cqmin' }} /> {/* スペーサー */}
       </div>
 
       {/* メインコンテンツ: 左右2分割 */}
