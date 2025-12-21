@@ -147,8 +147,14 @@ export function TitleScreen() {
         </button>
       </div>
       {/* 非公式表記 */}
-      <div className="absolute bottom-[1%] text-gray-400 text-xs">
-        このゲームは二次創作物であり非公式のものです
+      <div className="absolute text-gray-300"
+        style={{
+          fontSize: '2cqmin',
+          bottom: '0',
+          filter: 'drop-shadow(1px 1px 1px rgba(0, 0, 0, 1))',
+         }}
+      >
+        ※このゲームは二次創作物であり非公式のものです
       </div>
     </div>
   );
