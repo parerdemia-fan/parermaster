@@ -12,14 +12,32 @@ import type { ProcessedQuestion } from '../types';
  */
 function getQuestionFontSize(text: string): string {
   const length = text.length;
-  if (length <= 20) {
+if (length <= 20) {
+    return '7cqmin';
+  } else if (length <= 40) {
+    return '6cqmin';
+  } else if (length <= 60) {
+    return '5cqmin';
+  } else {
+    return '4cqmin';
+  }
+}
+
+/**
+ * 画像付き問題文の文字数に応じた文字サイズを取得する
+ * @param text 問題文（画像タグ除去済み）
+ * @returns CSS font-size値
+ */
+function getQuestionWithImageFontSize(text: string): string {
+  const length = text.length;
+  if (length <= 15) {
+    return '7cqmin';
+  } else if (length <= 20) {
     return '6cqmin';
   } else if (length <= 40) {
-    return '5cqmin';
-  } else if (length <= 60) {
-    return '4cqmin';
+    return '5.3cqmin';
   } else {
-    return '3.5cqmin';
+    return '4cqmin';
   }
 }
 
@@ -421,15 +439,13 @@ function NormalQuizLayout({
       style={{
         width: '100%',
         height: '100%',
-        gap: '2cqmin',
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: '1cqmin',
       }}
     >
       {/* 左パネル: 出題エリア（正方形） */}
       <div
-        className="flex flex-col items-center justify-center relative"
+        className="flex flex-col relative"
         style={{
           flex: '0 0 calc(50% - 1cqmin)',
           aspectRatio: '1 / 1',
@@ -439,7 +455,13 @@ function NormalQuizLayout({
           backgroundColor: 'rgba(30,30,30,0.90)',
           maxWidth: '50%',
           maxHeight: '100%',
+          borderRadius: '0.8cqmin',
           overflow: 'hidden',
+          // 縦に上から順に配置するための設定
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'stretch',
+          justifyContent: 'flex-start',          
         }}
       >
         {/* 問題画像がある場合 */}
@@ -449,8 +471,9 @@ function NormalQuizLayout({
             <div
               className="flex items-center justify-center"
               style={{
-                width: '90%',
-                height: '60%',
+                width: '100%',
+                height: '50%',
+                marginTop: '3cqmin',
                 marginBottom: '1cqmin',
               }}
             >
@@ -461,29 +484,40 @@ function NormalQuizLayout({
               />
             </div>
             {/* 問題文 */}
-            <p
-              className="text-white text-center font-bold leading-relaxed"
+            <div
+              className="text-white font-bold"
               style={{
+                flex: '0 0 26cqmin',
+                fontSize: getQuestionWithImageFontSize(questionText),
+                textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
+                padding: '0 2cqmin',
+                overflowY: 'scroll',
+                scrollbarWidth: 'none',
+              }}
+            >
+              {parseTextWithTalentIcons(questionText, showIconInQuestion, isAnswered)}
+            </div>
+          </>
+        ) : (
+          /* 問題画像がない場合は問題文のみ */
+          <div
+            className="flex items-center justify-center text-white font-bold"
+            style={{
+              flex: '0 0 65cqmin',
+            }}
+          >
+            <div
+              className="text-white font-bold leading-relaxed"
+              style={{
+                flex: '0 0 65cqmin',
                 fontSize: getQuestionFontSize(questionText),
                 textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
                 padding: '0 2cqmin',
               }}
             >
               {parseTextWithTalentIcons(questionText, showIconInQuestion, isAnswered)}
-            </p>
-          </>
-        ) : (
-          /* 問題画像がない場合は問題文のみ */
-          <p
-            className="text-white text-center font-bold leading-relaxed"
-            style={{
-              fontSize: getQuestionFontSize(questionText),
-              textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
-              padding: '0 3cqmin',
-            }}
-          >
-            {parseTextWithTalentIcons(questionText, showIconInQuestion, isAnswered)}
-          </p>
+            </div>
+          </div>
         )}
 
         {/* 正解/不正解表示 */}
@@ -491,15 +525,18 @@ function NormalQuizLayout({
           <div
             className="text-center font-bold rounded-lg absolute"
             style={{
-              fontSize: '5cqmin',
-              color: isCorrect ? '#4ade80' : '#f87171',
-              bottom: '2cqmin',
+              fontSize: '8cqmin',
+              color: isCorrect ? '#2cff7aff' : '#ff3e3eff',
+              top: '88%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
               textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)',
-              backgroundColor: 'rgba(128, 128, 128, 0.5)',
+              backgroundColor: 'rgba(128, 128, 128, 0.8)',
               padding: '0.5cqmin 1.5cqmin',
+              zIndex: 20,
             }}
           >
-            {isCorrect ? '正解！' : '不正解...'}
+            {isCorrect ? '正解！' : '不正解..'}
           </div>
         )}
       </div>
@@ -514,8 +551,6 @@ function NormalQuizLayout({
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundColor: 'rgba(30,30,30,0.90)',
-          borderRadius: '1cqmin',
-          padding: 'min(1vw, 1vw)',
           maxWidth: '50%',
           maxHeight: '100%',
         }}
@@ -524,7 +559,6 @@ function NormalQuizLayout({
           /* タレント名選択肢: 2x2グリッド */
           <div
             className="grid grid-cols-2 grid-rows-2 w-full h-full"
-            style={{ gap: '1cqmin' }}
           >
             {currentQuestion.answers.map((answer, index) => {
               const studentId = answerStudentIds[index];
@@ -564,7 +598,6 @@ function NormalQuizLayout({
                     src="./data/images/ui/panel_choice_face_bg.png"
                     alt=""
                     className="absolute inset-0 w-full h-full object-cover"
-                    style={{ borderRadius: '0.8cqmin' }}
                   />
 
                   {/* 正解時のグリーングローエフェクト */}
@@ -681,7 +714,6 @@ function NormalQuizLayout({
           /* 通常選択肢: 4行配置 */
           <div
             className="flex flex-col w-full h-full justify-center"
-            style={{ gap: '1cqmin', padding: '1cqmin' }}
           >
             {currentQuestion.answers.map((answer, index) => {
               // 正解/不正解の背景色
@@ -723,9 +755,10 @@ function NormalQuizLayout({
                   <img
                     src="./data/images/ui/panel_answer_oneline.png"
                     alt=""
-                    className="absolute inset-0 w-full h-full object-cover"
+                    className="absolute inset-0 w-full h-full object-fill"
                     style={{
                       borderRadius: '0.5cqmin',
+                      width: '66cqmin',
                       ...bgStyle,
                     }}
                   />
@@ -1035,7 +1068,6 @@ function NameQuizLayout({
   selectedAnswer: number | null;
   selectAnswer: (index: number) => void;
 }) {
-  const profile = currentQuestion.talentProfile;
   const talentImage = currentQuestion.talentImagePath;
   const isSilhouette = currentQuestion.isSilhouette ?? false;
   const answerStudentIds = currentQuestion.answerStudentIds ?? [];
@@ -1093,7 +1125,6 @@ function NameQuizLayout({
           style={{
             flex: '0 0 6cqmin',
             textAlign: 'center',
-            fontSize: '4.5cqmin',
             paddingTop: '2cqmin',
           }}
         >
@@ -1537,107 +1568,55 @@ export function QuizScreen() {
     }
   }, [isAnswered, currentIndex, questions, isLastQuestion]);
 
-  // 顔当て問題用のレイアウト（横4:縦3）
-  if (isFaceQuiz || questionType === 'name') {
-    return (
-      <div className="w-full h-full flex flex-col p-[3%]">
-        {/* ヘッダーエリア */}
-        <QuizHeader
-          gameStage={gameStage}
-          category={category}
-          genre={currentQuestion.genre}
-          difficulty={currentQuestion.difficulty}
-          currentIndex={currentIndex}
-          totalQuestions={questions.length}
-          returnToTitle={returnToTitle}
-        />
+  return (
+    <div className="w-full h-full flex flex-col p-[3%]">
+      {/* ヘッダーエリア */}
+      <QuizHeader
+        gameStage={gameStage}
+        category={category}
+        genre={currentQuestion.genre}
+        difficulty={currentQuestion.difficulty}
+        currentIndex={currentIndex}
+        totalQuestions={questions.length}
+        returnToTitle={returnToTitle}
+      />
 
-        {/* 中央エリア（横4:縦3のメインコンテンツ） */}
-        {questionType === 'face' && (
-          <div
-            className="flex items-center justify-center"
-            style={{ flex: '0 0 65cqmin', minHeight: 0 }}
-          >
-            <FaceQuizLayout
-              currentQuestion={currentQuestion}
-              isAnswered={isAnswered}
-              isCorrect={isCorrect}
-              selectedAnswer={selectedAnswer}
-              selectAnswer={selectAnswer}
-            />
-          </div>
-        )}
-        {questionType === 'name' && (
-          <div
-            className="flex items-center justify-center"
-            style={{ flex: '0 0 65cqmin', minHeight: 0 }}
-          >
-            <NameQuizLayout
-              currentQuestion={currentQuestion}
-              isAnswered={isAnswered}
-              isCorrect={isCorrect}
-              selectedAnswer={selectedAnswer}
-              selectAnswer={selectAnswer}
-            />
-          </div>
-        )}
-
-        {/* 下部: 操作ボタン */}
-
+      {/* 中央エリア（横4:縦3のメインコンテンツ） */}
+      {/* 顔当て問題 */}
+      {questionType === 'face' && (
         <div
           className="flex items-center justify-center"
-          style={{ flex: '0 0 12cqmin', minHeight: 0 }}
+          style={{ flex: '0 0 65cqmin', minHeight: 0 }}
         >
-          <ControlButtonArea
-            showPrevButton={!isFirstQuestion}
-            showCommentButton={showCommentButton}
-            showNextButton={true}
-            isLastQuestion={isLastQuestion}
+          <FaceQuizLayout
+            currentQuestion={currentQuestion}
             isAnswered={isAnswered}
-            onPrevClick={prevQuestion}
-            onCommentClick={() => setIsCommentDialogOpen(true)}
-            onNextClick={nextQuestion}
+            isCorrect={isCorrect}
+            selectedAnswer={selectedAnswer}
+            selectAnswer={selectAnswer}
           />
         </div>
-
-        {/* 解説ダイアログ */}
-        <CommentDialog
-          isOpen={isCommentDialogOpen}
-          onClose={() => setIsCommentDialogOpen(false)}
-          currentQuestion={currentQuestion}
-        />
-      </div>
-    );
-  }
-
-  // 通常問題用のレイアウト（顔当てと同様の構成）
-  if (questionType === 'normal') {
-    return (
-      <div className="w-full h-full flex flex-col p-[3%]">
-        {/* ヘッダーエリア */}
-        <QuizHeader
-          gameStage={gameStage}
-          category={category}
-          genre={currentQuestion.genre}
-          difficulty={currentQuestion.difficulty}
-          currentIndex={currentIndex}
-          totalQuestions={questions.length}
-          returnToTitle={returnToTitle}
-        />
-
-        {/* 水平線 */}
-        <div style={{ height: '2%', display: 'flex', alignItems: 'center' }}>
-          <img
-            src="./data/images/ui/hr.png"
-            alt=""
-            style={{ width: '100%', height: 'auto', objectFit: 'contain' }}
-          />
-        </div>
-
-        {/* 中央エリア（メインコンテンツ） */}
+      )}
+      {/* 名前当て問題 */}
+      {questionType === 'name' && (
         <div
           className="flex items-center justify-center"
-          style={{ flex: 1, minHeight: 0 }}
+          style={{ flex: '0 0 65cqmin', minHeight: 0 }}
+        >
+          <NameQuizLayout
+            currentQuestion={currentQuestion}
+            isAnswered={isAnswered}
+            isCorrect={isCorrect}
+            selectedAnswer={selectedAnswer}
+            selectAnswer={selectAnswer}
+          />
+        </div>
+      )}
+      {/* 通常問題 */}
+      {questionType === 'normal' && (
+        <div
+          className="flex items-center justify-center"
+          style={{ flex: '0 0 65cqmin', minHeight: 0 }}
         >
           <NormalQuizLayout
             currentQuestion={currentQuestion}
@@ -1648,8 +1627,13 @@ export function QuizScreen() {
             showIconInQuestion={showIconInQuestion}
           />
         </div>
+      )}
 
-        {/* 下部: 操作ボタン */}
+      {/* 下部: 操作ボタン */}
+      <div
+        className="flex items-center justify-center"
+        style={{ flex: '0 0 12cqmin', minHeight: 0 }}
+      >
         <ControlButtonArea
           showPrevButton={!isFirstQuestion}
           showCommentButton={showCommentButton}
@@ -1660,72 +1644,14 @@ export function QuizScreen() {
           onCommentClick={() => setIsCommentDialogOpen(true)}
           onNextClick={nextQuestion}
         />
-
-        {/* 解説ダイアログ */}
-        <CommentDialog
-          isOpen={isCommentDialogOpen}
-          onClose={() => setIsCommentDialogOpen(false)}
-          currentQuestion={currentQuestion}
-        />
       </div>
-    );
-  }
 
-  // // 名前当て問題用のレイアウト（通常問題と同じレイアウト）
-  // return (
-  //   <div className="w-full h-full flex flex-col p-[5%]">
-  //     {/* ヘッダーエリア */}
-  //     <QuizHeader
-  //       gameStage={gameStage}
-  //       category={category}
-  //       genre={currentQuestion.genre}
-  //       difficulty={currentQuestion.difficulty}
-  //       currentIndex={currentIndex}
-  //       totalQuestions={questions.length}
-  //       returnToTitle={returnToTitle}
-  //     />
-
-  //     {/* 水平線 */}
-  //     <div style={{ height: '2%', display: 'flex', alignItems: 'center' }}>
-  //       <img
-  //         src="./data/images/ui/hr.png"
-  //         alt=""
-  //         style={{ width: '100%', height: 'auto', objectFit: 'contain' }}
-  //       />
-  //     </div>
-
-  //     {/* 中央エリア（メインコンテンツ） */}
-  //     <div
-  //       className="flex items-center justify-center"
-  //       style={{ flex: 1, minHeight: 0 }}
-  //     >
-  //       <NameQuizLayout
-  //         currentQuestion={currentQuestion}
-  //         isAnswered={isAnswered}
-  //         isCorrect={isCorrect}
-  //         selectedAnswer={selectedAnswer}
-  //         selectAnswer={selectAnswer}
-  //       />
-  //     </div>
-
-  //     {/* 操作ボタンエリア (10%) */}
-  //     <ControlButtonArea
-  //       showPrevButton={!isFirstQuestion}
-  //       showCommentButton={showCommentButton}
-  //       showNextButton={true}
-  //       isLastQuestion={isLastQuestion}
-  //       isAnswered={isAnswered}
-  //       onPrevClick={prevQuestion}
-  //       onCommentClick={() => setIsCommentDialogOpen(true)}
-  //       onNextClick={nextQuestion}
-  //     />
-
-  //     {/* 解説ダイアログ */}
-  //     <CommentDialog
-  //       isOpen={isCommentDialogOpen}
-  //       onClose={() => setIsCommentDialogOpen(false)}
-  //       currentQuestion={currentQuestion}
-  //     />
-  //   </div>
-  // );
+      {/* 解説ダイアログ */}
+      <CommentDialog
+        isOpen={isCommentDialogOpen}
+        onClose={() => setIsCommentDialogOpen(false)}
+        currentQuestion={currentQuestion}
+      />
+    </div>
+  );
 }
