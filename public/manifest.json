@@ -1,0 +1,35 @@
+{
+  "name": "パレ学マスター",
+  "short_name": "ぱ",
+  "description": "パレデミア学園の非公式クイズゲームです。",
+  "start_url": "https://parerdemia-fan.github.io/parermaster/",
+  "display": "fullscreen",
+  "orientation": "landscape",
+  "theme_color": "#000033",
+  "background_color": "#000033",
+  "icons": [
+    {
+      "src": "/parermaster/data/images/faviceon192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/parermaster/data/images/faviceon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/parermaster/data/images/faviceon_maskable192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/parermaster/data/images/faviceon_maskable512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "categories": ["games", "entertainment"]
+}
