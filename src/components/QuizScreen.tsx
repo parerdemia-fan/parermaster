@@ -213,7 +213,6 @@ function QuizHeader({
   difficulty,
   currentIndex,
   totalQuestions,
-  returnToTitle,
 }: {
   gameStage: string;
   category: string;
@@ -221,7 +220,6 @@ function QuizHeader({
   difficulty: number;
   currentIndex: number;
   totalQuestions: number;
-  returnToTitle: () => void;
 }): React.ReactNode {
 
   return (
@@ -1410,6 +1408,7 @@ function ControlButtonArea({
   onPrevClick,
   onCommentClick,
   onNextClick,
+  returnToTitle,
 }: {
   showPrevButton: boolean;
   showCommentButton: boolean;
@@ -1419,48 +1418,65 @@ function ControlButtonArea({
   onPrevClick: () => void;
   onCommentClick: () => void;
   onNextClick: () => void;
+  returnToTitle: () => void;
 }) {
   return (
     <div
-      className="flex items-center justify-between w-full"
+      className="relative w-full"
       style={{ padding: '0 1cqmin' }}
     >
-      {/* 左側: 前の問題へボタン */}
-      <div>
-        {showPrevButton && (
-          <ImageButton
-            src="./data/images/ui/btn_back.png"
-            alt="前の問題へ"
-            label="前の問題へ"
-            onClick={onPrevClick}
-            height='8cqmin'
-          />
-        )}
+      {/* 左端: ホーム / 前の問題へ */}
+      <div
+      className="flex items-center gap-[1.5cqmin]"
+      style={{ position: 'absolute', left: '1cqmin', top: '50%', transform: 'translateY(-50%)' }}
+      >
+      <ImageButton
+        src="./data/images/ui/btn_home.png"
+        alt="ホームへ"
+        label="ホームへ"
+        onClick={returnToTitle}
+        height="8cqmin"
+      />
+      {showPrevButton && (
+        <ImageButton
+        src="./data/images/ui/btn_back.png"
+        alt="前の問題へ"
+        label="前の問題へ"
+        onClick={onPrevClick}
+        height="8cqmin"
+        />
+      )}
       </div>
 
-      {/* 中央: 解説ボタン */}
-      <div className="flex items-center justify-center">
-        {showCommentButton && isAnswered && (
-          <ImageButton
-            src="./data/images/ui/btn_description.png"
-            alt="解説"
-            label="解説"
-            onClick={onCommentClick}
-          />
-        )}
+      {/* 中央: 解説ボタン（真ん中に固定） */}
+      <div
+      className="flex items-center justify-center"
+      style={{ position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }}
+      >
+      {showCommentButton && isAnswered && (
+        <ImageButton
+        src="./data/images/ui/btn_description.png"
+        alt="解説"
+        label="解説"
+        onClick={onCommentClick}
+        />
+      )}
       </div>
 
-      {/* 右側: 次の問題へ / 結果を見るボタン */}
-      <div className="flex items-center justify-end">
-        {showNextButton && isAnswered && (
-          <ImageButton
-            src={isLastQuestion ? './data/images/ui/btn_result.png' : './data/images/ui/btn_next.png'}
-            alt={isLastQuestion ? '結果を見る' : '次の問題へ'}
-            label={isLastQuestion ? '結果を見る' : '次の問題へ'}
-            onClick={onNextClick}
-            height="10cqmin"
-          />
-        )}
+      {/* 右端: 次の問題へ / 結果を見る */}
+      <div
+      className="flex items-center gap-[1.5cqmin]"
+      style={{ position: 'absolute', right: '1cqmin', top: '50%', transform: 'translateY(-50%)' }}
+      >
+      {showNextButton && isAnswered && (
+        <ImageButton
+        src={isLastQuestion ? './data/images/ui/btn_result.png' : './data/images/ui/btn_next.png'}
+        alt={isLastQuestion ? '結果を見る' : '次の問題へ'}
+        label={isLastQuestion ? '結果を見る' : '次の問題へ'}
+        onClick={onNextClick}
+        height="10cqmin"
+        />
+      )}
       </div>
     </div>
   );
@@ -1501,9 +1517,6 @@ export function QuizScreen() {
 
   // 問題タイプを取得
   const questionType = currentQuestion.questionType;
-
-  // 顔当て問題かどうかで全体レイアウトを変える
-  const isFaceQuiz = questionType === 'face';
 
   /**
    * 次の問題の選択肢画像をプリロードする
@@ -1578,7 +1591,6 @@ export function QuizScreen() {
         difficulty={currentQuestion.difficulty}
         currentIndex={currentIndex}
         totalQuestions={questions.length}
-        returnToTitle={returnToTitle}
       />
 
       {/* 中央エリア（横4:縦3のメインコンテンツ） */}
@@ -1643,6 +1655,7 @@ export function QuizScreen() {
           onPrevClick={prevQuestion}
           onCommentClick={() => setIsCommentDialogOpen(true)}
           onNextClick={nextQuestion}
+          returnToTitle={returnToTitle}
         />
       </div>
 
