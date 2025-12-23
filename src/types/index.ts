@@ -71,13 +71,17 @@ export type ProcessedQuestion = {
   questioner?: string;        // 出題者名（任意）
 };
 
+export type ExamScope = 'バゥ寮' | 'ミュゥ寮' | 'クゥ寮' | 'ウィニー寮' | 'すべて'
+export type QuestionCount = 10 | 15 | 30 | 50 | 100
+export type Accuracy = 'low' | 'medium' | 'high'; // low: ~74%, medium: 75~99%, high: 100%
+
 // 出題範囲の選択肢
-export const QUESTION_DORMITORY_OPTIONS: { label: string; value: string }[] = [
-  { label: 'バゥ寮', value: 'wa' },
-  { label: 'ミュゥ寮', value: 'me' },
-  { label: 'クゥ寮', value: 'co' },
-  { label: 'ウィニー寮', value: 'wh' },
-  { label: 'すべて', value: 'all' },
+export const QUESTION_EXAM_SCOPE_OPTIONS: { examScope: ExamScope; value: string }[] = [
+  { examScope: 'バゥ寮', value: 'wa' },
+  { examScope: 'ミュゥ寮', value: 'me' },
+  { examScope: 'クゥ寮', value: 'co' },
+  { examScope: 'ウィニー寮', value: 'wh' },
+  { examScope: 'すべて', value: 'all' },
 ];
 
 // ステージ（入門試験、実力試験）
@@ -105,4 +109,12 @@ export type Achievement = {
   w: number;            // 画像幅（vw/vh単位）
   h: number;            // 画像高さ（vw/vh単位）
   dependsOn?: string[]; // 依存する他のアチーブメントID（すべて取得済みの場合のみ表示）
+};
+
+export type ResultMessage = {
+  category: Category;
+  examScope?: ExamScope;
+  questionCount?: QuestionCount;
+  accuracy: Accuracy;
+  message: string;
 };

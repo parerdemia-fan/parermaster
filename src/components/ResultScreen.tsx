@@ -1,93 +1,86 @@
-import { useMemo } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { useGameStore } from '../stores/gameStore';
-import type { Category } from '../types';
+import type { Category, ResultMessage, ExamScope, Accuracy, QuestionCount } from '../types';
 import { ThreePatchButton } from './ThreePatchButton';
+import { QUESTION_EXAM_SCOPE_OPTIONS } from '../types';
 
-// 称賛メッセージのリスト
-type MessageCategory = 'perfect' | 'excellent' | 'great' | 'good' | 'encourage';
+// ResultMessage配列をロードする
+async function loadResultMessages(): Promise<ResultMessage[]> {
+  const response = await fetch('./data/result_messages.json');
+  const data = await response.json();
+  return data as ResultMessage[];
+}
 
-const MESSAGES: Record<MessageCategory, string[]> = {
-  perfect: [
-    'すごい！パレデミア学園のことを完璧に理解している！',
-    '満点達成！君こそ真のパレ学マスターだ！',
-    '全問正解おめでとう！素晴らしい！',
-    'パーフェクト！寮生たちも喜んでいるよ！',
-    '完璧だ！パレデミア学園の誇りだね！',
-    'すべて正解！この調子で次も頑張ろう！',
-    '最高の結果だ！君の知識は本物だ！',
-    '見事なパーフェクト！記念すべき瞬間だ！',
-  ],
-  excellent: [
-    'すごい成績だ！あと少しでパーフェクト！',
-    '素晴らしい！パレ学博士に近づいている！',
-    '立派な成績！この調子で頑張ろう！',
-    'いい調子！パレデミア学園のことをよく知っているね！',
-    '優秀！次はパーフェクトを狙ってみよう！',
-  ],
-  great: [
-    'いい成績だ！もっと上を目指せる！',
-    'よくできました！知識が着実に増えているね！',
-    'なかなかの成績！さらなる高みへ！',
-    'グッジョブ！パレ学への理解が深まっている！',
-    'いいね！この調子で寮生たちのことを覚えていこう！',
-  ],
-  good: [
-    'まだまだこれから！もっと知識を深めよう！',
-    'いいスタートだ！次はもっとできる！',
-    '挑戦ありがとう！繰り返し挑戦しよう！',
-    'パレデミア学園には魅力がたくさん！もっと知ってね！',
-    '経験を積んでパレ学マスターを目指そう！',
-  ],
-  encourage: [
-    '諦めずに挑戦してくれてありがとう！',
-    '一歩ずつ進めば大丈夫！また挑戦してね！',
-    'パレデミア学園のことをもっと知るチャンスだ！',
-    '最初は誰でも初心者！続ければ必ず上達する！',
-    '次こそはもっといい結果が出るはず！',
-  ],
-};
+// 正解率（パーセント）をAccuracy型に変換
+function convertAccuracyToType(accuracyPercent: number): Accuracy {
+  if (accuracyPercent === 100) return 'high';
+  if (accuracyPercent >= 75) return 'medium';
+  return 'low';
+}
 
-// レベル・問題数・正解率に応じたメッセージを取得
-function getResultMessage(category: Category, questionCount: number, accuracy: number): string {
-  let messageCategory: MessageCategory;
+// questionRangeからExamScopeに変換
+function convertQuestionRangeToExamScope(questionRange: string): ExamScope {
+  const option = QUESTION_EXAM_SCOPE_OPTIONS.find(opt => opt.value === questionRange);
+  return option?.examScope ?? 'すべて';
+}
 
-  if (accuracy === 100) {
-    messageCategory = 'perfect';
-  } else if (accuracy >= 80) {
-    messageCategory = 'excellent';
-  } else if (accuracy >= 60) {
-    messageCategory = 'great';
-  } else if (accuracy >= 40) {
-    messageCategory = 'good';
+// questionCountをQuestionCount型に変換（最も近い値にマッチング）
+function normalizeQuestionCount(count: number): QuestionCount {
+  const validCounts: QuestionCount[] = [10, 15, 30, 50, 100];
+  // 完全一致を優先
+  if (validCounts.includes(count as QuestionCount)) {
+    return count as QuestionCount;
+  }
+  // 最も近い値を返す
+  return validCounts.reduce((prev, curr) => 
+    Math.abs(curr - count) < Math.abs(prev - count) ? curr : prev
+  );
+}
+
+// ResultMessage配列から条件に合うメッセージを取得
+function getResultMessage(
+  resultMessages: ResultMessage[],
+  category: Category,
+  questionRange: string,
+  questionCount: number,
+  accuracyPercent: number
+): string {
+  const accuracy = convertAccuracyToType(accuracyPercent);
+  
+  // 顔名前当て系はexamScopeで、それ以外はquestionCountで絞り込む
+  const isFaceNameCategory = category.includes('顔名前当て');
+  
+  let matchedMessages: ResultMessage[];
+  
+  if (isFaceNameCategory) {
+    const examScope = convertQuestionRangeToExamScope(questionRange);
+    matchedMessages = resultMessages.filter(msg =>
+      msg.category === category &&
+      msg.examScope === examScope &&
+      msg.accuracy === accuracy
+    );
   } else {
-    messageCategory = 'encourage';
+    const normalizedCount = normalizeQuestionCount(questionCount);
+    matchedMessages = resultMessages.filter(msg =>
+      msg.category === category &&
+      msg.questionCount === normalizedCount &&
+      msg.accuracy === accuracy
+    );
   }
-
-  // レベルと問題数でメッセージを強化
-  const messages = MESSAGES[messageCategory];
-
-  // パーフェクト以外でも、上級+多問題+高正解率なら称賛を強める
-  if (messageCategory !== 'perfect' && category === '顔名前当て上級' && questionCount >= 50 && accuracy >= 80) {
-    // excellent メッセージに上級特別メッセージを追加
-    const advancedMessages = [
-      '上級で高得点！君は本物のパレ学マスターに近づいている！',
-      '上級モードでこの成績は素晴らしい！',
-      '難問をこなす実力がある！さらなる高みへ！',
-    ];
-    return advancedMessages[Math.floor(Math.random() * advancedMessages.length)];
+  
+  // マッチするメッセージがあればランダムで返す（現状は1件のみだが、拡張性のため）
+  if (matchedMessages.length > 0) {
+    return matchedMessages[Math.floor(Math.random() * matchedMessages.length)].message;
   }
-
-  // 問題数が多い場合の追加称賛
-  if (messageCategory !== 'perfect' && questionCount >= 100 && accuracy >= 70) {
-    const enduranceMessages = [
-      '100問完走おつかれさま！集中力も素晴らしい！',
-      '長丁場を乗り切った！その根気強さは立派だ！',
-      'たくさんの問題に挑戦してくれてありがとう！',
-    ];
-    return enduranceMessages[Math.floor(Math.random() * enduranceMessages.length)];
+  
+  // フォールバック：マッチしない場合は汎用メッセージ
+  if (accuracyPercent === 100) {
+    return 'パーフェクト！素晴らしい成績です！';
+  } else if (accuracyPercent >= 75) {
+    return 'よくできました！あと少しでパーフェクトです！';
+  } else {
+    return '挑戦ありがとう！次はもっと良い結果を目指そう！';
   }
-
-  return messages[Math.floor(Math.random() * messages.length)];
 }
 
 // キラキラの位置を生成
@@ -101,16 +94,22 @@ function generateSparkles(count: number): Array<{ x: number; y: number; delay: n
 }
 
 export function ResultScreen() {
-  const { gameStage, category, questions, correctCount, newAchievements, returnToTitle } = useGameStore();
+  const { gameStage, category, questions, correctCount, newAchievements, returnToTitle, questionRange } = useGameStore();
+  const [resultMessages, setResultMessages] = useState<ResultMessage[]>([]);
 
   const accuracy = Math.round((correctCount / questions.length) * 100);
   const isPerfect = accuracy === 100;
 
+  // ResultMessages を初回ロード
+  useEffect(() => {
+    loadResultMessages().then(setResultMessages);
+  }, []);
+
   // メッセージを生成（リレンダリングで変わらないようにメモ化）
-  const resultMessage = useMemo(
-    () => getResultMessage(category, questions.length, accuracy),
-    [category, questions.length, accuracy]
-  );
+  const resultMessage = useMemo(() => {
+    if (resultMessages.length === 0) return '';
+    return getResultMessage(resultMessages, category, questionRange, questions.length, accuracy);
+  }, [resultMessages, category, questionRange, questions.length, accuracy]);
 
   // キラキラの位置をメモ化
   const sparkles = useMemo(() => generateSparkles(20), []);
@@ -264,7 +263,10 @@ ${gameUrl}
       {/* ボタンエリア - 横並びでスペース節約 */}
       <div
         className="flex items-center justify-center"
-        style={{ gap: '3cqmin' }}
+        style={{
+          gap: '3cqmin',
+          marginTop: newAchievements.length > 0 ? '0' : '5cqmin',
+       }}
       >
         {/* タイトルに戻るボタン */}
         <ThreePatchButton

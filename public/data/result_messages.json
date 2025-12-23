@@ -1,0 +1,434 @@
+[
+  {
+    "category": "顔名前当て",
+    "examScope": "バゥ寮",
+    "accuracy": "low",
+    "message": "未来のアイドルたち、もっと知りたいですね！"
+  },
+  {
+    "category": "顔名前当て",
+    "examScope": "バゥ寮",
+    "accuracy": "medium",
+    "message": "バゥ寮生のキラキラ、感じ取れてます！"
+  },
+  {
+    "category": "顔名前当て",
+    "examScope": "バゥ寮",
+    "accuracy": "high",
+    "message": "正統派アイドルの原石、完全把握ですね！"
+  },
+  {
+    "category": "顔名前当て",
+    "examScope": "ミュゥ寮",
+    "accuracy": "low",
+    "message": "ゴージャスな波動、これから感じてこう！"
+  },
+  {
+    "category": "顔名前当て",
+    "examScope": "ミュゥ寮",
+    "accuracy": "medium",
+    "message": "バイブス上がってきました！ノリは完璧！"
+  },
+  {
+    "category": "顔名前当て",
+    "examScope": "ミュゥ寮",
+    "accuracy": "high",
+    "message": "ウチら最高！マインド完全にリンク済み！"
+  },
+  {
+    "category": "顔名前当て",
+    "examScope": "クゥ寮",
+    "accuracy": "low",
+    "message": "サイバーな世界へログインしてみましょう。"
+  },
+  {
+    "category": "顔名前当て",
+    "examScope": "クゥ寮",
+    "accuracy": "medium",
+    "message": "ゲーミング女子の魅力、掴んできましたね。"
+  },
+  {
+    "category": "顔名前当て",
+    "examScope": "クゥ寮",
+    "accuracy": "high",
+    "message": "全プレイヤーの顔と名前、解析完了！"
+  },
+  {
+    "category": "顔名前当て",
+    "examScope": "ウィニー寮",
+    "accuracy": "low",
+    "message": "荒野に咲く花々の名前、覚えてみませんか。"
+  },
+  {
+    "category": "顔名前当て",
+    "examScope": "ウィニー寮",
+    "accuracy": "medium",
+    "message": "麗しき寮生たちの横顔、見えてきました。"
+  },
+  {
+    "category": "顔名前当て",
+    "examScope": "ウィニー寮",
+    "accuracy": "high",
+    "message": "気高き魂の名前、すべて心に刻まれました。"
+  },
+  {
+    "category": "顔名前当て",
+    "examScope": "すべて",
+    "accuracy": "low",
+    "message": "パレ学には魅力的な子が沢山いますよ！"
+  },
+  {
+    "category": "顔名前当て",
+    "examScope": "すべて",
+    "accuracy": "medium",
+    "message": "パレ学のみんなと仲良くなれてきました！"
+  },
+  {
+    "category": "顔名前当て",
+    "examScope": "すべて",
+    "accuracy": "high",
+    "message": "祝・全寮制覇！今日から君もパレ学通！"
+  },
+  {
+    "category": "顔名前当て上級",
+    "examScope": "バゥ寮",
+    "accuracy": "low",
+    "message": "推しの夢、もっと近くで応援したいですね！"
+  },
+  {
+    "category": "顔名前当て上級",
+    "examScope": "バゥ寮",
+    "accuracy": "medium",
+    "message": "その調子！ペンライト振って応援だ！"
+  },
+  {
+    "category": "顔名前当て上級",
+    "examScope": "バゥ寮",
+    "accuracy": "high",
+    "message": "バゥ寮への溢れる愛、届いています！"
+  },
+  {
+    "category": "顔名前当て上級",
+    "examScope": "ミュゥ寮",
+    "accuracy": "low",
+    "message": "もっとアゲてこ！パーティーはこれから！"
+  },
+  {
+    "category": "顔名前当て上級",
+    "examScope": "ミュゥ寮",
+    "accuracy": "medium",
+    "message": "キラキラな輝き、しっかり追えてます！"
+  },
+  {
+    "category": "顔名前当て上級",
+    "examScope": "ミュゥ寮",
+    "accuracy": "high",
+    "message": "最強のミュゥ寮推し爆誕！神レベル！"
+  },
+  {
+    "category": "顔名前当て上級",
+    "examScope": "クゥ寮",
+    "accuracy": "low",
+    "message": "バグ修正完了、再起動して挑みましょう。"
+  },
+  {
+    "category": "顔名前当て上級",
+    "examScope": "クゥ寮",
+    "accuracy": "medium",
+    "message": "高スコア連発！プレイヤースキル高いです。"
+  },
+  {
+    "category": "顔名前当て上級",
+    "examScope": "クゥ寮",
+    "accuracy": "high",
+    "message": "クゥ寮推しの鑑！見事な攻略でした。"
+  },
+  {
+    "category": "顔名前当て上級",
+    "examScope": "ウィニー寮",
+    "accuracy": "low",
+    "message": "迷い込んだ荒野で、推しを探す旅へ。"
+  },
+  {
+    "category": "顔名前当て上級",
+    "examScope": "ウィニー寮",
+    "accuracy": "medium",
+    "message": "その眼差し、保安官のように鋭いです。"
+  },
+  {
+    "category": "顔名前当て上級",
+    "examScope": "ウィニー寮",
+    "accuracy": "high",
+    "message": "ウィニー寮への忠誠と愛、証明されました。"
+  },
+  {
+    "category": "顔名前当て上級",
+    "examScope": "すべて",
+    "accuracy": "low",
+    "message": "どの寮の子も個性豊かで迷っちゃいますね。"
+  },
+  {
+    "category": "顔名前当て上級",
+    "examScope": "すべて",
+    "accuracy": "medium",
+    "message": "だいぶ深い沼にハマってきてますね！"
+  },
+  {
+    "category": "顔名前当て上級",
+    "examScope": "すべて",
+    "accuracy": "high",
+    "message": "これぞ箱推し！全員への愛が素晴らしい！"
+  },
+  {
+    "category": "顔名前当て超級",
+    "examScope": "バゥ寮",
+    "accuracy": "low",
+    "message": "一瞬の輝きも見逃さない、それがガチ勢。"
+  },
+  {
+    "category": "顔名前当て超級",
+    "examScope": "バゥ寮",
+    "accuracy": "medium",
+    "message": "愛あればこそ！あと少しで頂点です！"
+  },
+  {
+    "category": "顔名前当て超級",
+    "examScope": "バゥ寮",
+    "accuracy": "high",
+    "message": "瞬時に見抜く愛、バゥ寮ガチ勢認定！"
+  },
+  {
+    "category": "顔名前当て超級",
+    "examScope": "ミュゥ寮",
+    "accuracy": "low",
+    "message": "ガチのギャルマインド、見せてこー！"
+  },
+  {
+    "category": "顔名前当て超級",
+    "examScope": "ミュゥ寮",
+    "accuracy": "medium",
+    "message": "マジで惜しい！テンションMAXまであと少し！"
+  },
+  {
+    "category": "顔名前当て超級",
+    "examScope": "ミュゥ寮",
+    "accuracy": "high",
+    "message": "魂レベルのガチ勢！永遠にズッ友です！"
+  },
+  {
+    "category": "顔名前当て超級",
+    "examScope": "クゥ寮",
+    "accuracy": "low",
+    "message": "超高速演算で挑む、電脳の壁は厚い。"
+  },
+  {
+    "category": "顔名前当て超級",
+    "examScope": "クゥ寮",
+    "accuracy": "medium",
+    "message": "驚異の動体視力！あともうワンコンボ！"
+  },
+  {
+    "category": "顔名前当て超級",
+    "examScope": "クゥ寮",
+    "accuracy": "high",
+    "message": "フレーム単位の愛。クゥ寮ガチ勢の神技。"
+  },
+  {
+    "category": "顔名前当て超級",
+    "examScope": "ウィニー寮",
+    "accuracy": "low",
+    "message": "一瞬の油断が命取り。決闘は厳しい。"
+  },
+  {
+    "category": "顔名前当て超級",
+    "examScope": "ウィニー寮",
+    "accuracy": "medium",
+    "message": "早撃ちの名手級！あと一歩で伝説です。"
+  },
+  {
+    "category": "顔名前当て超級",
+    "examScope": "ウィニー寮",
+    "accuracy": "high",
+    "message": "その眼力、達人の域。ウィニー寮ガチ勢！"
+  },
+  {
+    "category": "顔名前当て超級",
+    "examScope": "すべて",
+    "accuracy": "low",
+    "message": "パレ学の深淵、まだまだ奥が深そうです。"
+  },
+  {
+    "category": "顔名前当て超級",
+    "examScope": "すべて",
+    "accuracy": "medium",
+    "message": "全寮生への愛が試される試練、大健闘です！"
+  },
+  {
+    "category": "顔名前当て超級",
+    "examScope": "すべて",
+    "accuracy": "high",
+    "message": "その愛は奇跡！パレ学ガチ勢ここに極まる！"
+  },
+  {
+    "category": "基本問題",
+    "questionCount": 15,
+    "accuracy": "low",
+    "message": "パレ学の楽しみ方はこれからですよ！"
+  },
+  {
+    "category": "基本問題",
+    "questionCount": 15,
+    "accuracy": "medium",
+    "message": "パレ学の基礎知識、身についてますね！"
+  },
+  {
+    "category": "基本問題",
+    "questionCount": 15,
+    "accuracy": "high",
+    "message": "入門試験突破！素敵なリスナー生活を！"
+  },
+  {
+    "category": "深堀り問題",
+    "questionCount": 10,
+    "accuracy": "low",
+    "message": "新しい発見がきっと待っています。"
+  },
+  {
+    "category": "深堀り問題",
+    "questionCount": 10,
+    "accuracy": "medium",
+    "message": "パレ学常連リスナーの風格があります！"
+  },
+  {
+    "category": "深堀り問題",
+    "questionCount": 10,
+    "accuracy": "high",
+    "message": "全問正解！いつも聞いてくれてありがとう！"
+  },
+  {
+    "category": "深堀り問題",
+    "questionCount": 30,
+    "accuracy": "low",
+    "message": "深い沼への入り口、覗いてみませんか？"
+  },
+  {
+    "category": "深堀り問題",
+    "questionCount": 30,
+    "accuracy": "medium",
+    "message": "かなり詳しいですね！ベテランの背中が見えます。"
+  },
+  {
+    "category": "深堀り問題",
+    "questionCount": 30,
+    "accuracy": "high",
+    "message": "愛あるベテランリスナー！流石です！"
+  },
+  {
+    "category": "深堀り問題",
+    "questionCount": 50,
+    "accuracy": "low",
+    "message": "知れば知るほど好きになる、それがパレ学。"
+  },
+  {
+    "category": "深堀り問題",
+    "questionCount": 50,
+    "accuracy": "medium",
+    "message": "確かな知識量！古参への道も見えてます。"
+  },
+  {
+    "category": "深堀り問題",
+    "questionCount": 50,
+    "accuracy": "high",
+    "message": "歴史を知る古参リスナー！圧倒的感謝！"
+  },
+  {
+    "category": "深堀り問題",
+    "questionCount": 100,
+    "accuracy": "low",
+    "message": "最古参への道は長く険しい...挑戦を求む。"
+  },
+  {
+    "category": "深堀り問題",
+    "questionCount": 100,
+    "accuracy": "medium",
+    "message": "凄まじい知識！最古参の座も夢じゃない！"
+  },
+  {
+    "category": "深堀り問題",
+    "questionCount": 100,
+    "accuracy": "high",
+    "message": "最古参リスナー認定！伝説の証人です！"
+  },
+  {
+    "category": "超深堀り問題",
+    "questionCount": 10,
+    "accuracy": "low",
+    "message": "マニアックな世界へようこそ。"
+  },
+  {
+    "category": "超深堀り問題",
+    "questionCount": 10,
+    "accuracy": "medium",
+    "message": "その知識、マニアへの入り口に立ってます！"
+  },
+  {
+    "category": "超深堀り問題",
+    "questionCount": 10,
+    "accuracy": "high",
+    "message": "鉄トロフィー級の知識！脱帽です！"
+  },
+  {
+    "category": "超深堀り問題",
+    "questionCount": 30,
+    "accuracy": "low",
+    "message": "博士号への道、研究あるのみです。"
+  },
+  {
+    "category": "超深堀り問題",
+    "questionCount": 30,
+    "accuracy": "medium",
+    "message": "名誉博士も驚く博識ぶり、素晴らしい！"
+  },
+  {
+    "category": "超深堀り問題",
+    "questionCount": 30,
+    "accuracy": "high",
+    "message": "銅トロフィー獲得！パレ学の博士です！"
+  },
+  {
+    "category": "超深堀り問題",
+    "questionCount": 50,
+    "accuracy": "low",
+    "message": "教授への審査は厳しい...出直しましょう。"
+  },
+  {
+    "category": "超深堀り問題",
+    "questionCount": 50,
+    "accuracy": "medium",
+    "message": "難問にこの正解率…教授への道も近い！？"
+  },
+  {
+    "category": "超深堀り問題",
+    "questionCount": 50,
+    "accuracy": "high",
+    "message": "銀トロフィーに輝く知性！名誉教授！"
+  },
+  {
+    "category": "超深堀り問題",
+    "questionCount": 100,
+    "accuracy": "low",
+    "message": "理事長室の扉はまだ重く閉ざされている。"
+  },
+  {
+    "category": "超深堀り問題",
+    "questionCount": 100,
+    "accuracy": "medium",
+    "message": "あと少し！名誉理事長の椅子は目前です！"
+  },
+  {
+    "category": "超深堀り問題",
+    "questionCount": 100,
+    "accuracy": "high",
+    "message": "金トロフィー！あなたが名誉理事長です！"
+  }
+]

@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useCallback } from 'react';
 import { useGameStore } from '../stores/gameStore';
 import type { Category } from '../types';
-import { QUESTION_DORMITORY_OPTIONS } from '../types';
+import { QUESTION_EXAM_SCOPE_OPTIONS } from '../types';
 import { ThreePatchButton } from './ThreePatchButton';
 
 export function SettingScreen() {
@@ -56,10 +56,10 @@ export function SettingScreen() {
   // 出題範囲オプション（categoryに応じて動的に変更）
   const questionRangeOptions = useMemo(() => {
     if (category.indexOf('顔名前当て') !== -1) {
-      return QUESTION_DORMITORY_OPTIONS;
+      return QUESTION_EXAM_SCOPE_OPTIONS;
     } else {
       return [
-        { label: 'すべて', value: 'all' }
+        { examScope: 'すべて', value: 'all' }
       ];
     }
   }, [category]);
@@ -206,7 +206,7 @@ export function SettingScreen() {
                     className="selection-card"
                     style={{ filter: isSelected ? 'brightness(2.2)' : undefined }}
                   >
-                    {option.label}
+                    {option.examScope}
                   </ThreePatchButton>
                 );
               })}
