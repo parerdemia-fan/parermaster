@@ -118,7 +118,15 @@ export function ResultScreen() {
   // Xシェア用のURL生成
   const shareOnX = () => {
     const gameUrl = 'https://parerdemia-fan.github.io/parermaster/';
-    const text = `【パレ学マスター】\n${gameStage} ${category} / ${questions.length}問\n正解率: ${isPerfect ? 'PERFECT!' : `${accuracy}%`}\n\n${resultMessage}\n\n${gameUrl}`;
+    const text = `【パレ学マスター 結果発表】
+${gameStage} ${category} / ${questions.length}問
+${isPerfect ? '🎉🎉🎉パーフェクト達成!🎉🎉🎉' : `正解率: ${accuracy}%`}
+
+${resultMessage}
+
+👇挑戦はこちら
+${gameUrl}
+#パレ学マスター #パレデミア学園`;
     const encodedText = encodeURIComponent(text);
     window.open(`https://x.com/intent/tweet?text=${encodedText}`, '_blank');
   };

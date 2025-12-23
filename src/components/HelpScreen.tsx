@@ -1,4 +1,5 @@
 import { useGameStore } from '../stores/gameStore';
+import { ThreePatchButton } from './ThreePatchButton';
 
 // Googleフォームへのリンク（問題募集用）
 const QUESTION_FORM_URL = 'https://forms.gle/PQkrKT2VNux1RP1C6';
@@ -14,7 +15,15 @@ export function HelpScreen() {
 
   // Xでシェアする
   const shareOnX = () => {
-    const text = `パレ学マスターで遊んでます！パレデミア学園の寮生たちをどれだけ知っているかチェックしよう！`;
+    const text = `パレデミア学園の知識を試すクイズゲーム
+『パレ学マスター』
+
+✅寮生の顔名前当て
+✅深堀り問題
+✅寮生一覧
+
+👇今すぐプレイ
+#パレ学マスター #パレデミア学園`;
     const url = `https://x.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(GAME_URL)}`;
     window.open(url, '_blank');
   };
@@ -35,55 +44,18 @@ export function HelpScreen() {
         className="flex items-center justify-between shrink-0"
         style={{ height: '10%', padding: '0 3cqmin' }}
       >
-        <button
+        <ThreePatchButton
+          leftImage="./data/images/ui/btn_normal_off_left.png"
+          middleImage="./data/images/ui/btn_normal_off_middle.png"
+          rightImage="./data/images/ui/btn_normal_off_right.png"
           onClick={returnToTitle}
-          className="flex items-center transition brightness-125 hover:brightness-150"
-          style={{ 
-            padding: 0,
-            border: 'none',
-            background: 'none',
-            fontSize: '3.5cqmin',
-          }}
+          height="5.5cqmin"
+          fontSize="3.5cqmin"
+          textColor="#CCC"
+          className="selection-card"
         >
-          {/* 左端 */}
-          <img
-            src="./data/images/ui/btn_normal_off_left.png"
-            alt=""
-            style={{
-              height: '5cqmin',
-              width: 'auto',
-              display: 'block',
-            }}
-          />
-          {/* 中央（文字列長に合わせて伸縮） */}
-          <div
-            style={{
-              backgroundImage: 'url(./data/images/ui/btn_normal_off_middle.png)',
-              backgroundRepeat: 'no-repeat',
-              backgroundSize: '100% 100%',
-              height: '5cqmin',
-              display: 'flex',
-              alignItems: 'center',
-              padding: '0 2.5cqmin',
-              fontSize: '3cqmin',
-              color: '#999',
-              fontWeight: 'bold',
-              whiteSpace: 'nowrap',
-            }}
-          >
-            戻る
-          </div>
-          {/* 右端 */}
-          <img
-            src="./data/images/ui/btn_normal_off_right.png"
-            alt=""
-            style={{
-              height: '5cqmin',
-              width: 'auto',
-              display: 'block',
-            }}
-          />
-        </button>
+          戻る
+        </ThreePatchButton>
         <h1 
           className="text-white font-bold"
           style={{ fontSize: '5cqmin', lineHeight: '1.6', color: '#493e33ff', textShadow: '0 0 1cqmin rgba(74, 59, 42, 0.5)' }}
@@ -164,18 +136,18 @@ export function HelpScreen() {
               申し訳ありません。現在「100問モード」と上位の称号はロックされています。 ゲームディレクターが問題を制作してきましたが、深堀り問題・超深堀り問題ともに約80問でネタが尽きてしまいました……。ロック解除には、あと少し問題数が足りません。 よろしければ、下記のGoogleフォームからあなたの知識を分けていただけないでしょうか？ 100問に到達次第、すぐに解放します！
             </p>
           </div>
-          <a
-            href={QUESTION_FORM_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block bg-black/20 hover:bg-black/30 font-bold rounded-lg transition-colors"
-            style={{ 
-              padding: '2cqmin 4cqmin',
-              fontSize: '3cqmin',
-            }}
+          <ThreePatchButton
+            leftImage="./data/images/ui/btn_normal_off_left.png"
+            middleImage="./data/images/ui/btn_normal_off_middle.png"
+            rightImage="./data/images/ui/btn_normal_off_right.png"
+            onClick={() => window.open(QUESTION_FORM_URL, '_blank', 'noopener,noreferrer')}
+            height="7cqmin"
+            fontSize="3.5cqmin"
+            textColor="#CCC"
+            className="selection-card"
           >
             📝 問題を投稿する
-          </a>
+          </ThreePatchButton>
         </section>
 
         {/* リンク */}
@@ -187,30 +159,31 @@ export function HelpScreen() {
             リンク
           </h2>
           <div className="leading-relaxed" style={{ gap: '2cqmin' }}>
-            <a
-              href={PARERDEMIA_OFFICIAL_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block bg-black/20 hover:bg-black/30 font-bold rounded-lg transition-colors"
-              style={{ 
-                padding: '2cqmin 4cqmin',
-                fontSize: '3cqmin',
-              }}
+            <ThreePatchButton
+              leftImage="./data/images/ui/btn_normal_off_left.png"
+              middleImage="./data/images/ui/btn_normal_off_middle.png"
+              rightImage="./data/images/ui/btn_normal_off_right.png"
+              onClick={() => window.open(PARERDEMIA_OFFICIAL_URL, '_blank', 'noopener,noreferrer')}
+              height="7cqmin"
+              fontSize="3.5cqmin"
+              textColor="#CCC"
+              className="selection-card"
             >
               🏫 パレデミア学園公式サイト
-            </a>
+            </ThreePatchButton>
             <br />
-            <br />
-            <button
+            <ThreePatchButton
+              leftImage="./data/images/ui/btn_normal_off_left.png"
+              middleImage="./data/images/ui/btn_normal_off_middle.png"
+              rightImage="./data/images/ui/btn_normal_off_right.png"
               onClick={shareOnX}
-              className="inline-block bg-black/20 hover:bg-black/30 font-bold rounded-lg transition-colors text-left"
-              style={{ 
-                padding: '2cqmin 4cqmin',
-                fontSize: '3cqmin',
-              }}
+              height="7cqmin"
+              fontSize="3.5cqmin"
+              textColor="#CCC"
+              className="selection-card"
             >
               𝕏 シェアする
-            </button>
+            </ThreePatchButton>
           </div>
         </section>
       </div>

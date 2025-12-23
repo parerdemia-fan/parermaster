@@ -79,8 +79,8 @@ export function TalentListScreen() {
           middleImage="./data/images/ui/btn_normal_off_middle.png"
           rightImage="./data/images/ui/btn_normal_off_right.png"
           onClick={returnToTitle}
-          height="7cqmin"
-          fontSize="5cqmin"
+          height="6cqmin"
+          fontSize="4cqmin"
           textColor="#CCC"
           className="selection-card"
           style={{marginLeft: '2cqmin'}}
