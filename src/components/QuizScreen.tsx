@@ -3,6 +3,7 @@ import { useGameStore } from '../stores/gameStore';
 import { extractFirstImage, removeImageTags } from '../utils/imageTagParser';
 import { parseTextWithTalentIcons, getTalentNameMap } from '../utils/talentIconParser';
 import { ThreePatchImage } from './ThreePatchImage';
+import { ThreePatchButton } from './ThreePatchButton';
 import type { ProcessedQuestion } from '../types';
 
 /**
@@ -349,54 +350,18 @@ function CommentDialog({
           </div>
         )}
         <div className="flex justify-center" style={{ marginTop: '2cqmin' }}>
-          <button
+          <ThreePatchButton
+            leftImage="./data/images/ui/btn_normal_off_left.png"
+            middleImage="./data/images/ui/btn_normal_off_middle.png"
+            rightImage="./data/images/ui/btn_normal_off_right.png"
             onClick={onClose}
-            className="flex items-center transition brightness-125 hover:brightness-150"
-            style={{
-              padding: 0,
-              border: 'none',
-              background: 'none',
-              fontSize: '3.5cqmin',
-            }}
+            height="7cqmin"
+            fontSize="5cqmin"
+            textColor="#CCC"
+            className="selection-card"
           >
-            {/* 左端 */}
-            <img
-              src="./data/images/ui/btn_normal_off_left.png"
-              alt=""
-              style={{
-                height: '7cqmin',
-                width: 'auto',
-                display: 'block',
-              }}
-            />
-            {/* 中央（文字列長に合わせて伸縮） */}
-            <div
-              style={{
-                backgroundImage: 'url(./data/images/ui/btn_normal_off_middle.png)',
-                backgroundRepeat: 'no-repeat',
-                backgroundSize: '100% 100%',
-                height: '7cqmin',
-                display: 'flex',
-                alignItems: 'center',
-                padding: '0 2.5cqmin',
-                color: '#999',
-                fontWeight: 'bold',
-                whiteSpace: 'nowrap',
-              }}
-            >
-              閉じる
-            </div>
-            {/* 右端 */}
-            <img
-              src="./data/images/ui/btn_normal_off_right.png"
-              alt=""
-              style={{
-                height: '7cqmin',
-                width: 'auto',
-                display: 'block',
-              }}
-            />
-          </button>
+            閉じる
+          </ThreePatchButton>
         </div>
       </div>
     </div>

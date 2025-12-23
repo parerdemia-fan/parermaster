@@ -34,7 +34,7 @@ export function ThreePatchImage({
   filter,
 }: ThreePatchImageProps) {
   return (
-    <div className="flex" style={{ width }}>
+    <div className="flex" style={{ width, fontSize: 0, lineHeight: 0 }}>
       {/* 左端 */}
       <img
       src={leftImage}
@@ -43,6 +43,8 @@ export function ThreePatchImage({
         height,
         width: 'auto',
         display: 'block',
+        verticalAlign: 'top',
+        margin: 0,
         filter,
       }}
       />
@@ -57,8 +59,10 @@ export function ThreePatchImage({
         alignItems: 'center',
         padding: '0 2.5cqmin',
         color: textColor,
+        fontSize: '3cqmin',
         fontWeight: 'bold',
         whiteSpace: 'nowrap',
+        margin: 0,
         filter,
         ...(width !== 'auto' && { flex: 1 }),
       }}
@@ -73,6 +77,8 @@ export function ThreePatchImage({
         height,
         width: 'auto',
         display: 'block',
+        verticalAlign: 'top',
+        margin: 0,
         filter,
       }}
       />
