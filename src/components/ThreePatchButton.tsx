@@ -72,6 +72,7 @@ export function ThreePatchButton({
         rightImage={rightImage}
         height={height}
         textColor={textColor}
+        fontSize={fontSize}
         filter={imageFilter}
       >
         {children}

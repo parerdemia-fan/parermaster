@@ -356,7 +356,7 @@ function CommentDialog({
             rightImage="./data/images/ui/btn_normal_off_right.png"
             onClick={onClose}
             height="7cqmin"
-            fontSize="5cqmin"
+            fontSize="3.5cqmin"
             textColor="#CCC"
             className="selection-card"
           >

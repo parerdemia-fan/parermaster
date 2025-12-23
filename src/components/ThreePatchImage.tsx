@@ -15,6 +15,8 @@ interface ThreePatchImageProps {
   height: string;
   /** テキストカラー */
   textColor?: string;
+  /** フォントサイズ (例: '4cqmin') */
+  fontSize?: string;
   /** 画像に適用するfilter */
   filter?: string;
 }
@@ -31,6 +33,7 @@ export function ThreePatchImage({
   width = 'auto',
   height,
   textColor = '#999',
+  fontSize = '4cqmin',
   filter,
 }: ThreePatchImageProps) {
   return (
@@ -59,10 +62,11 @@ export function ThreePatchImage({
         alignItems: 'center',
         padding: '0 2.5cqmin',
         color: textColor,
-        fontSize: '3cqmin',
+        fontSize,
         fontWeight: 'bold',
         whiteSpace: 'nowrap',
-        margin: 0,
+        marginLeft: '-2px',
+        marginRight: '-2px',
         filter,
         ...(width !== 'auto' && { flex: 1 }),
       }}
