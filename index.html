@@ -6,7 +6,7 @@
     <meta property="og:title" content="パレ学マスター">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://parerdemia-fan.github.io/parermaster/">
-    <meta property="og:image" content="https://parerdemia-fan.github.io/parermaster/ogp.png">
+    <meta property="og:image" content="https://parerdemia-fan.github.io/parermaster/data/images/ogp.png">
     <meta property="og:site_name" content="パレ学マスター">
     <meta property="og:description" content="パレデミア学園の寮生たちの顔と名前を覚えたり、寮生たちのことをどれだけ知っているかをチェックできるクイズゲームです。">
     <meta property="og:locale" content="ja_JP">
@@ -25,5 +25,18 @@
   <body>
     <div id="root"></div>
     <script type="module" src="./src/main.tsx"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/parermaster/sw.js')
+            .then((registration) => {
+              console.log('ServiceWorker registration successful with scope: ', registration.scope);
+            })
+            .catch((err) => {
+              console.log('ServiceWorker registration failed: ', err);
+            });
+        });
+      }
+    </script>
   </body>
 </html>
