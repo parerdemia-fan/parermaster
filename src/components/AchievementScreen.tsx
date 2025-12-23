@@ -1,9 +1,12 @@
+import { useState, useRef } from 'react';
 import { useGameStore } from '../stores/gameStore';
 import { ThreePatchButton } from './ThreePatchButton';
 import { ThreePatchImage } from './ThreePatchImage';
 
 export function AchievementScreen() {
   const { achievements, returnToTitle } = useGameStore();
+  const [activeAchievementId, setActiveAchievementId] = useState<string | null>(null);
+  const timeoutRef = useRef<number | null>(null);
 
   // 取得済みアチーブメントのみフィルタリング
   // 依存関係があるアチーブメントは、依存するアチーブメントがすべて取得済みの場合のみ表示
@@ -22,6 +25,38 @@ export function AchievementScreen() {
     }
     return false;
   });
+
+  // タップ時の表示制御
+  const handleTap = (id: string) => {
+    setActiveAchievementId(id);
+    
+    // 既存のタイマーをクリア
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    
+    // 3秒後に非表示
+    timeoutRef.current = setTimeout(() => {
+      setActiveAchievementId(null);
+    }, 3000);
+  };
+
+  // ホバー開始時：表示してタイマーをクリア
+  const handleMouseEnter = (id: string) => {
+    setActiveAchievementId(id);
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+  };
+
+  // ホバー終了時：再度タイマーをセット
+  const handleMouseLeave = (id: string) => {
+    if (activeAchievementId === id) {
+      timeoutRef.current = setTimeout(() => {
+        setActiveAchievementId(null);
+      }, 3000);
+    }
+  };
 
   return (
     <div 
@@ -90,11 +125,13 @@ export function AchievementScreen() {
             {unlockedAchievements.map((achievement) => (
                 <div
                 key={achievement.id}
-                className="absolute group"
+                className="absolute"
                 style={{
                   left: `${achievement.x}cqmin`,
                   top: `${achievement.y}cqmin`,
                 }}
+                onMouseEnter={() => handleMouseEnter(achievement.id)}
+                onMouseLeave={() => handleMouseLeave(achievement.id)}
                 >
                 {/* アチーブメント画像 */}
                 <img
@@ -107,10 +144,13 @@ export function AchievementScreen() {
                   objectFit: 'contain',
                   }}
                   draggable={false}
+                  onClick={() => handleTap(achievement.id)}
                 />
-                {/* アチーブメント名と説明（ホバー時のみ表示） */}
+                {/* アチーブメント名と説明 */}
                 <div
-                  className="absolute left-1/2 transform -translate-x-1/2 bg-black bg-opacity-90 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
+                  className={`absolute left-1/2 transform -translate-x-1/2 bg-black bg-opacity-90 rounded transition-opacity pointer-events-none ${
+                    activeAchievementId === achievement.id ? 'opacity-100' : 'opacity-0'
+                  }`}
                   style={{
                   top: `${achievement.h}cqmin`,
                   padding: '1cqmin 1.5cqmin',
