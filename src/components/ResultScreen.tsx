@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { useGameStore } from '../stores/gameStore';
 import type { Category } from '../types';
+import { ThreePatchButton } from './ThreePatchButton';
 
 // 称賛メッセージのリスト
 type MessageCategory = 'perfect' | 'excellent' | 'great' | 'good' | 'encourage';
@@ -258,63 +259,32 @@ export function ResultScreen() {
         style={{ gap: '3cqmin' }}
       >
         {/* タイトルに戻るボタン */}
-        <button
+        <ThreePatchButton
+          leftImage="./data/images/ui/btn_normal_off_left.png"
+          middleImage="./data/images/ui/btn_normal_off_middle.png"
+          rightImage="./data/images/ui/btn_normal_off_right.png"
           onClick={returnToTitle}
-          className="flex items-center transition brightness-125 hover:brightness-150"
+          height="8cqmin"
+          fontSize="4cqmin"
+          textColor="#CCC"
+          className="selection-card"
         >
-          {/* 左端 */}
-          <img
-            src="./data/images/ui/btn_normal_off_left.png"
-            alt=""
-            style={{
-              height: '5cqmin',
-              width: 'auto',
-              display: 'block',
-            }}
-          />
-          {/* 中央（文字列長に合わせて伸縮） */}
-          <div
-            style={{
-              backgroundImage: 'url(./data/images/ui/btn_normal_off_middle.png)',
-              backgroundRepeat: 'no-repeat',
-              backgroundSize: '100% 100%',
-              height: '5cqmin',
-              display: 'flex',
-              alignItems: 'center',
-              padding: '0 2cqmin',
-              fontSize: '2.5cqmin',
-              color: '#999',
-              fontWeight: 'bold',
-              whiteSpace: 'nowrap',
-            }}
-          >
-            タイトルに戻る
-          </div>
-          {/* 右端 */}
-          <img
-            src="./data/images/ui/btn_normal_off_right.png"
-            alt=""
-            style={{
-              height: '5cqmin',
-              width: 'auto',
-              display: 'block',
-            }}
-          />
-        </button>
+          タイトルに戻る
+        </ThreePatchButton>
 
         {/* Xでシェアボタン */}
         <button
           onClick={shareOnX}
           className="bg-gray-800 hover:bg-gray-700 text-white font-bold rounded-lg transition-colors flex items-center"
           style={{
-            fontSize: '2.5cqmin',
+            fontSize: '4cqmin',
             padding: '1.2cqmin 3cqmin',
             gap: '1cqmin',
           }}
         >
           <svg
             viewBox="0 0 24 24"
-            style={{ width: '3cqmin', height: '3cqmin' }}
+            style={{ width: '4cqmin', height: '4cqmin' }}
             fill="currentColor"
           >
             <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
