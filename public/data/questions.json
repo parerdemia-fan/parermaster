@@ -13,8 +13,8 @@
     "genre": "コラボ",
     "hide_icon": false,
     "sort_answers": false,
-    "comment": "",
-    "source_url": "",
+    "comment": "[image:peachtea.png]",
+    "source_url": "https://www.youtube.com/watch?v=VCgXfwnT82A",
     "questioner": ""
   },
   {
@@ -31,7 +31,7 @@
     "genre": "パレ学",
     "hide_icon": false,
     "sort_answers": false,
-    "comment": "",
+    "comment": "[image:whinny_room.png]",
     "source_url": "",
     "questioner": ""
   },
@@ -85,8 +85,8 @@
     "genre": "コラボ",
     "hide_icon": false,
     "sort_answers": false,
-    "comment": "",
-    "source_url": "",
+    "comment": "[image:osushi.png]",
+    "source_url": "https://www.youtube.com/watch?v=_hYE68LfRWQ",
     "questioner": ""
   },
   {
@@ -103,7 +103,7 @@
     "genre": "パレ学",
     "hide_icon": false,
     "sort_answers": false,
-    "comment": "",
+    "comment": "[image:coo_room.png]",
     "source_url": "",
     "questioner": ""
   },
@@ -158,7 +158,7 @@
     "hide_icon": false,
     "sort_answers": false,
     "comment": "",
-    "source_url": "",
+    "source_url": "https://www.youtube.com/shorts/_j7K0KiVFm0",
     "questioner": ""
   },
   {
@@ -212,7 +212,7 @@
     "hide_icon": false,
     "sort_answers": false,
     "comment": "公式エボライバーとして34名が参加しています",
-    "source_url": "",
+    "source_url": "https://jongevo.enish.com/#liver_05",
     "questioner": ""
   },
   {
@@ -230,7 +230,7 @@
     "hide_icon": false,
     "sort_answers": false,
     "comment": "",
-    "source_url": "",
+    "source_url": "https://x.com/parerdemia/status/1963532823278833758",
     "questioner": ""
   },
   {
@@ -248,7 +248,7 @@
     "hide_icon": false,
     "sort_answers": false,
     "comment": "[image:100k.png]",
-    "source_url": "",
+    "source_url": "https://x.com/parerdemia/status/1939674672884244669",
     "questioner": ""
   },
   {
@@ -266,7 +266,7 @@
     "hide_icon": false,
     "sort_answers": false,
     "comment": "[image:water.png]",
-    "source_url": "",
+    "source_url": "https://x.com/parerdemia/status/1925163684038619438",
     "questioner": ""
   },
   {
@@ -284,7 +284,7 @@
     "hide_icon": false,
     "sort_answers": false,
     "comment": "[image:okinawa.png]",
-    "source_url": "",
+    "source_url": "https://x.com/parerdemia/status/1929734795510038578",
     "questioner": ""
   },
   {
@@ -302,7 +302,7 @@
     "hide_icon": false,
     "sort_answers": false,
     "comment": "",
-    "source_url": "",
+    "source_url": "https://x.com/parerdemia/status/1991435594275164170",
     "questioner": ""
   },
   {
@@ -373,7 +373,7 @@
     "genre": "ネームロゴ",
     "hide_icon": false,
     "sort_answers": false,
-    "comment": "",
+    "comment": "[image:oboroduki_namelogo.png]",
     "source_url": "",
     "questioner": ""
   },
@@ -391,7 +391,7 @@
     "genre": "グッズ",
     "hide_icon": false,
     "sort_answers": false,
-    "comment": "",
+    "comment": "[image:oboroduki_halloween.png]",
     "source_url": "",
     "questioner": ""
   },
@@ -3281,15 +3281,15 @@
     "dormitory": "all",
     "difficulty": 0,
     "answers": [
-      "ルナエイト",
-      "パレエイト",
-      "ソレイユエイト",
-      "ステラエイト"
+      "ルナグランデステージ",
+      "パレグランデステージ",
+      "ジググランデステージ",
+      "渋谷サクラステージ"
     ],
     "genre": "",
     "hide_icon": false,
     "sort_answers": false,
-    "comment": "3年間の活動の後、8名が選抜されてルナエイトになるそうです。",
+    "comment": "3年間の活動の後、8名が選抜されてルナエイトになり、ルナグランデステージへ",
     "source_url": "",
     "questioner": ""
   },
