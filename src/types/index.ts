@@ -47,6 +47,7 @@ export type QuestionType = 'normal' | 'face' | 'name';
 
 // 処理済み問題データ（ゲーム中に使用）
 export type ProcessedQuestion = {
+  index?: number;           // 問題番号（0始まり）
   questionType: QuestionType;  // 問題タイプ
   question: string;
   answers: string[];        // シャッフル/ソート済みの選択肢

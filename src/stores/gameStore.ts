@@ -986,6 +986,9 @@ export const useGameStore = create<GameState>((set, get) => ({
       allQuestions = filteredQuestions.map(q => processQuestion(q, talents, questionRange));
     }
 
+    // allQuestionsにindexを付ける
+    allQuestions = allQuestions.map((q, i) => ({ ...q, index: i }));
+
     set({
       screen: 'quiz',
       currentIndex: 0,

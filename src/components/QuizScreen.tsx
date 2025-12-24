@@ -1095,7 +1095,10 @@ function NameQuizLayout({
             style={{ 
               width: '75%',
               height: '100%',
-              backgroundColor: 'white',
+              backgroundImage: `url("./data/images/ui/bg_${(currentQuestion.index ?? 0) % 8}.png")`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
               borderRadius: '0.8cqmin',
             }}
           >
