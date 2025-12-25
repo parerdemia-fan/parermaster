@@ -24,4 +24,4 @@ $ pnpm prepare
 
 - **仕組み**: コミット前に `.husky/pre-commit` が `node scripts/update-sw-cache-name.cjs` を実行し、`public/sw.js` の `CACHE_NAME` を `game-vYYYYMMDDHHMM` 形式のタイムスタンプに更新して自動で `git add` します。
 
-- **テスト**: 変更を作って `git commit -m "test"` を実行すると、pre-commit で `sw.js` が更新されコミットに含まれま
+- **テスト**: 変更を作って `git commit -m "test"` を実行すると、pre-commit で `sw.js` が更新されコミットに含まれます。
