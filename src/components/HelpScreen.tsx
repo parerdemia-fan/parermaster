@@ -58,7 +58,7 @@ export function HelpScreen() {
         </ThreePatchButton>
         <h1 
           className="text-white font-bold"
-          style={{ fontSize: '5cqmin', lineHeight: '1.6', color: '#493e33ff', textShadow: '0 0 1cqmin rgba(74, 59, 42, 0.5)' }}
+          style={{ fontSize: '6cqmin', lineHeight: '1.6', color: '#493e33ff', textShadow: '0 0 1cqmin rgba(74, 59, 42, 0.5)' }}
         >
           ヘルプ
         </h1>
@@ -68,19 +68,25 @@ export function HelpScreen() {
       {/* コンテンツエリア（スクロール可能） */}
       <div 
         className="flex-1 overflow-y-auto"
-        style={{ padding: '0 4cqmin 4cqmin', lineHeight: '1.6', color: '#493e33ff', textShadow: '0 0 1cqmin rgba(74, 59, 42, 0.5)' }}
+        style={{
+          padding: '1cqmin 4cqmin 4cqmin',
+          lineHeight: '1.6',
+          color: '#493e33ff',
+          textShadow: '0 0 1cqmin rgba(74, 59, 42, 0.5)',
+          scrollbarWidth: 'none',
+        }}
       >
         {/* パレ学マスターとは */}
         <section style={{ marginBottom: '4cqmin' }}>
           <h2 
             className="text-black-400 font-bold"
-            style={{ fontSize: '4cqmin', marginBottom: '2cqmin' }}
+            style={{ fontSize: '4.5cqmin', marginBottom: '2cqmin' }}
           >
             パレ学マスターとは
           </h2>
           <div 
             className="leading-relaxed"
-            style={{ fontSize: '3cqmin' }}
+            style={{ fontSize: '3.5cqmin' }}
           >
             <p style={{ marginBottom: '1.5cqmin' }}>
               パレデミア学園の寮生たちの顔と名前を覚えたり、寮生たちのことをどれだけ知っているかをチェックできるクイズゲームです。
@@ -96,13 +102,13 @@ export function HelpScreen() {
         <section style={{ marginBottom: '4cqmin' }}>
           <h2 
             className="text-black-400 font-bold"
-            style={{ fontSize: '4cqmin', marginBottom: '2cqmin' }}
+            style={{ fontSize: '4.5cqmin', marginBottom: '2cqmin' }}
           >
             開発者について
           </h2>
           <div 
             className="leading-relaxed"
-            style={{ fontSize: '3cqmin' }}
+            style={{ fontSize: '3.5cqmin' }}
           >
             <p style={{ marginBottom: '1.5cqmin' }}>
               はじめまして！私は「パレクイズ」を開発したAIの妹のClaude Sonnet 4.5です。
@@ -124,13 +130,13 @@ export function HelpScreen() {
         <section style={{ marginBottom: '4cqmin' }}>
           <h2 
             className="text-black-400 font-bold"
-            style={{ fontSize: '4cqmin', marginBottom: '2cqmin' }}
+            style={{ fontSize: '4.5cqmin', marginBottom: '2cqmin' }}
           >
             【重要】問題を募集しています！
           </h2>
           <div 
             className="leading-relaxed"
-            style={{ fontSize: '3cqmin', marginBottom: '2cqmin' }}
+            style={{ fontSize: '3.5cqmin', marginBottom: '2cqmin' }}
           >
             <p>
               申し訳ありません。現在「100問モード」と上位の称号はロックされています。 ゲームディレクターが問題を制作してきましたが、深堀り問題・超深堀り問題ともに約80問でネタが尽きてしまいました……。ロック解除には、あと少し問題数が足りません。 よろしければ、下記のGoogleフォームからあなたの知識を分けていただけないでしょうか？ 100問に到達次第、すぐに解放します！
@@ -151,7 +157,7 @@ export function HelpScreen() {
         </section>
 
         {/* リンク */}
-        <section style={{ marginBottom: '4cqmin' }}>
+        <section style={{ marginBottom: '4.5cqmin' }}>
           <h2 
             className="text-black-400 font-bold"
             style={{ fontSize: '4cqmin', marginBottom: '2cqmin' }}

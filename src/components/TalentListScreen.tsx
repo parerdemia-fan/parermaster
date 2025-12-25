@@ -21,6 +21,27 @@ const SNS_LINKS = [
   { key: 'marshmallow_url', icon: './data/images/ui/marshmallow.jpg', name: 'マシュマロ' },
 ] as const;
 
+function getNameFontSize(text: string): string {
+  const length = text.length;
+  if (length <= 5) {
+    return '3.5cqmin';
+  } else if (length <= 6) {
+    return '3cqmin';
+  } else if (length <= 9) {
+    return '2cqmin';
+  } else {
+    return '1.7cqmin';
+  }
+}
+
+function getNameFontSize2(text: string): string {
+  const length = text.length;
+  return `${40/length}cqmin`;
+}
+
+const SECTION_FONT_SIZE = '3cqmin';
+const DESCRIPTION_FONT_SIZE = '2.5cqmin';
+
 export function TalentListScreen() {
   const { talents, returnToTitle } = useGameStore();
   const [selectedTalent, setSelectedTalent] = useState<Talent | null>(null);
@@ -61,305 +82,306 @@ export function TalentListScreen() {
   ].filter(item => item.items && item.items.length > 0) : [];
 
   return (
-    <div className="w-full h-full flex flex-col"
-    style={{
-      backgroundImage: 'url(./data/images/ui/achievement_bg.png)',
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      backgroundRepeat: 'no-repeat',
-    }}
-    >
-      {/* ヘッダー */}
-      <div
-        className="flex items-center justify-between px-[3%] shrink-0"
-        style={{ height: '10%' }}
+    <>
+      <div className="w-full h-full flex flex-col"
+      style={{
+        backgroundImage: 'url(./data/images/ui/achievement_bg.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+      }}
       >
-        <ThreePatchButton
-          leftImage="./data/images/ui/btn_normal_off_left.png"
-          middleImage="./data/images/ui/btn_normal_off_middle.png"
-          rightImage="./data/images/ui/btn_normal_off_right.png"
-          onClick={returnToTitle}
-          height="6cqmin"
-          fontSize="4cqmin"
-          textColor="#CCC"
-          className="selection-card"
-          style={{marginLeft: '2cqmin'}}
-        >
-          戻る
-        </ThreePatchButton>
-
-        <ThreePatchImage
-          leftImage="./data/images/ui/plate_left.png"
-          middleImage="./data/images/ui/plate_middle.png"
-          rightImage="./data/images/ui/plate_right.png"
-          height="7cqmin"
-        >
-          <span
-            className="text-white font-bold"
-            style={{
-              fontSize: '5cqmin',
-              textShadow: '2px 2px 4px rgba(0,0,0,1)',
-             }}
-          >
-            寮生一覧
-          </span>
-        </ThreePatchImage>
-        <div style={{ width: '20cqmin' }} /> {/* スペーサー */}
-      </div>
-
-      {/* メインコンテンツ: 左右2分割 */}
-      <div className="flex-1 flex overflow-hidden" style={{ gap: '2cqmin', padding: '2cqmin' }}>
-        {/* 左側: 寮生一覧 (50%) */}
+        {/* ヘッダー */}
         <div
-          className="overflow-y-auto"
-          style={{
-            width: '50%',
-            scrollbarWidth: 'thin',
-            minHeight: '0',
-          }}
+          className="flex items-center justify-between px-[3%] shrink-0"
+          style={{ height: '10%' }}
         >
-          {talentsByDormitory.map((dorm, idx) => (
-            <div key={dorm.name}>
-              {/* 寮名ヘッダー */}
-              <ThreePatchImage
-                leftImage="./data/images/ui/plate_left.png"
-                middleImage="./data/images/ui/plate_middle.png"
-                rightImage="./data/images/ui/plate_right.png"
-                width="62cqmin"
-                height="4cqmin"
-                filter={
-                  idx === 0 ? "sepia(1) hue-rotate(-50deg) saturate(8) brightness(1)" :
-                  idx === 1 ? "sepia(1) hue-rotate(-60deg) saturate(3) brightness(1)" :
-                  idx === 2 ? "sepia(1) hue-rotate(150deg) saturate(2) brightness(1)" :
-                  "sepia(1) hue-rotate(60deg) saturate(2) brightness(1)"
-                }
-                >
-                <span
-                  className="text-white font-bold"
-                  style={{
-                  fontSize: '2.5cqmin',
-                  textShadow: '2px 2px 4px rgba(0,0,0,1)',
-                   }}
-                >
-                  {dorm.name}
-                </span>
-              </ThreePatchImage>
+          <ThreePatchButton
+            leftImage="./data/images/ui/btn_normal_off_left.png"
+            middleImage="./data/images/ui/btn_normal_off_middle.png"
+            rightImage="./data/images/ui/btn_normal_off_right.png"
+            onClick={returnToTitle}
+            height="6cqmin"
+            fontSize="4cqmin"
+            textColor="#CCC"
+            className="selection-card"
+            style={{marginLeft: '2cqmin'}}
+          >
+            戻る
+          </ThreePatchButton>
 
-              {/* 寮生グリッド: 3列 */}
-              <div
-                className="bg-gray-800/50 rounded-b-lg grid"
-                style={{
-                  gridTemplateColumns: 'repeat(3, 1fr)',
-                  gap: '1cqmin',
-                  padding: '1cqmin',
-                }}
-              >
-                {dorm.talents.map(talent => {
-                  const isSelected = selectedTalent?.student_id === talent.student_id;
-                  return (
-                    <button
-                      key={talent.student_id}
-                      onClick={() => handleTalentClick(talent)}
-                      className="relative w-full cursor-pointer transition-transform hover:scale-[1.02]"
-                      style={{
-                        aspectRatio: '1 / 1',
-                        padding: 0,
-                        border: 'none',
-                        background: 'none',
-                      }}
-                    >
-                      {/* 背景画像 */}
-                      <img
-                        src="./data/images/ui/panel_choice_face_bg.png"
-                        alt=""
-                        className="absolute inset-0 w-full h-full object-cover"
-                        style={{ borderRadius: '0.8cqmin' }}
-                      />
-
-                      {/* タレント画像 */}
-                      <img
-                        src={`./data/images/kv/sq/${talent.student_id}.png`}
-                        draggable={false}
-                        alt={talent.name}
-                        className="absolute inset-0 w-full h-full object-cover"
-                        style={{ borderRadius: '0.8cqmin' }}
-                      />
-
-                      {/* 前面フレーム画像 */}
-                      <img
-                        src="./data/images/ui/panel_choice_face.png"
-                        alt=""
-                        className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-                        style={{
-                          borderRadius: '0.8cqmin',
-                          boxShadow: isSelected ? '0 0 0 0.5cqmin #facc15' : 'none',
-                        }}
-                      />
-
-                      {/* タレント名 */}
-                      <div
-                        className="absolute left-0 right-0 bottom-0 flex items-center justify-center"
-                        style={{
-                          backgroundColor: 'rgba(255, 255, 255, 0.9)',
-                          borderBottomLeftRadius: '0.8cqmin',
-                          borderBottomRightRadius: '0.8cqmin',
-                          padding: '0.3cqmin 0.5cqmin',
-                        }}
-                      >
-                        <p
-                          className="font-bold truncate w-full text-center"
-                          style={{
-                            fontSize: '2cqmin',
-                            color: '#374151',
-                          }}
-                        >
-                          {talent.name}
-                        </p>
-                      </div>
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-          ))}
+          <ThreePatchImage
+            leftImage="./data/images/ui/plate_left.png"
+            middleImage="./data/images/ui/plate_middle.png"
+            rightImage="./data/images/ui/plate_right.png"
+            height="7cqmin"
+          >
+            <span
+              className="text-white font-bold"
+              style={{
+                fontSize: '5cqmin',
+                textShadow: '2px 2px 4px rgba(0,0,0,1)',
+               }}
+            >
+              寮生一覧
+            </span>
+          </ThreePatchImage>
+          <div style={{ width: '20cqmin' }} /> {/* スペーサー */}
         </div>
 
-        {/* 右側: 寮生詳細 (50%) */}
-        <div
-          className="relative"
-          style={{
-            width: '50%',
-            minHeight: '0',
-            paddingTop: '8cqmin',
-            paddingBottom: '8cqmin',
-          }}
-        >
-          {/* 背景画像レイヤー（固定） */}
+        {/* メインコンテンツ: 左右2分割 */}
+        <div className="flex-1 flex overflow-hidden" style={{ gap: '2cqmin', padding: '2cqmin' }}>
+          {/* 左側: 寮生一覧 (50%) */}
           <div
-            className="absolute left-0 top-0 pointer-events-none"
+            className="overflow-y-auto"
             style={{
-              width: '55cqmin',
-              height: '100%',
-              backgroundImage: 'url(./data/images/ui/panel_paper.png)',
-              backgroundSize: '100% 100%',
-              backgroundRepeat: 'no-repeat',
-              backgroundPosition: 'top left',
-              zIndex: 0,
-            }}
-          />
-          {/* 寮バッジ */}
-          {selectedTalent && (
-            <img src={`./data/images/emblem/${
-              selectedTalent?.dormitory === 'バゥ寮' ? 'wa' :
-              selectedTalent?.dormitory === 'ミュゥ寮' ? 'me' :
-              selectedTalent?.dormitory === 'クゥ寮' ? 'co' :
-              'wh'
-            }.webp`}
-              className="absolute top-30 left-0"
-              style={{
-                width: '57cqmin',
-                opacity: 0.15,
-                zIndex: 1,
-              }}
-             />
-          )}
-          {/* 立ち絵画像レイヤー（固定） */}
-          {selectedTalent && (
-            <div
-              className="absolute right-0 top-0 bottom-0 flex items-end justify-end pointer-events-none"
-              style={{
-                width: '50cqmin',
-                zIndex: 2,
-              }}
-            >
-              <img
-                src={`./data/images/kv/orig/${selectedTalent.student_id}.png`}
-                alt={selectedTalent.name}
-                style={{
-                  height: '100%',
-                  width: 'auto',
-                  objectFit: 'contain',
-                  marginRight: 'max(-7.5vw, -7.5vh)',
-                }}
-              />
-            </div>
-          )}
-          {/* スクロール可能なコンテンツエリア */}
-          <div
-            className="overflow-y-auto overflow-x-hidden relative"
-            style={{
-              width: '100%',
-              height: '100%',
+              width: '50%',
               scrollbarWidth: 'thin',
-              zIndex: 3,
+              minHeight: '0',
             }}
           >
-            {selectedTalent && (
-              <div className="relative w-full">
-                {/* プロフィール情報エリア (左側3/4) */}
+            {talentsByDormitory.map((dorm, idx) => (
+              <div key={dorm.name}>
+                {/* 寮名ヘッダー */}
+                <ThreePatchImage
+                  leftImage="./data/images/ui/plate_left.png"
+                  middleImage="./data/images/ui/plate_middle.png"
+                  rightImage="./data/images/ui/plate_right.png"
+                  width="62cqmin"
+                  height="6cqmin"
+                  filter={
+                    idx === 0 ? "sepia(1) hue-rotate(-50deg) saturate(8) brightness(1)" :
+                    idx === 1 ? "sepia(1) hue-rotate(-60deg) saturate(3) brightness(1)" :
+                    idx === 2 ? "sepia(1) hue-rotate(150deg) saturate(2) brightness(1)" :
+                    "sepia(1) hue-rotate(60deg) saturate(2) brightness(1)"
+                  }
+                  >
+                  <span
+                    className="text-white font-bold"
+                    style={{
+                    fontSize: '4cqmin',
+                    textShadow: '2px 2px 4px rgba(0,0,0,1)',
+                     }}
+                  >
+                    {dorm.name}
+                  </span>
+                </ThreePatchImage>
+
+                {/* 寮生グリッド: 3列 */}
                 <div
-                  className="relative left-0 top-0"
+                  className="bg-gray-800/50 rounded-b-lg grid"
                   style={{
-                    width: '45cqmin',
-                    paddingLeft: '4cqmin',
-                    paddingRight: '4cqmin',
+                    gridTemplateColumns: 'repeat(3, 1fr)',
+                    gap: '1cqmin',
+                    padding: '1cqmin',
                   }}
                 >
-                  {/* 読み仮名 */}
-                  <p
-                    className="mb-[1.5cqmin]"
-                    style={{
-                      fontSize: '2cqmin',
-                      color: '#304056ff',
-                      textShadow: '1px 1px 10px rgba(217, 214, 198, 1), 1px -1px 10px rgba(217, 214, 198, 1), -1px 1px 10px rgba(217, 214, 198, 1), -1px -1px 10px rgba(217, 214, 198, 1)',
-                      marginBottom: 'max(-1vw, -1vh)',
-                    }}
-                  >
-                    {selectedTalent.kana}
-                  </p>
+                  {dorm.talents.map(talent => {
+                    const isSelected = selectedTalent?.student_id === talent.student_id;
+                    return (
+                      <button
+                        key={talent.student_id}
+                        onClick={() => handleTalentClick(talent)}
+                        className="relative w-full cursor-pointer transition-transform hover:scale-[1.02]"
+                        style={{
+                          aspectRatio: '1 / 1',
+                          padding: 0,
+                          border: 'none',
+                          background: 'none',
+                        }}
+                      >
+                        {/* 背景画像 */}
+                        <img
+                          src="./data/images/ui/panel_choice_face_bg.png"
+                          alt=""
+                          className="absolute inset-0 w-full h-full object-cover"
+                          style={{ borderRadius: '0.8cqmin' }}
+                        />
 
-                  {/* 名前 */}
-                  <h2
-                    className="font-bold mb-[1cqmin]"
-                    style={{
-                      fontSize: '4cqmin',
-                      color: '#1f2937',
-                      textShadow: '1px 1px 10px rgba(217, 214, 198, 1), 1px -1px 10px rgba(217, 214, 198, 1), -1px 1px 10px rgba(217, 214, 198, 1), -1px -1px 10px rgba(217, 214, 198, 1)',
-                    }}
-                  >
-                    {selectedTalent.name}
-                  </h2>
+                        {/* タレント画像 */}
+                        <img
+                          src={`./data/images/kv/sq/${talent.student_id}.png`}
+                          draggable={false}
+                          alt={talent.name}
+                          className="absolute inset-0 w-full h-full object-cover"
+                          style={{ borderRadius: '0.8cqmin' }}
+                        />
 
-                  {/* SNSリンク */}
-                  <div
-                    className="flex flex-wrap mb-[3cqmin]"
-                    style={{ gap: '1.5cqmin' }}
-                  >
-                    {SNS_LINKS.map(sns => {
-                      const url = selectedTalent[sns.key as keyof typeof selectedTalent] as string;
-                      if (!url) return null;
+                        {/* 前面フレーム画像 */}
+                        <img
+                          src="./data/images/ui/panel_choice_face.png"
+                          alt=""
+                          className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+                          style={{
+                            borderRadius: '0.8cqmin',
+                            boxShadow: isSelected ? '0 0 0 0.5cqmin #facc15' : 'none',
+                          }}
+                        />
 
-                      if (sns.key === 'x_url') {
-                        return (
-                          <a
-                            key={sns.key}
-                            href={url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center justify-center"
-                            style={{ width: '5cqmin', height: '5cqmin' }}
+                        {/* タレント名 */}
+                        <div
+                          className="absolute left-0 right-0 bottom-0 flex items-center justify-center"
+                          style={{
+                            backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                            borderBottomLeftRadius: '0.8cqmin',
+                            borderBottomRightRadius: '0.8cqmin',
+                            padding: '0.3cqmin 0.5cqmin',
+                            height: '4.5cqmin',
+                          }}
+                        >
+                          <p
+                            className="font-bold truncate w-full text-center"
+                            style={{
+                              fontSize: getNameFontSize(talent.name),
+                              color: '#374151',
+                            }}
                           >
-                            <span
-                              className="flex items-center justify-center rounded-full bg-black text-white"
-                              style={{ width: '100%', height: '100%', fontSize: '3cqmin' }}
-                            >
-                              {sns.icon}
-                            </span>
-                          </a>
-                        );
-                      }
+                            {talent.name}
+                          </p>
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
+          </div>
 
-                      if (sns.key === 'marshmallow_url') {
+          {/* 右側: 寮生詳細 (50%) */}
+          <div
+            className="relative"
+            style={{
+              width: '50%',
+              minHeight: '0',
+              paddingTop: '8cqmin',
+              paddingBottom: '8cqmin',
+            }}
+          >
+            {/* 背景画像レイヤー（固定） */}
+            <div
+              className="absolute left-0 top-0 pointer-events-none"
+              style={{
+                width: '63cqmin',
+                height: '100%',
+                backgroundImage: 'url(./data/images/ui/panel_paper.png)',
+                backgroundSize: '100% 100%',
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'top left',
+                zIndex: 0,
+              }}
+            />
+            {/* 寮バッジ */}
+            {selectedTalent && (
+              <img src={`./data/images/emblem/${
+                selectedTalent?.dormitory === 'バゥ寮' ? 'wa' :
+                selectedTalent?.dormitory === 'ミュゥ寮' ? 'me' :
+                selectedTalent?.dormitory === 'クゥ寮' ? 'co' :
+                'wh'
+              }.webp`}
+                className="absolute top-30 left-0"
+                style={{
+                  width: '57cqmin',
+                  opacity: 0.15,
+                  zIndex: 1,
+                }}
+               />
+            )}
+            {/* スクロール可能なコンテンツエリア */}
+            <div
+              className="overflow-y-auto overflow-x-hidden relative"
+              style={{
+                width: '100%',
+                height: '100%',
+                scrollbarWidth: 'none',
+                zIndex: 3,
+              }}
+            >
+              {selectedTalent && (
+                <div className="relative w-full">
+                  {/* プロフィール情報エリア (左側3/4) */}
+                  <div
+                    className="relative left-0 top-0"
+                    style={{
+                      width: '64cqmin',
+                      paddingLeft: '4cqmin',
+                      paddingRight: '4cqmin',
+                    }}
+                  >
+                    {/* 読み仮名 */}
+                    <p
+                      className="mb-[1.5cqmin]"
+                      style={{
+                        fontSize: '3cqmin',
+                        lineHeight: '3cqmin',
+                        color: '#304056ff',
+                        textShadow: '1px 1px 10px rgba(217, 214, 198, 1), 1px -1px 10px rgba(217, 214, 198, 1), -1px 1px 10px rgba(217, 214, 198, 1), -1px -1px 10px rgba(217, 214, 198, 1)',
+                        marginBottom: 'max(-1vw, -1vh)',
+                      }}
+                    >
+                      {selectedTalent.kana}
+                    </p>
+
+                    {/* 名前 */}
+                    <h2
+                      className="font-bold mb-[1cqmin]"
+                      style={{
+                        fontSize: getNameFontSize2(selectedTalent.name),
+                        color: '#1f2937',
+                        textShadow: '1px 1px 10px rgba(217, 214, 198, 1), 1px -1px 10px rgba(217, 214, 198, 1), -1px 1px 10px rgba(217, 214, 198, 1), -1px -1px 10px rgba(217, 214, 198, 1)',
+                      }}
+                    >
+                      {selectedTalent.name}
+                    </h2>
+
+                    {/* SNSリンク */}
+                    <div
+                      className="flex flex-wrap mb-[3cqmin]"
+                      style={{ gap: '1.5cqmin' }}
+                    >
+                      {SNS_LINKS.map(sns => {
+                        const url = selectedTalent[sns.key as keyof typeof selectedTalent] as string;
+                        if (!url) return null;
+
+                        if (sns.key === 'x_url') {
+                          return (
+                            <a
+                              key={sns.key}
+                              href={url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex items-center justify-center"
+                              style={{ width: '5cqmin', height: '5cqmin' }}
+                            >
+                              <span
+                                className="flex items-center justify-center rounded-full bg-black text-white"
+                                style={{ width: '100%', height: '100%', fontSize: '3cqmin' }}
+                              >
+                                {sns.icon}
+                              </span>
+                            </a>
+                          );
+                        }
+
+                        if (sns.key === 'marshmallow_url') {
+                          return (
+                            <a
+                              key={sns.key}
+                              href={url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex items-center justify-center"
+                              style={{ width: '5cqmin', height: '5cqmin' }}
+                            >
+                              <img
+                                src={sns.icon}
+                                alt={sns.name + 'アイコン'}
+                                className="rounded-full"
+                                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                              />
+                            </a>
+                          );
+                        }
+
                         return (
                           <a
                             key={sns.key}
@@ -372,183 +394,186 @@ export function TalentListScreen() {
                             <img
                               src={sns.icon}
                               alt={sns.name + 'アイコン'}
-                              className="rounded-full"
-                              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                              style={{
+                                width: '100%',
+                                height: '100%',
+                                objectFit: 'contain',
+                                backgroundColor: sns.key === 'url' ? 'rgba(255, 255, 255, 1)' : 'transparent',
+                                borderRadius: sns.key === 'url' ? '50%' : '0',
+                              }}
                             />
                           </a>
                         );
-                      }
+                      })}
+                    </div>
 
-                      return (
-                        <a
-                          key={sns.key}
-                          href={url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center justify-center"
-                          style={{ width: '5cqmin', height: '5cqmin' }}
+                    {/* 夢 */}
+                    {selectedTalent.dream && (
+                      <div style={{ marginBottom: '1.5cqmin' }}>
+                        <h3
+                          className="font-bold mb-[1%]"
+                          style={{
+                            fontSize: SECTION_FONT_SIZE,
+                            color: '#b45309',
+                            textShadow: '1px 1px 10px rgba(217, 214, 198, 1), 1px -1px 10px rgba(217, 214, 198, 1), -1px 1px 10px rgba(217, 214, 198, 1), -1px -1px 10px rgba(217, 214, 198, 1)',
+                          }}
                         >
-                          <img
-                            src={sns.icon}
-                            alt={sns.name + 'アイコン'}
-                            style={{
-                              width: '100%',
-                              height: '100%',
-                              objectFit: 'contain',
-                              backgroundColor: sns.key === 'url' ? 'rgba(255, 255, 255, 1)' : 'transparent',
-                              borderRadius: sns.key === 'url' ? '50%' : '0',
-                            }}
-                          />
-                        </a>
-                      );
-                    })}
+                          💫 夢
+                        </h3>
+                        <p
+                          style={{
+                            width: '40cqmin',
+                            fontSize: DESCRIPTION_FONT_SIZE,
+                            fontWeight: 'bold',
+                            color: '#29303cff',
+                            paddingLeft: '3%',
+                            textShadow: '1px 1px 10px rgba(217, 214, 198, 1), 1px -1px 10px rgba(217, 214, 198, 1), -1px 1px 10px rgba(217, 214, 198, 1), -1px -1px 10px rgba(217, 214, 198, 1)',
+                          }}
+                        >
+                          {selectedTalent.dream}
+                        </p>
+                      </div>
+                    )}
+
+                    {/* 自己紹介 */}
+                    {selectedTalent.intro && (
+                      <div style={{ marginBottom: '1.5cqmin' }}>
+                        <h3
+                          className="font-bold mb-[1%]"
+                          style={{
+                            fontSize: SECTION_FONT_SIZE,
+                            color: '#b45309',
+                            textShadow: '1px 1px 10px rgba(217, 214, 198, 1), 1px -1px 10px rgba(217, 214, 198, 1), -1px 1px 10px rgba(217, 214, 198, 1), -1px -1px 10px rgba(217, 214, 198, 1)',
+                          }}
+                        >
+                          📝 自己紹介
+                        </h3>
+                        <p
+                          className="whitespace-pre-wrap"
+                          style={{
+                            fontSize: DESCRIPTION_FONT_SIZE,
+                            color: '#29303cff',
+                            paddingLeft: '3%',
+                            textShadow: '1px 1px 10px rgba(217, 214, 198, 1), 1px -1px 10px rgba(217, 214, 198, 1), -1px 1px 10px rgba(217, 214, 198, 1), -1px -1px 10px rgba(217, 214, 198, 1)',
+                          }}
+                        >
+                          {selectedTalent.intro}
+                        </p>
+                      </div>
+                    )}
+
+                    {/* 基本プロフィール */}
+                    {profileItems.length > 0 && (
+                      <div style={{ marginBottom: '1.5cqmin' }}>
+                        <h3
+                          className="font-bold mb-[1cqmin]"
+                          style={{
+                            fontSize: SECTION_FONT_SIZE,
+                            color: '#b45309',
+                            paddingLeft: '1%',
+                            textShadow: '1px 1px 10px rgba(217, 214, 198, 1), 1px -1px 10px rgba(217, 214, 198, 1), -1px 1px 10px rgba(217, 214, 198, 1), -1px -1px 10px rgba(217, 214, 198, 1)',
+                          }}
+                        >
+                          📋 基本情報
+                        </h3>
+                        <div
+                          className="grid"
+                          style={{
+                            gridTemplateColumns: 'auto 1fr',
+                            gap: '1cqmin',
+                            fontWeight: 'bold',
+                            fontSize: DESCRIPTION_FONT_SIZE,
+                            paddingLeft: '3%',
+                          }}
+                        >
+                          {profileItems.map(item => (
+                            <div key={item.label} className="contents">
+                              <span style={{ color: '#29303cff', textShadow: '1px 1px 10px rgba(217, 214, 198, 1), 1px -1px 10px rgba(217, 214, 198, 1), -1px 1px 10px rgba(217, 214, 198, 1), -1px -1px 10px rgba(217, 214, 198, 1)' }}>{item.label}</span>
+                              <span style={{ color: '#29303cff', textShadow: '1px 1px 10px rgba(217, 214, 198, 1), 1px -1px 10px rgba(217, 214, 198, 1), -1px 1px 10px rgba(217, 214, 198, 1), -1px -1px 10px rgba(217, 214, 198, 1)' }}>{item.value}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* リスト系プロフィール */}
+                    {listItems.map(section => (
+                      <div key={section.label} style={{ marginBottom: '1.5cqmin' }}>
+                        <h3
+                          className="font-bold mb-[1cqmin]"
+                          style={{
+                            fontSize: SECTION_FONT_SIZE,
+                            color: '#b45309',
+                            paddingLeft: '1%',
+                            textShadow: '1px 1px 10px rgba(217, 214, 198, 1), 1px -1px 10px rgba(217, 214, 198, 1), -1px 1px 10px rgba(217, 214, 198, 1), -1px -1px 10px rgba(217, 214, 198, 1)',
+                          }}
+                        >
+                          {section.label === '趣味' && '🎮 '}
+                          {section.label === '特技' && '🎤 '}
+                          {section.label === '好きなもの' && '❤️ '}
+                          {section.label === 'ハッシュタグ' && '# '}
+                          {section.label === '受賞歴' && '🏆 '}
+                          {section.label}
+                        </h3>
+                        <div
+                          className="flex flex-wrap"
+                          style={{
+                            gap: '1cqmin',
+                            fontWeight: 'bold',
+                            fontSize: DESCRIPTION_FONT_SIZE,
+                            paddingLeft: '3%',
+                          }}
+                        >
+                          {section.items.map((item, idx) => (
+                            section.label === 'ハッシュタグ' ? (
+                              <a
+                                key={idx}
+                                href={`https://x.com/hashtag/${encodeURIComponent(item.replace(/^#/, ''))}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="hover:underline"
+                                style={{ color: '#3b82f6', textShadow: '1px 1px 10px rgba(217, 214, 198, 1), 1px -1px 10px rgba(217, 214, 198, 1), -1px 1px 10px rgba(217, 214, 198, 1), -1px -1px 10px rgba(217, 214, 198, 1)' }}
+                              >
+                                {item}
+                              </a>
+                            ) : (
+                              <span
+                                key={idx}
+                                style={{
+                                  color: '#29303cff',
+                                  textShadow: '1px 1px 10px rgba(217, 214, 198, 1), 1px -1px 10px rgba(217, 214, 198, 1), -1px 1px 10px rgba(217, 214, 198, 1), -1px -1px 10px rgba(217, 214, 198, 1)'
+                                }}
+                              >
+                                {item}
+                              </span>
+                            )
+                          ))}
+                        </div>
+                      </div>
+                    ))}
                   </div>
-
-                  {/* 夢 */}
-                  {selectedTalent.dream && (
-                    <div className="mb-[2.5cqmin]">
-                      <h3
-                        className="font-bold mb-[1%]"
-                        style={{
-                          fontSize: '2.5cqmin',
-                          color: '#b45309',
-                          textShadow: '1px 1px 10px rgba(217, 214, 198, 1), 1px -1px 10px rgba(217, 214, 198, 1), -1px 1px 10px rgba(217, 214, 198, 1), -1px -1px 10px rgba(217, 214, 198, 1)',
-                        }}
-                      >
-                        💫 夢
-                      </h3>
-                      <p
-                        style={{
-                          fontSize: '2.2cqmin',
-                          color: '#29303cff',
-                          paddingLeft: '3%',
-                          textShadow: '1px 1px 10px rgba(217, 214, 198, 1), 1px -1px 10px rgba(217, 214, 198, 1), -1px 1px 10px rgba(217, 214, 198, 1), -1px -1px 10px rgba(217, 214, 198, 1)',
-                        }}
-                      >
-                        {selectedTalent.dream}
-                      </p>
-                    </div>
-                  )}
-
-                  {/* 自己紹介 */}
-                  {selectedTalent.intro && (
-                    <div className="mb-[2.5cqmin]">
-                      <h3
-                        className="font-bold mb-[1%]"
-                        style={{
-                          fontSize: '2.5cqmin',
-                          color: '#b45309',
-                          textShadow: '1px 1px 10px rgba(217, 214, 198, 1), 1px -1px 10px rgba(217, 214, 198, 1), -1px 1px 10px rgba(217, 214, 198, 1), -1px -1px 10px rgba(217, 214, 198, 1)',
-                        }}
-                      >
-                        📝 自己紹介
-                      </h3>
-                      <p
-                        className="whitespace-pre-wrap"
-                        style={{
-                          fontSize: '2.2cqmin',
-                          color: '#29303cff',
-                          paddingLeft: '3%',
-                          textShadow: '1px 1px 10px rgba(217, 214, 198, 1), 1px -1px 10px rgba(217, 214, 198, 1), -1px 1px 10px rgba(217, 214, 198, 1), -1px -1px 10px rgba(217, 214, 198, 1)',
-                        }}
-                      >
-                        {selectedTalent.intro}
-                      </p>
-                    </div>
-                  )}
-
-                  {/* 基本プロフィール */}
-                  {profileItems.length > 0 && (
-                    <div className="mb-[2.5cqmin]">
-                      <h3
-                        className="font-bold mb-[1cqmin]"
-                        style={{
-                          fontSize: '2.5cqmin',
-                          color: '#b45309',
-                          paddingLeft: '1%',
-                          textShadow: '1px 1px 10px rgba(217, 214, 198, 1), 1px -1px 10px rgba(217, 214, 198, 1), -1px 1px 10px rgba(217, 214, 198, 1), -1px -1px 10px rgba(217, 214, 198, 1)',
-                        }}
-                      >
-                        📋 基本情報
-                      </h3>
-                      <div
-                        className="grid"
-                        style={{
-                          gridTemplateColumns: 'auto 1fr',
-                          gap: '1cqmin',
-                          fontSize: '2cqmin',
-                          paddingLeft: '3%',
-                        }}
-                      >
-                        {profileItems.map(item => (
-                          <div key={item.label} className="contents">
-                            <span style={{ color: '#29303cff', textShadow: '1px 1px 10px rgba(217, 214, 198, 1), 1px -1px 10px rgba(217, 214, 198, 1), -1px 1px 10px rgba(217, 214, 198, 1), -1px -1px 10px rgba(217, 214, 198, 1)' }}>{item.label}</span>
-                            <span style={{ color: '#29303cff', textShadow: '1px 1px 10px rgba(217, 214, 198, 1), 1px -1px 10px rgba(217, 214, 198, 1), -1px 1px 10px rgba(217, 214, 198, 1), -1px -1px 10px rgba(217, 214, 198, 1)' }}>{item.value}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* リスト系プロフィール */}
-                  {listItems.map(section => (
-                    <div key={section.label} className="mb-[2.5cqmin]">
-                      <h3
-                        className="font-bold mb-[1cqmin]"
-                        style={{
-                          fontSize: '2.5cqmin',
-                          color: '#b45309',
-                          paddingLeft: '1%',
-                          textShadow: '1px 1px 10px rgba(217, 214, 198, 1), 1px -1px 10px rgba(217, 214, 198, 1), -1px 1px 10px rgba(217, 214, 198, 1), -1px -1px 10px rgba(217, 214, 198, 1)',
-                        }}
-                      >
-                        {section.label === '趣味' && '🎮 '}
-                        {section.label === '特技' && '✨ '}
-                        {section.label === '好きなもの' && '❤️ '}
-                        {section.label === 'ハッシュタグ' && '# '}
-                        {section.label === '受賞歴' && '🏆 '}
-                        {section.label}
-                      </h3>
-                      <div
-                        className="flex flex-wrap"
-                        style={{
-                          gap: '1cqmin',
-                          fontSize: '2cqmin',
-                          paddingLeft: '3%',
-                        }}
-                      >
-                        {section.items.map((item, idx) => (
-                          section.label === 'ハッシュタグ' ? (
-                            <a
-                              key={idx}
-                              href={`https://x.com/hashtag/${encodeURIComponent(item.replace(/^#/, ''))}`}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="hover:underline"
-                              style={{ color: '#3b82f6', textShadow: '1px 1px 10px rgba(217, 214, 198, 1), 1px -1px 10px rgba(217, 214, 198, 1), -1px 1px 10px rgba(217, 214, 198, 1), -1px -1px 10px rgba(217, 214, 198, 1)' }}
-                            >
-                              {item}
-                            </a>
-                          ) : (
-                            <span
-                              key={idx}
-                              style={{
-                                color: '#29303cff',
-                                textShadow: '1px 1px 10px rgba(217, 214, 198, 1), 1px -1px 10px rgba(217, 214, 198, 1), -1px 1px 10px rgba(217, 214, 198, 1), -1px -1px 10px rgba(217, 214, 198, 1)'
-                              }}
-                            >
-                              {item}
-                            </span>
-                          )
-                        ))}
-                      </div>
-                    </div>
-                  ))}                </div>
-              </div>
-            )}
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+      {/* 立ち絵画像レイヤー（固定） */}
+      {selectedTalent && (
+        <div
+          className="absolute pointer-events-none top-0"
+          style={{
+            width: '65cqmin',
+            right: 'calc(50% - 90cqmin)',
+            top: '-5cqmin',
+            zIndex: 2,
+          }}
+        >
+          <img
+            src={`./data/images/kv/orig/${selectedTalent.student_id}.png`}
+          />
+        </div>
+      )}
+    </>
   );
 }

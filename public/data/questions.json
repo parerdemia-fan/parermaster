@@ -126,6 +126,24 @@
     "questioner": ""
   },
   {
+    "question": "クゥ寮の全員で合唱した40mPの曲は？",
+    "category": "深堀り問題",
+    "dormitory": "co",
+    "difficulty": 3,
+    "answers": [
+      "ドレミファロンド",
+      "からくりピエロ",
+      "恋愛裁判",
+      "トリノコシティ"
+    ],
+    "genre": "コラボ",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "[image:doremifa.png]",
+    "source_url": "https://www.youtube.com/watch?v=h56m7IdezQk",
+    "questioner": ""
+  },
+  {
     "question": "愛乃宮ゆめ・肇明日空・猫乃間うとのキービジュアルの共通点は？",
     "category": "深堀り問題",
     "dormitory": "all",
@@ -752,7 +770,7 @@
     "hide_icon": false,
     "sort_answers": false,
     "comment": "",
-    "source_url": "",
+    "source_url": "https://www.youtube.com/watch?v=UDi1p2wQc7Q",
     "questioner": ""
   },
   {
@@ -3308,7 +3326,7 @@
     "hide_icon": false,
     "sort_answers": false,
     "comment": "この3人のコラボは必見です！",
-    "source_url": "https://www.youtube.com/shorts/7lnMobKRJvM",
+    "source_url": "https://www.youtube.com/watch?v=B9AE5oKbuUo",
     "questioner": ""
   }
 ]
