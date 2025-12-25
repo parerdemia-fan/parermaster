@@ -1,0 +1,4 @@
+#!/bin/sh
+
+
+node scripts/update-sw-cache-name.cjs
