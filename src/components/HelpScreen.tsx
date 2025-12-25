@@ -212,6 +212,18 @@ export function HelpScreen() {
             style={{ fontSize: '3.5cqmin' }}
           >
             {version || 'Loading...'}
+            <ThreePatchButton
+              leftImage="./data/images/ui/btn_normal_off_left.png"
+              middleImage="./data/images/ui/btn_normal_off_middle.png"
+              rightImage="./data/images/ui/btn_normal_off_right.png"
+              onClick={() => window.location.reload()}
+              height="7cqmin"
+              fontSize="3.5cqmin"
+              textColor="#CCC"
+              className="selection-card"
+            >
+              リロードして最新版にする
+            </ThreePatchButton>
           </div>
         </section>
       </div>
