@@ -25,7 +25,7 @@ function genTimestamp() {
 
 const ts = genTimestamp();
 
-const newCacheName = `game-v${ts}`;
+const newCacheName = `v${ts}`;
 
 const updated = content.replace(/const\s+CACHE_NAME\s*=\s*['"][^'"]+['"];?/, `const CACHE_NAME = '${newCacheName}';`);
 

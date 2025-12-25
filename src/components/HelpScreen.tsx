@@ -1,5 +1,7 @@
+import { useEffect, useState } from 'react';
 import { useGameStore } from '../stores/gameStore';
 import { ThreePatchButton } from './ThreePatchButton';
+import { getVersion } from '../utils/version';
 
 // Googleフォームへのリンク（問題募集用）
 const QUESTION_FORM_URL = 'https://forms.gle/PQkrKT2VNux1RP1C6';
@@ -12,6 +14,11 @@ const GAME_URL = 'https://parerdemia-fan.github.io/parermaster/';
 
 export function HelpScreen() {
   const { returnToTitle } = useGameStore();
+  const [version, setVersion] = useState<string>('');
+
+  useEffect(() => {
+    getVersion().then(setVersion);
+  }, []);
 
   // Xでシェアする
   const shareOnX = () => {
@@ -190,6 +197,21 @@ export function HelpScreen() {
             >
               𝕏 シェアする
             </ThreePatchButton>
+          </div>
+        </section>
+        {/* バージョン */}
+        <section style={{ marginBottom: '4.5cqmin' }}>
+          <h2 
+            className="text-black-400 font-bold"
+            style={{ fontSize: '4cqmin', marginBottom: '2cqmin' }}
+          >
+            バージョン
+          </h2>
+          <div 
+            className="leading-relaxed"
+            style={{ fontSize: '3.5cqmin' }}
+          >
+            {version || 'Loading...'}
           </div>
         </section>
       </div>
