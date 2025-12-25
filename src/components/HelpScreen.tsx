@@ -216,7 +216,10 @@ export function HelpScreen() {
               leftImage="./data/images/ui/btn_normal_off_left.png"
               middleImage="./data/images/ui/btn_normal_off_middle.png"
               rightImage="./data/images/ui/btn_normal_off_right.png"
-              onClick={() => window.location.reload()}
+              onClick={() => {
+                const currentUrl = window.location.href.split('?')[0];
+                window.location.href = currentUrl + '?t=' + new Date().getTime();
+              }}
               height="7cqmin"
               fontSize="3.5cqmin"
               textColor="#CCC"
