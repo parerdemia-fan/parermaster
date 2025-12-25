@@ -1,10 +1,9 @@
 // キャッシュの名前（バージョン管理用）
-const CACHE_NAME = 'game-v1';
+const CACHE_NAME = 'game-v202612260138';
 
 // キャッシュしたいファイルのリスト
 const urlsToCache = [
   './',
-  './index.html',
   './manifest.json',
   './data/images/favicon192.png',
   './data/images/favicon.png',
