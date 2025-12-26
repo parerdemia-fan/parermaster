@@ -37,6 +37,7 @@ parermaster/
 │   │   ├── HelpScreen.tsx         # ヘルプ画面
 │   │   ├── QuizScreen.tsx         # クイズ画面
 │   │   ├── ResultScreen.tsx       # 結果画面
+│   │   ├── RoomArea.tsx           # 談話室エリア（縦画面時に表示）
 │   │   ├── SettingScreen.tsx      # 設定画面
 │   │   ├── TalentDetailScreen.tsx # 寮生詳細画面
 │   │   ├── TalentListScreen.tsx   # 寮生一覧画面
