@@ -22,7 +22,7 @@ export function TitleScreen() {
   // PWA関連の状態管理
   const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
   const [isPWA, setIsPWA] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const [isAndroid, setIsAndroid] = useState(false);
   const [isInstallable, setIsInstallable] = useState(false);
 
   // コンポーネントマウント時に問題データを読み込む
@@ -37,8 +37,8 @@ export function TitleScreen() {
     setIsPWA(checkIsPWA);
 
     // モバイルデバイスかチェック
-    const checkIsMobile = window.matchMedia('(pointer: coarse)').matches;
-    setIsMobile(checkIsMobile);
+    const checkIsAndroid = /Android/i.test(navigator.userAgent);
+    setIsAndroid(checkIsAndroid);
 
     // beforeinstallpromptイベントリスナー
     const handleBeforeInstallPrompt = (e: Event) => {
@@ -102,10 +102,10 @@ export function TitleScreen() {
     setDeferredPrompt(null);
   };
 
-  // インストールボタン表示条件：PWAアプリ実行中でなく、モバイルで、インストール可能な場合
-  const showInstallButton = !isPWA && isMobile && isInstallable;
+  // インストールボタン表示条件：PWAアプリ実行中でなく、Androidで、インストール可能な場合
+  const showInstallButton = !isPWA && isAndroid && isInstallable;
   // 通常ボタン表示条件：インストールボタン非表示の場合
-  const showNormalButtons = isPWA || !isMobile;
+  const showNormalButtons = isPWA || !isAndroid;
 
   return (
     <div className="w-full h-full flex flex-col items-center justify-center p-[5%] animate-fade-in relative">
@@ -137,7 +137,7 @@ export function TitleScreen() {
             )}
         </div>
       )}
-      {!isPWA && isMobile && !isInstallable && (
+      {!isPWA && isAndroid && !isInstallable && (
         <div className="w-full h-full flex flex-col items-center justify-center"
           style={{ marginTop: '70cqmin' }}
         >

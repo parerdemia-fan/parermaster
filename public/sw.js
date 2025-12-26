@@ -1,5 +1,5 @@
 // キャッシュの名前（バージョン管理用）
-const CACHE_NAME = 'v202512261147';
+const CACHE_NAME = 'v202512270042';
 
 // キャッシュしたいファイルのリスト
 const urlsToCache = [

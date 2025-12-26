@@ -21,8 +21,8 @@ export function GameContainer({ children }: GameContainerProps) {
           // 4:3 アスペクト比を維持
           // 横長画面: 高さ基準（100vh, 幅 = 133.33vh）
           // 縦長画面: 幅基準（100vw, 高さ = 75vw）
-          width: 'min(133.33vh, 100vw)',
-          height: 'min(100vh, 75vw)',
+          width: 'min(133.33dvh, 100dvw)',
+          height: 'min(100dvh, 75dvw)',
           // Container Queries を有効化（子要素で cqmin 単位を使用可能）
           containerType: 'size',
         }}
