@@ -451,6 +451,7 @@ export function TalentListScreen() {
                         <p
                           className="whitespace-pre-wrap"
                           style={{
+                            fontWeight: 'bold',
                             fontSize: DESCRIPTION_FONT_SIZE,
                             color: '#29303cff',
                             paddingLeft: '3%',
