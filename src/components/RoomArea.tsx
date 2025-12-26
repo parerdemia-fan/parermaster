@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import gsap from 'gsap';
 import { useGameStore } from '../stores/gameStore';
 import type { Talent } from '../types';
 
@@ -26,6 +27,7 @@ export function RoomArea({ showSelector = false }: RoomAreaProps) {
   const [selectedTalent, setSelectedTalent] = useState<Talent | null>(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const talentImageRef = useRef<HTMLImageElement>(null);
 
   // 初期化：LocalStorageから選択済みタレントを取得、なければランダム選択
   useEffect(() => {
@@ -63,6 +65,63 @@ export function RoomArea({ showSelector = false }: RoomAreaProps) {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [isDropdownOpen]);
+
+  // 寮生画像のゆらゆらアニメーション
+  useEffect(() => {
+    const element = talentImageRef.current;
+    if (!element) return;
+
+    // 複数のアニメーションを異なるdurationで設定し、自然な動きを実現
+    const animations: gsap.core.Tween[] = [];
+
+    // 上下移動
+    animations.push(
+      gsap.to(element, {
+        y: '1%',
+        duration: 'random(1, 3)',
+        ease: 'sine.inOut',
+        yoyo: true,
+        repeat: -1,
+      })
+    );
+
+    // 左右移動
+    animations.push(
+      gsap.to(element, {
+        x: '2%',
+        duration: 'random(4, 6)',
+        ease: 'sine.inOut',
+        yoyo: true,
+        repeat: -1,
+      })
+    );
+
+    // 回転
+    animations.push(
+      gsap.to(element, {
+        rotation: 'random(-5, 5)',
+        duration: 'random(5, 7)',
+        ease: 'sine.inOut',
+        yoyo: true,
+        repeat: -1,
+      })
+    );
+
+    // 拡大・縮小
+    animations.push(
+      gsap.to(element, {
+        scale: 'random(1.15, 1.2)',
+        duration: 'random(3, 5)',
+        ease: 'sine.inOut',
+        yoyo: true,
+        repeat: -1,
+      })
+    );
+
+    return () => {
+      animations.forEach(anim => anim.kill());
+    };
+  }, [selectedTalent]);
 
   // タレント選択時の処理
   const handleSelectTalent = (talent: Talent) => {
@@ -111,6 +170,7 @@ export function RoomArea({ showSelector = false }: RoomAreaProps) {
         className="absolute inset-0 overflow-hidden flex justify-center"
       >
         <img
+          ref={talentImageRef}
           src={kvImage}
           alt={selectedTalent.name}
           style={{

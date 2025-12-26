@@ -17,6 +17,7 @@
 - Vite
 - Tailwind CSS v4
 - Zustand（状態管理）
+- GSAP（アニメーション）
 
 ## 1. ディレクトリ構成
 
