@@ -236,7 +236,7 @@ function QuizHeader({
               leftImage="./data/images/ui/plate_left.png"
               middleImage="./data/images/ui/plate_middle.png"
               rightImage="./data/images/ui/plate_right.png"
-              height="12.5cqmin"
+              height="11cqmin"
             >
               <span
                 className="text-white font-bold"
@@ -257,7 +257,7 @@ function QuizHeader({
               leftImage="./data/images/ui/plate_left.png"
               middleImage="./data/images/ui/plate_middle.png"
               rightImage="./data/images/ui/plate_right.png"
-              height="12.5cqmin"
+              height="11cqmin"
             >
               <span
                 className="text-white font-bold"
@@ -495,7 +495,8 @@ function NormalQuizLayout({
               transform: 'translate(-50%, -50%)',
               textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)',
               backgroundColor: 'rgba(128, 128, 128, 0.8)',
-              padding: '0.5cqmin 1.5cqmin',
+              padding: '0.5cqmin 3cqmin',
+              whiteSpace: 'nowrap',
               zIndex: 20,
             }}
           >
@@ -879,7 +880,8 @@ function FaceQuizLayout({
               transform: 'translate(-50%, -50%)',
               textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)',
               backgroundColor: 'rgba(128, 128, 128, 0.8)',
-              padding: '0.5cqmin 1.5cqmin',
+              padding: '0.5cqmin 3cqmin',
+              whiteSpace: 'nowrap',
               zIndex: 20,
             }}
           >
@@ -1128,7 +1130,8 @@ function NameQuizLayout({
               transform: 'translate(-50%, -50%)',
               textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)',
               backgroundColor: 'rgba(128, 128, 128, 0.8)',
-              padding: '0.5cqmin 1.5cqmin',
+              padding: '0.5cqmin 3cqmin',
+              whiteSpace: 'nowrap',
               zIndex: 20,
             }}
           >
@@ -1403,7 +1406,7 @@ function ControlButtonArea({
         alt="ホームへ"
         label="ホームへ"
         onClick={returnToTitle}
-        height="8cqmin"
+        height="11cqmin"
       />
       {showPrevButton && (
         <ImageButton

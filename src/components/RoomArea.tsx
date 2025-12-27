@@ -78,7 +78,7 @@ export function RoomArea({ showSelector = false }: RoomAreaProps) {
     animations.push(
       gsap.to(element, {
         y: '1%',
-        duration: 'random(1, 3)',
+        duration: 'random(3, 5)',
         ease: 'sine.inOut',
         yoyo: true,
         repeat: -1,
@@ -110,8 +110,8 @@ export function RoomArea({ showSelector = false }: RoomAreaProps) {
     // 拡大・縮小
     animations.push(
       gsap.to(element, {
-        scale: 'random(1.15, 1.2)',
-        duration: 'random(3, 5)',
+        scale: 'random(1, 1.07)',
+        duration: 'random(4, 5)',
         ease: 'sine.inOut',
         yoyo: true,
         repeat: -1,
