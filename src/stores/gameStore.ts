@@ -405,7 +405,7 @@ interface GameState {
   unlockAchievement: (achievementId: string) => void;
   checkAchievements: () => void;
   checkCompositeAchievements: () => void;
-  markCompositeAchievementShown: (achievementId: string) => void;
+  markCompositeAchievementShown: (achievementId: string, saveToStorage?: boolean) => void;
   triggerCompositeAchievementForDebug: () => void;
 }
 
@@ -1166,10 +1166,12 @@ export const useGameStore = create<GameState>((set, get) => ({
     }
   },
 
-  markCompositeAchievementShown: (achievementId: string) => {
-    // 表示済みフラグをLocalStorageに保存
-    const shownKey = `parermaster_composite_shown_${achievementId}`;
-    localStorage.setItem(shownKey, 'true');
+  markCompositeAchievementShown: (achievementId: string, saveToStorage = true) => {
+    // 表示済みフラグをLocalStorageに保存（オプションがtrueの場合のみ）
+    if (saveToStorage) {
+      const shownKey = `parermaster_composite_shown_${achievementId}`;
+      localStorage.setItem(shownKey, 'true');
+    }
 
     // pendingから削除
     set(state => ({

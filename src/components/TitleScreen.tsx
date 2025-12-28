@@ -57,10 +57,8 @@ export function TitleScreen() {
   // ダイアログを閉じる
   const handleCloseAchievementDialog = useCallback(() => {
     if (displayedAchievement) {
-      // デバッグモードでない場合のみ表示済みフラグを立てる
-      if (!isDebugMode) {
-        markCompositeAchievementShown(displayedAchievement.id);
-      }
+      // デバッグモードの場合はLocalStorageに保存しない（第2引数=false）
+      markCompositeAchievementShown(displayedAchievement.id, !isDebugMode);
       setDisplayedAchievement(null);
       setIsDebugMode(false);
     }
