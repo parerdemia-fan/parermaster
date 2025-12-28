@@ -1,32 +1,20 @@
 [
- {
-    "question": "シグマ・イングラムが描いたこの画像の元ネタは？[image:sigma_driver.jpg]",
-    "difficulty": 1,
-    "category": "ツイート",
-    "answers": [
-      "銀魂",
-      "ポプテピピック",
-      "ボボボーボ・ボーボボ",
-      "おそ松さん"
-    ],
-    "hide_icon": false,
-    "sort_answers": false,
-    "comment": "",
-    "source_url": "https://x.com/sigma_inging/status/1986457555921768567"
-  },
   {
-    "question": "満力きぃのネームロゴの右側に描かれている動物は？",
-    "category": "ネームロゴ",
-    "difficulty": 2,
+    "question": "「ウーマンコ\nミュニケーション」のお清楚ゲーム配信をやったのは？",
+    "category": "深堀り問題",
+    "dormitory": "co",
+    "difficulty": 4,
     "answers": [
-      "キツネ",
-      "馬",
-      "猫",
-      "竜"
+      "朧月ひかる",
+      "斗瀬ひおり",
+      "七扇ヲトメ",
+      "艶島カオル"
     ],
+    "genre": "エピソード",
     "hide_icon": false,
     "sort_answers": false,
-    "comment": "[image:manriki_namelogo.jpg]",
-    "source_url": ""
+    "comment": "「学園の先生(運営)からやっていいよって言われました」",
+    "source_url": "https://www.youtube.com/watch?v=3N0T2MftNus",
+    "questioner": ""
   }
 ]

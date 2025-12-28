@@ -2754,18 +2754,18 @@
     "questioner": ""
   },
   {
-    "question": "久堂れしあのファンマークに入っている果物は？",
+    "question": "パレ学1期生で青髪オッドアイの人は誰？",
     "category": "深堀り問題",
     "dormitory": "wh",
     "difficulty": 2,
     "answers": [
-      "ぶどう🍇",
-      "オレンジ🍊",
-      "りんご🍎",
-      "🍒さくらんぼ"
+      "久堂れしあ",
+      "愛葉はな",
+      "ローズ・ダマスクハート",
+      "艶島カオル"
     ],
     "genre": "プロフィール",
-    "hide_icon": false,
+    "hide_icon": true,
     "sort_answers": false,
     "comment": "",
     "source_url": "",
