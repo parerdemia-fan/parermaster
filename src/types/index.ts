@@ -18,6 +18,7 @@ export type Talent = {
   height: number;
   hair_color: string;
   hair_style: string;
+  mbti: string;
   url: string;
   tiktok_url: string;
   youtube_url: string;

@@ -70,6 +70,7 @@ export function TalentListScreen() {
     { label: '学籍番号', value: selectedTalent.student_id },
     { label: 'ファンネーム', value: selectedTalent.fan_name },
     { label: 'ファンマーク', value: selectedTalent.fan_mark },
+    { label: 'MBTIタイプ', value: selectedTalent.mbti },
   ].filter(item => item.value) : [];
 
   // リスト項目（配列系）
