@@ -456,6 +456,7 @@ function NormalQuizLayout({
                 padding: '0 2cqmin',
                 overflowY: 'scroll',
                 scrollbarWidth: 'none',
+                whiteSpace: 'pre-wrap',
               }}
             >
               {parseTextWithTalentIcons(questionText, showIconInQuestion, isAnswered)}
@@ -476,6 +477,7 @@ function NormalQuizLayout({
                 fontSize: getQuestionFontSize(questionText),
                 textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
                 padding: '0 2cqmin',
+                whiteSpace: 'pre-wrap',
               }}
             >
               {parseTextWithTalentIcons(questionText, showIconInQuestion, isAnswered)}
