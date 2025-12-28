@@ -41,6 +41,7 @@ parermaster/
 │   │   ├── ResultScreen.tsx       # 結果画面
 │   │   ├── RoomArea.tsx           # 談話室エリア（縦画面時に表示）
 │   │   ├── SettingScreen.tsx      # 設定画面
+│   │   ├── SSScreen.tsx           # ショートストーリー画面
 │   │   ├── StaffRollScreen.tsx    # スタッフロール画面
 │   │   ├── TalentDetailScreen.tsx # 寮生詳細画面
 │   │   ├── TalentListScreen.tsx   # 寮生一覧画面
@@ -655,4 +656,23 @@ const talents: Talent[] = await talentsRes.json();
   - スクロール完了時に自動で閉じる
 - イベント:
   - Skipボタン → closeStaffRoll()
+
+### 7.11 SSScreen
+
+- 責務: ショートストーリーの表示
+- 表示タイミング:
+  - 開発日誌画面で「やっぱり」の「ぱ」をクリックしたとき
+- レイアウト構成:
+  - 全画面オーバーレイ（半透明黒背景）
+  - 左上に閉じるボタン
+  - 中央にタイトル
+  - スクロール可能な本文エリア
+- 表示内容:
+  - タイトル（ss.jsonのss_title）
+  - 章ごとのチャプター（章タイトル + 本文）
+  - タレント名の前に顔アイコンを表示（talentIconParserを使用）
+- データ:
+  - ss.jsonから読み込み
+- イベント:
+  - 閉じるボタン → closeSS()
 

@@ -384,6 +384,7 @@ interface GameState {
   pendingCompositeAchievements: Achievement[]; // 未表示の複合アチーブメント
   showingStaffRoll: boolean; // スタッフロール表示中かどうか
   showingDiary: boolean; // 開発日誌表示中かどうか
+  showingSS: boolean; // SS画面表示中かどうか
 
   // Actions
   loadQuestions: () => Promise<void>;
@@ -414,6 +415,8 @@ interface GameState {
   hasSommelierAchievement: () => boolean;
   showDiary: () => void;
   closeDiary: () => void;
+  showSS: () => void;
+  closeSS: () => void;
   hasMasterAchievement: () => boolean;
   toggleMasterAchievement: () => void;
 }
@@ -801,6 +804,7 @@ export const useGameStore = create<GameState>((set, get) => ({
   pendingCompositeAchievements: [],
   showingStaffRoll: false,
   showingDiary: false,
+  showingSS: false,
 
   loadQuestions: async () => {
     // 開発モードの場合は動作確認用データを使用
@@ -1221,6 +1225,14 @@ export const useGameStore = create<GameState>((set, get) => ({
 
   closeDiary: () => {
     set({ showingDiary: false });
+  },
+
+  showSS: () => {
+    set({ showingSS: true });
+  },
+
+  closeSS: () => {
+    set({ showingSS: false });
   },
 
   hasMasterAchievement: () => {

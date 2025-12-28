@@ -9,8 +9,69 @@ interface DiaryEntry {
   body: string;
 }
 
+/**
+ * 「やっぱり」の「ぱ」をクリック可能なリンクに変換する
+ * @param text テキスト
+ * @param onClickPa 「ぱ」がクリックされたときのコールバック
+ * @returns React要素の配列
+ */
+function renderBodyWithClickablePa(text: string, onClickPa: () => void): React.ReactNode[] {
+  const result: React.ReactNode[] = [];
+  let lastIndex = 0;
+  let keyIndex = 0;
+  
+  // 「やっぱり」を検索
+  const pattern = /やっぱり/g;
+  let match: RegExpExecArray | null;
+  
+  while ((match = pattern.exec(text)) !== null) {
+    // マッチ前のテキストを追加
+    if (match.index > lastIndex) {
+      result.push(
+        <span key={`text-${keyIndex++}`}>
+          {text.slice(lastIndex, match.index)}
+        </span>
+      );
+    }
+    
+    // 「やっ」「ぱ」「り」に分割して、「ぱ」をクリック可能にする
+    result.push(
+      <span key={`yappari-${keyIndex++}`}>
+        やっ
+        <span
+          onClick={onClickPa}
+          style={{
+            cursor: 'pointer',
+            textDecoration: 'underline',
+            textDecorationStyle: 'dotted',
+            textDecorationColor: '#444',
+            textUnderlineOffset: '0.2em',
+          }}
+          title="？"
+        >
+          ぱ
+        </span>
+        り
+      </span>
+    );
+    
+    lastIndex = match.index + match[0].length;
+  }
+  
+  // 残りのテキストを追加
+  if (lastIndex < text.length) {
+    result.push(
+      <span key={`text-${keyIndex++}`}>
+        {text.slice(lastIndex)}
+      </span>
+    );
+  }
+  
+  return result.length > 0 ? result : [<span key="empty">{text}</span>];
+}
+
 export function DiaryScreen() {
-  const { closeDiary } = useGameStore();
+  const { closeDiary, showSS } = useGameStore();
   const [diaryData, setDiaryData] = useState<DiaryEntry[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -125,7 +186,7 @@ export function DiaryScreen() {
                 whiteSpace: 'pre-wrap',
               }}
             >
-              {entry.body}
+              {renderBodyWithClickablePa(entry.body, showSS)}
             </div>
           </div>
         ))}
