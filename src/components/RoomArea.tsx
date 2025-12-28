@@ -145,7 +145,7 @@ export function RoomArea({ showSelector = false }: RoomAreaProps) {
   }, {} as Record<string, Talent[]>);
 
   // 寮の表示順序
-  const dormitoryOrder = ['クゥ寮', 'ミュゥ寮', 'バゥ寮', 'ウィニー寮'];
+  const dormitoryOrder = ['バゥ寮', 'ミュゥ寮', 'クゥ寮', 'ウィニー寮'];
 
   return (
     <div
