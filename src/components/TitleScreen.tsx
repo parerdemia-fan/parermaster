@@ -25,6 +25,8 @@ export function TitleScreen() {
 
   // 表示中の複合アチーブメント
   const [displayedAchievement, setDisplayedAchievement] = useState<Achievement | null>(null);
+  // デバッグモードで表示しているか（trueなら表示済みフラグを立てない）
+  const [isDebugMode, setIsDebugMode] = useState(false);
 
   // PWA関連の状態管理
   const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
@@ -55,10 +57,14 @@ export function TitleScreen() {
   // ダイアログを閉じる
   const handleCloseAchievementDialog = useCallback(() => {
     if (displayedAchievement) {
-      markCompositeAchievementShown(displayedAchievement.id);
+      // デバッグモードでない場合のみ表示済みフラグを立てる
+      if (!isDebugMode) {
+        markCompositeAchievementShown(displayedAchievement.id);
+      }
       setDisplayedAchievement(null);
+      setIsDebugMode(false);
     }
-  }, [displayedAchievement, markCompositeAchievementShown]);
+  }, [displayedAchievement, isDebugMode, markCompositeAchievementShown]);
 
   // PWA関連の初期化処理
   useEffect(() => {
@@ -326,7 +332,10 @@ export function TitleScreen() {
             leftImage="./data/images/ui/btn_normal_off_left.png"
             middleImage="./data/images/ui/btn_normal_off_middle.png"
             rightImage="./data/images/ui/btn_normal_off_right.png"
-            onClick={triggerCompositeAchievementForDebug}
+            onClick={() => {
+              setIsDebugMode(true);
+              triggerCompositeAchievementForDebug();
+            }}
             height="5cqmin"
             fontSize="2.5cqmin"
             textColor="#F88"
