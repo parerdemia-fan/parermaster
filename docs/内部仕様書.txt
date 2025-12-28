@@ -40,6 +40,7 @@ parermaster/
 │   │   ├── ResultScreen.tsx       # 結果画面
 │   │   ├── RoomArea.tsx           # 談話室エリア（縦画面時に表示）
 │   │   ├── SettingScreen.tsx      # 設定画面
+│   │   ├── StaffRollScreen.tsx    # スタッフロール画面
 │   │   ├── TalentDetailScreen.tsx # 寮生詳細画面
 │   │   ├── TalentListScreen.tsx   # 寮生一覧画面
 │   │   ├── ThreePatchButton.tsx   # 3-Patchボタンコンポーネント
@@ -585,9 +586,11 @@ const talents: Talent[] = await talentsRes.json();
   - 開発者について: AIの妹がこのゲームを作成したという設定
   - 問題募集: Googleフォームへのリンク
   - リンク: パレデミア学園公式サイト、Xシェアボタン
+  - スタッフロールボタン: パレ学ソムリエ称号を持っている場合のみ最下部に表示
 - イベント:
   - 「戻る」ボタン → returnToTitle()
   - 「Xでシェアする」ボタン → 別タブでX投稿画面を開く
+  - 「スタッフロール」ボタン → showStaffRoll()
 
 ### 7.8 ThreePatchImage
 
@@ -630,4 +633,25 @@ const talents: Talent[] = await talentsRes.json();
 - 使用例:
   - SettingScreenのカテゴリー選択ボタン（blue/red）
   - SettingScreenの出題範囲・出題数選択ボタン（normal_off）
+
+### 7.10 StaffRollScreen
+
+- 責務: スタッフロールの表示
+- 表示タイミング:
+  - パレ学ソムリエ称号獲得ダイアログを閉じたとき
+  - ヘルプ画面の「スタッフロール」ボタンをクリックしたとき（パレ学ソムリエ称号保持者のみ）
+- レイアウト構成:
+  - 全画面オーバーレイ（半透明黒背景）
+  - 右上にSkipボタン
+  - 中央にスクロールするスタッフリスト
+- 表示内容:
+  - タイトル「パレ学マスター」
+  - スタッフリスト（staff.jsonから読み込み）: 役職名とメンバー名
+  - エンディングメッセージ「Thank you for playing!」
+- アニメーション:
+  - 映画のエンドロールのように下から上にスクロール
+  - スクロール速度: 0.8ピクセル/フレーム
+  - スクロール完了時に自動で閉じる
+- イベント:
+  - Skipボタン → closeStaffRoll()
 

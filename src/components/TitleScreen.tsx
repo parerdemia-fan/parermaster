@@ -21,6 +21,7 @@ export function TitleScreen() {
     checkCompositeAchievements,
     markCompositeAchievementShown,
     triggerCompositeAchievementForDebug,
+    showStaffRoll,
   } = useGameStore();
 
   // 表示中の複合アチーブメント
@@ -57,12 +58,16 @@ export function TitleScreen() {
   // ダイアログを閉じる
   const handleCloseAchievementDialog = useCallback(() => {
     if (displayedAchievement) {
+      // パレ学ソムリエ称号の場合はスタッフロールを表示
+      if (displayedAchievement.id === 'palegaku_sommelier' || displayedAchievement.id === 'palegaku_master') {
+        showStaffRoll();
+      }
       // デバッグモードの場合はLocalStorageに保存しない（第2引数=false）
       markCompositeAchievementShown(displayedAchievement.id, !isDebugMode);
       setDisplayedAchievement(null);
       setIsDebugMode(false);
     }
-  }, [displayedAchievement, isDebugMode, markCompositeAchievementShown]);
+  }, [displayedAchievement, isDebugMode, markCompositeAchievementShown, showStaffRoll]);
 
   // PWA関連の初期化処理
   useEffect(() => {

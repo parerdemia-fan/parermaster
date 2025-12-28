@@ -382,6 +382,7 @@ interface GameState {
   achievements: Achievement[];    // アチーブメント一覧
   newAchievements: Achievement[]; // 新規取得アチーブメント（結果画面で表示）
   pendingCompositeAchievements: Achievement[]; // 未表示の複合アチーブメント
+  showingStaffRoll: boolean; // スタッフロール表示中かどうか
 
   // Actions
   loadQuestions: () => Promise<void>;
@@ -407,6 +408,9 @@ interface GameState {
   checkCompositeAchievements: () => void;
   markCompositeAchievementShown: (achievementId: string, saveToStorage?: boolean) => void;
   triggerCompositeAchievementForDebug: () => void;
+  showStaffRoll: () => void;
+  closeStaffRoll: () => void;
+  hasSommelierAchievement: () => boolean;
 }
 
 /**
@@ -790,6 +794,7 @@ export const useGameStore = create<GameState>((set, get) => ({
   achievements: [...ACHIEVEMENT_DEFINITIONS],
   newAchievements: [],
   pendingCompositeAchievements: [],
+  showingStaffRoll: false,
 
   loadQuestions: async () => {
     // 開発モードの場合は動作確認用データを使用
@@ -1186,7 +1191,21 @@ export const useGameStore = create<GameState>((set, get) => ({
     // 複合アチーブメントの最初の1つを強制的に表示
     const compositeAchievements = achievements.filter(a => a.dependsOn && a.dependsOn.length > 0);
     if (compositeAchievements.length > 0) {
-      set({ pendingCompositeAchievements: [compositeAchievements[0]] });
+      set({ pendingCompositeAchievements: [compositeAchievements[1]] });
     }
+  },
+
+  showStaffRoll: () => {
+    set({ showingStaffRoll: true });
+  },
+
+  closeStaffRoll: () => {
+    set({ showingStaffRoll: false });
+  },
+
+  hasSommelierAchievement: () => {
+    const { achievements } = get();
+    const sommelier = achievements.find(a => a.id === 'palegaku_sommelier');
+    return sommelier?.unlocked ?? false;
   },
 }));

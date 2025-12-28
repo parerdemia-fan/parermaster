@@ -6,11 +6,12 @@ import { ResultScreen } from './components/ResultScreen';
 import { TalentListScreen } from './components/TalentListScreen';
 import { HelpScreen } from './components/HelpScreen';
 import { AchievementScreen } from './components/AchievementScreen';
+import { StaffRollScreen } from './components/StaffRollScreen';
 import { RoomArea } from './components/RoomArea';
 import { useGameStore } from './stores/gameStore';
 
 function App() {
-  const { screen } = useGameStore();
+  const { screen, showingStaffRoll } = useGameStore();
 
   return (
     <div className="w-screen h-screen flex flex-col">
@@ -22,6 +23,8 @@ function App() {
         {screen === 'talents' && <TalentListScreen />}
         {screen === 'help' && <HelpScreen />}
         {screen === 'achievement' && <AchievementScreen />}
+        {/* スタッフロール（オーバーレイ表示） */}
+        {showingStaffRoll && <StaffRollScreen />}
       </GameContainer>
       {/* 縦画面時のみ表示される談話室エリア */}
       <div className="hidden portrait:block">
