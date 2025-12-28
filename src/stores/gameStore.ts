@@ -381,6 +381,7 @@ interface GameState {
   gameStage: GameStage; // ステージ
   achievements: Achievement[];    // アチーブメント一覧
   newAchievements: Achievement[]; // 新規取得アチーブメント（結果画面で表示）
+  pendingCompositeAchievements: Achievement[]; // 未表示の複合アチーブメント
 
   // Actions
   loadQuestions: () => Promise<void>;
@@ -403,6 +404,9 @@ interface GameState {
   loadAchievements: () => void;
   unlockAchievement: (achievementId: string) => void;
   checkAchievements: () => void;
+  checkCompositeAchievements: () => void;
+  markCompositeAchievementShown: (achievementId: string) => void;
+  triggerCompositeAchievementForDebug: () => void;
 }
 
 /**
@@ -785,6 +789,7 @@ export const useGameStore = create<GameState>((set, get) => ({
   category: '顔名前当て',
   achievements: [...ACHIEVEMENT_DEFINITIONS],
   newAchievements: [],
+  pendingCompositeAchievements: [],
 
   loadQuestions: async () => {
     // 開発モードの場合は動作確認用データを使用
@@ -1123,5 +1128,63 @@ export const useGameStore = create<GameState>((set, get) => ({
   },
   showAchievement: () => {
     set({ screen: 'achievement' });
+  },
+
+  checkCompositeAchievements: () => {
+    const { achievements } = get();
+    const pendingAchievements: Achievement[] = [];
+
+    // 複合アチーブメント（dependsOnがあるもの）をチェック
+    const compositeAchievements = achievements.filter(a => a.dependsOn && a.dependsOn.length > 0);
+
+    for (const composite of compositeAchievements) {
+      // すでに取得済みならスキップ
+      if (composite.unlocked) continue;
+
+      // 依存するアチーブメントがすべて取得済みかチェック
+      const allDependenciesMet = composite.dependsOn!.every(depId =>
+        achievements.find(a => a.id === depId)?.unlocked
+      );
+
+      if (allDependenciesMet) {
+        // 表示済みかどうかチェック
+        const shownKey = `parermaster_composite_shown_${composite.id}`;
+        const alreadyShown = localStorage.getItem(shownKey) === 'true';
+
+        if (!alreadyShown) {
+          // アチーブメントを解放
+          get().unlockAchievement(composite.id);
+          // 更新後のアチーブメント情報を取得
+          const updatedAchievement = get().achievements.find(a => a.id === composite.id)!;
+          pendingAchievements.push(updatedAchievement);
+        }
+      }
+    }
+
+    if (pendingAchievements.length > 0) {
+      set({ pendingCompositeAchievements: pendingAchievements });
+    }
+  },
+
+  markCompositeAchievementShown: (achievementId: string) => {
+    // 表示済みフラグをLocalStorageに保存
+    const shownKey = `parermaster_composite_shown_${achievementId}`;
+    localStorage.setItem(shownKey, 'true');
+
+    // pendingから削除
+    set(state => ({
+      pendingCompositeAchievements: state.pendingCompositeAchievements.filter(
+        a => a.id !== achievementId
+      ),
+    }));
+  },
+
+  triggerCompositeAchievementForDebug: () => {
+    const { achievements } = get();
+    // 複合アチーブメントの最初の1つを強制的に表示
+    const compositeAchievements = achievements.filter(a => a.dependsOn && a.dependsOn.length > 0);
+    if (compositeAchievements.length > 0) {
+      set({ pendingCompositeAchievements: [compositeAchievements[0]] });
+    }
   },
 }));

@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useGameStore } from '../stores/gameStore';
-import type { GameStage } from '../types';
+import type { GameStage, Achievement } from '../types';
 import { ThreePatchButton } from './ThreePatchButton';
 
 // BeforeInstallPromptEvent型定義
@@ -17,7 +17,14 @@ export function TitleScreen() {
     showTalentList,
     showHelp,
     showAchievement,
+    pendingCompositeAchievements,
+    checkCompositeAchievements,
+    markCompositeAchievementShown,
+    triggerCompositeAchievementForDebug,
   } = useGameStore();
+
+  // 表示中の複合アチーブメント
+  const [displayedAchievement, setDisplayedAchievement] = useState<Achievement | null>(null);
 
   // PWA関連の状態管理
   const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
@@ -29,6 +36,29 @@ export function TitleScreen() {
   useEffect(() => {
     loadQuestions();
   }, [loadQuestions]);
+
+  // 複合アチーブメントのチェック（タイトル画面表示時）
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      checkCompositeAchievements();
+    }, 500);
+    return () => clearTimeout(timer);
+  }, [checkCompositeAchievements]);
+
+  // pending の複合アチーブメントがあれば表示
+  useEffect(() => {
+    if (pendingCompositeAchievements.length > 0 && !displayedAchievement) {
+      setDisplayedAchievement(pendingCompositeAchievements[0]);
+    }
+  }, [pendingCompositeAchievements, displayedAchievement]);
+
+  // ダイアログを閉じる
+  const handleCloseAchievementDialog = useCallback(() => {
+    if (displayedAchievement) {
+      markCompositeAchievementShown(displayedAchievement.id);
+      setDisplayedAchievement(null);
+    }
+  }, [displayedAchievement, markCompositeAchievementShown]);
 
   // PWA関連の初期化処理
   useEffect(() => {
@@ -288,6 +318,105 @@ export function TitleScreen() {
       >
         ※このゲームは二次創作物であり非公式のものです
       </div>
+
+      {/* ローカル環境用デバッグボタン */}
+      {(window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') && (
+        <div className="absolute" style={{ top: '3cqmin', left: '3cqmin' }}>
+          <ThreePatchButton
+            leftImage="./data/images/ui/btn_normal_off_left.png"
+            middleImage="./data/images/ui/btn_normal_off_middle.png"
+            rightImage="./data/images/ui/btn_normal_off_right.png"
+            onClick={triggerCompositeAchievementForDebug}
+            height="5cqmin"
+            fontSize="2.5cqmin"
+            textColor="#F88"
+          >
+            称号演出テスト
+          </ThreePatchButton>
+        </div>
+      )}
+
+      {/* 複合アチーブメント獲得ダイアログ */}
+      {displayedAchievement && (
+        <div
+          className="absolute inset-0 flex items-center justify-center z-50"
+          style={{ backgroundColor: 'rgba(0, 0, 0, 0.8)' }}
+          onClick={handleCloseAchievementDialog}
+        >
+          <div
+            className="flex flex-col items-center animate-fade-in"
+            style={{ padding: '4cqmin' }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* 称号獲得テキスト */}
+            <div
+              className="text-yellow-300 font-bold mb-4"
+              style={{
+                fontSize: '5cqmin',
+                textShadow: '0 0 10px rgba(255, 215, 0, 0.8), 0 0 20px rgba(255, 215, 0, 0.6)',
+              }}
+            >
+              🎉 称号獲得！ 🎉
+            </div>
+
+            {/* アチーブメント画像 */}
+            <div
+              className="relative mb-4"
+              style={{
+                animation: 'pulse 2s ease-in-out infinite',
+              }}
+            >
+              <img
+                src={displayedAchievement.imagePath}
+                alt={displayedAchievement.name}
+                style={{
+                  width: '30cqmin',
+                  height: '30cqmin',
+                  objectFit: 'contain',
+                  filter: 'drop-shadow(0 0 15px rgba(255, 215, 0, 0.8))',
+                }}
+                draggable={false}
+              />
+            </div>
+
+            {/* アチーブメント名 */}
+            <div
+              className="text-white font-bold text-center"
+              style={{
+                fontSize: '5cqmin',
+                textShadow: '2px 2px 4px rgba(0, 0, 0, 1)',
+              }}
+            >
+              {displayedAchievement.name}
+            </div>
+
+            {/* 説明 */}
+            <div
+              className="text-gray-300 text-center mt-2"
+              style={{
+                fontSize: '3cqmin',
+              }}
+            >
+              {displayedAchievement.description}
+            </div>
+
+            {/* 閉じるボタン */}
+            <div style={{ marginTop: '8cqmin' }}>
+              <ThreePatchButton
+                leftImage="./data/images/ui/btn_normal_off_left.png"
+                middleImage="./data/images/ui/btn_normal_off_middle.png"
+                rightImage="./data/images/ui/btn_normal_off_right.png"
+                onClick={handleCloseAchievementDialog}
+                height="7cqmin"
+                fontSize="4cqmin"
+                textColor="#DDA"
+              >
+                閉じる
+              </ThreePatchButton>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

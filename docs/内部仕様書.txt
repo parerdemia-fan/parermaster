@@ -221,7 +221,13 @@ interface AnswerRecord {
 | showTalentDetail(talent) | 寮生詳細画面を表示 |
 | backToTalentList() | 寮生一覧画面に戻る |
 | showHelp() | ヘルプ画面を表示 |
-
+| showAchievement() | アチーブメント画面を表示 |
+| loadAchievements() | LocalStorageからアチーブメントの取得状態を読み込み |
+| unlockAchievement(id) | 指定アチーブメントを解放 |
+| checkAchievements() | ゲーム終了時にアチーブメント取得条件をチェック |
+| checkCompositeAchievements() | 複合アチーブメントの取得条件をチェックし、未表示のものをpendingに追加 |
+| markCompositeAchievementShown(id) | 複合アチーブメントを表示済みとして記録 |
+| triggerCompositeAchievementForDebug() | デバッグ用: 複合アチーブメントダイアログを強制表示 |
 ### 3.3 ユーティリティ関数
 
 | 関数 | 説明 |
