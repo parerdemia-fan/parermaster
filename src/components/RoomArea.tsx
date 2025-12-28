@@ -14,6 +14,10 @@ const DORMITORY_BG_MAP: Record<string, string> = {
 // LocalStorage キー
 const STORAGE_KEY = 'parermaster_selected_talent';
 
+// 談話室のみモードを表す特殊な識別子（寮名をそのまま使用）
+const ROOM_ONLY_DORMITORIES = ['バゥ寮', 'ミュゥ寮', 'クゥ寮', 'ウィニー寮'] as const;
+type RoomOnlyDormitory = typeof ROOM_ONLY_DORMITORIES[number];
+
 interface RoomAreaProps {
   showSelector?: boolean;
 }
@@ -25,19 +29,29 @@ interface RoomAreaProps {
 export function RoomArea({ showSelector = false }: RoomAreaProps) {
   const { talents } = useGameStore();
   const [selectedTalent, setSelectedTalent] = useState<Talent | null>(null);
+  // 談話室のみモード（タレント画像なしで背景のみ表示）
+  const [roomOnlyDormitory, setRoomOnlyDormitory] = useState<RoomOnlyDormitory | null>(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const talentImageRef = useRef<HTMLImageElement>(null);
 
-  // 初期化：LocalStorageから選択済みタレントを取得、なければランダム選択
+  // 初期化：LocalStorageから選択済みタレント or 談話室のみモードを取得、なければランダム選択
   useEffect(() => {
     if (talents.length === 0) return;
 
-    const savedStudentId = localStorage.getItem(STORAGE_KEY);
-    if (savedStudentId) {
-      const talent = talents.find(t => t.student_id === savedStudentId);
+    const savedValue = localStorage.getItem(STORAGE_KEY);
+    if (savedValue) {
+      // 談話室のみモードかチェック（寮名で保存されている場合）
+      if (ROOM_ONLY_DORMITORIES.includes(savedValue as RoomOnlyDormitory)) {
+        setRoomOnlyDormitory(savedValue as RoomOnlyDormitory);
+        setSelectedTalent(null);
+        return;
+      }
+      // タレントIDで保存されている場合
+      const talent = talents.find(t => t.student_id === savedValue);
       if (talent) {
         setSelectedTalent(talent);
+        setRoomOnlyDormitory(null);
         return;
       }
     }
@@ -46,6 +60,7 @@ export function RoomArea({ showSelector = false }: RoomAreaProps) {
     const randomIndex = Math.floor(Math.random() * talents.length);
     const randomTalent = talents[randomIndex];
     setSelectedTalent(randomTalent);
+    setRoomOnlyDormitory(null);
     localStorage.setItem(STORAGE_KEY, randomTalent.student_id);
   }, [talents]);
 
@@ -126,14 +141,27 @@ export function RoomArea({ showSelector = false }: RoomAreaProps) {
   // タレント選択時の処理
   const handleSelectTalent = (talent: Talent) => {
     setSelectedTalent(talent);
+    setRoomOnlyDormitory(null);
     localStorage.setItem(STORAGE_KEY, talent.student_id);
     setIsDropdownOpen(false);
   };
 
-  if (!selectedTalent) return null;
+  // 談話室のみモード選択時の処理
+  const handleSelectRoomOnly = (dormitory: RoomOnlyDormitory) => {
+    setRoomOnlyDormitory(dormitory);
+    setSelectedTalent(null);
+    localStorage.setItem(STORAGE_KEY, dormitory);
+    setIsDropdownOpen(false);
+  };
 
-  const bgImage = DORMITORY_BG_MAP[selectedTalent.dormitory] || DORMITORY_BG_MAP['クゥ寮'];
-  const kvImage = `./data/images/kv/orig/${selectedTalent.student_id}.png`;
+  // 談話室のみモードでもタレント選択でもない場合は何も表示しない
+  if (!selectedTalent && !roomOnlyDormitory) return null;
+
+  // 背景画像の決定：談話室のみモード or タレントの寮から
+  const bgImage = roomOnlyDormitory
+    ? DORMITORY_BG_MAP[roomOnlyDormitory]
+    : DORMITORY_BG_MAP[selectedTalent!.dormitory] || DORMITORY_BG_MAP['クゥ寮'];
+  const kvImage = selectedTalent ? `./data/images/kv/orig/${selectedTalent.student_id}.png` : null;
 
   // 寮ごとにタレントをグループ化
   const talentsByDormitory = talents.reduce((acc, talent) => {
@@ -165,23 +193,25 @@ export function RoomArea({ showSelector = false }: RoomAreaProps) {
         draggable={false}
       />
 
-      {/* 寮生立ち絵（上半分を表示、下半分は画面外にはみ出す） */}
-      <div
-        className="absolute inset-0 overflow-hidden flex justify-center"
-      >
-        <img
-          ref={talentImageRef}
-          src={kvImage}
-          alt={selectedTalent.name}
-          style={{
-            // コンテナの2倍の高さにすることで、下半分が画面外にはみ出す
-            height: '200%',
-            width: 'auto',
-            maxWidth: 'none',
-          }}
-          draggable={false}
-        />
-      </div>
+      {/* 寮生立ち絵（上半分を表示、下半分は画面外にはみ出す）- タレント選択時のみ表示 */}
+      {selectedTalent && kvImage && (
+        <div
+          className="absolute inset-0 overflow-hidden flex justify-center"
+        >
+          <img
+            ref={talentImageRef}
+            src={kvImage}
+            alt={selectedTalent.name}
+            style={{
+              // コンテナの2倍の高さにすることで、下半分が画面外にはみ出す
+              height: '200%',
+              width: 'auto',
+              maxWidth: 'none',
+            }}
+            draggable={false}
+          />
+        </div>
+      )}
 
       {/* タレント選択ボタン（タイトル画面のみ） */}
       {showSelector && (
@@ -201,7 +231,7 @@ export function RoomArea({ showSelector = false }: RoomAreaProps) {
               padding: '1cqmin 2cqmin',
             }}
           >
-            <span>{selectedTalent.name}</span>
+            <span>{roomOnlyDormitory ? `${roomOnlyDormitory}談話室` : selectedTalent?.name}</span>
             <span className="text-xs">▼</span>
           </button>
 
@@ -224,13 +254,28 @@ export function RoomArea({ showSelector = false }: RoomAreaProps) {
                     >
                       {dormitory}
                     </div>
+                    {/* 談話室のみ選択肢 */}
+                    <button
+                      onClick={() => handleSelectRoomOnly(dormitory as RoomOnlyDormitory)}
+                      className={`w-full px-3 py-3 text-left text-sm hover:bg-gray-700 transition-colors ${
+                        roomOnlyDormitory === dormitory
+                          ? 'bg-gray-700 text-yellow-400'
+                          : 'text-white'
+                      }`}
+                      style={{
+                        fontSize: '4cqmin',
+                        padding: '1.5cqmin 2cqmin',
+                      }}
+                    >
+                      {dormitory}談話室のみ
+                    </button>
                     {/* タレントリスト */}
                     {talentsByDormitory[dormitory].map(talent => (
                       <button
                         key={talent.student_id}
                         onClick={() => handleSelectTalent(talent)}
                         className={`w-full px-3 py-3 text-left text-sm hover:bg-gray-700 transition-colors ${
-                          talent.student_id === selectedTalent.student_id
+                          selectedTalent?.student_id === talent.student_id
                             ? 'bg-gray-700 text-yellow-400'
                             : 'text-white'
                         }`}
