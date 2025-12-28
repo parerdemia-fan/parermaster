@@ -49,13 +49,13 @@ function getQuestionWithImageFontSize(text: string): string {
  */
 function getAnswerFontSize(text: string): string {
   const length = text.length;
-  if (length <= 6) {
-    return '4.5cqmin';
-  } else if (length <= 12) {
-    return '3.8cqmin';
-  } else {
-    return '3cqmin';
-  }
+  console.log('Answer length:', length);
+  let size = 50 / length;
+  console.log('Calculated size:', size);
+  // 最大・最小値で制限
+  const res = `${Math.min(Math.max(size, 4), 8)}cqmin`
+  console.log('Answer font size:', res);
+  return res;
 }
 
 function getFaceQuizFontSize(text: string): string {
@@ -588,19 +588,20 @@ function NormalQuizLayout({
                         style={{ borderRadius: '0.8cqmin' }}
                       />
                       <div
-                        className="absolute left-0 right-0 bottom-0 flex items-center justify-center"
+                        className="absolute left-0.5 right-0.5 bottom-0.5 flex items-center justify-center"
                         style={{
                           backgroundColor: 'rgba(255, 255, 255, 0.9)',
                           borderBottomLeftRadius: '0.8cqmin',
                           borderBottomRightRadius: '0.8cqmin',
-                          padding: '0.3cqmin 0.5cqmin',
+                          padding: '0.3cqmin 0',
+                          height: '6cqmin',
                           zIndex: 10,
                         }}
                       >
                         <p
                           className="font-bold truncate w-full text-center"
                           style={{
-                            fontSize: '2.5cqmin',
+                            fontSize: getFaceQuizAnswerFontSize(answer),
                             color: '#374151',
                           }}
                         >
@@ -623,12 +624,12 @@ function NormalQuizLayout({
                       {/* タレント名（中央にオーバーレイ） */}
                       <div
                         className="absolute inset-0 flex items-center justify-center"
-                        style={{ padding: '1cqmin' }}
+                        style={{ padding: '1cqmin 0' }}
                       >
                         <span
                           className="text-white font-bold text-center"
                           style={{
-                            fontSize: getAnswerFontSize(answer),
+                            fontSize: getFaceQuizAnswerFontSize(answer),
                             textShadow: '2px 2px 4px rgba(0, 0, 0, 0.8)',
                             wordBreak: 'break-word',
                           }}
@@ -1232,12 +1233,12 @@ function NameQuizLayout({
                     {/* タレント名（中央にオーバーレイ） */}
                     <div
                       className="absolute inset-0 flex items-center justify-center"
-                      style={{ padding: '1cqmin' }}
+                      style={{ padding: '1cqmin 0' }}
                     >
                       <span
                         className="text-white font-bold text-center"
                         style={{
-                          fontSize: getAnswerFontSize(answer),
+                          fontSize: getFaceQuizAnswerFontSize(answer),
                           textShadow: '2px 2px 2px rgba(0, 0, 0, 1), 2px -2px 2px rgba(0, 0, 0, 1), -2px 2px 2px rgba(0, 0, 0, 1), -2px -2px 2px rgba(0, 0, 0, 1)',
                           wordBreak: 'break-word',
                         }}
