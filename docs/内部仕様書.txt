@@ -34,6 +34,7 @@ parermaster/
 ├── src/
 │   ├── components/
 │   │   ├── AchievementScreen.tsx  # アチーブメント画面
+│   │   ├── DiaryScreen.tsx        # 開発日誌画面
 │   │   ├── GameContainer.tsx      # 正方形スケーリングコンテナ
 │   │   ├── HelpScreen.tsx         # ヘルプ画面
 │   │   ├── QuizScreen.tsx         # クイズ画面

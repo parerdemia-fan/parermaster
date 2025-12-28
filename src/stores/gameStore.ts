@@ -383,6 +383,7 @@ interface GameState {
   newAchievements: Achievement[]; // 新規取得アチーブメント（結果画面で表示）
   pendingCompositeAchievements: Achievement[]; // 未表示の複合アチーブメント
   showingStaffRoll: boolean; // スタッフロール表示中かどうか
+  showingDiary: boolean; // 開発日誌表示中かどうか
 
   // Actions
   loadQuestions: () => Promise<void>;
@@ -411,6 +412,10 @@ interface GameState {
   showStaffRoll: () => void;
   closeStaffRoll: () => void;
   hasSommelierAchievement: () => boolean;
+  showDiary: () => void;
+  closeDiary: () => void;
+  hasMasterAchievement: () => boolean;
+  toggleMasterAchievement: () => void;
 }
 
 /**
@@ -795,6 +800,7 @@ export const useGameStore = create<GameState>((set, get) => ({
   newAchievements: [],
   pendingCompositeAchievements: [],
   showingStaffRoll: false,
+  showingDiary: false,
 
   loadQuestions: async () => {
     // 開発モードの場合は動作確認用データを使用
@@ -1207,5 +1213,44 @@ export const useGameStore = create<GameState>((set, get) => ({
     const { achievements } = get();
     const sommelier = achievements.find(a => a.id === 'palegaku_sommelier');
     return sommelier?.unlocked ?? false;
+  },
+
+  showDiary: () => {
+    set({ showingDiary: true });
+  },
+
+  closeDiary: () => {
+    set({ showingDiary: false });
+  },
+
+  hasMasterAchievement: () => {
+    const { achievements } = get();
+    const master = achievements.find(a => a.id === 'palegaku_master');
+    return master?.unlocked ?? false;
+  },
+
+  toggleMasterAchievement: () => {
+    const { achievements } = get();
+    const master = achievements.find(a => a.id === 'palegaku_master');
+    if (!master) return;
+
+    const newUnlockedState = !master.unlocked;
+    const updatedAchievements = achievements.map(a =>
+      a.id === 'palegaku_master'
+        ? { ...a, unlocked: newUnlockedState, unlockedAt: newUnlockedState ? new Date().toISOString() : undefined }
+        : a
+    );
+
+    set({ achievements: updatedAchievements });
+
+    // LocalStorageに保存
+    try {
+      const unlockedIds = updatedAchievements
+        .filter(a => a.unlocked)
+        .map(a => a.id);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(unlockedIds));
+    } catch (error) {
+      console.error('Failed to save achievements:', error);
+    }
   },
 }));

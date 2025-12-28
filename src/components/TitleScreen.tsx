@@ -22,6 +22,8 @@ export function TitleScreen() {
     markCompositeAchievementShown,
     triggerCompositeAchievementForDebug,
     showStaffRoll,
+    hasMasterAchievement,
+    toggleMasterAchievement,
   } = useGameStore();
 
   // 表示中の複合アチーブメント
@@ -330,7 +332,7 @@ export function TitleScreen() {
 
       {/* ローカル環境用デバッグボタン */}
       {(window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') && (
-        <div className="absolute" style={{ top: '3cqmin', left: '3cqmin' }}>
+        <div className="absolute flex" style={{ top: '3cqmin', left: '3cqmin', gap: '2cqmin' }}>
           <ThreePatchButton
             leftImage="./data/images/ui/btn_normal_off_left.png"
             middleImage="./data/images/ui/btn_normal_off_middle.png"
@@ -344,6 +346,17 @@ export function TitleScreen() {
             textColor="#F88"
           >
             称号演出テスト
+          </ThreePatchButton>
+          <ThreePatchButton
+            leftImage="./data/images/ui/btn_normal_off_left.png"
+            middleImage="./data/images/ui/btn_normal_off_middle.png"
+            rightImage="./data/images/ui/btn_normal_off_right.png"
+            onClick={toggleMasterAchievement}
+            height="5cqmin"
+            fontSize="2.5cqmin"
+            textColor={hasMasterAchievement() ? '#8F8' : '#F88'}
+          >
+            マスター{hasMasterAchievement() ? 'ON' : 'OFF'}
           </ThreePatchButton>
         </div>
       )}

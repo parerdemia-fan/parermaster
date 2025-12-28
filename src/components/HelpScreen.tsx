@@ -13,9 +13,10 @@ const PARERDEMIA_OFFICIAL_URL = 'https://www.parerdemia.jp/';
 const GAME_URL = 'https://parerdemia-fan.github.io/parermaster/';
 
 export function HelpScreen() {
-  const { returnToTitle, hasSommelierAchievement, showStaffRoll } = useGameStore();
+  const { returnToTitle, hasSommelierAchievement, hasMasterAchievement, showStaffRoll, showDiary } = useGameStore();
   const [version, setVersion] = useState<string>('');
   const hasSommelier = hasSommelierAchievement();
+  const hasMaster = hasMasterAchievement();
 
   useEffect(() => {
     getVersion().then(setVersion);
@@ -244,6 +245,24 @@ export function HelpScreen() {
               className="selection-card"
             >
               🎬 スタッフロール
+            </ThreePatchButton>
+          </section>
+        )}
+
+        {/* 開発日誌（パレ学マスター称号保持者のみ表示） */}
+        {hasMaster && (
+          <section style={{ marginBottom: '4.5cqmin' }}>
+            <ThreePatchButton
+              leftImage="./data/images/ui/btn_normal_off_left.png"
+              middleImage="./data/images/ui/btn_normal_off_middle.png"
+              rightImage="./data/images/ui/btn_normal_off_right.png"
+              onClick={showDiary}
+              height="7cqmin"
+              fontSize="3.5cqmin"
+              textColor="#CCC"
+              className="selection-card"
+            >
+              📓 開発日誌
             </ThreePatchButton>
           </section>
         )}
