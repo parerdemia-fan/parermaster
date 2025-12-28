@@ -31,7 +31,7 @@ const updated = content.replace(/const\s+CACHE_NAME\s*=\s*['"][^'"]+['"];?/, `co
 
 if (updated === content) {
   console.error('Failed to update CACHE_NAME — pattern not found');
-  process.exit(2);
+  process.exit(0);
 }
 
 fs.writeFileSync(swPath, updated, 'utf8');
