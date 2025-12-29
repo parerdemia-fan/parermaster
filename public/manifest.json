@@ -4,7 +4,7 @@
   "description": "パレデミア学園の非公式クイズゲームです。",
   "start_url": "https://parerdemia-fan.github.io/parermaster/",
   "display": "fullscreen",
-  "orientation": "landscape",
+  "orientation": "any",
   "theme_color": "#000033",
   "background_color": "#000033",
   "icons": [
