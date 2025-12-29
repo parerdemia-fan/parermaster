@@ -140,7 +140,7 @@ export function TitleScreen() {
             fontSize="3cqmin"
             textColor={isFullscreen ? '#8F8' : '#ADF'}
           >
-            全画面{isFullscreen ? 'ON' : 'OFF'}
+            全画面{isFullscreen ? '解除' : '化'}
           </ThreePatchButton>
         </div>
       )}
