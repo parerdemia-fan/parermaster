@@ -342,6 +342,24 @@
     "questioner": ""
   },
   {
+    "question": "東雲アカリ 恋歌さわこ 桜雲ほわり 朧月ひかるのMBTIタイプは？",
+    "category": "深堀り問題",
+    "dormitory": "all",
+    "difficulty": 5,
+    "answers": [
+      "INFJ(提唱者)",
+      "ENTP(討論者)",
+      "ISFJ(擁護者)",
+      "ESFP(エンターテイナー)"
+    ],
+    "genre": "プロフィール",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "[image:infj.png]",
+    "source_url": "https://x.com/totococopopo/status/2004932973737771173",
+    "questioner": ""
+  },
+  {
     "question": "朧月ひかるが最初に食べた昆虫食は？",
     "category": "深堀り問題",
     "dormitory": "co",
@@ -1278,6 +1296,24 @@
     "questioner": ""
   },
   {
+    "question": "リスナーのことを「人間」と呼ぶのは誰？",
+    "category": "深堀り問題",
+    "dormitory": "me",
+    "difficulty": 4,
+    "answers": [
+      "新巻るろな",
+      "",
+      "",
+      ""
+    ],
+    "genre": "特技・所作",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "「寝る人間たちはおやすみなさい。\n寝ない人間たちはがんばれ。おれもがんばる。」",
+    "source_url": "https://x.com/Aramaki_ruronA/status/2005369164442279979",
+    "questioner": ""
+  },
+  {
     "question": "氷雨セイのヘッドホンの色は？",
     "category": "深堀り問題",
     "dormitory": "me",
@@ -1959,6 +1995,24 @@
     "sort_answers": false,
     "comment": "[image:totococo_namelogo.png]",
     "source_url": "",
+    "questioner": ""
+  },
+  {
+    "question": "パレ学MBTIまとめを作った人は？",
+    "category": "深堀り問題",
+    "dormitory": "wa",
+    "difficulty": 5,
+    "answers": [
+      "飛渡ココ",
+      "",
+      "",
+      ""
+    ],
+    "genre": "エピソード",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "[image:mbti.png]",
+    "source_url": "https://x.com/totococopopo/status/2004932973737771173",
     "questioner": ""
   },
   {

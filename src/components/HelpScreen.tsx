@@ -38,7 +38,7 @@ export function HelpScreen() {
   };
 
   return (
-    <div 
+    <div
       className="w-full h-full flex flex-col animate-fade-in"
       style={{
         backgroundImage: 'url(./data/images/ui/panel_scroll.png)',
@@ -49,7 +49,7 @@ export function HelpScreen() {
       }}
     >
       {/* ヘッダー */}
-      <div 
+      <div
         className="flex items-center justify-between shrink-0"
         style={{ height: '10%', padding: '0 3cqmin' }}
       >
@@ -65,7 +65,7 @@ export function HelpScreen() {
         >
           戻る
         </ThreePatchButton>
-        <h1 
+        <h1
           className="text-white font-bold"
           style={{ fontSize: '6cqmin', lineHeight: '1.6', color: '#493e33ff', textShadow: '0 0 1cqmin rgba(74, 59, 42, 0.5)' }}
         >
@@ -75,7 +75,7 @@ export function HelpScreen() {
       </div>
 
       {/* コンテンツエリア（スクロール可能） */}
-      <div 
+      <div
         className="flex-1 overflow-y-auto"
         style={{
           padding: '1cqmin 4cqmin 4cqmin',
@@ -87,13 +87,13 @@ export function HelpScreen() {
       >
         {/* パレ学マスターとは */}
         <section style={{ marginBottom: '4cqmin' }}>
-          <h2 
+          <h2
             className="text-black-400 font-bold"
             style={{ fontSize: '4.5cqmin', marginBottom: '2cqmin' }}
           >
             パレ学マスターとは
           </h2>
-          <div 
+          <div
             className="leading-relaxed"
             style={{ fontSize: '3.5cqmin' }}
           >
@@ -109,13 +109,13 @@ export function HelpScreen() {
 
         {/* 開発者について */}
         <section style={{ marginBottom: '4cqmin' }}>
-          <h2 
+          <h2
             className="text-black-400 font-bold"
             style={{ fontSize: '4.5cqmin', marginBottom: '2cqmin' }}
           >
             開発者について
           </h2>
-          <div 
+          <div
             className="leading-relaxed"
             style={{ fontSize: '3.5cqmin' }}
           >
@@ -137,18 +137,18 @@ export function HelpScreen() {
 
         {/* 問題募集 */}
         <section style={{ marginBottom: '4cqmin' }}>
-          <h2 
+          <h2
             className="text-black-400 font-bold"
             style={{ fontSize: '4.5cqmin', marginBottom: '2cqmin' }}
           >
             【重要】問題を募集しています！
           </h2>
-          <div 
+          <div
             className="leading-relaxed"
             style={{ fontSize: '3.5cqmin', marginBottom: '2cqmin' }}
           >
             <p>
-              申し訳ありません。現在「100問モード」と上位の称号はロックされています。 ゲームディレクターが問題を制作してきましたが、深堀り問題・超深堀り問題ともに約90問でネタが尽きてしまいました……。ロック解除には、あと少し問題数が足りません。 よろしければ、下記のGoogleフォームからあなたの知識を分けていただけないでしょうか？ 100問に到達次第、すぐに解放します！
+              申し訳ありません。現在「100問モード」と上位の称号はロックされています。 ゲームディレクターが問題を制作してきましたが、深堀り問題は83問・超深堀り問題は90問でネタが尽きてしまいました……。ロック解除には、あと少し問題数が足りません。 よろしければ、下記のGoogleフォームからあなたの知識を分けていただけないでしょうか？ 100問に到達次第、すぐに解放します！
             </p>
           </div>
           <ThreePatchButton
@@ -167,7 +167,7 @@ export function HelpScreen() {
 
         {/* リンク */}
         <section style={{ marginBottom: '4.5cqmin' }}>
-          <h2 
+          <h2
             className="text-black-400 font-bold"
             style={{ fontSize: '4cqmin', marginBottom: '2cqmin' }}
           >
@@ -203,13 +203,13 @@ export function HelpScreen() {
         </section>
         {/* バージョン */}
         <section style={{ marginBottom: '4.5cqmin' }}>
-          <h2 
+          <h2
             className="text-black-400 font-bold"
             style={{ fontSize: '4cqmin', marginBottom: '2cqmin' }}
           >
             バージョン
           </h2>
-          <div 
+          <div
             className="leading-relaxed"
             style={{ fontSize: '3.5cqmin' }}
           >
