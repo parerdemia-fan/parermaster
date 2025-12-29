@@ -3,6 +3,28 @@ import { useGameStore } from '../stores/gameStore';
 import type { GameStage, Achievement } from '../types';
 import { ThreePatchButton } from './ThreePatchButton';
 
+/**
+ * フルスクリーントグルボタンを表示する条件をチェック
+ * @returns Android横画面かつ非PWAの場合true
+ */
+function shouldShowFullscreenToggle(): boolean {
+  // Android判定
+  const isAndroid = /Android/i.test(navigator.userAgent);
+  if (!isAndroid) return false;
+
+  // 横画面判定
+  const isLandscape = window.innerWidth > window.innerHeight;
+  if (!isLandscape) return false;
+
+  // PWA判定（スタンドアロンモードでない場合のみ表示）
+  const isPWA = window.matchMedia('(display-mode: standalone)').matches ||
+    window.matchMedia('(display-mode: fullscreen)').matches ||
+    (window.navigator as Navigator & { standalone?: boolean }).standalone === true;
+  if (isPWA) return false;
+
+  return true;
+}
+
 export function TitleScreen() {
   const {
     loadQuestions,
@@ -24,6 +46,46 @@ export function TitleScreen() {
   const [displayedAchievement, setDisplayedAchievement] = useState<Achievement | null>(null);
   // デバッグモードで表示しているか（trueなら表示済みフラグを立てない）
   const [isDebugMode, setIsDebugMode] = useState(false);
+
+  // フルスクリーン状態
+  const [isFullscreen, setIsFullscreen] = useState(!!document.fullscreenElement);
+  // フルスクリーントグル表示条件
+  const [showFullscreenToggle, setShowFullscreenToggle] = useState(shouldShowFullscreenToggle());
+
+  // フルスクリーン状態変更の監視
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
+  }, []);
+
+  // 画面回転・リサイズ時にフルスクリーントグル表示条件を再チェック
+  useEffect(() => {
+    const handleOrientationChange = () => {
+      setShowFullscreenToggle(shouldShowFullscreenToggle());
+    };
+    window.addEventListener('resize', handleOrientationChange);
+    window.addEventListener('orientationchange', handleOrientationChange);
+    return () => {
+      window.removeEventListener('resize', handleOrientationChange);
+      window.removeEventListener('orientationchange', handleOrientationChange);
+    };
+  }, []);
+
+  // フルスクリーントグル処理
+  const toggleFullscreen = useCallback(async () => {
+    try {
+      if (document.fullscreenElement) {
+        await document.exitFullscreen();
+      } else {
+        await document.documentElement.requestFullscreen();
+      }
+    } catch (err) {
+      console.error('フルスクリーン切り替えに失敗しました:', err);
+    }
+  }, []);
 
   // コンポーネントマウント時に問題データを読み込む
   useEffect(() => {
@@ -66,129 +128,146 @@ export function TitleScreen() {
 
   return (
     <div className="w-full h-full flex flex-col items-center justify-center p-[5%] animate-fade-in relative">
+      {/* Android横画面非PWA時のみフルスクリーントグルボタンを表示 */}
+      {showFullscreenToggle && (
+        <div className="absolute" style={{ top: '3cqmin', right: '3cqmin', zIndex: 20 }}>
+          <ThreePatchButton
+            leftImage="./data/images/ui/btn_normal_off_left.png"
+            middleImage="./data/images/ui/btn_normal_off_middle.png"
+            rightImage="./data/images/ui/btn_normal_off_right.png"
+            onClick={toggleFullscreen}
+            height="6cqmin"
+            fontSize="3cqmin"
+            textColor={isFullscreen ? '#8F8' : '#ADF'}
+          >
+            全画面{isFullscreen ? 'ON' : 'OFF'}
+          </ThreePatchButton>
+        </div>
+      )}
+
       {/* 通常の試験モード選択ボタン */}
       <div
         className="w-full flex flex-row items-center justify-center gap-[6cqmin] relative z-10"
         style={{ marginTop: '35cqmin' }}
       >
-          <button
-            onClick={() => handleStage('入門試験')}
-            className="transition-transform active:scale-95 focus:outline-none"
+        <button
+          onClick={() => handleStage('入門試験')}
+          className="transition-transform active:scale-95 focus:outline-none"
+          style={{
+            width: '36cqmin',
+          }}
+        >
+          <img
+            src="./data/images/ui/btn_nyumon.png"
+            alt="入門試験"
+            className="transition brightness-100 hover:brightness-140"
             style={{
-              width: '36cqmin',
+              width: '100%',
+              height: 'auto',
+              display: 'block',
             }}
-          >
-            <img
-              src="./data/images/ui/btn_nyumon.png"
-              alt="入門試験"
-              className="transition brightness-100 hover:brightness-140"
-              style={{
-                width: '100%',
-                height: 'auto',
-                display: 'block',
-              }}
-              draggable={false}
-            />
-          </button>
+            draggable={false}
+          />
+        </button>
 
-          <button
-            onClick={() => handleStage('実力試験')}
-            className="transition-transform active:scale-95 focus:outline-none"
+        <button
+          onClick={() => handleStage('実力試験')}
+          className="transition-transform active:scale-95 focus:outline-none"
+          style={{
+            width: '36cqmin',
+          }}
+        >
+          <img
+            src="./data/images/ui/btn_jitsuryoku.png"
+            alt="実力試験"
+            className="transition brightness-100 hover:brightness-140"
             style={{
-              width: '36cqmin',
+              width: '100%',
+              height: 'auto',
+              display: 'block',
             }}
-          >
-            <img
-              src="./data/images/ui/btn_jitsuryoku.png"
-              alt="実力試験"
-              className="transition brightness-100 hover:brightness-140"
-              style={{
-                width: '100%',
-                height: 'auto',
-                display: 'block',
-              }}
-              draggable={false}
-            />
-          </button>
+            draggable={false}
+          />
+        </button>
 
-          <button
-            onClick={() => handleStage('マスター試験')}
-            className="transition-transform active:scale-95 focus:outline-none"
+        <button
+          onClick={() => handleStage('マスター試験')}
+          className="transition-transform active:scale-95 focus:outline-none"
+          style={{
+            width: '36cqmin',
+          }}
+        >
+          <img
+            src="./data/images/ui/btn_master.png"
+            alt="マスター試験"
+            className="transition brightness-100 hover:brightness-140"
             style={{
-              width: '36cqmin',
+              width: '100%',
+              height: 'auto',
+              display: 'block',
             }}
-          >
-            <img
-              src="./data/images/ui/btn_master.png"
-              alt="マスター試験"
-              className="transition brightness-100 hover:brightness-140"
-              style={{
-                width: '100%',
-                height: 'auto',
-                display: 'block',
-              }}
-              draggable={false}
-            />
-          </button>
-        </div>
+            draggable={false}
+          />
+        </button>
+      </div>
 
       {/* ヘルプ・寮生一覧・アチーブメントリンク */}
       <div
-          className="flex justify-center items-center absolute bottom-[5%]"
-          style={{ gap: '4cqmin' }}
+        className="flex justify-center items-center absolute bottom-[5%]"
+        style={{ gap: '4cqmin' }}
+      >
+        <button
+          onClick={showHelp}
+          className="transition-transform active:scale-95 focus:outline-none"
+          style={{ width: '9cqmin' }}
         >
-          <button
-            onClick={showHelp}
-            className="transition-transform active:scale-95 focus:outline-none"
-            style={{ width: '9cqmin' }}
-          >
-            <img
-              src="./data/images/ui/btn_help.png"
-              alt="ヘルプ"
-              className="transition brightness-100 hover:brightness-140"
-              style={{
-                width: '100%',
-                height: 'auto',
-                display: 'block',
-              }}
-              draggable={false}
-            />
-          </button>
-          <button
-            onClick={showTalentList}
-            className="transition-transform active:scale-95 focus:outline-none"
-            style={{ width: '9cqmin' }}
-          >
-            <img
-              src="./data/images/ui/btn_talents.png"
-              alt="寮生一覧"
-              className="transition brightness-100 hover:brightness-140"
-              style={{
-                width: '100%',
-                height: 'auto',
-                display: 'block',
-              }}
-              draggable={false}
-            />
-          </button>
-          <button
-            onClick={showAchievement}
-            className="transition-transform active:scale-95 focus:outline-none"
-            style={{ width: '9cqmin' }}
-          >
-            <img
-              src="./data/images/ui/btn_achievement.png"
-              alt="称号"
-              className="transition brightness-100 hover:brightness-140"
-              style={{
-                width: '100%',
-                height: 'auto',
-                display: 'block',
-              }}
-              draggable={false}
-            />
-          </button>
-        </div>
+          <img
+            src="./data/images/ui/btn_help.png"
+            alt="ヘルプ"
+            className="transition brightness-100 hover:brightness-140"
+            style={{
+              width: '100%',
+              height: 'auto',
+              display: 'block',
+            }}
+            draggable={false}
+          />
+        </button>
+        <button
+          onClick={showTalentList}
+          className="transition-transform active:scale-95 focus:outline-none"
+          style={{ width: '9cqmin' }}
+        >
+          <img
+            src="./data/images/ui/btn_talents.png"
+            alt="寮生一覧"
+            className="transition brightness-100 hover:brightness-140"
+            style={{
+              width: '100%',
+              height: 'auto',
+              display: 'block',
+            }}
+            draggable={false}
+          />
+        </button>
+        <button
+          onClick={showAchievement}
+          className="transition-transform active:scale-95 focus:outline-none"
+          style={{ width: '9cqmin' }}
+        >
+          <img
+            src="./data/images/ui/btn_achievement.png"
+            alt="称号"
+            className="transition brightness-100 hover:brightness-140"
+            style={{
+              width: '100%',
+              height: 'auto',
+              display: 'block',
+            }}
+            draggable={false}
+          />
+        </button>
+      </div>
 
       {/* 非公式表記 */}
       <div className="absolute text-gray-300"
@@ -196,7 +275,7 @@ export function TitleScreen() {
           fontSize: '2cqmin',
           bottom: '0',
           filter: 'drop-shadow(1px 1px 1px rgba(0, 0, 0, 1))',
-         }}
+        }}
       >
         ※このゲームは二次創作物であり非公式のものです
       </div>
