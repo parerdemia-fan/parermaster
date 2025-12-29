@@ -313,6 +313,23 @@ export function RoomArea({ showSelector = false }: RoomAreaProps) {
           )}
         </div>
       )}
+      {/* 右下の推奨ランドスケープ画像 */}
+      {showSelector && (
+        <img
+          src="./data/images/ui/landscape_recommended.png"
+          alt="landscape recommended"
+          className="absolute opacity-60"
+          style={{
+            left: '2cqmin',
+            bottom: '2cqmin',
+            width: '18cqmin',
+            height: 'auto',
+            pointerEvents: 'none',
+            userSelect: 'none',
+          }}
+          draggable={false}
+        />
+      )}
     </div>
   );
 }
