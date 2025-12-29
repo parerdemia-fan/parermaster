@@ -34,6 +34,7 @@ export function RoomArea({ showSelector = false }: RoomAreaProps) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const talentImageRef = useRef<HTMLImageElement>(null);
+  const dropdownMenuRef = useRef<HTMLDivElement>(null);
 
   // 初期化：LocalStorageから選択済みタレント or 談話室のみモードを取得、なければランダム選択
   useEffect(() => {
@@ -79,6 +80,21 @@ export function RoomArea({ showSelector = false }: RoomAreaProps) {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
+  }, [isDropdownOpen]);
+
+  // ドロップダウンメニュー開閉時に選択アイテムへスクロール
+  useEffect(() => {
+    if (!isDropdownOpen || !dropdownMenuRef.current) return;
+
+    // 少し遅延させて、DOMの更新後にスクロール
+    const timer = setTimeout(() => {
+      const selectedElement = dropdownMenuRef.current?.querySelector('[data-selected="true"]');
+      if (selectedElement) {
+        selectedElement.scrollIntoView({ block: 'nearest' });
+      }
+    }, 0);
+
+    return () => clearTimeout(timer);
   }, [isDropdownOpen]);
 
   // 寮生画像のゆらゆらアニメーション
@@ -238,11 +254,12 @@ export function RoomArea({ showSelector = false }: RoomAreaProps) {
           {/* ドロップダウンメニュー */}
           {isDropdownOpen && (
             <div
+              ref={dropdownMenuRef}
               className="absolute right-0 mt-1 bg-gray-900/95 border border-gray-600 rounded-lg shadow-xl overflow-hidden"
               style={{
                 maxHeight: 'calc(100dvh - 75dvw - 60px)',
                 overflowY: 'auto',
-                minWidth: '160px',
+                width: '49cqmin',
               }}
             >
               {dormitoryOrder.map(dormitory => (
@@ -266,6 +283,7 @@ export function RoomArea({ showSelector = false }: RoomAreaProps) {
                         fontSize: '4cqmin',
                         padding: '1.5cqmin 2cqmin',
                       }}
+                      data-selected={roomOnlyDormitory === dormitory}
                     >
                       {dormitory}談話室のみ
                     </button>
@@ -283,6 +301,7 @@ export function RoomArea({ showSelector = false }: RoomAreaProps) {
                           fontSize: '4cqmin',
                           padding: '1.5cqmin 2cqmin',
                         }}
+                        data-selected={selectedTalent?.student_id === talent.student_id}
                       >
                         {talent.name}
                       </button>
