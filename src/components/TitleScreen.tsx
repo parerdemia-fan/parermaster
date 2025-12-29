@@ -3,12 +3,6 @@ import { useGameStore } from '../stores/gameStore';
 import type { GameStage, Achievement } from '../types';
 import { ThreePatchButton } from './ThreePatchButton';
 
-// BeforeInstallPromptEvent型定義
-interface BeforeInstallPromptEvent extends Event {
-  prompt: () => Promise<void>;
-  userChoice: Promise<{ outcome: 'accepted' | 'dismissed' }>;
-}
-
 export function TitleScreen() {
   const {
     loadQuestions,
@@ -30,12 +24,6 @@ export function TitleScreen() {
   const [displayedAchievement, setDisplayedAchievement] = useState<Achievement | null>(null);
   // デバッグモードで表示しているか（trueなら表示済みフラグを立てない）
   const [isDebugMode, setIsDebugMode] = useState(false);
-
-  // PWA関連の状態管理
-  const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
-  const [isPWA, setIsPWA] = useState(false);
-  const [isAndroid, setIsAndroid] = useState(false);
-  const [isInstallable, setIsInstallable] = useState(false);
 
   // コンポーネントマウント時に問題データを読み込む
   useEffect(() => {
@@ -71,132 +59,18 @@ export function TitleScreen() {
     }
   }, [displayedAchievement, isDebugMode, markCompositeAchievementShown, showStaffRoll]);
 
-  // PWA関連の初期化処理
-  useEffect(() => {
-    // PWAアプリとして実行中かチェック
-    const checkIsPWA = isRunningInPwa();
-    setIsPWA(checkIsPWA);
-
-    // モバイルデバイスかチェック
-    const checkIsAndroid = /Android/i.test(navigator.userAgent);
-    setIsAndroid(checkIsAndroid);
-
-    // beforeinstallpromptイベントリスナー
-    const handleBeforeInstallPrompt = (e: Event) => {
-      e.preventDefault();
-      setDeferredPrompt(e as BeforeInstallPromptEvent);
-      setIsInstallable(true);
-    };
-
-    // appinstalledイベントリスナー（インストール完了検知）
-    const handleAppInstalled = () => {
-      setTimeout(() => {
-        setIsInstallable(false);
-        setDeferredPrompt(null);
-      }, 5000);
-    };
-
-    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
-    window.addEventListener('appinstalled', handleAppInstalled);
-
-    return () => {
-      window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
-      window.removeEventListener('appinstalled', handleAppInstalled);
-    };
-  }, []);
-
-  const isRunningInPwa = (): boolean => {
-    // 1. 複数の display-mode をチェック
-    // standalone: 通常のアプリモード（ステータスバーあり）
-    // fullscreen: フルスクリーンモード（ステータスバーなし・ゲーム等）
-    // minimal-ui: 最小限のUI（戻るボタン等だけある状態）
-    const isAppMode = window.matchMedia(
-      '(display-mode: standalone), (display-mode: fullscreen), (display-mode: minimal-ui)'
-    ).matches;
-
-    // 2. iOS Safari (レガシー対応)
-    // iOSは fullscreen 指定でも navigator.standalone が true になることが多いですが、
-    // 念のためこの判定も残しておきます。
-    const isIosStandalone = 
-      'standalone' in window.navigator && 
-      (window.navigator as any).standalone === true;
-
-    return isAppMode || isIosStandalone;
-  };
-
   const handleStage = (stage: GameStage) => {
     setGameStage(stage);
     showSetting();
   };
 
-  // PWAインストールボタンのクリック処理
-  const handleInstallClick = async () => {
-    if (!deferredPrompt) return;
-
-    await deferredPrompt.prompt();
-    const { outcome } = await deferredPrompt.userChoice;
-
-    if (outcome === 'accepted') {
-      setIsInstallable(false);
-    }
-
-    setDeferredPrompt(null);
-  };
-
-  // インストールボタン表示条件：PWAアプリ実行中でなく、Androidで、インストール可能な場合
-  const showInstallButton = !isPWA && isAndroid && isInstallable;
-  // 通常ボタン表示条件：インストールボタン非表示の場合
-  const showNormalButtons = isPWA || !isAndroid;
-
   return (
     <div className="w-full h-full flex flex-col items-center justify-center p-[5%] animate-fade-in relative">
-      {/* PWAインストールボタン */}
-      {showInstallButton && (
-        <div className="w-full h-full flex flex-col items-center justify-center"
-          style={{ marginTop: '60cqmin' }}
-        >
-          <ThreePatchButton
-            key="install-pwa-button"
-            leftImage={`./data/images/ui/btn_red_left.png`}
-            middleImage={`./data/images/ui/btn_red_middle.png`}
-            rightImage={`./data/images/ui/btn_red_right.png`}
-            onClick={handleInstallClick}
-            height="9cqmin"
-            fontSize="4cqmin"
-            textColor="#FFF"
-            className="selection-card"
-          >
-            アプリをインストール
-          </ThreePatchButton>
-            {typeof navigator !== 'undefined' && /Android/i.test(navigator.userAgent) && (
-            <p
-              className="text-white mt-[1cqmin]"
-              style={{ fontSize: '5cqmin', width: '80cqmin' }}
-            >
-              インストール完了後にホーム画面にアイコンが追加されない場合は、アプリ一覧から起動をお願いします。
-            </p>
-            )}
-        </div>
-      )}
-      {!isPWA && isAndroid && !isInstallable && (
-        <div className="w-full h-full flex flex-col items-center justify-center"
-          style={{ marginTop: '70cqmin' }}
-        >
-          <p
-            className="text-white mt-[1cqmin]"
-            style={{ fontSize: '5cqmin', width: '80cqmin' }}
-          >
-            ホーム画面またはアプリ一覧より「パレ学マスター」を起動してください。
-          </p>
-        </div>
-      )}
-
       {/* 通常の試験モード選択ボタン */}
-      {showNormalButtons && (
-        <div
-          className="w-full flex flex-row items-center justify-center gap-[6cqmin] relative z-10"
-          style={{ marginTop: '35cqmin' }}
-        >
+      <div
+        className="w-full flex flex-row items-center justify-center gap-[6cqmin] relative z-10"
+        style={{ marginTop: '35cqmin' }}
+      >
           <button
             onClick={() => handleStage('入門試験')}
             className="transition-transform active:scale-95 focus:outline-none"
@@ -257,11 +131,9 @@ export function TitleScreen() {
             />
           </button>
         </div>
-      )}
 
       {/* ヘルプ・寮生一覧・アチーブメントリンク */}
-      {showNormalButtons && (
-        <div
+      <div
           className="flex justify-center items-center absolute bottom-[5%]"
           style={{ gap: '4cqmin' }}
         >
@@ -317,7 +189,6 @@ export function TitleScreen() {
             />
           </button>
         </div>
-      )}
 
       {/* 非公式表記 */}
       <div className="absolute text-gray-300"
