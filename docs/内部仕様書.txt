@@ -568,7 +568,7 @@ const talents: Talent[] = await talentsRes.json();
   - 上部: 顔画像、寮名バッジ、名前、ふりがな
   - SNSリンク: YouTube、TikTok、X、マシュマロ、公式ページ（URLがあるもののみ表示、別タブで開く）
   - 夢: talent.dream
-  - 自己紹介: talent.intro
+  - キャッチフレーズ: talent.intro
   - 基本情報: 誕生日、身長、寮、学籍番号、ファンネーム、ファンマーク
   - リスト情報: 趣味、特技、好きなもの、ハッシュタグ、受賞歴
 - イベント:

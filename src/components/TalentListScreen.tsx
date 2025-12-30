@@ -36,7 +36,7 @@ function getNameFontSize(text: string): string {
 
 function getNameFontSize2(text: string): string {
   const length = text.length;
-  return `${40/length}cqmin`;
+  return `${40 / length}cqmin`;
 }
 
 const SECTION_FONT_SIZE = '3cqmin';
@@ -85,12 +85,12 @@ export function TalentListScreen() {
   return (
     <>
       <div className="w-full h-full flex flex-col"
-      style={{
-        backgroundImage: 'url(./data/images/ui/achievement_bg.png)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-      }}
+        style={{
+          backgroundImage: 'url(./data/images/ui/achievement_bg.png)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+        }}
       >
         {/* ヘッダー */}
         <div
@@ -106,7 +106,7 @@ export function TalentListScreen() {
             fontSize="4cqmin"
             textColor="#CCC"
             className="selection-card"
-            style={{marginLeft: '2cqmin'}}
+            style={{ marginLeft: '2cqmin' }}
           >
             戻る
           </ThreePatchButton>
@@ -122,7 +122,7 @@ export function TalentListScreen() {
               style={{
                 fontSize: '5cqmin',
                 textShadow: '2px 2px 4px rgba(0,0,0,1)',
-               }}
+              }}
             >
               寮生一覧
             </span>
@@ -152,17 +152,17 @@ export function TalentListScreen() {
                   height="6cqmin"
                   filter={
                     idx === 0 ? "sepia(1) hue-rotate(-50deg) saturate(8) brightness(1)" :
-                    idx === 1 ? "sepia(1) hue-rotate(-60deg) saturate(3) brightness(1)" :
-                    idx === 2 ? "sepia(1) hue-rotate(150deg) saturate(2) brightness(1)" :
-                    "sepia(1) hue-rotate(60deg) saturate(2) brightness(1)"
+                      idx === 1 ? "sepia(1) hue-rotate(-60deg) saturate(3) brightness(1)" :
+                        idx === 2 ? "sepia(1) hue-rotate(150deg) saturate(2) brightness(1)" :
+                          "sepia(1) hue-rotate(60deg) saturate(2) brightness(1)"
                   }
-                  >
+                >
                   <span
                     className="text-white font-bold"
                     style={{
-                    fontSize: '4cqmin',
-                    textShadow: '2px 2px 4px rgba(0,0,0,1)',
-                     }}
+                      fontSize: '4cqmin',
+                      textShadow: '2px 2px 4px rgba(0,0,0,1)',
+                    }}
                   >
                     {dorm.name}
                   </span>
@@ -273,19 +273,18 @@ export function TalentListScreen() {
             />
             {/* 寮バッジ */}
             {selectedTalent && (
-              <img src={`./data/images/emblem/${
-                selectedTalent?.dormitory === 'バゥ寮' ? 'wa' :
-                selectedTalent?.dormitory === 'ミュゥ寮' ? 'me' :
-                selectedTalent?.dormitory === 'クゥ寮' ? 'co' :
-                'wh'
-              }.webp`}
+              <img src={`./data/images/emblem/${selectedTalent?.dormitory === 'バゥ寮' ? 'wa' :
+                  selectedTalent?.dormitory === 'ミュゥ寮' ? 'me' :
+                    selectedTalent?.dormitory === 'クゥ寮' ? 'co' :
+                      'wh'
+                }.webp`}
                 className="absolute top-30 left-0"
                 style={{
                   width: '57cqmin',
                   opacity: 0.15,
                   zIndex: 1,
                 }}
-               />
+              />
             )}
             {/* スクロール可能なコンテンツエリア */}
             <div
@@ -436,7 +435,7 @@ export function TalentListScreen() {
                       </div>
                     )}
 
-                    {/* 自己紹介 */}
+                    {/* キャッチフレーズ */}
                     {selectedTalent.intro && (
                       <div style={{ marginBottom: '1.5cqmin' }}>
                         <h3
@@ -447,7 +446,7 @@ export function TalentListScreen() {
                             textShadow: '1px 1px 10px rgba(217, 214, 198, 1), 1px -1px 10px rgba(217, 214, 198, 1), -1px 1px 10px rgba(217, 214, 198, 1), -1px -1px 10px rgba(217, 214, 198, 1)',
                           }}
                         >
-                          📝 自己紹介
+                          📝 キャッチフレーズ
                         </h3>
                         <p
                           className="whitespace-pre-wrap"
