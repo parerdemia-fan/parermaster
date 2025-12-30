@@ -3382,5 +3382,59 @@
     "comment": "この3人のコラボは必見です！",
     "source_url": "https://www.youtube.com/watch?v=B9AE5oKbuUo",
     "questioner": ""
+  },
+  {
+    "question": "謝罪配信の謝罪配信をすることになった寮生は誰でしょう",
+    "category": "深堀り問題",
+    "dormitory": "all",
+    "difficulty": 3,
+    "answers": [
+      "ローズ・ダマスクハート",
+      "斗瀬ひおり",
+      "",
+      ""
+    ],
+    "genre": "エピソード",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "リスナーを銃〇しようとしてBANされた",
+    "source_url": "https://youtube.com/shorts/uuPC-fA28_Y?si=XQZ-C4V2nPjdFwO2",
+    "questioner": ""
+  },
+  {
+    "question": "レポコラボ中に昔のあだ名の話になった時に「ごぼう」と答えた寮生はだれ？",
+    "category": "深堀り問題",
+    "dormitory": "all",
+    "difficulty": 5,
+    "answers": [
+      "ローズ・ダマスクハート",
+      "桜堂ねる",
+      "七音うら",
+      "七扇ヲトメ"
+    ],
+    "genre": "コラボ",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "茶色い服を来ていたかららしい",
+    "source_url": "https://www.youtube.com/shorts/e33zwWZQkr0",
+    "questioner": ""
+  },
+  {
+    "question": "ゲリラ配信を自称しており、予定表を出した時にほぼ全てゲリラだった寮生は？",
+    "category": "深堀り問題",
+    "dormitory": "all",
+    "difficulty": 1,
+    "answers": [
+      "フローレ・ブランカ",
+      "",
+      "",
+      ""
+    ],
+    "genre": "ツイート",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "自称ゲリラ配信者",
+    "source_url": "https://x.com/i/status/1949168796490760446",
+    "questioner": ""
   }
 ]
