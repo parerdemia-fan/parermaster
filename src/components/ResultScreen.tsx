@@ -32,7 +32,7 @@ function normalizeQuestionCount(count: number): QuestionCount {
     return count as QuestionCount;
   }
   // 最も近い値を返す
-  return validCounts.reduce((prev, curr) => 
+  return validCounts.reduce((prev, curr) =>
     Math.abs(curr - count) < Math.abs(prev - count) ? curr : prev
   );
 }
@@ -46,12 +46,12 @@ function getResultMessage(
   accuracyPercent: number
 ): string {
   const accuracy = convertAccuracyToType(accuracyPercent);
-  
+
   // 顔名前当て系はexamScopeで、それ以外はquestionCountで絞り込む
   const isFaceNameCategory = category.includes('顔名前当て');
-  
+
   let matchedMessages: ResultMessage[];
-  
+
   if (isFaceNameCategory) {
     const examScope = convertQuestionRangeToExamScope(questionRange);
     matchedMessages = resultMessages.filter(msg =>
@@ -67,12 +67,12 @@ function getResultMessage(
       msg.accuracy === accuracy
     );
   }
-  
+
   // マッチするメッセージがあればランダムで返す（現状は1件のみだが、拡張性のため）
   if (matchedMessages.length > 0) {
     return matchedMessages[Math.floor(Math.random() * matchedMessages.length)].message;
   }
-  
+
   // フォールバック：マッチしない場合は汎用メッセージ
   if (accuracyPercent === 100) {
     return 'パーフェクト！素晴らしい成績です！';
@@ -99,6 +99,7 @@ export function ResultScreen() {
 
   const accuracy = Math.round((correctCount / questions.length) * 100);
   const isPerfect = accuracy === 100;
+  const isFaceNameCategory = category.includes('顔名前当て');
 
   // ResultMessages を初回ロード
   useEffect(() => {
@@ -118,7 +119,7 @@ export function ResultScreen() {
   const shareOnX = () => {
     const gameUrl = 'https://parerdemia-fan.github.io/parermaster/';
     const text = `【パレ学マスター 結果発表】
-${gameStage} ${category} / ${questions.length}問
+${gameStage} ${category} / ${isFaceNameCategory ? convertQuestionRangeToExamScope(questionRange) : questions.length + "問"}
 ${isPerfect ? '🎉🎉🎉パーフェクト達成!🎉🎉🎉' : `正解率: ${accuracy}%`}
 
 ${resultMessage}
@@ -169,7 +170,7 @@ ${gameUrl}
         className="text-black-300 font-medium"
         style={{ fontSize: '4cqmin' }}
       >
-        カテゴリー: {category} ・ 出題数: {questions.length}
+        カテゴリー: {category}・{isFaceNameCategory ? convertQuestionRangeToExamScope(questionRange) : "出題数: " + questions.length}
       </p>
 
       {/* 正解率 */}
@@ -266,7 +267,7 @@ ${gameUrl}
         style={{
           gap: '3cqmin',
           marginTop: newAchievements.length > 0 ? '0' : '5cqmin',
-       }}
+        }}
       >
         {/* タイトルに戻るボタン */}
         <ThreePatchButton
