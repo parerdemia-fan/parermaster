@@ -21,7 +21,7 @@
     "question": "ウィニー寮の談話室の暖炉の上に飾られているものは？",
     "category": "深堀り問題",
     "dormitory": "wh",
-    "difficulty": 3,
+    "difficulty": 2,
     "answers": [
       "牛の頭の骨",
       "角笛",
@@ -177,6 +177,24 @@
     "sort_answers": false,
     "comment": "",
     "source_url": "https://www.youtube.com/shorts/_j7K0KiVFm0",
+    "questioner": ""
+  },
+  {
+    "question": "天辻ゆらぐと天透あわの初コラボのタイトルは？",
+    "category": "深堀り問題",
+    "dormitory": "all",
+    "difficulty": 4,
+    "answers": [
+      "ゆらあわメモリアル",
+      "あまあまタイム",
+      "天天爛漫",
+      "ゆらぐあわー"
+    ],
+    "genre": "コラボ",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "[image:yuraawa.png]",
+    "source_url": "https://www.youtube.com/watch?v=Q0pJUr4habA",
     "questioner": ""
   },
   {
@@ -1885,7 +1903,7 @@
     "genre": "エピソード",
     "hide_icon": false,
     "sort_answers": false,
-    "comment": "",
+    "comment": "「ほんまに申し訳ないんやけど、ぺけちゃんのマウスパッドだけは許せない😢」",
     "source_url": "https://x.com/hino_pekemaru/status/1978690260742676525",
     "questioner": ""
   },
@@ -3458,7 +3476,7 @@
   {
     "question": "謝罪配信の謝罪配信をすることになった寮生は誰でしょう",
     "category": "深堀り問題",
-    "dormitory": "all",
+    "dormitory": "wh",
     "difficulty": 3,
     "answers": [
       "ローズ・ダマスクハート",
@@ -3494,7 +3512,7 @@
   {
     "question": "ゲリラ配信を自称しており、予定表を出した時にほぼ全てゲリラだった寮生は？",
     "category": "深堀り問題",
-    "dormitory": "all",
+    "dormitory": "wa",
     "difficulty": 1,
     "answers": [
       "フローレ・ブランカ",
