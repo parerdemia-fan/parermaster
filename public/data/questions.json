@@ -450,6 +450,24 @@
     "questioner": ""
   },
   {
+    "question": "朧月ひかるが一番好きなボカロ曲は？",
+    "category": "深堀り問題",
+    "dormitory": "co",
+    "difficulty": 5,
+    "answers": [
+      "月見夜ラビット",
+      "星屑メソッド",
+      "心拍数 # 0822",
+      "え?ああ、そう"
+    ],
+    "genre": "趣味嗜好",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "選択肢はすべて蝶々Pの楽曲です",
+    "source_url": "https://youtu.be/rMJNNq5D9jg?t=3927",
+    "questioner": ""
+  },
+  {
     "question": "シグマ・イングラムが描いたこの画像の元ネタは？[image:sigma_driver.jpg]",
     "category": "深堀り問題",
     "dormitory": "co",
@@ -468,7 +486,7 @@
     "questioner": ""
   },
   {
-    "question": "薫る花は凛と咲くに関するツイートを公式にいいねされた人は？",
+    "question": "アニメ「薫る花は凛と咲く」に関するツイートを公式にいいねされた人は？",
     "category": "深堀り問題",
     "dormitory": "co",
     "difficulty": 4,
@@ -1512,7 +1530,7 @@
     "questioner": ""
   },
   {
-    "question": "3倍満を食らって6倍満で倍返しすると言っていた人は？",
+    "question": "雀魂で三倍満を食らって六倍満で倍返しすると言っていた人は？",
     "category": "深堀り問題",
     "dormitory": "me",
     "difficulty": 3,
@@ -1526,7 +1544,7 @@
     "hide_icon": false,
     "sort_answers": false,
     "comment": "",
-    "source_url": "",
+    "source_url": "https://www.youtube.com/shorts/bfC44qUn9tA",
     "questioner": ""
   },
   {
@@ -1940,7 +1958,7 @@
     "hide_icon": false,
     "sort_answers": false,
     "comment": "",
-    "source_url": "",
+    "source_url": "https://www.youtube.com/shorts/hPO3qZJawT0",
     "questioner": ""
   },
   {
@@ -2282,7 +2300,7 @@
     "hide_icon": false,
     "sort_answers": false,
     "comment": "",
-    "source_url": "",
+    "source_url": "https://x.com/BSapp_/status/1982659300473577945",
     "questioner": ""
   },
   {
