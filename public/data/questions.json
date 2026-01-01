@@ -36,24 +36,6 @@
     "questioner": ""
   },
   {
-    "question": "昆虫食が流行った寮は？",
-    "category": "深堀り問題",
-    "dormitory": "co",
-    "difficulty": 2,
-    "answers": [
-      "クゥ寮",
-      "ミュゥ寮",
-      "ウィニー寮",
-      "バゥ寮"
-    ],
-    "genre": "エピソード",
-    "hide_icon": false,
-    "sort_answers": false,
-    "comment": "",
-    "source_url": "",
-    "questioner": ""
-  },
-  {
     "question": "肇明日空と艶島カオルのネームロゴの特徴は？",
     "category": "深堀り問題",
     "dormitory": "co",
@@ -375,42 +357,6 @@
     "sort_answers": false,
     "comment": "[image:infj.png]",
     "source_url": "https://x.com/totococopopo/status/2004932973737771173",
-    "questioner": ""
-  },
-  {
-    "question": "朧月ひかるが最初に食べた昆虫食は？",
-    "category": "深堀り問題",
-    "dormitory": "co",
-    "difficulty": 5,
-    "answers": [
-      "幼虫ミックス",
-      "タガメ",
-      "カブトムシ",
-      "イナゴ"
-    ],
-    "genre": "エピソード",
-    "hide_icon": false,
-    "sort_answers": false,
-    "comment": "「保育園のとき食べた落ち葉の味」「エビフライの尻尾の味」",
-    "source_url": "https://www.youtube.com/watch?v=0sx8OI319lo",
-    "questioner": ""
-  },
-  {
-    "question": "「ウーマンコ\nミュニケーション」のお清楚ゲーム配信をやったのは？",
-    "category": "深堀り問題",
-    "dormitory": "co",
-    "difficulty": 4,
-    "answers": [
-      "朧月ひかる",
-      "斗瀬ひおり",
-      "七扇ヲトメ",
-      "艶島カオル"
-    ],
-    "genre": "エピソード",
-    "hide_icon": false,
-    "sort_answers": false,
-    "comment": "「学園の先生(運営)からやっていいよって言われました」",
-    "source_url": "https://www.youtube.com/watch?v=3N0T2MftNus",
     "questioner": ""
   },
   {
@@ -1257,24 +1203,6 @@
     "sort_answers": false,
     "comment": "",
     "source_url": "https://x.com/Tuyasima/status/1937841173118230706",
-    "questioner": ""
-  },
-  {
-    "question": "クゥ寮で近所のクソガキを自称している人といえば？",
-    "category": "深堀り問題",
-    "dormitory": "co",
-    "difficulty": 1,
-    "answers": [
-      "艶島カオル",
-      "畑スイカ",
-      "神童めしあ",
-      "猫乃間うと"
-    ],
-    "genre": "趣味嗜好",
-    "hide_icon": false,
-    "sort_answers": false,
-    "comment": "",
-    "source_url": "",
     "questioner": ""
   },
   {
