@@ -2988,7 +2988,7 @@
     "questioner": ""
   },
   {
-    "question": "パレクイズに松本Pがいることに多分最初に気づいた人は？",
+    "question": "前作「パレクイズ」に松本Pがいることに多分最初に気づいた人は？",
     "category": "深堀り問題",
     "dormitory": "wh",
     "difficulty": 4,
@@ -3543,6 +3543,24 @@
     "sort_answers": false,
     "comment": "自称ゲリラ配信者",
     "source_url": "https://x.com/i/status/1949168796490760446",
+    "questioner": ""
+  },
+  {
+    "question": "1月1日の配信で藤森ちとせさんがつけてたものは？",
+    "category": "深堀り問題",
+    "dormitory": "wh",
+    "difficulty": 2,
+    "answers": [
+      "馬の耳",
+      "鏡もち",
+      "ウィニーのエンブレム(紋章)",
+      "門松"
+    ],
+    "genre": "容姿",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "午年だから馬の耳付けてましたね",
+    "source_url": "https://www.youtube.com/live/2CbG0540Vwo?si=1jbTV0SuzChJ93kg",
     "questioner": ""
   }
 ]
