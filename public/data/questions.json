@@ -666,6 +666,24 @@
     "questioner": ""
   },
   {
+    "question": "ブルアカで安定してチナトロを取れているのは誰？",
+    "category": "深堀り問題",
+    "dormitory": "co",
+    "difficulty": 4,
+    "answers": [
+      "瀬奈りるか",
+      "",
+      "",
+      ""
+    ],
+    "genre": "プロフィール",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "",
+    "source_url": "https://x.com/senariruka/status/2006207510689243422",
+    "questioner": ""
+  },
+  {
     "question": "神童めしあが世界で一番好きなボカロ曲は？",
     "category": "深堀り問題",
     "dormitory": "co",
@@ -2304,6 +2322,24 @@
     "questioner": ""
   },
   {
+    "question": "おでんTier表を作ったのは誰？",
+    "category": "深堀り問題",
+    "dormitory": "wa",
+    "difficulty": 4,
+    "answers": [
+      "堂下さとり",
+      "",
+      "",
+      ""
+    ],
+    "genre": "ツイート",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "「1番人気は大根！！」",
+    "source_url": "https://x.com/doushitasatori/status/1999198751957877117",
+    "questioner": ""
+  },
+  {
     "question": "青い目・青いリボン・青い制服・青い帽子の人は？",
     "category": "深堀り問題",
     "dormitory": "wa",
@@ -2391,6 +2427,24 @@
     "sort_answers": false,
     "comment": "7/12が7/18に変更され、7/17に再変更されました。",
     "source_url": "https://x.com/aisu_ruju/status/1943181518576455738",
+    "questioner": ""
+  },
+  {
+    "question": "ハロウィンイベント中に「地味ハロウィン」の仮装をやっていたのは？",
+    "category": "深堀り問題",
+    "dormitory": "wa",
+    "difficulty": 5,
+    "answers": [
+      "相栖るじゅ",
+      "",
+      "",
+      ""
+    ],
+    "genre": "エピソード",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "",
+    "source_url": "https://www.youtube.com/shorts/lzLR7MYhM3I",
     "questioner": ""
   },
   {
