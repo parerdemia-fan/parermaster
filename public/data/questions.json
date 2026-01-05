@@ -1026,6 +1026,24 @@
     "questioner": ""
   },
   {
+    "question": "三が日で桜雲ほわりはおもちを何個食べたでしょう！！🎍",
+    "category": "深堀り問題",
+    "dormitory": "co",
+    "difficulty": 2,
+    "answers": [
+      "20個",
+      "5個",
+      "10個",
+      "30個"
+    ],
+    "genre": "エピソード",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "「みんなも良きモチライフを！！」",
+    "source_url": "https://x.com/ouun_howari/status/2008202523958747401",
+    "questioner": ""
+  },
+  {
     "question": "ミュゥ寮の名前の由来は猫の鳴き声ですが、猫乃間うとはどの寮？",
     "category": "深堀り問題",
     "dormitory": "co",
