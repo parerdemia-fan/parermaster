@@ -594,6 +594,24 @@
     "questioner": ""
   },
   {
+    "question": "ハロウィングッズでキョンシーになったのは誰？",
+    "category": "深堀り問題",
+    "dormitory": "co",
+    "difficulty": 2,
+    "answers": [
+      "桜庭羽奈",
+      "",
+      "",
+      ""
+    ],
+    "genre": "グッズ",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "[image:una_halloween.png]",
+    "source_url": "",
+    "questioner": ""
+  },
+  {
     "question": "[image:kani1.png]よくカニのヘアピン？をつけていたのは誰？",
     "category": "深堀り問題",
     "dormitory": "co",
@@ -3309,6 +3327,24 @@
     "sort_answers": false,
     "comment": "耳のリボンはきくらげでできているそうです[image:nanaoto_namelogo.png]",
     "source_url": "https://youtu.be/mRfPP8GWdAA?t=791",
+    "questioner": ""
+  },
+  {
+    "question": "お正月グッズで七音うらは何をしている？",
+    "category": "深堀り問題",
+    "dormitory": "wh",
+    "difficulty": 2,
+    "answers": [
+      "お雑煮を食べている",
+      "大吉のおみくじを見せている",
+      "門松を持っている",
+      "鏡餅の仮装をしている"
+    ],
+    "genre": "グッズ",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "[image:ura_newyear.png]愛乃宮ゆめ「おもち食べてるうらちごと食べたい」",
+    "source_url": "https://x.com/parerdemia/status/2008087610733035887",
     "questioner": ""
   },
   {
