@@ -1178,7 +1178,7 @@
       "天辻ゆらぐ",
       "桜庭羽奈",
       "犬丸なでこ",
-      ""
+      "灯野ぺけ。"
     ],
     "genre": "イベント",
     "hide_icon": false,
@@ -2001,7 +2001,7 @@
     "question": "2025年5月11日の初配信から10時間×30日=300時間配信を行ったのは誰？",
     "category": "深堀り問題",
     "dormitory": "wa",
-    "difficulty": 3,
+    "difficulty": 2,
     "answers": [
       "飛渡ココ",
       "",
@@ -2049,6 +2049,24 @@
     "sort_answers": false,
     "comment": "[image:mbti.png]",
     "source_url": "https://x.com/totococopopo/status/2004932973737771173",
+    "questioner": ""
+  },
+  {
+    "question": "飛渡ココが描く「おはぽぽ漫画」に登場する食パンのキャラの名前は？",
+    "category": "深堀り問題",
+    "dormitory": "wa",
+    "difficulty": 4,
+    "answers": [
+      "正義のジョーイ",
+      "毒舌のマリア",
+      "賢者クァ",
+      "食パン◯ン"
+    ],
+    "genre": "ツイート",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "毒舌のマリアはハート、賢者クァはハトのキャラクターです",
+    "source_url": "https://x.com/totococopopo/status/2002846663778717988",
     "questioner": ""
   },
   {
