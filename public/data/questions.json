@@ -468,6 +468,24 @@
     "questioner": ""
   },
   {
+    "question": "1月3日にお餅つきの実写配信をやっていたのは？",
+    "category": "深堀り問題",
+    "dormitory": "co",
+    "difficulty": 3,
+    "answers": [
+      "シグマ・イングラム",
+      "",
+      "",
+      ""
+    ],
+    "genre": "エピソード",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "【実写注意⚠️】第一回シグマお餅つき大会🎍〜餅ってお正月に食べようと思っても、もう売っていないんだね。〜",
+    "source_url": "https://www.youtube.com/watch?v=WHNpiXcBydE",
+    "questioner": ""
+  },
+  {
     "question": "ピンク髪ツインテールで翼の髪留めをしている人は？",
     "category": "深堀り問題",
     "dormitory": "co",
@@ -846,7 +864,7 @@
     "questioner": ""
   },
   {
-    "question": "何故かTikTokの年齢制限に引っかかって配信権限を止められ、異議申し立ても却下された人は？",
+    "question": "2025年12月に何故かTikTokの年齢制限に引っかかって配信権限を止められ、異議申し立ても却下された人は？",
     "category": "深堀り問題",
     "dormitory": "co",
     "difficulty": 3,
@@ -859,7 +877,7 @@
     "genre": "エピソード",
     "hide_icon": false,
     "sort_answers": false,
-    "comment": "その後無事復旧しました",
+    "comment": "その後無事復旧しました。が、その3週間後に再び年齢制限でBANされました。なぜ・・？",
     "source_url": "https://www.youtube.com/shorts/whBV-PC8VhQ",
     "questioner": ""
   },
