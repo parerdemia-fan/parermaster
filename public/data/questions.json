@@ -1242,7 +1242,7 @@
     "questioner": ""
   },
   {
-    "question": "神社に絵馬を奉納した人は？",
+    "question": "2025年10月に神社に絵馬を奉納した人は？",
     "category": "深堀り問題",
     "dormitory": "co",
     "difficulty": 3,
@@ -2880,6 +2880,24 @@
     "questioner": ""
   },
   {
+    "question": "八重森ふゆのが2026年の初詣で奉納した絵馬の形は？",
+    "category": "深堀り問題",
+    "dormitory": "wh",
+    "difficulty": 4,
+    "answers": [
+      "狐",
+      "馬",
+      "ハート",
+      "五角形"
+    ],
+    "genre": "エピソード",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "「初詣行ってきたー！ 可愛いお狐様の絵馬奉納してきたー✨」",
+    "source_url": "https://x.com/yaemori_fuyuno/status/2008803932207018111",
+    "questioner": ""
+  },
+  {
     "question": "◯◯◯◯のもり〜が口癖の人は？",
     "category": "深堀り問題",
     "dormitory": "wh",
@@ -3225,7 +3243,7 @@
     "question": "ウィニー寮所属 自称なろう系アイドルvtuberといえば？",
     "category": "深堀り問題",
     "dormitory": "wh",
-    "difficulty": 2,
+    "difficulty": 1,
     "answers": [
       "ローズ・ダマスクハート",
       "",
@@ -3243,7 +3261,7 @@
     "question": "ローズ・ダマスクハートが顔にくっつけている食べ物は？",
     "category": "深堀り問題",
     "dormitory": "wh",
-    "difficulty": 4,
+    "difficulty": 2,
     "answers": [
       "エビフライ",
       "コロッケ",
