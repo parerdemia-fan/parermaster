@@ -1584,6 +1584,24 @@
     "questioner": ""
   },
   {
+    "question": "お正月グッズで羽子板を持っているのは誰？",
+    "category": "深堀り問題",
+    "dormitory": "me",
+    "difficulty": 2,
+    "answers": [
+      "灯野ぺけ。",
+      "七音うら",
+      "鈴木沙透",
+      "飛渡ココ"
+    ],
+    "genre": "グッズ",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "[image:pekemaru_newyear.png]愛乃宮ゆめ「ぺけちゃの顔にたくさん落書きしたい。」",
+    "source_url": "https://x.com/parerdemia/status/2008087610733035887",
+    "questioner": ""
+  },
+  {
     "question": "ファンネームが「みんな達」の っょっょ𝑮𝑨𝑳アイドルVTuberは？",
     "category": "深堀り問題",
     "dormitory": "me",
