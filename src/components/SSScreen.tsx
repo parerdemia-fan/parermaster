@@ -11,6 +11,7 @@ interface SSChapter {
 
 interface SSData {
   ss_title: string;
+  caution: string;
   chapters: SSChapter[];
 }
 
@@ -104,6 +105,20 @@ export function SSScreen() {
           scrollbarColor: 'rgba(255, 215, 0, 0.5) transparent',
         }}
       >
+        {/* Caution */}
+        {ssData?.caution && (
+          <div
+            className="text-gray-400 text-right"
+            style={{
+              fontSize: '2.5cqmin',
+              marginTop: '2cqmin',
+              marginBottom: '4cqmin',
+            }}
+          >
+            {ssData.caution}
+          </div>
+        )}
+
         {isLoaded && !ssData && (
           <div
             className="text-gray-400 text-center"
