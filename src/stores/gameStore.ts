@@ -282,7 +282,7 @@ const ACHIEVEMENT_DEFINITIONS: Achievement[] = [
     imagePath: './data/images/achievement/crown1.png',
     unlocked: false,
     x: 16,
-    y: 44,
+    y: 48,
     w: 23,
     h: 23,
     dependsOn: ['all_face_name_perfect', 'beginners_perfect'],
@@ -294,21 +294,21 @@ const ACHIEVEMENT_DEFINITIONS: Achievement[] = [
     imagePath: './data/images/achievement/crown2.png',
     unlocked: false,
     x: 50.5,
-    y: 40,
+    y: 48.5,
     w: 26,
-    h: 28,
+    h: 20,
     dependsOn: ['all_face_name_perfect', 'beginners_perfect', 'all_face_name_advanced', 'deep_dive_100'],
   },
   {
     id: 'palegaku_master',
     name: 'パレ学マスター',
-    description: '全ての試験を完全制覇',
+    description: '全試験を完全制覇',
     imagePath: './data/images/achievement/crown3.png',
     unlocked: false,
     x: 88,
-    y: 35,
+    y: 45.5,
     w: 33,
-    h: 33,
+    h: 23,
     dependsOn: ['all_face_name_perfect', 'beginners_perfect', 'all_face_name_advanced', 'deep_dive_100', 'all_face_name_expert', 'ultra_deep_100'],
   },
 ];
@@ -419,6 +419,7 @@ interface GameState {
   closeSS: () => void;
   hasMasterAchievement: () => boolean;
   toggleMasterAchievement: () => void;
+  unlockAllAchievements: () => void;
 }
 
 /**
@@ -1260,6 +1261,28 @@ export const useGameStore = create<GameState>((set, get) => ({
       const unlockedIds = updatedAchievements
         .filter(a => a.unlocked)
         .map(a => a.id);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(unlockedIds));
+    } catch (error) {
+      console.error('Failed to save achievements:', error);
+    }
+  },
+
+  unlockAllAchievements: () => {
+    const { achievements } = get();
+    const now = new Date().toISOString();
+    
+    // すべてのアチーブメントを獲得済みに設定
+    const updatedAchievements = achievements.map(a => ({
+      ...a,
+      unlocked: true,
+      unlockedAt: a.unlockedAt || now,
+    }));
+
+    set({ achievements: updatedAchievements });
+
+    // LocalStorageに保存
+    try {
+      const unlockedIds = updatedAchievements.map(a => a.id);
       localStorage.setItem(STORAGE_KEY, JSON.stringify(unlockedIds));
     } catch (error) {
       console.error('Failed to save achievements:', error);

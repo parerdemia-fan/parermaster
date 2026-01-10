@@ -40,6 +40,7 @@ export function TitleScreen() {
     showStaffRoll,
     hasMasterAchievement,
     toggleMasterAchievement,
+    unlockAllAchievements,
   } = useGameStore();
 
   // 表示中の複合アチーブメント
@@ -307,6 +308,17 @@ export function TitleScreen() {
             textColor={hasMasterAchievement() ? '#8F8' : '#F88'}
           >
             マスター{hasMasterAchievement() ? 'ON' : 'OFF'}
+          </ThreePatchButton>
+          <ThreePatchButton
+            leftImage="./data/images/ui/btn_normal_off_left.png"
+            middleImage="./data/images/ui/btn_normal_off_middle.png"
+            rightImage="./data/images/ui/btn_normal_off_right.png"
+            onClick={unlockAllAchievements}
+            height="5cqmin"
+            fontSize="2.5cqmin"
+            textColor="#FFA500"
+          >
+            全称号獲得
           </ThreePatchButton>
         </div>
       )}
