@@ -1191,7 +1191,7 @@
     "question": "麻雀歌枠ができる人は？",
     "category": "深堀り問題",
     "dormitory": "co",
-    "difficulty": 5,
+    "difficulty": 3,
     "answers": [
       "天辻ゆらぐ",
       "",
@@ -1239,6 +1239,24 @@
     "sort_answers": false,
     "comment": "",
     "source_url": "https://x.com/parerdemia/status/1966824924041146397",
+    "questioner": ""
+  },
+  {
+    "question": "天辻ゆらぐが学内イベントのイベントラストに歌う曲は？",
+    "category": "深堀り問題",
+    "dormitory": "co",
+    "difficulty": 5,
+    "answers": [
+      "慎吾ママのおはロック",
+      "サライ",
+      "Driver’s High",
+      "負けないで"
+    ],
+    "genre": "エピソード",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "",
+    "source_url": "https://youtu.be/eQepg5oQg-c?t=9588",
     "questioner": ""
   },
   {
