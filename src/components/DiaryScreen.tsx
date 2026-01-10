@@ -10,9 +10,9 @@ interface DiaryEntry {
 }
 
 /**
- * 「やっぱり」の「ぱ」をクリック可能なリンクに変換する
+ * 全ての「ぱ」「パ」をクリック可能なリンクに変換する
  * @param text テキスト
- * @param onClickPa 「ぱ」がクリックされたときのコールバック
+ * @param onClickPa 「ぱ」「パ」がクリックされたときのコールバック
  * @returns React要素の配列
  */
 function renderBodyWithClickablePa(text: string, onClickPa: () => void): React.ReactNode[] {
@@ -20,8 +20,8 @@ function renderBodyWithClickablePa(text: string, onClickPa: () => void): React.R
   let lastIndex = 0;
   let keyIndex = 0;
   
-  // 「やっぱり」を検索
-  const pattern = /やっぱり/g;
+  // 全ての「ぱ」「パ」を検索
+  const pattern = /[ぱパ]/g;
   let match: RegExpExecArray | null;
   
   while ((match = pattern.exec(text)) !== null) {
@@ -34,24 +34,21 @@ function renderBodyWithClickablePa(text: string, onClickPa: () => void): React.R
       );
     }
     
-    // 「やっ」「ぱ」「り」に分割して、「ぱ」をクリック可能にする
+    // マッチした「ぱ」または「パ」をクリック可能にする
     result.push(
-      <span key={`yappari-${keyIndex++}`}>
-        やっ
-        <span
-          onClick={onClickPa}
-          style={{
-            cursor: 'pointer',
-            textDecoration: 'underline',
-            textDecorationStyle: 'dotted',
-            textDecorationColor: '#444',
-            textUnderlineOffset: '0.2em',
-          }}
-          title="？"
-        >
-          ぱ
-        </span>
-        り
+      <span
+        key={`pa-${keyIndex++}`}
+        onClick={onClickPa}
+        style={{
+          cursor: 'pointer',
+          textDecoration: 'underline',
+          textDecorationStyle: 'dotted',
+          textDecorationColor: '#222',
+          textUnderlineOffset: '0.2em',
+        }}
+        title="？"
+      >
+        {match[0]}
       </span>
     );
     
