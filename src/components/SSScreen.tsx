@@ -108,7 +108,7 @@ export function SSScreen() {
         {/* Caution */}
         {ssData?.caution && (
           <div
-            className="text-gray-400 text-right"
+            className="text-gray-600 text-right italic"
             style={{
               fontSize: '2.5cqmin',
               marginTop: '2cqmin',
