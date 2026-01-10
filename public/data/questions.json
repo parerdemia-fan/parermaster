@@ -100,7 +100,7 @@
       "",
       ""
     ],
-    "genre": "エピソード",
+    "genre": "コラボ",
     "hide_icon": false,
     "sort_answers": false,
     "comment": "",
@@ -136,7 +136,7 @@
       "前髪が揃ってる",
       "アホ毛がハート"
     ],
-    "genre": "容姿",
+    "genre": "コラボ",
     "hide_icon": true,
     "sort_answers": false,
     "comment": "",
@@ -154,7 +154,7 @@
       "2人で乗った橋が壊れた",
       "ぺけ。がなでこに食べられる"
     ],
-    "genre": "エピソード",
+    "genre": "コラボ",
     "hide_icon": false,
     "sort_answers": false,
     "comment": "",
@@ -190,7 +190,7 @@
       "オハさとラヂオ",
       "上↑下↓らじお"
     ],
-    "genre": "エピソード",
+    "genre": "コラボ",
     "hide_icon": false,
     "sort_answers": false,
     "comment": "第2回からゲストを1人迎えて3人で配信しています。[image:idou.png]",
@@ -1278,6 +1278,24 @@
     "questioner": ""
   },
   {
+    "question": "艶島カオルが飼っているハスキー犬の名前は？",
+    "category": "深堀り問題",
+    "dormitory": "co",
+    "difficulty": 4,
+    "answers": [
+      "シリウス",
+      "スバル",
+      "ルナ",
+      "スピカ"
+    ],
+    "genre": "エピソード",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "「クールな性格ですが、ちょっと抜けてるところもあります☺️ 配信中に声が聞こえるかもだけどまだ小さいワンワンやで許してね、、💦💦」",
+    "source_url": "https://x.com/Tuyasima/status/1998295919549411709",
+    "questioner": ""
+  },
+  {
     "question": "魚のヘアピンをつけているのは誰？",
     "category": "深堀り問題",
     "dormitory": "me",
@@ -1944,6 +1962,24 @@
     "questioner": ""
   },
   {
+    "question": "雛菊のんが「最高に壮大で楽しすぎるゲームだったね🤣🤣」と言っていたゲームは？",
+    "category": "深堀り問題",
+    "dormitory": "me",
+    "difficulty": 4,
+    "answers": [
+      "テストプレイをサボりすぎたRPG",
+      "8番彼氏\r",
+      "おしゃべりキング",
+      "VALORANT\r"
+    ],
+    "genre": "エピソード",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "「のんやっぱあのシリーズ大好きだ😂」",
+    "source_url": "https://x.com/Hinagiku_Non/status/2007437122161234270",
+    "questioner": ""
+  },
+  {
     "question": "語尾が「のじゃ」で魔界出身の人は？",
     "category": "深堀り問題",
     "dormitory": "me",
@@ -1977,6 +2013,24 @@
     "sort_answers": false,
     "comment": "夜宵カレンは魔界出身メドゥーサの末裔です[image:karen_halloween.png]",
     "source_url": "",
+    "questioner": ""
+  },
+  {
+    "question": "誰のツイート？\n「童磨様にえらい‼️がんばったね‼️してもらえたから明日からも生きる🤩🤩🤩🤩🤩👍👍👍👍👍💖💖💖💖💖サイコ～～～～～⤴️⤴️⤴️⤴️⤴️」",
+    "category": "深堀り問題",
+    "dormitory": "me",
+    "difficulty": 4,
+    "answers": [
+      "夜宵カレン",
+      "",
+      "",
+      ""
+    ],
+    "genre": "ツイート",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "",
+    "source_url": "https://x.com/yayoikaren/status/1959644316546261281",
     "questioner": ""
   },
   {
@@ -2016,6 +2070,24 @@
     "questioner": ""
   },
   {
+    "question": "東雲アカリが主にプレイしているゲームは？",
+    "category": "深堀り問題",
+    "dormitory": "me",
+    "difficulty": 2,
+    "answers": [
+      "VALORANT\r",
+      "マインクラフト",
+      "各種ホラーゲーム",
+      ""
+    ],
+    "genre": "趣味嗜好",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "",
+    "source_url": "",
+    "questioner": ""
+  },
+  {
     "question": "最終面接にメイド服を着ていったのは？",
     "category": "深堀り問題",
     "dormitory": "wa",
@@ -2049,6 +2121,24 @@
     "sort_answers": false,
     "comment": "",
     "source_url": "",
+    "questioner": ""
+  },
+  {
+    "question": "犬丸なでこがグルメイベントの賞品としてもらったものは？",
+    "category": "深堀り問題",
+    "dormitory": "wa",
+    "difficulty": 4,
+    "answers": [
+      "いくらの醤油漬け",
+      "千疋屋のメロン",
+      "霜降り和牛",
+      "高級チョコレート"
+    ],
+    "genre": "エピソード",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "「おいしかったよおおおお❣️」",
+    "source_url": "https://x.com/nadeko_inumaru/status/1989863000564781314",
     "questioner": ""
   },
   {
@@ -2253,7 +2343,7 @@
     "question": "青い帽子・青い服・緑色の眼・水色のショートヘアの人は？",
     "category": "深堀り問題",
     "dormitory": "wa",
-    "difficulty": 3,
+    "difficulty": 1,
     "answers": [
       "雨海まる",
       "フローレ・ブランカ",
@@ -2262,6 +2352,24 @@
     ],
     "genre": "容姿",
     "hide_icon": true,
+    "sort_answers": false,
+    "comment": "",
+    "source_url": "",
+    "questioner": ""
+  },
+  {
+    "question": "歌と少しレトロなものが好きな関西弁VTuberといえば？",
+    "category": "深堀り問題",
+    "dormitory": "wa",
+    "difficulty": 3,
+    "answers": [
+      "雨海まる",
+      "",
+      "",
+      ""
+    ],
+    "genre": "プロフィール",
+    "hide_icon": false,
     "sort_answers": false,
     "comment": "",
     "source_url": "",
@@ -2358,6 +2466,24 @@
     "questioner": ""
   },
   {
+    "question": "采多しゆあが初めて1位を獲得したイベントは？",
+    "category": "深堀り問題",
+    "dormitory": "wa",
+    "difficulty": 3,
+    "answers": [
+      "パレポイント獲得イベント",
+      "お部屋背景獲得イベント",
+      "バレンタインイベント",
+      "クリスマスイベント"
+    ],
+    "genre": "イベント",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "「応援してくれた皆さんほんっっっっっっっっとーーーーーーーーーーーーーーにありがとうございました😭😭😭 1位にしていただいたこの経験は絶対に墓場まで持っていきます！」",
+    "source_url": "https://x.com/cider_siyua/status/1977678695348486261",
+    "questioner": ""
+  },
+  {
     "question": "アイスクリームメーカーでアイスを作れる人は？",
     "category": "深堀り問題",
     "dormitory": "wa",
@@ -2451,7 +2577,7 @@
     "question": "天透あわのネームロゴの文字の特徴は？",
     "category": "深堀り問題",
     "dormitory": "wa",
-    "difficulty": 3,
+    "difficulty": 2,
     "answers": [
       "細くて丸い空色の文字",
       "太い筆文字で虹色の文字",
@@ -2463,6 +2589,42 @@
     "sort_answers": false,
     "comment": "[image:awa_namelogo.png]",
     "source_url": "",
+    "questioner": ""
+  },
+  {
+    "question": "天透あわが嫌いな食べ物は？",
+    "category": "深堀り問題",
+    "dormitory": "wa",
+    "difficulty": 4,
+    "answers": [
+      "桃",
+      "ラーメン",
+      "たこ焼き",
+      "マヌカハニー"
+    ],
+    "genre": "趣味嗜好",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "",
+    "source_url": "https://x.com/Amatoawa/status/1955996243957833797",
+    "questioner": ""
+  },
+  {
+    "question": "2025年8月のバゥ寮オフコラボの主催者は誰？",
+    "category": "深堀り問題",
+    "dormitory": "wa",
+    "difficulty": 3,
+    "answers": [
+      "天透あわ",
+      "フローレ・ブランカ",
+      "黄金つむぎ",
+      "堂下さとり"
+    ],
+    "genre": "コラボ",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "",
+    "source_url": "https://x.com/Amatoawa/status/1955996243957833797",
     "questioner": ""
   },
   {
@@ -2574,6 +2736,24 @@
     "questioner": ""
   },
   {
+    "question": "夢ト見りんねが神ゲーだと言っていたゲームは？",
+    "category": "深堀り問題",
+    "dormitory": "wa",
+    "difficulty": 3,
+    "answers": [
+      "APEX",
+      "VALORANT\r",
+      "LoL",
+      "CoD"
+    ],
+    "genre": "趣味嗜好",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "",
+    "source_url": "https://x.com/search?q=Yumetomi_Rinne%20APEX&src=typed_query&f=live",
+    "questioner": ""
+  },
+  {
     "question": "黄金つむぎのファンネームは？",
     "category": "深堀り問題",
     "dormitory": "wa",
@@ -2604,6 +2784,24 @@
     ],
     "genre": "容姿",
     "hide_icon": true,
+    "sort_answers": false,
+    "comment": "",
+    "source_url": "",
+    "questioner": ""
+  },
+  {
+    "question": "黄金つむぎが好きなパンは？",
+    "category": "深堀り問題",
+    "dormitory": "wa",
+    "difficulty": 2,
+    "answers": [
+      "メロンパン",
+      "チョココロネ",
+      "カレーパン",
+      "クロワッサン"
+    ],
+    "genre": "プロフィール",
+    "hide_icon": false,
     "sort_answers": false,
     "comment": "",
     "source_url": "",
@@ -2757,7 +2955,7 @@
     "question": "クリスマスイベント時の公約でシチュエーションボイスを5本投稿した人は？",
     "category": "深堀り問題",
     "dormitory": "wa",
-    "difficulty": 5,
+    "difficulty": 4,
     "answers": [
       "斗瀬ひおり",
       "",
@@ -2769,6 +2967,24 @@
     "sort_answers": false,
     "comment": "",
     "source_url": "https://www.tiktok.com/@tosetidde71",
+    "questioner": ""
+  },
+  {
+    "question": "斗瀬ひおりが好きなカップヌードルの味は？",
+    "category": "深堀り問題",
+    "dormitory": "wa",
+    "difficulty": 5,
+    "answers": [
+      "トムヤムクン",
+      "シーフード",
+      "グリーンカレー",
+      "チリトマト"
+    ],
+    "genre": "趣味嗜好",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "「色々味があって飽きずに楽しめるわよね〜🍜」",
+    "source_url": "https://x.com/tose_hiori/status/1968472211045707922",
     "questioner": ""
   },
   {
@@ -3063,7 +3279,7 @@
     "question": "ネームロゴに黒帯が描かれているのは誰？",
     "category": "深堀り問題",
     "dormitory": "wh",
-    "difficulty": 3,
+    "difficulty": 2,
     "answers": [
       "桜堂ねる",
       "",
@@ -3075,6 +3291,24 @@
     "sort_answers": false,
     "comment": "",
     "source_url": "",
+    "questioner": ""
+  },
+  {
+    "question": "桜堂ねるが年末年始に食べていた珍しい根菜は？",
+    "category": "深堀り問題",
+    "dormitory": "wh",
+    "difficulty": 4,
+    "answers": [
+      "ちょろぎ",
+      "くわい",
+      "パースニップ",
+      "ヤーコン"
+    ],
+    "genre": "エピソード",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "「ダイソーにもあるんだって。いつかたべてみてー！」",
+    "source_url": "https://x.com/oudoneru/status/2006314003233161223",
     "questioner": ""
   },
   {
@@ -3111,6 +3345,24 @@
     "sort_answers": false,
     "comment": "",
     "source_url": "https://www.parerdemia.jp/students/25WH007",
+    "questioner": ""
+  },
+  {
+    "question": "久堂れしあの初めての歌ってみた動画の曲は？",
+    "category": "深堀り問題",
+    "dormitory": "wh",
+    "difficulty": 5,
+    "answers": [
+      "ボーイフレンド/aiko",
+      "新宝島/サカナクション",
+      "アイドル/YOASOBI",
+      "うっせぇわ/Ado"
+    ],
+    "genre": "エピソード",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "「歌ってみたで最初に出すのはこれだと決めていたのだ\r」",
+    "source_url": "https://x.com/reshia_kudou/status/1914596538975981640",
     "questioner": ""
   },
   {
@@ -3243,7 +3495,7 @@
     "question": "水無瀬天が好きな言葉は？",
     "category": "深堀り問題",
     "dormitory": "wh",
-    "difficulty": 5,
+    "difficulty": 3,
     "answers": [
       "止まない雨はない",
       "雨降って地固まる",
@@ -3255,6 +3507,24 @@
     "sort_answers": false,
     "comment": "",
     "source_url": "https://x.com/Minase_Ame/status/1921238374435672232",
+    "questioner": ""
+  },
+  {
+    "question": "水無瀬天がお土産でもらって「食べ方がわかりませんでした…」と困惑したものは？",
+    "category": "深堀り問題",
+    "dormitory": "wh",
+    "difficulty": 5,
+    "answers": [
+      "安倍川餅",
+      "桔梗信玄餅",
+      "陣太鼓",
+      "ベイクドモチョチョ"
+    ],
+    "genre": "エピソード",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "",
+    "source_url": "https://x.com/Minase_Ame/status/1965100712846917830",
     "questioner": ""
   },
   {

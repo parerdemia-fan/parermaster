@@ -134,37 +134,6 @@ export function HelpScreen() {
             </p>
           </div>
         </section>
-
-        {/* 問題募集 */}
-        <section style={{ marginBottom: '4cqmin' }}>
-          <h2
-            className="text-black-400 font-bold"
-            style={{ fontSize: '4.5cqmin', marginBottom: '2cqmin' }}
-          >
-            【重要】問題を募集しています！
-          </h2>
-          <div
-            className="leading-relaxed"
-            style={{ fontSize: '3.5cqmin', marginBottom: '2cqmin' }}
-          >
-            <p>
-              申し訳ありません。現在「100問モード」と上位の称号はロックされています。 ゲームディレクターが問題を制作してきましたが、深堀り問題は83問・超深堀り問題は90問でネタが尽きてしまいました……。ロック解除には、あと少し問題数が足りません。 よろしければ、下記のGoogleフォームからあなたの知識を分けていただけないでしょうか？ 100問に到達次第、すぐに解放します！
-            </p>
-          </div>
-          <ThreePatchButton
-            leftImage="./data/images/ui/btn_normal_off_left.png"
-            middleImage="./data/images/ui/btn_normal_off_middle.png"
-            rightImage="./data/images/ui/btn_normal_off_right.png"
-            onClick={() => window.open(QUESTION_FORM_URL, '_blank', 'noopener,noreferrer')}
-            height="7cqmin"
-            fontSize="3.5cqmin"
-            textColor="#CCC"
-            className="selection-card"
-          >
-            📝 問題を投稿する
-          </ThreePatchButton>
-        </section>
-
         {/* リンク */}
         <section style={{ marginBottom: '4.5cqmin' }}>
           <h2
@@ -198,6 +167,19 @@ export function HelpScreen() {
               className="selection-card"
             >
               𝕏 シェアする
+            </ThreePatchButton>
+            <br />
+            <ThreePatchButton
+              leftImage="./data/images/ui/btn_normal_off_left.png"
+              middleImage="./data/images/ui/btn_normal_off_middle.png"
+              rightImage="./data/images/ui/btn_normal_off_right.png"
+              onClick={() => window.open(QUESTION_FORM_URL, '_blank', 'noopener,noreferrer')}
+              height="7cqmin"
+              fontSize="3.5cqmin"
+              textColor="#CCC"
+              className="selection-card"
+            >
+              📝 問題を投稿する
             </ThreePatchButton>
           </div>
         </section>
