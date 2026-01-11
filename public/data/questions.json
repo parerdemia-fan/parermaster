@@ -877,8 +877,26 @@
     "genre": "エピソード",
     "hide_icon": false,
     "sort_answers": false,
-    "comment": "その後無事復旧しました。が、その3週間後に再び年齢制限でBANされました。なぜ・・？",
+    "comment": "その後無事復旧しました。が、その3週間後に再び年齢制限でBANされました。なぜ・・？ ",
     "source_url": "https://www.youtube.com/shorts/whBV-PC8VhQ",
+    "questioner": ""
+  },
+  {
+    "question": "肇明日空の名前の由来は？",
+    "category": "深堀り問題",
+    "dormitory": "co",
+    "difficulty": 1,
+    "answers": [
+      "明日から始める",
+      "初めて見る明日の空",
+      "明日から推してほしい",
+      "先延ばしにしがちな自分への戒め"
+    ],
+    "genre": "プロフィール",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "",
+    "source_url": "https://www.youtube.com/shorts/b9cEGbIW-ys",
     "questioner": ""
   },
   {
@@ -1494,6 +1512,24 @@
     "questioner": ""
   },
   {
+    "question": "ミュゥ寮マイクラサーバーで最初の建物(プレハブ)を建てた人は？",
+    "category": "深堀り問題",
+    "dormitory": "me",
+    "difficulty": 4,
+    "answers": [
+      "緋雨柚",
+      "灯野ぺけ。",
+      "鈴木沙透",
+      "亀城ちかり"
+    ],
+    "genre": "エピソード",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "灯野ぺけ。「やっぱり頼れるのはゆずぴだったか…🥹🥹」",
+    "source_url": "https://x.com/Hisame_Yuzu/status/2010067679005335583",
+    "questioner": ""
+  },
+  {
     "question": "ファンネームが華の民なのは？",
     "category": "深堀り問題",
     "dormitory": "me",
@@ -1887,6 +1923,24 @@
     "sort_answers": false,
     "comment": "",
     "source_url": "",
+    "questioner": ""
+  },
+  {
+    "question": "恋歌さわこが「午年なので踊ってみました！」という動画で踊っていた曲は？",
+    "category": "深堀り問題",
+    "dormitory": "me",
+    "difficulty": 5,
+    "answers": [
+      "ウッーウッーウマウマ",
+      "うまぴょい伝説",
+      "江南スタイル",
+      "U.M.A. NEW WORLD!!"
+    ],
+    "genre": "エピソード",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "",
+    "source_url": "https://www.youtube.com/shorts/A5pheV-GZZY",
     "questioner": ""
   },
   {
@@ -3438,6 +3492,24 @@
     "questioner": ""
   },
   {
+    "question": "BackStage Rookie Challenge Vol.4でNo.2だった人は？",
+    "category": "深堀り問題",
+    "dormitory": "wh",
+    "difficulty": 5,
+    "answers": [
+      "満力きぃ",
+      "",
+      "",
+      ""
+    ],
+    "genre": "イベント",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "",
+    "source_url": "https://x.com/BSapp_/status/1972507385450377392",
+    "questioner": ""
+  },
+  {
     "question": "ファンマークが🥀⚔️の、記憶を亡くした祓魔師といえば？",
     "category": "深堀り問題",
     "dormitory": "wh",
@@ -3531,7 +3603,7 @@
     "question": "水無瀬天がお土産でもらって「食べ方がわかりませんでした…」と困惑したものは？",
     "category": "深堀り問題",
     "dormitory": "wh",
-    "difficulty": 5,
+    "difficulty": 4,
     "answers": [
       "安倍川餅",
       "桔梗信玄餅",
@@ -3543,6 +3615,24 @@
     "sort_answers": false,
     "comment": "",
     "source_url": "https://x.com/Minase_Ame/status/1965100712846917830",
+    "questioner": ""
+  },
+  {
+    "question": "9.5cmヒールで劇ムズ足ダンスの踊ってみた動画を出したのは誰？",
+    "category": "深堀り問題",
+    "dormitory": "wh",
+    "difficulty": 5,
+    "answers": [
+      "水無瀬天",
+      "",
+      "",
+      ""
+    ],
+    "genre": "特技・所作",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "",
+    "source_url": "https://www.youtube.com/shorts/Y4uGDCB6ycc",
     "questioner": ""
   },
   {
