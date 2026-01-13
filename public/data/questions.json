@@ -360,6 +360,24 @@
     "questioner": ""
   },
   {
+    "question": "パレ学1期生の全員の名前に含まれる漢数字、全部足すといくつ？",
+    "category": "深堀り問題",
+    "dormitory": "all",
+    "difficulty": 4,
+    "answers": [
+      "122",
+      "14",
+      "32",
+      "108"
+    ],
+    "genre": "プロフィール",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "月百ぷかり 八重森ふゆの 七扇ヲトメ 七音うら",
+    "source_url": "",
+    "questioner": ""
+  },
+  {
     "question": "朧月ひかるのネームロゴの特徴は？",
     "category": "深堀り問題",
     "dormitory": "co",
@@ -900,6 +918,24 @@
     "questioner": ""
   },
   {
+    "question": "肇明日空がTikTokのハートミーをもらったときのファンサは？",
+    "category": "深堀り問題",
+    "dormitory": "co",
+    "difficulty": 2,
+    "answers": [
+      "あすからハート",
+      "あすからビーム",
+      "ハジメのハート",
+      "葉っぱハッピー"
+    ],
+    "genre": "特技・所作",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "",
+    "source_url": "",
+    "questioner": ""
+  },
+  {
     "question": "畑スイカのファンネームは？",
     "category": "深堀り問題",
     "dormitory": "co",
@@ -1129,7 +1165,7 @@
     "genre": "趣味嗜好",
     "hide_icon": false,
     "sort_answers": false,
-    "comment": "",
+    "comment": "間違えた人は「あぶりカルビ」と10回言ってください",
     "source_url": "https://youtu.be/zpBQZYy_TAA?t=4850",
     "questioner": ""
   },
