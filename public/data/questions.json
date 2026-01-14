@@ -367,8 +367,8 @@
     "answers": [
       "122",
       "14",
-      "32",
-      "108"
+      "10122",
+      "1115"
     ],
     "genre": "プロフィール",
     "hide_icon": false,
@@ -3309,6 +3309,24 @@
     "sort_answers": false,
     "comment": "",
     "source_url": "",
+    "questioner": ""
+  },
+  {
+    "question": "藤森ちとせの第1回投票イベント賞品の新衣装ビジュアルの特徴は？",
+    "category": "深堀り問題",
+    "dormitory": "wh",
+    "difficulty": 3,
+    "answers": [
+      "涙メガネと三つ編みリング",
+      "藤の花が咲いている",
+      "ゴシックロリータ",
+      "彼シャツ風ルームウェア"
+    ],
+    "genre": "容姿",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "[image:fujinomori_fudangi.png]",
+    "source_url": "https://x.com/parerdemia/status/2011030492670542064",
     "questioner": ""
   },
   {
