@@ -594,21 +594,21 @@
     "questioner": ""
   },
   {
-    "question": "[image:sakuraba_zoom.png]この眼は誰？",
+    "question": "桜庭羽奈が嫌いな食べ物は？",
     "category": "深堀り問題",
     "dormitory": "co",
-    "difficulty": 2,
+    "difficulty": 4,
     "answers": [
-      "桜庭羽奈",
-      "夜宵カレン",
-      "彼方ルカ",
-      "ローズ・ダマスクハート"
+      "パクチー",
+      "納豆",
+      "ピーマン",
+      "トマト"
     ],
-    "genre": "容姿",
-    "hide_icon": true,
+    "genre": "趣味嗜好",
+    "hide_icon": false,
     "sort_answers": false,
-    "comment": "",
-    "source_url": "",
+    "comment": "桜庭羽奈「熱狂的なファンがいる系アイドルじゃないですか？パクチーさんって」",
+    "source_url": "https://youtu.be/bI6r6ZZjlZU?t=4656",
     "questioner": ""
   },
   {
@@ -987,6 +987,24 @@
     "sort_answers": false,
     "comment": "スイカ＜うと＜ほわり＜あすから",
     "source_url": "",
+    "questioner": ""
+  },
+  {
+    "question": "お料理対決オフコラボの英語のお買い物リストで畑スイカがわからなかったものは？",
+    "category": "深堀り問題",
+    "dormitory": "co",
+    "difficulty": 4,
+    "answers": [
+      "塩(Salt)",
+      "コショウ(Pepper)",
+      "玉ねぎ(1 Onion)",
+      "卵(10 Eggs)"
+    ],
+    "genre": "コラボ",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "「予想で買えました！」",
+    "source_url": "https://youtu.be/_Oir6eSVf3Q?t=229",
     "questioner": ""
   },
   {
