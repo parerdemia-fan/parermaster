@@ -2011,7 +2011,7 @@
     "genre": "エピソード",
     "hide_icon": false,
     "sort_answers": false,
-    "comment": "",
+    "comment": "「㊗️万バズ！！ 死ぬほど頑張って描いたからめちゃ嬉しい！！ ありがとう！！！」",
     "source_url": "https://www.youtube.com/shorts/A5pheV-GZZY",
     "questioner": ""
   },
@@ -2228,6 +2228,24 @@
     "hide_icon": false,
     "sort_answers": false,
     "comment": "",
+    "source_url": "",
+    "questioner": ""
+  },
+  {
+    "question": "「マミ子」と呼ばれることがある人は誰？",
+    "category": "深堀り問題",
+    "dormitory": "me",
+    "difficulty": 3,
+    "answers": [
+      "東雲アカリ",
+      "",
+      "",
+      ""
+    ],
+    "genre": "エピソード",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "誰か由来を教えてください。Grokさんによると言動がママっぽいかららしいけど本当？",
     "source_url": "",
     "questioner": ""
   },
@@ -3183,6 +3201,24 @@
     "sort_answers": false,
     "comment": "",
     "source_url": "https://x.com/Aka_kurogane_/status/1974813687799328906",
+    "questioner": ""
+  },
+  {
+    "question": "以下のボカロ曲が好きだとツイートした人は？\n『毒占欲』『合い鳴き』『名のない星が空に落ちたら』『GEDO』『タランタ・ラ・ムジカ』",
+    "category": "深堀り問題",
+    "dormitory": "wh",
+    "difficulty": 4,
+    "answers": [
+      "黒鋼亜華",
+      "",
+      "",
+      ""
+    ],
+    "genre": "趣味嗜好",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "",
+    "source_url": "https://x.com/Aka_kurogane_/status/2012061144056545368",
     "questioner": ""
   },
   {
