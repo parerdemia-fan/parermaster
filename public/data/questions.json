@@ -2703,7 +2703,7 @@
     "question": "おでんTier表を作ったのは誰？",
     "category": "深堀り問題",
     "dormitory": "wa",
-    "difficulty": 4,
+    "difficulty": 3,
     "answers": [
       "堂下さとり",
       "",
@@ -2715,6 +2715,24 @@
     "sort_answers": false,
     "comment": "「1番人気は大根！！」",
     "source_url": "https://x.com/doushitasatori/status/1999198751957877117",
+    "questioner": ""
+  },
+  {
+    "question": "2025年に堂下さとりが食べたソフトクリームの数は？",
+    "category": "深堀り問題",
+    "dormitory": "wa",
+    "difficulty": 4,
+    "answers": [
+      "547個",
+      "389個",
+      "216個",
+      "155個"
+    ],
+    "genre": "エピソード",
+    "hide_icon": false,
+    "sort_answers": true,
+    "comment": "堂下さとり「本人的にはあんまり納得いってないです。もっとやれました。」",
+    "source_url": "https://www.youtube.com/shorts/Qd5sgF_3GOU",
     "questioner": ""
   },
   {
