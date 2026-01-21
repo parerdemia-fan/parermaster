@@ -3834,6 +3834,24 @@
     "questioner": ""
   },
   {
+    "question": "亡国の王女でたびたび海外に出張するなど世界で活躍している寮生は？",
+    "category": "深堀り問題",
+    "dormitory": "wh",
+    "difficulty": 2,
+    "answers": [
+      "ローズ・ダマスクハート",
+      "",
+      "",
+      ""
+    ],
+    "genre": "活動",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "",
+    "source_url": "https://x.com/i/status/2010543027031568892",
+    "questioner": ""
+  },
+  {
     "question": "七人弟妹の長女の人は？",
     "category": "深堀り問題",
     "dormitory": "wh",
