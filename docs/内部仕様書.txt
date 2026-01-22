@@ -674,5 +674,20 @@ const talents: Talent[] = await talentsRes.json();
 - データ:
   - ss.jsonから読み込み
 - イベント:
-  - 閉じるボタン → closeSS()
+  - 閉じるボタン → 通常は closeSS()、特別演出条件時は演出シーケンス開始
+- 特別演出:
+  - 発動条件: 一度でも最下部までスクロールした後に閉じるボタンを押す
+  - 演出フロー:
+    1. noise1（2秒）: SSコンテンツ上にグリッチノイズを表示
+    2. pa（1.5秒）: 黒背景に白い巨大な「ぱ」を表示（徐々に拡大）
+    3. pa_noise（2秒）: 「ぱ」表示にグリッチノイズを重ねて表示
+    4. 画面を閉じる（closeSS()）
+  - ステート管理:
+    - hasReachedBottom: 最下部到達フラグ（一度trueになったら維持）
+    - effectPhase: 演出フェーズ（'none' | 'noise1' | 'pa' | 'pa_noise'）
+  - CSS:
+    - .noise-overlay: グリッチノイズエフェクト
+    - .pa-display, .pa-character: 「ぱ」表示用スタイル
+    - @keyframes noiseAnimation, noiseAnimation2: ノイズアニメーション
+    - @keyframes paGrow: 「ぱ」拡大アニメーション
 
