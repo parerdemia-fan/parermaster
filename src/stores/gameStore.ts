@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import type { RawQuestion, ProcessedQuestion, Talent, ScreenType, QuizState, GameStage, Category, Achievement } from '../types';
+import type { RawQuestion, ProcessedQuestion, Talent, ScreenType, QuizState, GameStage, Category, Achievement, AnswerSet } from '../types';
 import { DEV_MODE } from '../config';
 import { buildTalentNameMap } from '../utils/talentIconParser';
 
@@ -368,6 +368,7 @@ interface GameState {
   screen: ScreenType;
   rawQuestions: RawQuestion[];    // JSONから読み込んだ生データ
   talents: Talent[];              // タレントデータ
+  answerSets: AnswerSet[];        // 選択肢セットデータ
   questions: ProcessedQuestion[]; // 処理済み問題データ（ゲーム中に使用）
   currentIndex: number;
   quizState: QuizState;
@@ -435,16 +436,29 @@ export const shuffleArray = <T>(array: T[]): T[] => {
 };
 
 /**
- * 空の選択肢をタレント名で補完する
+ * [セット名] 形式かどうかを判定し、セット名を抽出する
+ * @param answer 選択肢文字列
+ * @returns セット名（形式が一致しない場合はnull）
+ */
+const extractAnswerSetName = (answer: string): string | null => {
+  const match = answer.match(/^\[(.+)\]$/);
+  return match ? match[1] : null;
+};
+
+/**
+ * 空の選択肢や[セット名]形式の選択肢をタレント名で補完する
  * @param answers 元の選択肢配列
  * @param talents タレントリスト
+ * @param answerSets 選択肢セットリスト
+ * @param dormitory 出題範囲（寮コード）
  * @returns 補完済みの選択肢配列
  */
-export const fillEmptyAnswers = (answers: string[], talents: Talent[], dormitory: string): string[] => {
+export const fillEmptyAnswers = (answers: string[], talents: Talent[], answerSets: AnswerSet[], dormitory: string): string[] => {
   const result = [...answers];
-  const usedNames = new Set(result.filter(a => a !== ''));
+  // 正答（answers[0]）と既存の有効な選択肢を除外対象として収集
+  const usedNames = new Set(result.filter(a => a !== '' && !extractAnswerSetName(a)));
 
-  // シャッフルしたタレントリストから選択
+  // シャッフルしたタレントリストから選択（フォールバック用）
   const shuffledTalents = shuffleArray(talents);
   let talentIndex = 0;
 
@@ -457,6 +471,26 @@ export const fillEmptyAnswers = (answers: string[], talents: Talent[], dormitory
       }
     }
 
+    // [セット名] 形式の処理
+    const setName = extractAnswerSetName(result[i]);
+    if (setName) {
+      const answerSet = answerSets.find(s => s.name === setName);
+      if (answerSet) {
+        // 使用済みの値を除外した候補リストを作成
+        const candidates = answerSet.answers.filter(a => !usedNames.has(a));
+        if (candidates.length > 0) {
+          // ランダムに1つ選択
+          const selectedAnswer = candidates[Math.floor(Math.random() * candidates.length)];
+          result[i] = selectedAnswer;
+          usedNames.add(selectedAnswer);
+          continue;
+        }
+      }
+      // セットが見つからない、または候補が不足している場合は空文字列として扱う
+      result[i] = '';
+    }
+
+    // 空文字列の処理（フォールバック）
     if (result[i] === '') {
       // 重複しないタレント名を探す
       while (talentIndex < shuffledTalents.length) {
@@ -484,11 +518,13 @@ export const fillEmptyAnswers = (answers: string[], talents: Talent[], dormitory
  * 生の問題データを処理済みデータに変換する
  * @param rawQuestion 生の問題データ
  * @param talents タレントリスト
+ * @param answerSets 選択肢セットリスト
+ * @param dormitory 出題範囲（寮コード）
  * @returns 処理済み問題データ
  */
-export const processQuestion = (rawQuestion: RawQuestion, talents: Talent[], dormitory: string): ProcessedQuestion => {
-  // 空の選択肢をタレント名で補完
-  const filledAnswers = fillEmptyAnswers(rawQuestion.answers, talents, dormitory);
+export const processQuestion = (rawQuestion: RawQuestion, talents: Talent[], answerSets: AnswerSet[], dormitory: string): ProcessedQuestion => {
+  // 空の選択肢や[セット名]形式の選択肢をタレント名で補完
+  const filledAnswers = fillEmptyAnswers(rawQuestion.answers, talents, answerSets, dormitory);
 
   // 正解は常にanswers[0]
   const correctAnswer = filledAnswers[0];
@@ -788,6 +824,7 @@ export const useGameStore = create<GameState>((set, get) => ({
   screen: 'title',
   rawQuestions: [],
   talents: [],
+  answerSets: [],
   questions: [],
   currentIndex: 0,
   quizState: 'answering',
@@ -810,17 +847,19 @@ export const useGameStore = create<GameState>((set, get) => ({
   loadQuestions: async () => {
     // 開発モードの場合は動作確認用データを使用
     const questionsPath = DEV_MODE ? './data/questions_dev.json' : './data/questions.json';
-    const [questionsRes, talentsRes] = await Promise.all([
+    const [questionsRes, talentsRes, answerSetsRes] = await Promise.all([
       fetch(questionsPath),
       fetch('./data/talents.json'),
+      fetch('./data/answer_set.json'),
     ]);
     const rawQuestions: RawQuestion[] = await questionsRes.json();
     const talents: Talent[] = await talentsRes.json();
+    const answerSets: AnswerSet[] = await answerSetsRes.json();
 
     // タレント名マップを構築（アイコン表示用）
     buildTalentNameMap(talents);
 
-    set({ rawQuestions, talents });
+    set({ rawQuestions, talents, answerSets });
 
     // アチーブメントをロード
     get().loadAchievements();
@@ -971,7 +1010,7 @@ export const useGameStore = create<GameState>((set, get) => ({
   },
 
   startGame: () => {
-    const { rawQuestions, talents, questionRange, category, questionCount } = get();
+    const { rawQuestions, talents, answerSets, questionRange, category, questionCount } = get();
     let allQuestions: ProcessedQuestion[] = [];
 
     const rangedTalents = shuffleArray(talents.filter(t => {
@@ -989,7 +1028,7 @@ export const useGameStore = create<GameState>((set, get) => ({
     } else if (category === '基本問題') {
       // 難易度0の通常問題を全て順番に出題
       const filteredQuestions = rawQuestions.filter(q => q.difficulty === 0);
-      allQuestions = filteredQuestions.map(q => processQuestion(q, talents, questionRange));
+      allQuestions = filteredQuestions.map(q => processQuestion(q, talents, answerSets, questionRange));
     } else if (category.indexOf('深堀り問題') !== -1) {
       // 難易度と出題範囲でフィルタリング
       const difficultyMin = category === '深堀り問題' ? 1 : 3;
@@ -1004,7 +1043,7 @@ export const useGameStore = create<GameState>((set, get) => ({
       // difficultyでソート
       filteredQuestions.sort((a, b) => (a.difficulty ?? 0) - (b.difficulty ?? 0));
       // 処理済み問題に変換
-      allQuestions = filteredQuestions.map(q => processQuestion(q, talents, questionRange));
+      allQuestions = filteredQuestions.map(q => processQuestion(q, talents, answerSets, questionRange));
     }
 
     // allQuestionsにindexを付ける

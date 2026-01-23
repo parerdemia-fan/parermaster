@@ -86,13 +86,13 @@ describe('shuffleArray', () => {
 describe('fillEmptyAnswers', () => {
   it('空文字列がない場合はそのまま返す', () => {
     const answers = ['選択肢A', '選択肢B', '選択肢C', '選択肢D'];
-    const result = fillEmptyAnswers(answers, mockTalents, 'all');
+    const result = fillEmptyAnswers(answers, mockTalents, [], 'all');
     expect(result).toEqual(answers);
   });
 
   it('空文字列をタレント名で補完する', () => {
     const answers = ['正解', '', '', ''];
-    const result = fillEmptyAnswers(answers, mockTalents, 'all');
+    const result = fillEmptyAnswers(answers, mockTalents, [], 'all');
 
     // 空文字列がなくなっていること
     expect(result.filter(a => a === '').length).toBe(0);
@@ -104,7 +104,7 @@ describe('fillEmptyAnswers', () => {
 
   it('タレント名がそのまま使用される', () => {
     const answers = ['', '', '', ''];
-    const result = fillEmptyAnswers(answers, mockTalents, 'all');
+    const result = fillEmptyAnswers(answers, mockTalents, [], 'all');
 
     // すべての選択肢がタレント名と一致すること
     result.forEach(answer => {
@@ -114,7 +114,7 @@ describe('fillEmptyAnswers', () => {
 
   it('重複したタレント名を使用しない', () => {
     const answers = ['朧月ひかる', '', '', ''];
-    const result = fillEmptyAnswers(answers, mockTalents, 'all');
+    const result = fillEmptyAnswers(answers, mockTalents, [], 'all');
 
     // ユニークな選択肢のみ
     const uniqueAnswers = new Set(result.map(a => a.toLowerCase()));
@@ -130,7 +130,7 @@ describe('processQuestion', () => {
       sort_answers: false,
       difficulty: 1,
     };
-    const result = processQuestion(rawQuestion, mockTalents, 'all');
+    const result = processQuestion(rawQuestion, mockTalents, [], 'all');
 
     // 空文字列がなくなっていること
     expect(result.answers.filter(a => a === '').length).toBe(0);
@@ -147,7 +147,7 @@ describe('processQuestion', () => {
       sort_answers: true,
       difficulty: 1,
     };
-    const result = processQuestion(rawQuestion, mockTalents, 'all');
+    const result = processQuestion(rawQuestion, mockTalents, [], 'all');
 
     // 昇順にソートされていること
     const sorted = [...result.answers].sort((a, b) => a.localeCompare(b, 'ja'));
@@ -163,7 +163,7 @@ describe('processQuestion', () => {
       comment: 'これは解説です',
       difficulty: 1,
     };
-    const result = processQuestion(rawQuestion, mockTalents, 'all');
+    const result = processQuestion(rawQuestion, mockTalents, [], 'all');
 
     expect(result.comment).toBe('これは解説です');
   });

@@ -1,3 +1,9 @@
+// 選択肢セットデータ
+export type AnswerSet = {
+  name: string;      // セット名（例: "バゥ寮", "声劇サークル"）
+  answers: string[]; // そのセットに含まれる選択肢リスト
+};
+
 // タレントデータ
 export type Talent = {
   name: string;

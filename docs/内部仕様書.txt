@@ -30,6 +30,7 @@ parermaster/
 │       ├── questions.json      # 問題データ
 │       ├── questions_dev.json  # 動作確認用問題データ
 │       ├── talents.json        # タレントデータ
+│       ├── answer_set.json     # 選択肢セットデータ
 │       └── images/             # 画像ファイル（問題・解説用）
 ├── src/
 │   ├── components/
@@ -105,7 +106,7 @@ export type Talent = {
 // 問題データ（JSONから読み込んだ生データ）
 export type RawQuestion = {
   question: string;
-  answers: string[];       // answers[0]が正解、空文字列はタレント名で補完
+  answers: string[];       // answers[0]が正解、空文字列や[セット名]形式はタレント名等で補完
   category?: string;       // 問題のカテゴリ（プロフィール、エピソード等）
   sort_answers?: boolean;  // trueの場合は昇順ソート、false/未指定の場合はシャッフル
   comment?: string;        // 解説テキスト（オプショナル）
@@ -115,6 +116,12 @@ export type RawQuestion = {
   difficulty: number;      // 問題の難易度（1-5、必須）
   dormitory?: string;      // 関連する寮（出題範囲フィルタ用）
   questioner?: string;     // 出題者名（任意）
+};
+
+// 選択肢セットデータ（answer_set.jsonから読み込み）
+export type AnswerSet = {
+  name: string;      // セット名（例: "バゥ寮", "声劇サークル"）
+  answers: string[]; // そのセットに含まれる選択肢リスト
 };
 
 // 問題タイプ
@@ -198,6 +205,7 @@ interface AnswerRecord {
 | screen | ScreenType | 現在の画面 |
 | rawQuestions | RawQuestion[] | JSONから読み込んだ生問題データ |
 | talents | Talent[] | タレントデータ |
+| answerSets | AnswerSet[] | 選択肢セットデータ |
 | questions | ProcessedQuestion[] | 処理済み問題データ（ゲーム中に使用） |
 | currentIndex | number | 現在の問題インデックス |
 | quizState | QuizState | クイズ画面の状態 |
@@ -212,7 +220,7 @@ interface AnswerRecord {
 
 | アクション | 説明 |
 |-----------|------|
-| loadQuestions() | questions.jsonとtalents.jsonを読み込み |
+| loadQuestions() | questions.json、talents.json、answer_set.jsonを読み込み |
 | setQuestionCount(count) | 出題数を設定 |
 | setGameLevel(level) | ゲームレベルを設定 |
 | startGame() | ゲーム開始（問題をシャッフルし、選択された出題数分の問題を処理してタイトル→クイズ） |
@@ -236,8 +244,9 @@ interface AnswerRecord {
 | 関数 | 説明 |
 |-----|------|
 | shuffleArray(array) | Fisher-Yatesアルゴリズムで配列をシャッフル |
-| fillEmptyAnswers(answers, talents, dormitory) | 空文字列の選択肢をタレント名で補完（出題範囲でフィルタ） |
-| processQuestion(rawQuestion, talents, dormitory) | 生問題データを処理済みデータに変換（questionType: 'normal'） |
+| extractAnswerSetName(answer) | [セット名] 形式の選択肢からセット名を抽出（形式不一致ならnull） |
+| fillEmptyAnswers(answers, talents, answerSets, dormitory) | 空文字列や[セット名]形式の選択肢を補完（[セット名]は対応セットからランダム選択、フォールバックはタレント名） |
+| processQuestion(rawQuestion, talents, answerSets, dormitory) | 生問題データを処理済みデータに変換（questionType: 'normal'） |
 | generateFaceQuestion(talent, otherTalents, difficulty) | 顔当て問題を生成（タレント名を出題し、画像4枚を選択肢として表示） |
 | generateNameQuestion(talent, otherTalents, difficulty) | 名前当て問題を生成（画像を出題し、タレント名4つを選択肢として表示） |
 | generateTalentQuestions(talents, selectedTalents) | タレントリストから顔当て/名前当て問題をランダムに生成 |
