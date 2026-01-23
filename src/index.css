@@ -173,77 +173,153 @@ body {
   transform: translateY(0);
 }
 
-/* ノイズエフェクト（グリッチ風） */
-@keyframes noiseAnimation {
-  0% { clip-path: inset(5% 0 93% 0); }
-  5% { clip-path: inset(78% 0 7% 0); }
-  10% { clip-path: inset(22% 0 60% 0); }
-  15% { clip-path: inset(95% 0 3% 0); }
-  20% { clip-path: inset(12% 0 85% 0); }
-  25% { clip-path: inset(55% 0 30% 0); }
-  30% { clip-path: inset(3% 0 95% 0); }
-  35% { clip-path: inset(70% 0 15% 0); }
-  40% { clip-path: inset(42% 0 48% 0); }
-  45% { clip-path: inset(85% 0 10% 0); }
-  50% { clip-path: inset(8% 0 90% 0); }
-  55% { clip-path: inset(35% 0 50% 0); }
-  60% { clip-path: inset(92% 0 5% 0); }
-  65% { clip-path: inset(18% 0 80% 0); }
-  70% { clip-path: inset(62% 0 20% 0); }
-  75% { clip-path: inset(2% 0 97% 0); }
-  80% { clip-path: inset(48% 0 40% 0); }
-  85% { clip-path: inset(75% 0 10% 0); }
-  90% { clip-path: inset(28% 0 68% 0); }
-  95% { clip-path: inset(88% 0 2% 0); }
-  100% { clip-path: inset(5% 0 93% 0); }
+/* ===========================================
+   グリッチノイズエフェクト（サイバー風）
+   =========================================== */
+
+/* メインノイズ: 高速で帯が切り替わる（太さ: 2%〜25%、細め多め） */
+@keyframes glitchNoise1 {
+  0%   { clip-path: inset(40% 0 58% 0); transform: translate(-8px, 0); }   /* 2% 極細 */
+  5%   { clip-path: inset(10% 0 85% 0); transform: translate(10px, 0); }   /* 5% 細 */
+  10%  { clip-path: inset(75% 0 5% 0);  transform: translate(-5px, 0); }   /* 20% 太 */
+  15%  { clip-path: inset(25% 0 72% 0); transform: translate(15px, 0); }   /* 3% 極細 */
+  20%  { clip-path: inset(90% 0 8% 0);  transform: translate(-12px, 0); }  /* 2% 極細 */
+  25%  { clip-path: inset(5% 0 80% 0);  transform: translate(8px, 0); }    /* 15% 中太 */
+  30%  { clip-path: inset(55% 0 43% 0); transform: translate(-15px, 0); }  /* 2% 極細 */
+  35%  { clip-path: inset(80% 0 12% 0); transform: translate(5px, 0); }    /* 8% 細 */
+  40%  { clip-path: inset(15% 0 60% 0); transform: translate(-10px, 0); }  /* 25% 太 */
+  45%  { clip-path: inset(60% 0 38% 0); transform: translate(12px, 0); }   /* 2% 極細 */
+  50%  { clip-path: inset(35% 0 60% 0); transform: translate(-6px, 0); }   /* 5% 細 */
+  55%  { clip-path: inset(85% 0 12% 0); transform: translate(14px, 0); }   /* 3% 極細 */
+  60%  { clip-path: inset(3% 0 85% 0);  transform: translate(-8px, 0); }   /* 12% 中 */
+  65%  { clip-path: inset(70% 0 28% 0); transform: translate(6px, 0); }    /* 2% 極細 */
+  70%  { clip-path: inset(20% 0 75% 0); transform: translate(-14px, 0); }  /* 5% 細 */
+  75%  { clip-path: inset(50% 0 30% 0); transform: translate(10px, 0); }   /* 20% 太 */
+  80%  { clip-path: inset(8% 0 90% 0);  transform: translate(-5px, 0); }   /* 2% 極細 */
+  85%  { clip-path: inset(65% 0 28% 0); transform: translate(8px, 0); }    /* 7% 細 */
+  90%  { clip-path: inset(30% 0 65% 0); transform: translate(-12px, 0); }  /* 5% 細 */
+  95%  { clip-path: inset(95% 0 3% 0);  transform: translate(6px, 0); }    /* 2% 極細 */
+  100% { clip-path: inset(40% 0 58% 0); transform: translate(-8px, 0); }   /* 2% 極細 */
 }
 
-@keyframes noiseAnimation2 {
-  0% { clip-path: inset(52% 0 35% 0); }
-  5% { clip-path: inset(15% 0 83% 0); }
-  10% { clip-path: inset(80% 0 5% 0); }
-  15% { clip-path: inset(38% 0 45% 0); }
-  20% { clip-path: inset(90% 0 8% 0); }
-  25% { clip-path: inset(5% 0 92% 0); }
-  30% { clip-path: inset(60% 0 25% 0); }
-  35% { clip-path: inset(25% 0 73% 0); }
-  40% { clip-path: inset(72% 0 12% 0); }
-  45% { clip-path: inset(10% 0 88% 0); }
-  50% { clip-path: inset(45% 0 40% 0); }
-  55% { clip-path: inset(93% 0 5% 0); }
-  60% { clip-path: inset(2% 0 96% 0); }
-  65% { clip-path: inset(65% 0 18% 0); }
-  70% { clip-path: inset(32% 0 55% 0); }
-  75% { clip-path: inset(82% 0 3% 0); }
-  80% { clip-path: inset(20% 0 78% 0); }
-  85% { clip-path: inset(58% 0 30% 0); }
-  90% { clip-path: inset(8% 0 90% 0); }
-  95% { clip-path: inset(70% 0 15% 0); }
-  100% { clip-path: inset(52% 0 35% 0); }
+/* セカンダリノイズ: 異なるタイミング（太さ: 1%〜30%、バリエーション豊富） */
+@keyframes glitchNoise2 {
+  0%   { clip-path: inset(65% 0 34% 0); transform: translate(12px, 0); }   /* 1% 走査線 */
+  5%   { clip-path: inset(20% 0 70% 0); transform: translate(-6px, 0); }   /* 10% 中 */
+  10%  { clip-path: inset(88% 0 10% 0); transform: translate(15px, 0); }   /* 2% 極細 */
+  15%  { clip-path: inset(45% 0 25% 0); transform: translate(-10px, 0); }  /* 30% 極太 */
+  20%  { clip-path: inset(5% 0 93% 0);  transform: translate(8px, 0); }    /* 2% 極細 */
+  25%  { clip-path: inset(72% 0 26% 0); transform: translate(-14px, 0); }  /* 2% 極細 */
+  30%  { clip-path: inset(12% 0 80% 0); transform: translate(5px, 0); }    /* 8% 細 */
+  35%  { clip-path: inset(58% 0 40% 0); transform: translate(-8px, 0); }   /* 2% 極細 */
+  40%  { clip-path: inset(92% 0 6% 0);  transform: translate(12px, 0); }   /* 2% 極細 */
+  45%  { clip-path: inset(28% 0 50% 0); transform: translate(-5px, 0); }   /* 22% 太 */
+  50%  { clip-path: inset(78% 0 20% 0); transform: translate(10px, 0); }   /* 2% 極細 */
+  55%  { clip-path: inset(8% 0 88% 0);  transform: translate(-12px, 0); }  /* 4% 細 */
+  60%  { clip-path: inset(52% 0 47% 0); transform: translate(6px, 0); }    /* 1% 走査線 */
+  65%  { clip-path: inset(95% 0 3% 0);  transform: translate(-15px, 0); }  /* 2% 極細 */
+  70%  { clip-path: inset(35% 0 50% 0); transform: translate(8px, 0); }    /* 15% 中太 */
+  75%  { clip-path: inset(82% 0 17% 0); transform: translate(-6px, 0); }   /* 1% 走査線 */
+  80%  { clip-path: inset(18% 0 75% 0); transform: translate(14px, 0); }   /* 7% 細 */
+  85%  { clip-path: inset(48% 0 50% 0); transform: translate(-10px, 0); }  /* 2% 極細 */
+  90%  { clip-path: inset(2% 0 95% 0);  transform: translate(5px, 0); }    /* 3% 極細 */
+  95%  { clip-path: inset(68% 0 30% 0); transform: translate(-8px, 0); }   /* 2% 極細 */
+  100% { clip-path: inset(65% 0 34% 0); transform: translate(12px, 0); }   /* 1% 走査線 */
 }
 
+/* 画面全体のグリッチ（垂直ズレ） */
+@keyframes screenGlitch {
+  0%, 65%, 100% { transform: translateY(0) skewX(0); }
+  66% { transform: translateY(-3%) skewX(-0.5deg); }
+  68% { transform: translateY(2%) skewX(0.3deg); }
+  70% { transform: translateY(-5%) skewX(-0.8deg); }
+  72% { transform: translateY(4%) skewX(0.5deg); }
+  74% { transform: translateY(-2%) skewX(-0.3deg); }
+  76% { transform: translateY(3%) skewX(0.6deg); }
+  78% { transform: translateY(-4%) skewX(-0.4deg); }
+  80% { transform: translateY(1%) skewX(0.2deg); }
+}
+
+/* スキャンラインアニメーション */
+@keyframes scanlines {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 4px; }
+}
+
+/* ノイズオーバーレイコンテナ */
 .noise-overlay {
   position: absolute;
   inset: 0;
   pointer-events: none;
   z-index: 10000;
-  background-color: rgba(128, 128, 128, 0.3);
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.5' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  background-size: 300px 300px;
-  background-blend-mode: multiply;
-  animation: noiseAnimation 0.05s steps(10) infinite;
+  overflow: hidden;
 }
 
-/* 2つ目のノイズレイヤー（横にずれるグリッチ） */
+/* 画面全体のグリッチを適用するコンテンツラッパー */
+.ss-content-glitching {
+  animation: screenGlitch 0.8s steps(1) infinite;
+}
+
+/* スキャンラインオーバーレイ */
 .noise-overlay::before {
   content: '';
   position: absolute;
   inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.15) 0px,
+    rgba(0, 0, 0, 0.15) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  animation: scanlines 0.1s linear infinite;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* グリッチレイヤー共通スタイル */
+.glitch-layer {
+  position: absolute;
+  inset: 0;
   background: inherit;
-  transform: translateX(3px);
-  mix-blend-mode: difference;
-  animation: noiseAnimation2 0.07s steps(8) infinite;
+  pointer-events: none;
+}
+
+/* メイングリッチ（シアン） */
+.glitch-cyan {
+  background-color: rgba(0, 255, 255, 0.4);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-blend-mode: overlay;
+  mix-blend-mode: screen;
+  animation: glitchNoise1 0.08s steps(20) infinite;
+}
+
+/* レッドグリッチ（RGB分離） */
+.glitch-red {
+  background-color: rgba(255, 0, 50, 0.3);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-blend-mode: overlay;
+  mix-blend-mode: screen;
+  animation: glitchNoise2 0.06s steps(25) infinite;
+}
+
+/* ブルーグリッチ（RGB分離） */
+.glitch-blue {
+  background-color: rgba(50, 50, 255, 0.3);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-blend-mode: overlay;
+  mix-blend-mode: screen;
+  animation: glitchNoise1 0.07s steps(22) infinite reverse;
+}
+
+/* ホワイトノイズ（全体のザラザラ感） */
+.glitch-white {
+  background-color: rgba(255, 255, 255, 0.15);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='5'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-blend-mode: overlay;
+  mix-blend-mode: overlay;
+  opacity: 0.6;
+  animation: glitchNoise2 0.05s steps(30) infinite;
 }
 
 /* 「ぱ」表示用のスタイル */
