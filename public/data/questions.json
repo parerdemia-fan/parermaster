@@ -198,24 +198,6 @@
     "questioner": ""
   },
   {
-    "question": "パレデミア学園声劇サークルのサークル長さん様は誰？",
-    "category": "深堀り問題",
-    "dormitory": "all",
-    "difficulty": 4,
-    "answers": [
-      "田中ルイ",
-      "[声劇サークル]",
-      "[声劇サークル]",
-      "[声劇サークル]"
-    ],
-    "genre": "コラボ",
-    "hide_icon": false,
-    "sort_answers": false,
-    "comment": "彼方ルカ演じる田中ルイさんがサークル長です。",
-    "source_url": "https://www.youtube.com/live/dXpQnprMfQA",
-    "questioner": ""
-  },
-  {
     "question": "第2回パレデミア学園投票イベントで、寮の公約を出したのは？",
     "category": "深堀り問題",
     "dormitory": "me",
@@ -831,7 +813,7 @@
     "question": "これは誰のツイート？「人狼ゲームは！！！！いいぞ！！！！」",
     "category": "深堀り問題",
     "dormitory": "co",
-    "difficulty": 2,
+    "difficulty": 3,
     "answers": [
       "風野かなめ",
       "",
@@ -861,6 +843,24 @@
     "sort_answers": false,
     "comment": "",
     "source_url": "",
+    "questioner": ""
+  },
+  {
+    "question": "[image:kaname_pocket.png]風野かなめの部屋着のポケットに描かれているものは？",
+    "category": "深堀り問題",
+    "dormitory": "co",
+    "difficulty": 2,
+    "answers": [
+      "かえる",
+      "タコ",
+      "ひよことクリームパン",
+      "キメラ"
+    ],
+    "genre": "容姿",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "風野かなめ「どっからどうみてもかえるなんですけどっ！」",
+    "source_url": "https://youtu.be/DLncbiDZ4I4?t=1646",
     "questioner": ""
   },
   {
@@ -1035,6 +1035,24 @@
       "オカリナ",
       "ハーモニカ",
       "カホン"
+    ],
+    "genre": "特技・所作",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "",
+    "source_url": "",
+    "questioner": ""
+  },
+  {
+    "question": "山田スバルのプロフィールに書かれている特技、食肉と歌唱ともう一つは何？",
+    "category": "深堀り問題",
+    "dormitory": "co",
+    "difficulty": 2,
+    "answers": [
+      "人のクセを真似る",
+      "人の黒歴史を察する",
+      "人の血液型を当てる",
+      "人の体調を見抜く"
     ],
     "genre": "特技・所作",
     "hide_icon": false,
@@ -1293,6 +1311,24 @@
     "sort_answers": false,
     "comment": "",
     "source_url": "https://x.com/Ruka__Kanata/status/2000956092889882912",
+    "questioner": ""
+  },
+  {
+    "question": "パレデミア学園声劇サークルのサークル長さん様は誰？",
+    "category": "深堀り問題",
+    "dormitory": "co",
+    "difficulty": 4,
+    "answers": [
+      "田中ルイ",
+      "[声劇サークル]",
+      "[声劇サークル]",
+      "[声劇サークル]"
+    ],
+    "genre": "コラボ",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "彼方ルカ演じる田中ルイさんがサークル長です。",
+    "source_url": "https://www.youtube.com/live/dXpQnprMfQA",
     "questioner": ""
   },
   {
