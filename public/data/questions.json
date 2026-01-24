@@ -2610,6 +2610,24 @@
     "questioner": ""
   },
   {
+    "question": "雨海まるが人生初マインクラフト配信で仲間にした狼の名前は？",
+    "category": "深堀り問題",
+    "dormitory": "wa",
+    "difficulty": 4,
+    "answers": [
+      "吾郎",
+      "太郎",
+      "次郎",
+      "一郎"
+    ],
+    "genre": "エピソード",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "",
+    "source_url": "https://www.youtube.com/shorts/dyGWIGlJF20",
+    "questioner": ""
+  },
+  {
     "question": "パレ学1期生で最も背が低いのは？",
     "category": "深堀り問題",
     "dormitory": "wa",
@@ -3777,6 +3795,24 @@
     "sort_answers": false,
     "comment": "",
     "source_url": "https://x.com/search?q=hizukiroseblade%20%E3%83%81%E3%83%A3%E3%83%BC%E3%83%8F%E3%83%B3&src=typed_query&f=top",
+    "questioner": ""
+  },
+  {
+    "question": "緋月・ローズ・ブレイドがマシュマロで好きなアーティストを聞かれたときに名前を挙げた人は？",
+    "category": "深堀り問題",
+    "dormitory": "wh",
+    "difficulty": 5,
+    "answers": [
+      "水樹奈々",
+      "坂本真綾",
+      "DECO*27",
+      "みきとP"
+    ],
+    "genre": "エピソード",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "「好きなアーティスト！！いっぱいいるんだけど、この道を選んだ切っ掛けをくれたアーティストさんは水樹奈々様です☺️」",
+    "source_url": "https://marshmallow-qa.com/messages/10383928-5ce0-47bb-95c1-d249b15e99aa?utm_medium=twitter&utm_source=answer",
     "questioner": ""
   },
   {
