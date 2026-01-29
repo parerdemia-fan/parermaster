@@ -648,6 +648,24 @@
     "questioner": ""
   },
   {
+    "question": "拍手の音が「ぱちこぱちこぱー」の人は？",
+    "category": "深堀り問題",
+    "dormitory": "co",
+    "difficulty": 3,
+    "answers": [
+      "桜庭羽奈",
+      "",
+      "",
+      ""
+    ],
+    "genre": "所作",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "",
+    "source_url": "",
+    "questioner": ""
+  },
+  {
     "question": "[image:kani1.png]よくカニのヘアピン？をつけていたのは誰？",
     "category": "深堀り問題",
     "dormitory": "co",
@@ -735,6 +753,24 @@
     "sort_answers": false,
     "comment": "",
     "source_url": "https://x.com/senariruka/status/2006207510689243422",
+    "questioner": ""
+  },
+  {
+    "question": "「しもぶれ」のスタンプを作ったのは誰？",
+    "category": "深堀り問題",
+    "dormitory": "co",
+    "difficulty": 5,
+    "answers": [
+      "瀬奈りるか",
+      "",
+      "",
+      ""
+    ],
+    "genre": "エピソード",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "",
+    "source_url": "https://www.youtube.com/watch?v=lv7B7KL8EuI&t=42059s",
     "questioner": ""
   },
   {
@@ -1404,6 +1440,24 @@
     "questioner": ""
   },
   {
+    "question": "人気Vtuberメタばあちゃんほのか(87)の実の孫は誰？",
+    "category": "深堀り問題",
+    "dormitory": "co",
+    "difficulty": 5,
+    "answers": [
+      "天辻ゆらぐ",
+      "",
+      "",
+      ""
+    ],
+    "genre": "エピソード",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "登録者数7.5万人超の人気Vtuberメタばあちゃんほのか(87)と実の孫の雑談コラボ！↓↓↓",
+    "source_url": "https://www.youtube.com/watch?v=aGGLhj_KjyE",
+    "questioner": ""
+  },
+  {
     "question": "2025年10月に神社に絵馬を奉納した人は？",
     "category": "深堀り問題",
     "dormitory": "co",
@@ -1785,7 +1839,7 @@
     "question": "お正月グッズで羽子板を持っているのは誰？",
     "category": "深堀り問題",
     "dormitory": "me",
-    "difficulty": 2,
+    "difficulty": 3,
     "answers": [
       "灯野ぺけ。",
       "七音うら",
@@ -1797,6 +1851,24 @@
     "sort_answers": false,
     "comment": "[image:pekemaru_newyear.png]愛乃宮ゆめ「ぺけちゃの顔にたくさん落書きしたい。」",
     "source_url": "https://x.com/parerdemia/status/2008087610733035887",
+    "questioner": ""
+  },
+  {
+    "question": "灯野ぺけ。が配信の最後に必ずやることは何？",
+    "category": "深堀り問題",
+    "dormitory": "me",
+    "difficulty": 2,
+    "answers": [
+      "一本締め",
+      "太鼓をドンドコ叩く",
+      "提灯の消灯",
+      "花火を打ち上げる"
+    ],
+    "genre": "所作",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "",
+    "source_url": "",
     "questioner": ""
   },
   {
