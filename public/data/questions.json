@@ -2415,7 +2415,7 @@
     "question": "最終面接にメイド服を着ていったのは？",
     "category": "深堀り問題",
     "dormitory": "wa",
-    "difficulty": 5,
+    "difficulty": 4,
     "answers": [
       "犬丸なでこ",
       "",
@@ -2451,7 +2451,7 @@
     "question": "犬丸なでこがグルメイベントの賞品としてもらったものは？",
     "category": "深堀り問題",
     "dormitory": "wa",
-    "difficulty": 4,
+    "difficulty": 3,
     "answers": [
       "いくらの醤油漬け",
       "千疋屋のメロン",
@@ -2463,6 +2463,24 @@
     "sort_answers": false,
     "comment": "「おいしかったよおおおお❣️」",
     "source_url": "https://x.com/nadeko_inumaru/status/1989863000564781314",
+    "questioner": ""
+  },
+  {
+    "question": "犬丸なでこが誕生日凸待ち配信で覚えた言葉は？",
+    "category": "深堀り問題",
+    "dormitory": "wa",
+    "difficulty": 5,
+    "answers": [
+      "言質",
+      "下振れ",
+      "清一色",
+      "シュールストレミング"
+    ],
+    "genre": "エピソード",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "「現場取れましたじゃなくて言質取れましたって言えばいいのね！」",
+    "source_url": "https://www.youtube.com/watch?v=O-MN4m_2U4I&t=5511s",
     "questioner": ""
   },
   {
