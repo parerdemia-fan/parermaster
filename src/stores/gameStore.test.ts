@@ -23,6 +23,8 @@ const createMockTalent = (overrides: Partial<Talent>): Talent => ({
   hair_color: '',
   hair_style: '',
   mbti: '',
+  nickname: '',
+  first_person: '',
   url: '',
   tiktok_url: '',
   youtube_url: '',
