@@ -68,6 +68,8 @@ export function TalentListScreen() {
     { label: '誕生日', value: selectedTalent.birthday },
     { label: '身長', value: selectedTalent.height ? `${selectedTalent.height}cm` : '' },
     { label: '学籍番号', value: selectedTalent.student_id },
+    { label: 'ニックネーム', value: selectedTalent.nickname },
+    { label: '一人称', value: selectedTalent.first_person },
     { label: 'ファンネーム', value: selectedTalent.fan_name },
     { label: 'ファンマーク', value: selectedTalent.fan_mark },
     { label: 'MBTIタイプ', value: selectedTalent.mbti },
