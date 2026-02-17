@@ -216,6 +216,24 @@
     "questioner": ""
   },
   {
+    "question": "黄金つむぎが犬丸なでことのデートで会いに行った動物は？",
+    "category": "深堀り問題",
+    "dormitory": "wa",
+    "difficulty": 3,
+    "answers": [
+      "カメレオン",
+      "ウーパールーパー",
+      "アルパカ",
+      "ハシビロコウ"
+    ],
+    "genre": "エピソード",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "黄金つむぎ「🌟念願のカメレオンとご対面っ🦎💖」",
+    "source_url": "https://x.com/tsumugyu_gold/status/2023365062392738207",
+    "questioner": ""
+  },
+  {
     "question": "第2回パレデミア学園投票イベントで、寮の公約を出したのは？",
     "category": "深堀り問題",
     "dormitory": "me",
@@ -1242,6 +1260,24 @@
     "questioner": ""
   },
   {
+    "question": "クゥ寮で唯一ニーハイを履いてない人は？",
+    "category": "深堀り問題",
+    "dormitory": "co",
+    "difficulty": 5,
+    "answers": [
+      "桜雲ほわり",
+      "[クゥ寮]",
+      "[クゥ寮]",
+      "[クゥ寮]"
+    ],
+    "genre": "容姿",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "[image:howari_kv.png]",
+    "source_url": "",
+    "questioner": ""
+  },
+  {
     "question": "ミュゥ寮の名前の由来は猫の鳴き声ですが、猫乃間うとはどの寮？",
     "category": "深堀り問題",
     "dormitory": "co",
@@ -1671,6 +1707,24 @@
     "sort_answers": false,
     "comment": "",
     "source_url": "https://youtu.be/kStZKpKGwoM?t=2275",
+    "questioner": ""
+  },
+  {
+    "question": "脚に魚の形のステッカー？を貼っているのは誰？",
+    "category": "深堀り問題",
+    "dormitory": "me",
+    "difficulty": 4,
+    "answers": [
+      "氷雨セイ",
+      "[ミュゥ寮]",
+      "[ミュゥ寮]",
+      "[ミュゥ寮]"
+    ],
+    "genre": "容姿",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "[image:sei_sakana.png]",
+    "source_url": "",
     "questioner": ""
   },
   {
