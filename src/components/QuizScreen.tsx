@@ -43,19 +43,35 @@ function getQuestionWithImageFontSize(text: string): string {
 }
 
 /**
+ * テキストの視覚的な文字幅を計算する
+ * 全角文字は1.0、半角英数字・記号は0.65として計算
+ * @param text 対象テキスト
+ * @returns 視覚的な文字幅
+ */
+function getVisualLength(text: string): number {
+  let length = 0;
+  for (const char of text) {
+    // 半角英数字・半角記号（U+0020〜U+007E）は0.65、それ以外は1.0
+    if (char.charCodeAt(0) >= 0x20 && char.charCodeAt(0) <= 0x7E) {
+      length += 0.65;
+    } else {
+      length += 1;
+    }
+  }
+  return length;
+}
+
+/**
  * 回答選択肢の文字数に応じた文字サイズを取得する
+ * 半角文字は0.65文字分として計算
  * @param text 選択肢のテキスト
  * @returns CSS font-size値
  */
 function getAnswerFontSize(text: string): string {
-  const length = text.length;
-  console.log('Answer length:', length);
-  let size = 50 / length;
-  console.log('Calculated size:', size);
+  const length = getVisualLength(text);
+  const size = 50 / length;
   // 最大・最小値で制限
-  const res = `${Math.min(Math.max(size, 4), 8)}cqmin`
-  console.log('Answer font size:', res);
-  return res;
+  return `${Math.min(Math.max(size, 4), 8)}cqmin`;
 }
 
 function getFaceQuizFontSize(text: string): string {
@@ -70,7 +86,7 @@ function getFaceQuizFontSize(text: string): string {
 }
 
 function getFaceQuizAnswerFontSize(text: string): string {
-  const length = text.length;
+  const length = getVisualLength(text);
   if (length <= 5) {
     return '5.5cqmin';
   } else if (length <= 6) {
