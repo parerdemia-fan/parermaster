@@ -216,6 +216,24 @@
     "questioner": ""
   },
   {
+    "question": "クゥ寮の肇明日空艶島カオル桜雲ほわりによるユニットの名前は？",
+    "category": "深堀り問題",
+    "dormitory": "all",
+    "difficulty": 3,
+    "answers": [
+      "深夜組",
+      "気象観測班",
+      "宵闇倶楽部",
+      "クゥ寮三銃士"
+    ],
+    "genre": "コラボ",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "[image:shinyagumi.png]",
+    "source_url": "https://x.com/asukara_hajime/status/1960344945182810518",
+    "questioner": ""
+  },
+  {
     "question": "黄金つむぎが犬丸なでことのデートで会いに行った動物は？",
     "category": "深堀り問題",
     "dormitory": "wa",
@@ -2121,6 +2139,24 @@
     "sort_answers": false,
     "comment": "「英語きらいすぎて早々に諦めました。」",
     "source_url": "https://x.com/me_mairu/status/2013946402473451556",
+    "questioner": ""
+  },
+  {
+    "question": "Xでの投票によって決定した音海まいるのエゴサタグは？",
+    "category": "深堀り問題",
+    "dormitory": "me",
+    "difficulty": 4,
+    "answers": [
+      "のぞきにまいる",
+      "参れまいる",
+      "音海監視隊",
+      "はなまるまいる"
+    ],
+    "genre": "プロフィール",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "音海まいる「【#のぞきにまいる】に決定ー！！♡\nみんなたくさんつかってください^-^」",
+    "source_url": "https://x.com/me_mairu/status/2027299488751366350",
     "questioner": ""
   },
   {
