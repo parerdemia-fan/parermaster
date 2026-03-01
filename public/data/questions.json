@@ -3384,6 +3384,24 @@
     "questioner": ""
   },
   {
+    "question": "黄金つむぎが一番得意な料理は？",
+    "category": "深堀り問題",
+    "dormitory": "wa",
+    "difficulty": 3,
+    "answers": [
+      "だし巻き玉子",
+      "フレンチトースト",
+      "カステラ",
+      "黄金炒飯"
+    ],
+    "genre": "特技",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "",
+    "source_url": "https://youtu.be/KiRdNdiUy8c?t=1059",
+    "questioner": ""
+  },
+  {
     "question": "パレ学一期生で唯一の緑髪の人は？",
     "category": "深堀り問題",
     "dormitory": "wa",
