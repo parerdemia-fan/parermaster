@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content">
 <title>パレ学1期生クロスワード</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -574,7 +574,7 @@ function showOverlay() {
 
 function resetPopupStyle(p) {
   p.classList.remove('mobile-bottom');
-  p.style.left = ''; p.style.top = '';
+  p.style.left = ''; p.style.top = ''; p.style.bottom = '';
 }
 
 function hideAllPopups() {
@@ -811,6 +811,24 @@ if (answerCells.length > 0) {
 
 render();
 renderFinalAnswer();
+
+// Keyboard handler: push popup above IME on iOS Safari etc.
+function setupKeyboardHandler() {
+  if (!window.visualViewport) return;
+  function onViewportChange() {
+    var popup = document.querySelector('.mobile-bottom');
+    if (!popup) return;
+    var keyboardHeight = window.innerHeight - window.visualViewport.height;
+    if (keyboardHeight > 50) {
+      popup.style.bottom = keyboardHeight + 'px';
+    } else {
+      popup.style.bottom = '0';
+    }
+  }
+  window.visualViewport.addEventListener('resize', onViewportChange);
+  window.visualViewport.addEventListener('scroll', onViewportChange);
+}
+setupKeyboardHandler();
 
 // Hide answer button on non-local environments
 const isLocal = location.protocol === 'file:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1';
