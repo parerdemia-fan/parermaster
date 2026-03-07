@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>パレ学1期生クロスワード</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+  background: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 1.4rem;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+#info {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 12px;
+}
+
+#grid-container {
+  max-width: 95vw;
+  overflow-x: auto;
+  border: 2px solid #333;
+}
+
+#grid {
+  border-collapse: collapse;
+  background: #333;
+  border-spacing: 1px;
+}
+
+#grid td {
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  min-height: 34px;
+  max-width: 34px;
+  max-height: 34px;
+  position: relative;
+  padding: 0;
+  text-align: center;
+  vertical-align: middle;
+}
+
+td.b {
+  background: #333;
+}
+
+td.w {
+  background: #fff;
+  border: 1px solid #aaa;
+  cursor: pointer;
+}
+
+td.w.sel {
+  background: #bbdefb;
+}
+
+td.w.hl {
+  background: #e3f2fd;
+}
+
+td.w.ok {
+  background: #c8e6c9;
+}
+
+.n {
+  position: absolute;
+  top: 1px;
+  left: 2px;
+  font-size: 10px;
+  color: #d32f2f;
+  font-weight: bold;
+  pointer-events: none;
+  line-height: 1;
+}
+
+td.w.fa-cell {
+  background: #fff8e1;
+}
+
+td.w.fa-cell.sel {
+  background: #bbdefb;
+}
+
+td.w.fa-cell.hl {
+  background: #e3f2fd;
+}
+
+td.w.fa-cell.ok {
+  background: #c8e6c9;
+}
+
+#final-answer {
+  margin-top: 20px;
+  text-align: center;
+  max-width: 700px;
+  width: 100%;
+}
+
+#final-answer h2 {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+#fa-cells {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 10px;
+}
+
+.fa-box {
+  width: 38px;
+  height: 38px;
+  border: 2px solid #d32f2f;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: #111;
+  background: #fff;
+  position: relative;
+}
+
+.fa-box .fa-num {
+  position: absolute;
+  top: 1px;
+  left: 3px;
+  font-size: 9px;
+  color: #d32f2f;
+  font-weight: bold;
+}
+
+#fa-result {
+  font-size: 1rem;
+  min-height: 1.5em;
+}
+
+#fa-result.ok {
+  color: #2e7d32;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+#fa-result.ng {
+  color: #d32f2f;
+  font-weight: bold;
+}
+
+.c {
+  display: block;
+  width: 100%;
+  height: 100%;
+  line-height: 34px;
+  font-size: 17px;
+  color: #111;
+  pointer-events: none;
+}
+
+.c.hint {
+  color: #1565c0;
+  font-weight: bold;
+}
+
+.c.answer {
+  background: #fff9c4;
+}
+
+.c.vertical-bar {
+  transform: rotate(90deg);
+}
+
+#controls {
+  margin-top: 12px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+button {
+  padding: 8px 20px;
+  font-size: 0.9rem;
+  border: 1px solid #999;
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+}
+
+button:hover { background: #eee; }
+
+#msg {
+  margin-top: 12px;
+  font-size: 1rem;
+  color: #333;
+  min-height: 1.5em;
+}
+
+#msg.ok {
+  color: #2e7d32;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+#popup-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 99;
+}
+
+.floating-popup {
+  display: none;
+  position: absolute;
+  z-index: 100;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+  padding: 12px;
+}
+
+#dir-popup {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 140px;
+}
+
+#dir-popup .dir-choice {
+  font-size: 1.1rem;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 6px;
+  text-align: center;
+}
+
+#dir-popup .dir-choice:hover {
+  background: #e3f2fd;
+}
+
+#word-popup {
+  flex-direction: column;
+  padding: 10px 14px;
+  width: 200px;
+  box-sizing: border-box;
+}
+
+.floating-popup.mobile-bottom {
+  position: fixed !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  top: auto !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  border-radius: 12px 12px 0 0 !important;
+  box-sizing: border-box !important;
+}
+
+#word-popup-label {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #1565c0;
+  margin-bottom: 6px;
+  text-align: center;
+}
+
+#word-input {
+  font-size: 1.1rem;
+  padding: 6px 8px;
+  width: 100%;
+  border: 2px solid #1565c0;
+  border-radius: 6px;
+  ime-mode: active;
+  outline: none;
+  text-align: center;
+  letter-spacing: 0.1em;
+}
+
+#word-input:focus {
+  border-color: #0d47a1;
+  box-shadow: 0 0 0 2px rgba(21,101,192,0.15);
+}
+
+#word-error {
+  color: #d32f2f;
+  font-size: 0.8rem;
+  min-height: 1em;
+  margin-top: 3px;
+  text-align: center;
+}
+
+.word-popup-buttons {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.word-popup-buttons button {
+  flex: 1;
+  padding: 6px 0;
+  font-size: 0.85rem;
+  border-radius: 6px;
+}
+
+#word-ok {
+  background: #1565c0;
+  color: #fff;
+  border: 1px solid #1565c0;
+}
+
+#word-ok:hover {
+  background: #0d47a1;
+}
+
+#word-cancel {
+  background: #f5f5f5;
+  color: #333;
+}
+</style>
+</head>
+<body>
+
+<h1>パレ学1期生クロスワード</h1>
+<div id="info"></div>
+<div id="grid-container">
+  <table id="grid"></table>
+</div>
+<div id="controls">
+  <button id="btn-reset">リセット</button>
+  <button id="btn-answer">答えを見る</button>
+</div>
+<div id="msg"></div>
+<div id="final-answer" style="display:none;">
+  <h2>最終回答</h2>
+  <div id="fa-cells"></div>
+  <button id="btn-fa-check">最終回答を確認</button>
+  <div id="fa-result"></div>
+</div>
+<div id="popup-overlay"></div>
+<div id="dir-popup" class="floating-popup">
+  <button class="dir-choice" data-dir="across">→ よこ</button>
+  <button class="dir-choice" data-dir="down">↓ たて</button>
+</div>
+<div id="word-popup" class="floating-popup">
+  <div id="word-popup-label"></div>
+  <input id="word-input" type="text" inputmode="text" autocapitalize="off" autocomplete="off" autocorrect="off">
+  <div id="word-error"></div>
+  <div class="word-popup-buttons">
+    <button id="word-ok">OK</button>
+    <button id="word-cancel">キャンセル</button>
+  </div>
+</div>
+
+<script>
+const P = {"size":{"width":29,"height":24},"grid":[[null,"く","ろ","が","ね","あ","か",null,null,null,null,null,null,null,null,null,null,"か","げ","や","ま","あ1","げ","は",null,null,null,"し",null],[null,null,null,null,null,null,"な","な","お","う","ぎ","を","と","め",null,null,null,null,null,"え",null,"ら",null,null,null,null,null,"の",null],[null,null,null,null,null,null,"た",null,null,null,null,null,null,null,null,null,null,"あ",null,"も",null,"ま",null,null,"え",null,null,"の",null],[null,"ひ","の","ぺ","け","ま","る",null,null,null,"は",null,null,null,null,null,null,"ま","ん","り","き","き","ぃ",null,"の",null,null,"め",null],[null,"さ",null,null,null,null,"か","ざ","の","か","な","め",null,"あ",null,null,null,"と",null,"ふ",null,"る",null,null,"み","な","せ","あ","め"],["か","め","き","ち","か","り8",null,null,null,null,"は",null,"さ","い","だ","し","ゆ","あ",null,"ゆ",null,"ろ",null,null,"や",null,null,"か",null],[null,"ゆ",null,null,null,null,"や","よ","い","か","れ","ん",null,"ば",null,null,null,"わ",null,"の",null,"な",null,null,"ゆ",null,null,"り",null],["す","ず","き","さ","と","う",null,null,null,null,"り",null,null,"は",null,null,null,null,null,null,null,null,"ひ","さ","め","せ","い",null,null],[null,null,null,null,null,null,"ど",null,"さ","く","ら","ば","う","な",null,null,null,null,null,null,"ひ",null,"づ",null,null,null,null,null,null],[null,null,null,null,null,null,"う",null,null,"ど3",null,null,null,null,"お",null,null,null,"し",null,"な",null,"き",null,null,null,null,null,null],[null,null,null,null,"つ",null,"し","ん","ど","う","め","し","あ",null,"ぼ",null,null,null,"ぐ",null,"ぎ",null,"ろ",null,null,"や",null,null,null],[null,"こ",null,null,"や",null,"た",null,null,"れ",null,null,"ま",null,"ろ","ー","ず","だ","ま","す","く","は","ー7","と",null,"ま",null,null,null],[null,"が",null,null,"し",null,"さ",null,null,"し",null,null,"つ",null,"づ",null,null,null,"い",null,"の",null,"ず",null,null,"だ",null,null,null],[null,"ね","こ","の","ま","う","と",null,null,"あ",null,null,"じ",null,"き",null,"つ",null,"ん",null,"ん",null,"ぶ",null,null,"す",null,null,null],[null,"つ",null,null,"か",null,"り",null,null,null,null,null,"ゆ",null,"ひ",null,"き",null,"ぐ",null,null,null,"れ",null,null,"ば",null,null,null],[null,"む",null,null,"お",null,null,"ふ","ろ","ー9","れ","ぶ","ら","ん","か",null,"も",null,"ら",null,null,null,"い","ぬ","ま","る4","な","で","こ"],[null,"ぎ",null,null,"る",null,null,"じ",null,null,null,null,"ぐ",null,"る",null,"も",null,"む",null,null,null,"ど",null,null,null,null,null,"い"],[null,null,null,null,null,null,null,"の",null,null,null,null,null,"ゆ",null,null,"ぷ",null,null,null,null,"お",null,null,null,null,null,null,"う"],[null,null,null,"お",null,null,null,"も",null,null,null,"は","じ","め","あ","す","か","ら",null,"あ","い2","う","え","お","は","な",null,null,"た"],["り",null,null,"と","せ","ひ","お","り",null,null,null,"た",null,"と6",null,null,"り",null,null,"ま",null,"う",null,"う",null,"な",null,null,"さ"],["の",null,null,"み",null,null,null,"ち",null,null,null,"す",null,"み",null,null,null,null,null,"み",null,"ん",null,"ど",null,"お",null,null,"わ"],["せ",null,null,"ま",null,null,null,"と",null,null,null,"い",null,"り",null,null,null,null,null,"ま",null,"ほ",null,"う",null,"と","と","こ","こ"],["り",null,null,"い",null,null,null,"せ","な","り","る","か",null,"ん",null,null,null,null,null,"る",null,"わ",null,"ね",null,"う",null,null,null],["あ","い","す5","る","じ","ゅ",null,null,null,null,null,null,null,"ね",null,null,null,null,null,null,null,"り",null,"る",null,"ら",null,null,null]],"words":[{"id":43,"number":1,"direction":"across","text":"くろがねあか","x":1,"y":0,"length":6},{"id":13,"number":2,"direction":"down","text":"かなたるか","x":6,"y":0,"length":5},{"id":21,"number":3,"direction":"across","text":"かげやまあげは","x":17,"y":0,"length":7},{"id":44,"number":4,"direction":"down","text":"やえもりふゆの","x":19,"y":0,"length":7},{"id":16,"number":5,"direction":"down","text":"あらまきるろな","x":21,"y":0,"length":7},{"id":28,"number":6,"direction":"down","text":"しののめあかり","x":27,"y":0,"length":7},{"id":53,"number":7,"direction":"across","text":"ななおうぎをとめ","x":6,"y":1,"length":8},{"id":36,"number":8,"direction":"down","text":"あまとあわ","x":17,"y":2,"length":5},{"id":3,"number":9,"direction":"down","text":"えのみやゆめ","x":24,"y":2,"length":6},{"id":20,"number":10,"direction":"across","text":"ひのぺけまる","x":1,"y":3,"length":6},{"id":18,"number":10,"direction":"down","text":"ひさめゆず","x":1,"y":3,"length":5},{"id":46,"number":11,"direction":"down","text":"はなはれりら","x":10,"y":3,"length":6},{"id":49,"number":12,"direction":"across","text":"まんりききぃ","x":17,"y":3,"length":6},{"id":7,"number":13,"direction":"across","text":"かざのかなめ","x":6,"y":4,"length":6},{"id":19,"number":14,"direction":"down","text":"あいばはな","x":13,"y":4,"length":5},{"id":51,"number":15,"direction":"across","text":"みなせあめ","x":24,"y":4,"length":5},{"id":25,"number":16,"direction":"across","text":"かめきちかり","x":0,"y":5,"length":6},{"id":34,"number":17,"direction":"across","text":"さいだしゆあ","x":12,"y":5,"length":6},{"id":27,"number":18,"direction":"across","text":"やよいかれん","x":6,"y":6,"length":6},{"id":23,"number":19,"direction":"across","text":"すずきさとう","x":0,"y":7,"length":6},{"id":17,"number":20,"direction":"across","text":"ひさめせい","x":22,"y":7,"length":5},{"id":50,"number":20,"direction":"down","text":"ひづきろーずぶれいど","x":22,"y":7,"length":10},{"id":35,"number":21,"direction":"down","text":"どうしたさとり","x":6,"y":8,"length":7},{"id":4,"number":22,"direction":"across","text":"さくらばうな","x":8,"y":8,"length":6},{"id":48,"number":23,"direction":"down","text":"くどうれしあ","x":9,"y":8,"length":6},{"id":26,"number":24,"direction":"down","text":"ひなぎくのん","x":20,"y":8,"length":6},{"id":1,"number":25,"direction":"down","text":"おぼろづきひかる","x":14,"y":9,"length":8},{"id":2,"number":26,"direction":"down","text":"しぐまいんぐらむ","x":18,"y":9,"length":8},{"id":15,"number":27,"direction":"down","text":"つやしまかおる","x":4,"y":10,"length":7},{"id":6,"number":28,"direction":"across","text":"しんどうめしあ","x":6,"y":10,"length":7},{"id":14,"number":29,"direction":"down","text":"あまつじゆらぐ","x":12,"y":10,"length":7},{"id":10,"number":30,"direction":"down","text":"やまだすばる","x":25,"y":10,"length":6},{"id":39,"number":31,"direction":"down","text":"こがねつむぎ","x":1,"y":11,"length":6},{"id":52,"number":32,"direction":"across","text":"ろーずだますくはーと","x":14,"y":11,"length":10},{"id":12,"number":33,"direction":"across","text":"ねこのまうと","x":1,"y":13,"length":6},{"id":33,"number":34,"direction":"down","text":"つきももぷかり","x":16,"y":13,"length":7},{"id":31,"number":35,"direction":"across","text":"ふろーれぶらんか","x":7,"y":15,"length":8},{"id":45,"number":35,"direction":"down","text":"ふじのもりちとせ","x":7,"y":15,"length":8},{"id":29,"number":36,"direction":"across","text":"いぬまるなでこ","x":22,"y":15,"length":7},{"id":24,"number":37,"direction":"down","text":"こいうたさわこ","x":28,"y":15,"length":7},{"id":38,"number":38,"direction":"down","text":"ゆめとみりんね","x":13,"y":17,"length":7},{"id":11,"number":39,"direction":"down","text":"おううんほわり","x":21,"y":17,"length":7},{"id":22,"number":40,"direction":"down","text":"おとみまいる","x":3,"y":18,"length":6},{"id":8,"number":41,"direction":"across","text":"はじめあすから","x":11,"y":18,"length":7},{"id":9,"number":41,"direction":"down","text":"はたすいか","x":11,"y":18,"length":5},{"id":40,"number":42,"direction":"across","text":"あいうえおはな","x":19,"y":18,"length":7},{"id":32,"number":42,"direction":"down","text":"あまみまる","x":19,"y":18,"length":5},{"id":47,"number":43,"direction":"down","text":"おうどうねる","x":23,"y":18,"length":6},{"id":54,"number":44,"direction":"down","text":"ななおとうら","x":25,"y":18,"length":6},{"id":41,"number":45,"direction":"down","text":"りのせりあ","x":0,"y":19,"length":5},{"id":42,"number":46,"direction":"across","text":"とせひおり","x":3,"y":19,"length":5},{"id":30,"number":47,"direction":"across","text":"ととここ","x":25,"y":21,"length":4},{"id":5,"number":48,"direction":"across","text":"せなりるか","x":7,"y":22,"length":5},{"id":37,"number":49,"direction":"across","text":"あいするじゅ","x":0,"y":23,"length":6}],"initialHints":[{"x":1,"y":7,"char":"ず"},{"x":1,"y":13,"char":"ね"},{"x":4,"y":11,"char":"や"},{"x":6,"y":0,"char":"か"},{"x":7,"y":6,"char":"よ"},{"x":7,"y":19,"char":"り"},{"x":13,"y":18,"char":"め"},{"x":16,"y":13,"char":"つ"},{"x":17,"y":5,"char":"あ"},{"x":19,"y":3,"char":"り"},{"x":19,"y":22,"char":"る"},{"x":21,"y":21,"char":"ほ"},{"x":23,"y":19,"char":"う"},{"x":24,"y":3,"char":"の"},{"x":25,"y":10,"char":"や"},{"x":26,"y":7,"char":"い"},{"x":27,"y":0,"char":"し"}],"crossings":54,"hintCount":17};
+const G = P.grid;
+const W = P.size.width;
+const H = P.size.height;
+
+const userCells = {};
+const hintSet = new Set();
+let sel = null;
+let dir = 'across';
+
+const CIRCLE_NUMS = '①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳';
+
+// Parse grid: extract answer numbers from cell values
+const answerMap = {};  // "x,y" → order number
+const answerCells = []; // [{order, x, y}, ...]
+for (let y = 0; y < H; y++) {
+  for (let x = 0; x < W; x++) {
+    if (G[y][x] === null) continue;
+    const m = G[y][x].match(/^(.+?)(\d+)$/);
+    if (m) {
+      G[y][x] = m[1]; // pure character
+      const order = parseInt(m[2]);
+      answerMap[x + ',' + y] = order;
+      answerCells.push({order, x, y});
+    }
+  }
+}
+answerCells.sort((a, b) => a.order - b.order);
+
+// Init hints
+for (const h of P.initialHints) {
+  const k = h.x + ',' + h.y;
+  hintSet.add(k);
+  userCells[k] = h.char;
+}
+
+// Build set of cells that belong to a down word (for vertical long vowel mark)
+const downCells = new Set();
+const acrossCells = new Set();
+for (const w of P.words) {
+  const dx = w.direction === 'across' ? 1 : 0;
+  const dy = w.direction === 'down' ? 1 : 0;
+  for (let i = 0; i < w.length; i++) {
+    const k = (w.x + dx * i) + ',' + (w.y + dy * i);
+    if (w.direction === 'down') downCells.add(k);
+    else acrossCells.add(k);
+  }
+}
+
+document.getElementById('info').textContent = 'パレ学1期生全員の名前をひらがなで入力してください';
+
+// Render grid
+function render() {
+  const t = document.getElementById('grid');
+  t.innerHTML = '';
+  for (let y = 0; y < H; y++) {
+    const tr = document.createElement('tr');
+    for (let x = 0; x < W; x++) {
+      const td = document.createElement('td');
+      if (G[y][x] === null) {
+        td.className = 'b';
+      } else {
+        td.className = 'w';
+        td.dataset.x = x;
+        td.dataset.y = y;
+        const k = x + ',' + y;
+        if (k in answerMap) {
+          td.classList.add('fa-cell');
+          const s = document.createElement('span');
+          s.className = 'n';
+          s.textContent = CIRCLE_NUMS[answerMap[k] - 1] || answerMap[k];
+          td.appendChild(s);
+        }
+        const c = document.createElement('span');
+        c.className = 'c';
+        if (k in userCells) {
+          c.textContent = userCells[k];
+          if (hintSet.has(k)) c.classList.add('hint');
+          if (userCells[k] === 'ー' && downCells.has(k) && !acrossCells.has(k)) c.classList.add('vertical-bar');
+        }
+        td.appendChild(c);
+      }
+      tr.appendChild(td);
+    }
+    t.appendChild(tr);
+  }
+  hilite();
+}
+
+function hilite() {
+  document.querySelectorAll('td.w').forEach(td => {
+    td.classList.remove('sel', 'hl');
+  });
+  if (!sel) return;
+  const word = wordAt(sel.x, sel.y, dir);
+  if (word) {
+    const dx = word.direction === 'across' ? 1 : 0;
+    const dy = word.direction === 'down' ? 1 : 0;
+    for (let i = 0; i < word.length; i++) {
+      const td = getCell(word.x + dx * i, word.y + dy * i);
+      if (td) td.classList.add('hl');
+    }
+  }
+  const s = getCell(sel.x, sel.y);
+  if (s) s.classList.add('sel');
+}
+
+function getCell(x, y) {
+  return document.querySelector('td[data-x="' + x + '"][data-y="' + y + '"]');
+}
+
+function wordAt(x, y, d) {
+  for (const w of P.words) {
+    if (w.direction !== d) continue;
+    const dx = d === 'across' ? 1 : 0;
+    const dy = d === 'down' ? 1 : 0;
+    for (let i = 0; i < w.length; i++) {
+      if (w.x + dx * i === x && w.y + dy * i === y) return w;
+    }
+  }
+  return null;
+}
+
+function select(x, y) {
+  if (x < 0 || x >= W || y < 0 || y >= H || G[y][x] === null) return;
+  sel = { x, y };
+  hilite();
+}
+
+
+function setChar(x, y, ch) {
+  const k = x + ',' + y;
+  if (hintSet.has(k)) return;
+  if (ch) { userCells[k] = ch; } else { delete userCells[k]; }
+  const td = getCell(x, y);
+  if (td) {
+    const c = td.querySelector('.c');
+    c.textContent = ch || '';
+    c.className = 'c';
+    if (hintSet.has(k)) c.classList.add('hint');
+    if (ch === 'ー' && downCells.has(k) && !acrossCells.has(k)) c.classList.add('vertical-bar');
+  }
+  renderFinalAnswer();
+}
+
+function wordsAtCell(x, y) {
+  return P.words.filter(w => {
+    const dx = w.direction === 'across' ? 1 : 0;
+    const dy = w.direction === 'down' ? 1 : 0;
+    for (let i = 0; i < w.length; i++) {
+      if (w.x + dx * i === x && w.y + dy * i === y) return true;
+    }
+    return false;
+  });
+}
+
+function getWordCurrentText(w) {
+  const dx = w.direction === 'across' ? 1 : 0;
+  const dy = w.direction === 'down' ? 1 : 0;
+  let text = '';
+  for (let i = 0; i < w.length; i++) {
+    const k = (w.x + dx * i) + ',' + (w.y + dy * i);
+    text += (k in userCells) ? userCells[k] : '';
+  }
+  return text;
+}
+
+function isMobile() {
+  var vw = (window.visualViewport ? window.visualViewport.width : window.innerWidth);
+  return vw <= 768;
+}
+
+function positionPopup(popup, cellTd, side) {
+  popup.style.display = 'flex';
+  if (isMobile()) {
+    popup.classList.add('mobile-bottom');
+    return;
+  }
+  popup.classList.remove('mobile-bottom');
+  const rect = cellTd.getBoundingClientRect();
+  const pw = popup.offsetWidth;
+  const ph = popup.offsetHeight;
+  let top, left;
+  if (side === 'right') {
+    top = rect.top + window.scrollY;
+    left = rect.right + window.scrollX + 4;
+    if (left + pw > window.innerWidth - 8) left = rect.left + window.scrollX - pw - 4;
+    if (top + ph > window.innerHeight + window.scrollY - 8) top = window.innerHeight + window.scrollY - ph - 8;
+  } else {
+    top = rect.bottom + window.scrollY + 4;
+    left = rect.left + window.scrollX;
+    if (top + ph > window.innerHeight + window.scrollY - 8) top = rect.top + window.scrollY - ph - 4;
+  }
+  if (left + pw > window.innerWidth - 8) left = window.innerWidth - pw - 8;
+  if (left < 8) left = 8;
+  if (top < window.scrollY + 8) top = window.scrollY + 8;
+  popup.style.left = left + 'px';
+  popup.style.top = top + 'px';
+}
+
+function showOverlay() {
+  document.getElementById('popup-overlay').style.display = 'block';
+}
+
+function resetPopupStyle(p) {
+  p.classList.remove('mobile-bottom');
+  p.style.left = ''; p.style.top = '';
+}
+
+function hideAllPopups() {
+  document.getElementById('popup-overlay').style.display = 'none';
+  const dirPopup = document.getElementById('dir-popup');
+  const wordPopup = document.getElementById('word-popup');
+  dirPopup.style.display = 'none';
+  wordPopup.style.display = 'none';
+  resetPopupStyle(dirPopup);
+  resetPopupStyle(wordPopup);
+  document.getElementById('word-error').textContent = '';
+}
+
+let currentPopupWord = null;
+
+function showDirPopup(x, y, cellTd) {
+  hideAllPopups();
+  showOverlay();
+  const popup = document.getElementById('dir-popup');
+  popup.dataset.cellX = x;
+  popup.dataset.cellY = y;
+  positionPopup(popup, cellTd);
+}
+
+function showWordPopup(word, cellTd) {
+  const dirPopup = document.getElementById('dir-popup');
+  dirPopup.style.display = 'none';
+  currentPopupWord = word;
+  dir = word.direction;
+  sel = { x: word.x, y: word.y };
+  hilite();
+  showOverlay();
+  const popup = document.getElementById('word-popup');
+  const dirLabel = word.direction === 'across' ? 'よこ' : 'たて';
+  document.getElementById('word-popup-label').textContent =
+    dirLabel + ' ' + word.length + '文字';
+  const input = document.getElementById('word-input');
+  input.value = getWordCurrentText(word);
+  document.getElementById('word-error').textContent = '';
+  const side = word.direction === 'down' ? 'right' : 'below';
+  positionPopup(popup, cellTd, side);
+  setTimeout(() => { input.focus(); input.select(); }, 50);
+}
+
+function handleWordSubmit() {
+  if (!currentPopupWord) return;
+  const input = document.getElementById('word-input');
+  const text = input.value;
+  const chars = [...text];
+  const w = currentPopupWord;
+  const dx = w.direction === 'across' ? 1 : 0;
+  const dy = w.direction === 'down' ? 1 : 0;
+  if (chars.length === 0) {
+    for (let i = 0; i < w.length; i++) {
+      setChar(w.x + dx * i, w.y + dy * i, null);
+    }
+  } else if (chars.length !== w.length) {
+    document.getElementById('word-error').textContent =
+      chars.length + '文字入力されています（' + w.length + '文字必要）';
+    return;
+  } else {
+    for (let i = 0; i < w.length; i++) {
+      setChar(w.x + dx * i, w.y + dy * i, chars[i]);
+    }
+  }
+  hideAllPopups();
+  checkComplete();
+}
+
+// Reset
+document.getElementById('btn-reset').addEventListener('click', () => {
+  hideAllPopups();
+  if (!confirm('入力をすべてリセットしますか？')) return;
+  for (const k in userCells) { if (!hintSet.has(k)) delete userCells[k]; }
+  sel = null;
+  document.getElementById('msg').textContent = '';
+  document.getElementById('msg').className = '';
+  render();
+  renderFinalAnswer();
+});
+
+// Answer
+document.getElementById('btn-answer').addEventListener('click', () => {
+  hideAllPopups();
+  if (!confirm('答えを表示しますか？')) return;
+  for (let y = 0; y < H; y++) {
+    for (let x = 0; x < W; x++) {
+      if (G[y][x] === null) continue;
+      const k = x + ',' + y;
+      if (!(k in userCells) || userCells[k] !== G[y][x]) {
+        userCells[k] = G[y][x];
+      }
+    }
+  }
+  render();
+  for (let y = 0; y < H; y++) {
+    for (let x = 0; x < W; x++) {
+      if (G[y][x] === null) continue;
+      const k = x + ',' + y;
+      if (!hintSet.has(k)) {
+        const td = getCell(x, y);
+        if (td) { const c = td.querySelector('.c'); if (c) c.classList.add('answer'); }
+      }
+    }
+  }
+  renderFinalAnswer();
+});
+
+// Grid click → popup flow
+document.getElementById('grid').addEventListener('click', (e) => {
+  const td = e.target.closest('td.w');
+  if (!td) return;
+  const x = parseInt(td.dataset.x);
+  const y = parseInt(td.dataset.y);
+  const words = wordsAtCell(x, y);
+  if (words.length === 0) return;
+  if (words.length === 1) {
+    select(x, y);
+    showWordPopup(words[0], td);
+  } else {
+    select(x, y);
+    showDirPopup(x, y, td);
+  }
+});
+
+// Direction choice
+document.querySelectorAll('.dir-choice').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const popup = document.getElementById('dir-popup');
+    const x = parseInt(popup.dataset.cellX);
+    const y = parseInt(popup.dataset.cellY);
+    const d = btn.dataset.dir;
+    const word = wordAt(x, y, d);
+    if (word) {
+      const cellTd = getCell(x, y);
+      showWordPopup(word, cellTd);
+    }
+  });
+});
+
+// Word popup OK
+document.getElementById('word-ok').addEventListener('click', handleWordSubmit);
+
+// Word popup Cancel
+document.getElementById('word-cancel').addEventListener('click', hideAllPopups);
+
+// Overlay click
+document.getElementById('popup-overlay').addEventListener('click', hideAllPopups);
+
+// Keyboard in word input
+document.getElementById('word-input').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' && !e.isComposing) {
+    e.preventDefault();
+    handleWordSubmit();
+  }
+  if (e.key === 'Escape') {
+    e.preventDefault();
+    hideAllPopups();
+  }
+});
+
+// Escape key global
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') hideAllPopups();
+});
+
+function checkComplete() {
+  let allFilled = true;
+  let allCorrect = true;
+  for (let y = 0; y < H; y++) {
+    for (let x = 0; x < W; x++) {
+      if (G[y][x] === null) continue;
+      const k = x + ',' + y;
+      if (!(k in userCells)) { allFilled = false; break; }
+      if (userCells[k] !== G[y][x]) allCorrect = false;
+    }
+    if (!allFilled) break;
+  }
+  const msg = document.getElementById('msg');
+  if (allFilled && allCorrect) {
+    msg.textContent = 'すべて正解です！';
+    msg.className = 'ok';
+    document.querySelectorAll('td.w').forEach(td => td.classList.add('ok'));
+  } else {
+    msg.textContent = '';
+    msg.className = '';
+  }
+}
+
+// Final answer
+function renderFinalAnswer() {
+  const container = document.getElementById('fa-cells');
+  container.innerHTML = '';
+  for (const ac of answerCells) {
+    const box = document.createElement('div');
+    box.className = 'fa-box';
+    const num = document.createElement('span');
+    num.className = 'fa-num';
+    num.textContent = CIRCLE_NUMS[ac.order - 1] || ac.order;
+    box.appendChild(num);
+    const k = ac.x + ',' + ac.y;
+    if (k in userCells) {
+      const txt = document.createTextNode(userCells[k]);
+      box.appendChild(txt);
+    }
+    container.appendChild(box);
+  }
+}
+
+if (answerCells.length > 0) {
+  document.getElementById('final-answer').style.display = '';
+  document.getElementById('btn-fa-check').addEventListener('click', () => {
+    const result = document.getElementById('fa-result');
+    let allFilled = true;
+    let allCorrect = true;
+    for (const ac of answerCells) {
+      const k = ac.x + ',' + ac.y;
+      if (!(k in userCells)) { allFilled = false; break; }
+      if (userCells[k] !== G[ac.y][ac.x]) allCorrect = false;
+    }
+    if (!allFilled) {
+      result.className = '';
+      result.textContent = 'まだ空いているマスがあります';
+    } else if (allCorrect) {
+      result.className = 'ok';
+      const answer = answerCells.map(ac => userCells[ac.x + ',' + ac.y]).join('');
+      result.textContent = '\ud83c\udf89 正解！「' + answer + '」';
+    } else {
+      result.className = 'ng';
+      result.textContent = '不正解です…もう一度考えてみましょう';
+    }
+  });
+}
+
+render();
+renderFinalAnswer();
+
+// Hide answer button on non-local environments
+const isLocal = location.protocol === 'file:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+if (!isLocal) {
+  document.getElementById('btn-answer').style.display = 'none';
+}
+</script>
+</body>
+</html>

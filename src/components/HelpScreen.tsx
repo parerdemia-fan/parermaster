@@ -142,7 +142,7 @@ export function HelpScreen() {
           >
             リンク
           </h2>
-          <div className="leading-relaxed" style={{ gap: '2cqmin' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5cqmin' }}>
             <ThreePatchButton
               leftImage="./data/images/ui/btn_normal_off_left.png"
               middleImage="./data/images/ui/btn_normal_off_middle.png"
@@ -155,7 +155,6 @@ export function HelpScreen() {
             >
               🏫 パレデミア学園公式サイト
             </ThreePatchButton>
-            <br />
             <ThreePatchButton
               leftImage="./data/images/ui/btn_normal_off_left.png"
               middleImage="./data/images/ui/btn_normal_off_middle.png"
@@ -168,7 +167,6 @@ export function HelpScreen() {
             >
               𝕏 シェアする
             </ThreePatchButton>
-            <br />
             <ThreePatchButton
               leftImage="./data/images/ui/btn_normal_off_left.png"
               middleImage="./data/images/ui/btn_normal_off_middle.png"
@@ -181,6 +179,18 @@ export function HelpScreen() {
             >
               📝 問題を投稿する
             </ThreePatchButton>
+            <ThreePatchButton
+              leftImage="./data/images/ui/btn_normal_off_left.png"
+              middleImage="./data/images/ui/btn_normal_off_middle.png"
+              rightImage="./data/images/ui/btn_normal_off_right.png"
+              onClick={() => window.open('./crossword.html', '_blank', 'noopener,noreferrer')}
+              height="7cqmin"
+              fontSize="3.5cqmin"
+              textColor="#CCC"
+              className="selection-card"
+            >
+              🧩 パレ学1期生クロスワード
+            </ThreePatchButton>
           </div>
         </section>
         {/* バージョン */}
@@ -192,10 +202,9 @@ export function HelpScreen() {
             バージョン
           </h2>
           <div
-            className="leading-relaxed"
             style={{ fontSize: '3.5cqmin' }}
           >
-            {version || 'Loading...'}
+            <div style={{ marginBottom: '1.5cqmin' }}>{version || 'Loading...'}</div>
             <ThreePatchButton
               leftImage="./data/images/ui/btn_normal_off_left.png"
               middleImage="./data/images/ui/btn_normal_off_middle.png"
@@ -213,39 +222,37 @@ export function HelpScreen() {
           </div>
         </section>
 
-        {/* スタッフロール（パレ学ソムリエ称号保持者のみ表示） */}
-        {hasSommelier && (
-          <section style={{ marginBottom: '4.5cqmin' }}>
-            <ThreePatchButton
-              leftImage="./data/images/ui/btn_normal_off_left.png"
-              middleImage="./data/images/ui/btn_normal_off_middle.png"
-              rightImage="./data/images/ui/btn_normal_off_right.png"
-              onClick={showStaffRoll}
-              height="7cqmin"
-              fontSize="3.5cqmin"
-              textColor="#CCC"
-              className="selection-card"
-            >
-              🎬 スタッフロール
-            </ThreePatchButton>
-          </section>
-        )}
-
-        {/* 開発日誌（パレ学マスター称号保持者のみ表示） */}
-        {hasMaster && (
-          <section style={{ marginBottom: '4.5cqmin' }}>
-            <ThreePatchButton
-              leftImage="./data/images/ui/btn_normal_off_left.png"
-              middleImage="./data/images/ui/btn_normal_off_middle.png"
-              rightImage="./data/images/ui/btn_normal_off_right.png"
-              onClick={showDiary}
-              height="7cqmin"
-              fontSize="3.5cqmin"
-              textColor="#CCC"
-              className="selection-card"
-            >
-              📓 開発日誌
-            </ThreePatchButton>
+        {/* スタッフロール・開発日誌 */}
+        {(hasSommelier || hasMaster) && (
+          <section style={{ display: 'flex', flexDirection: 'column', gap: '1.5cqmin', marginBottom: '4.5cqmin' }}>
+            {hasSommelier && (
+              <ThreePatchButton
+                leftImage="./data/images/ui/btn_normal_off_left.png"
+                middleImage="./data/images/ui/btn_normal_off_middle.png"
+                rightImage="./data/images/ui/btn_normal_off_right.png"
+                onClick={showStaffRoll}
+                height="7cqmin"
+                fontSize="3.5cqmin"
+                textColor="#CCC"
+                className="selection-card"
+              >
+                🎬 スタッフロール
+              </ThreePatchButton>
+            )}
+            {hasMaster && (
+              <ThreePatchButton
+                leftImage="./data/images/ui/btn_normal_off_left.png"
+                middleImage="./data/images/ui/btn_normal_off_middle.png"
+                rightImage="./data/images/ui/btn_normal_off_right.png"
+                onClick={showDiary}
+                height="7cqmin"
+                fontSize="3.5cqmin"
+                textColor="#CCC"
+                className="selection-card"
+              >
+                📓 開発日誌
+              </ThreePatchButton>
+            )}
           </section>
         )}
       </div>
