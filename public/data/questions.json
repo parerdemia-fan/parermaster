@@ -234,6 +234,24 @@
     "questioner": ""
   },
   {
+    "question": "雨海まると堂下さとりのユニット名は？",
+    "category": "深堀り問題",
+    "dormitory": "all",
+    "difficulty": 3,
+    "answers": [
+      "さとまる水産",
+      "あまどーなつ",
+      "まるさと製麺",
+      "あまみんさとりん"
+    ],
+    "genre": "コラボ",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "[image:satomaru.png]",
+    "source_url": "https://x.com/search?q=%23%E3%81%95%E3%81%A8%E3%81%BE%E3%82%8B%E6%B0%B4%E7%94%A3",
+    "questioner": ""
+  },
+  {
     "question": "黄金つむぎが犬丸なでことのデートで会いに行った動物は？",
     "category": "深堀り問題",
     "dormitory": "wa",
@@ -1383,6 +1401,24 @@
     "sort_answers": false,
     "comment": "「後半の追い上げ👏✨ これが成長です( *¯ ꒳¯*) 前半はアーカイブ見ないでくださいね👀」",
     "source_url": "https://youtu.be/JZ0fF_Hd0cI?t=12337",
+    "questioner": ""
+  },
+  {
+    "question": "猫乃間うとが飼っている3匹の猫、まりん・小梅ともう1匹は？",
+    "category": "深堀り問題",
+    "dormitory": "co",
+    "difficulty": 5,
+    "answers": [
+      "おこげ",
+      "つくね",
+      "おもち",
+      "あんこ"
+    ],
+    "genre": "その他",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "猫乃間うと「おこげは可愛い天使🪽💕」",
+    "source_url": "https://x.com/nekonoma_uto/status/1972609705131508030",
     "questioner": ""
   },
   {
