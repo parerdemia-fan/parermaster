@@ -2052,6 +2052,24 @@
     "questioner": ""
   },
   {
+    "question": "2026年パレ学1期生学力テストで1位だったのは誰？",
+    "category": "深堀り問題",
+    "dormitory": "me",
+    "difficulty": 4,
+    "answers": [
+      "灯野ぺけ。",
+      "久堂れしあ",
+      "天辻ゆらぐ",
+      "飛渡ココ"
+    ],
+    "genre": "イベント",
+    "hide_icon": false,
+    "sort_answers": false,
+    "comment": "[image:exam2026.png]",
+    "source_url": "https://www.youtube.com/watch?v=VmSmcEITuAM",
+    "questioner": ""
+  },
+  {
     "question": "ファンネームが「みんな達」の っょっょ𝑮𝑨𝑳アイドルVTuberは？",
     "category": "深堀り問題",
     "dormitory": "me",
@@ -4155,24 +4173,6 @@
     "sort_answers": false,
     "comment": "",
     "source_url": "",
-    "questioner": ""
-  },
-  {
-    "question": "前作「パレクイズ」に松本Pがいることに多分最初に気づいた人は？",
-    "category": "深堀り問題",
-    "dormitory": "wh",
-    "difficulty": 4,
-    "answers": [
-      "緋月・ローズ・ブレイド",
-      "",
-      "",
-      ""
-    ],
-    "genre": "エピソード",
-    "hide_icon": false,
-    "sort_answers": false,
-    "comment": "[image:parerquiz_matsumoto.png]",
-    "source_url": "https://www.youtube.com/shorts/AJLdJeSbhZU",
     "questioner": ""
   },
   {
