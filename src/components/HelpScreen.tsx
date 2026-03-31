@@ -204,7 +204,7 @@ export function HelpScreen() {
           <div
             style={{ fontSize: '3.5cqmin' }}
           >
-            <div style={{ marginBottom: '1.5cqmin' }}>{version || 'Loading...'}</div>
+            <div style={{ marginBottom: '1.5cqmin' }}>{version || 'Loading...'}Final</div>
             <ThreePatchButton
               leftImage="./data/images/ui/btn_normal_off_left.png"
               middleImage="./data/images/ui/btn_normal_off_middle.png"
