@@ -9,6 +9,9 @@ const QUESTION_FORM_URL = 'https://forms.gle/PQkrKT2VNux1RP1C6';
 // パレデミア学園公式サイト
 const PARERDEMIA_OFFICIAL_URL = 'https://www.parerdemia.jp/';
 
+// パレ学マスター2
+const PARERMASTER2_URL = 'https://parerdemia-fan.github.io/parermaster2/';
+
 // シェア用のURL
 const GAME_URL = 'https://parerdemia-fan.github.io/parermaster/';
 
@@ -143,6 +146,18 @@ export function HelpScreen() {
             リンク
           </h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5cqmin' }}>
+            <ThreePatchButton
+              leftImage="./data/images/ui/btn_normal_off_left.png"
+              middleImage="./data/images/ui/btn_normal_off_middle.png"
+              rightImage="./data/images/ui/btn_normal_off_right.png"
+              onClick={() => window.open(PARERMASTER2_URL, '_blank', 'noopener,noreferrer')}
+              height="7cqmin"
+              fontSize="3.5cqmin"
+              textColor="#CCC"
+              className="selection-card"
+            >
+              🎮 パレ学マスター 2nd Season
+            </ThreePatchButton>
             <ThreePatchButton
               leftImage="./data/images/ui/btn_normal_off_left.png"
               middleImage="./data/images/ui/btn_normal_off_middle.png"
