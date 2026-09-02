@@ -671,6 +671,8 @@ const talents: Talent[] = await talentsRes.json();
 - 責務: ショートストーリーの表示
 - 表示タイミング:
   - 開発日誌画面で「やっぱり」の「ぱ」をクリックしたとき
+  - 裏口用URL（クエリパラメータ `?ss` または `?ss=1`）でアクセスしたとき
+    - App.tsx の useEffect で URLSearchParams を判定し、実績の取得状況に関わらず showSS() を呼ぶ
 - レイアウト構成:
   - 全画面オーバーレイ（半透明黒背景）
   - 左上に閉じるボタン

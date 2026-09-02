@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { GameContainer } from './components/GameContainer';
 import { TitleScreen } from './components/TitleScreen';
 import { SettingScreen } from './components/SettingScreen';
@@ -13,7 +14,15 @@ import { RoomArea } from './components/RoomArea';
 import { useGameStore } from './stores/gameStore';
 
 function App() {
-  const { screen, showingStaffRoll, showingDiary, showingSS } = useGameStore();
+  const { screen, showingStaffRoll, showingDiary, showingSS, showSS } = useGameStore();
+
+  // 裏口用URL（?ss または ?ss=1）: 実績の取得状況に関わらずショートストーリーを直接開く
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.has('ss')) {
+      showSS();
+    }
+  }, [showSS]);
 
   return (
     <div className="w-screen h-screen flex flex-col">
